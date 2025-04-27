@@ -123,6 +123,11 @@ float starch_sucrose_partition(
     float lambda_sdi,
     float lambda_sni);
 
+float starch_sucrose_partition_f(
+    float t,
+    float starch_partition_coeff,
+    void* params);
+
 float nitrogen_content(
     float nitrogen_uptake,
     float respiration_frequency,
@@ -137,7 +142,10 @@ float nitrogen_content(
     float max_photosyntetic_rate,
     float nutrient_conversion_parameter,
     float min_nitrogen_photosynthesis);
-
+float nitrogen_content_f(
+    float t,
+    float nitrogen,
+    void* params);
 float phosphorus_content(
     float phosphorus_uptake,
     float respiration_frequency,
@@ -152,6 +160,10 @@ float phosphorus_content(
     float max_photosyntetic_rate,
     float nutrient_conversion_parameter,
     float min_phosphorus_photosynthesis);
+float phosphorus_content_f(
+    float t,
+    float phosphorus,
+    void * params);
 
 float assimilation_cost_nitrogen(
     float lambda_csn);
@@ -206,7 +218,10 @@ float nitrogen_affinity(
     float nitrogen_uptake_sucrose_consumption,
     float starch_partition_coeff,
     float starch_degradation_rate);
-
+float nitrogen_affinity_f(
+    float t,
+    float nitrogen_affinity_p,
+    void* params);
 float phosphorus_affinity(
     float phosphorus_affinity,
     float phosphorus_uptake,
@@ -222,7 +237,10 @@ float phosphorus_affinity(
     float phosphorus_uptake_sucrose_consumption,
     float starch_partition_coeff,
     float starch_degradation_rate);
-
+float phosphorus_affinity_f(
+    float t,
+    float phosphorus_affinity_p,
+    void* params);
 float nitrogen_cost(
     float respiration_frequency,
     float sucrose,
@@ -278,6 +296,11 @@ float starch_production(
     float starch_partition_coeff,
     float starch_degradation_rate);
 
+float starch_production_f(
+    float t,
+    float starch,
+    void* params);
+
 float sucrose_production(
     float sucrose_partition_coeff,
     float photosynthesis,
@@ -288,6 +311,11 @@ float sucrose_production(
     float sucrose,
     float sucrose_loading_frequency,
     float night_efficiency_starch);
+
+float sucrose_production_f(
+    float t,
+    float sucrose,
+    void* params);
 
 float night_efficieny_starch(
     float sucrose,
@@ -317,7 +345,10 @@ float leaf_growth(
     float leaf_biomass,
     float leaf_death_rate,
     float leaf_competative_rate);
-
+float leaf_growth_f(
+    float t,
+    float leaf_biomass,
+    void* params);
 float root_growth(
     float labmda_sb,
     float sucrose_root_allocation,
@@ -327,7 +358,10 @@ float root_growth(
     float root_biomass,
     float root_death_rate,
     float root_competative_rate);
-
+float root_growth_f(
+    float t,
+    float root_biomass,
+    void* params);  
 float stochiometric_signal(
     float optimal_stechiometric_ratio,
     float nitrogen,
@@ -345,7 +379,10 @@ float sucrose_root_allocation(
     float min_nitrogen,
     float phosphorus,
     float min_phosphorus);
-
+float sucrose_root_allocation_f(
+    float t,
+    float sucrose_root_allocation_p,
+    void* params);
 // Maksimov
 float moistureAvailability(
     float evapotranspiration,

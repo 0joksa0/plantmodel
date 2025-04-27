@@ -160,8 +160,8 @@ void simulate_step(int t, Input* input)
     // 10. Ažuriranje biomasa i resursa
     input->sucrose = input->sucrose + sucrose_prod;
     input->starch = input->starch + starch_prod;
-    input->nitrogen = input->nitrogen + input->nitrogen_uptake;
-    input->phosphorus = input->phosphorus + input->phosphorus_uptake;
+    input->nitrogen =input->nitrogen + nitrogen_content(input->nitrogen_uptake, input->respiration_frequency, input->sucrose, input->starch, input->sucrose_loading_frequency, input->night_efficiency_starch, input->assimilation_cost_nitrogen, input->leaf_biomass, input->total_biomass, input->photosynthesis, input->max_photosyntetic_rate, input->nutrient_conversion_parameter, input->min_nitrogen_photosynthesis);
+    input->phosphorus = input->phosphorus + phosphorus_content(input->phosphorus_uptake, input->respiration_frequency, input->sucrose, input->starch, input->sucrose_loading_frequency, input->night_efficiency_starch, input->assimilation_cost_phorphorus, input->leaf_biomass, input->total_biomass, input->photosynthesis, input->max_photosyntetic_rate, input->nutrient_conversion_parameter, input->min_phosphorus_photosynthesis);
 
     // 11. Troškovi transporta i disanja
     input->uptake_cost = uptake_cost(
