@@ -1,0 +1,480 @@
+#include "../include/model.h"
+#include <math.h>
+#include <stdlib.h>
+
+float epsylon = 0.000001f;
+float photosynthesis(
+    float light,
+    float limitation_of_photosynthetic_rate,
+    float max_photosyntetic_rate,
+    float nitrogen_saturation,
+    float phosphorus_saturation,
+    float leaf_biomass,
+    float min_leaf_biomass)
+{
+    if (leaf_biomass < min_leaf_biomass) {
+        return 0;
+    }
+
+    float photo = light * limitation_of_photosynthetic_rate * max_photosyntetic_rate * fminf(nitrogen_saturation, phosphorus_saturation);
+    return photo < 0 ? 0 : photo;
+}
+
+float nitrogen_saturation(
+    float nitrogen,
+    float min_nitrogen_photosynthesis)
+{
+    if (nitrogen < min_nitrogen_photosynthesis) {
+        return 0;
+    }
+    return ((2.0f * nitrogen) / (nitrogen + min_nitrogen_photosynthesis)) - 1.0f ;
+}
+
+float phosphorus_saturation(
+    float min_nitrogen_photosynthesis,
+    float optimal_stechimetric_ratio,
+    float phosphorus)
+{
+    float min_phosphorus_photosynthesis = min_nitrogen_photosynthesis / optimal_stechimetric_ratio;
+    if (phosphorus < min_phosphorus_photosynthesis) {
+        return 0;
+    }
+    return ((2.0f * phosphorus) / (phosphorus + min_phosphorus_photosynthesis)) - 1.0f;
+}
+
+float limitation_of_photosyntethic_rate(
+    float starch,
+    float feedback_on_photosynthesis,
+    float max_starch)
+{
+    return feedback_on_photosynthesis + ((1.0f - feedback_on_photosynthesis) * ((max_starch - starch) / max_starch));
+}
+
+float max_starch(
+    float max_starch_degradation_rate,
+    float photoperiod)
+{
+
+    return max_starch_degradation_rate * (photoperiod);
+}
+
+float starch_degradation(
+    float max_starch_degradation_rate,
+    float max_sucrose,
+    float starch_night_start,
+    float min_starch,
+    float sucrose,
+    float light,
+    float time,
+    float photoperiod)
+{
+    if (starch_night_start < min_starch) {
+        return 0;
+    }
+    float degradation_rate = (time / 24.0f + (1.0f - time / 24.0f) * (1.0f - (sucrose / (sucrose + max_sucrose)))) * ((starch_night_start - min_starch) / (24.0f - photoperiod));
+
+    return (1.0f - light) * fminf(max_starch_degradation_rate, degradation_rate);
+}
+
+float starch_sucrose_partition(
+    float light,
+    float starch_partition_coeff,
+    float min_sucrose,
+    float max_sucrose,
+    float sucrose,
+    float lambda_sdr,
+    float lambda_sdi,
+    float lambda_sni)
+{
+    float s_min_fract = (min_sucrose / (min_sucrose + sucrose));
+    float s_max_fract = (sucrose / (sucrose + max_sucrose));
+    float day_part = light * (((-starch_partition_coeff * lambda_sdr * s_min_fract) + ((1.0f - starch_partition_coeff) * lambda_sdi * s_max_fract)));
+
+    float night_part = (1.0f - light) * (1.0f - starch_partition_coeff) * lambda_sni * s_min_fract;
+
+    return day_part + night_part;
+}
+
+float nitrogen_content(
+    float nitrogen_uptake,
+    float respiration_frequency,
+    float sucrose,
+    float starch,
+    float sucrose_loading_frequency,
+    float night_efficiency_starch,
+    float assimilaton_cost,
+    float leaf_biomass,
+    float total_biomass,
+    float photosyntesis,
+    float max_photosyntetic_rate,
+    float nutrient_conversion_parameter,
+    float min_nitrogen_photosynthesis)
+{
+
+    return nitrogen_uptake - (respiration_frequency * (sucrose + starch) + night_efficiency_starch * sucrose_loading_frequency) * assimilaton_cost * (leaf_biomass / (total_biomass + epsylon)) - (photosyntesis / max_photosyntetic_rate) * min_nitrogen_photosynthesis * nutrient_conversion_parameter;
+}
+
+float phosphorus_content(
+    float phosphorus_uptake,
+    float respiration_frequency,
+    float sucrose,
+    float starch,
+    float sucrose_loading_frequency,
+    float night_efficiency_starch,
+    float assimilaton_cost,
+    float leaf_biomass,
+    float total_biomass,
+    float photosyntesis,
+    float max_photosyntetic_rate,
+    float nutrient_conversion_parameter,
+    float min_phosphorus_photosynthesis)
+{
+
+    return phosphorus_uptake - (respiration_frequency * (sucrose + starch) + night_efficiency_starch * sucrose_loading_frequency) * assimilaton_cost * (leaf_biomass / (total_biomass + epsylon)) - (photosyntesis / max_photosyntetic_rate) * min_phosphorus_photosynthesis * nutrient_conversion_parameter;
+}
+
+float assimilation_cost_nitrogen(
+    float lambda_csn)
+{
+    return lambda_csn * 1.724f;
+}
+
+float assimilation_cost_phosphorus(
+    float assimilation_cost_nitrogen,
+    float optimal_stechiometric_ratio)
+{
+
+    return assimilation_cost_nitrogen / optimal_stechiometric_ratio;
+}
+
+float pot_nitrogen_uptake(
+    float nitrogen_nutrient_uptake,
+    float nitrogen_affinity,
+    float root_biomass,
+    float total_biomass
+
+)
+{
+    return nitrogen_nutrient_uptake * nitrogen_affinity * (root_biomass / (total_biomass + epsylon));
+}
+
+float nitrogen_uptake(
+    float pot_nitrogen_uptake,
+    float sucrose,
+    float nitrogen_uptake_sucrose_consumption)
+{
+
+    return pot_nitrogen_uptake * sucrose / (sucrose + nitrogen_uptake_sucrose_consumption * pot_nitrogen_uptake * 1.0f + epsylon);
+}
+
+float nitrogen_nutrient_uptake(
+    float max_nitrogen_uptake,
+    float nitrogen_soil_content,
+    float Michaelis_Menten_const_nitrogen)
+{
+    return max_nitrogen_uptake * (nitrogen_soil_content / (nitrogen_soil_content + Michaelis_Menten_const_nitrogen));
+}
+
+float pot_phosphorus_uptake(
+    float phosphorus_nutrient_uptake,
+    float phosphorus_affinity,
+    float root_biomass,
+    float total_biomass
+
+)
+{
+    return phosphorus_nutrient_uptake * phosphorus_affinity * (root_biomass / (total_biomass + epsylon));
+}
+
+float phosphorus_uptake(
+    float pot_phosphorus_uptake,
+    float sucrose,
+    float phosphorus_uptake_sucrose_consumption)
+{
+
+    return pot_phosphorus_uptake * sucrose / (sucrose + phosphorus_uptake_sucrose_consumption * pot_phosphorus_uptake * 1.0f + epsylon);
+}
+
+float phosphorus_nutrient_uptake(
+    float max_phosphorus_uptake,
+    float phosphorus_soil_content,
+    float Michaelis_Menten_const_phosphorus)
+{
+    return max_phosphorus_uptake * (phosphorus_soil_content / (phosphorus_soil_content + Michaelis_Menten_const_phosphorus));
+}
+float nitrogen_affinity(
+    float nitrogen_affinity,
+    float nitrogen_uptake,
+    float nitrogen_cost,
+    float max_nitrogen,
+    float nitrogen,
+    float photosynthesis,
+    float max_photosyntetic_rate,
+    float lambda_k,
+    float optimal_stochiometric_ratio,
+    float phosphorus,
+    float min_nitrogen,
+    float nitrogen_uptake_sucrose_consumption,
+    float starch_partition_coeff,
+    float starch_degradation_rate)
+{
+    float term1 = (1.0f - nitrogen_affinity) * (((1.0f - nitrogen_uptake / (nitrogen_uptake + nitrogen_cost + epsylon)) * max_nitrogen / (max_nitrogen + nitrogen) + photosynthesis / max_photosyntetic_rate - nitrogen_affinity * lambda_k * (nitrogen - optimal_stochiometric_ratio * phosphorus) / (nitrogen + optimal_stochiometric_ratio * phosphorus + epsylon)));
+
+    float term2 = nitrogen_affinity * (nitrogen / (nitrogen + min_nitrogen) + nitrogen_uptake_sucrose_consumption * nitrogen_uptake / (nitrogen_uptake_sucrose_consumption * nitrogen_uptake + photosynthesis * (1.0f - starch_partition_coeff) + starch_degradation_rate + epsylon));
+
+    return term1 - term2;
+}
+
+float phosphorus_affinity(
+    float phosphorus_affinity,
+    float phosphorus_uptake,
+    float phosphorus_cost,
+    float max_phosphorus,
+    float phosphorus,
+    float photosynthesis,
+    float max_photosyntetic_rate,
+    float lambda_k,
+    float optimal_stochiometric_ratio,
+    float nitrogen,
+    float min_phosphorus,
+    float phosphorus_uptake_sucrose_consumption,
+    float starch_partition_coeff,
+    float starch_degradation_rate)
+{
+    float term1 = (1.0f - phosphorus_affinity) * (((1.0f - phosphorus_uptake / (phosphorus_uptake + phosphorus_cost + epsylon)) * max_phosphorus / (max_phosphorus + phosphorus) + photosynthesis / max_photosyntetic_rate - phosphorus_affinity * lambda_k * (nitrogen - optimal_stochiometric_ratio * phosphorus) / (nitrogen + optimal_stochiometric_ratio * phosphorus + epsylon)));
+
+    float term2 = phosphorus_affinity * (phosphorus / (phosphorus + min_phosphorus) + phosphorus_uptake_sucrose_consumption * phosphorus_uptake / (phosphorus_uptake_sucrose_consumption * phosphorus_uptake + photosynthesis * (1.0f - starch_partition_coeff) + starch_degradation_rate + epsylon));
+
+    return term1 - term2;
+}
+
+float nitrogen_cost(
+    float respiration_frequency,
+    float sucrose,
+    float starch,
+    float sucrose_loading_frequency,
+    float night_efficiency_starch,
+    float assimilation_cost_nitrogen,
+    float leaf_biomass,
+    float total_biomass,
+    float photosynthesis,
+    float max_photosyntetic_rate,
+    float min_nitrogen_photosyntesis)
+{
+    float first_term = (respiration_frequency * (sucrose + starch) + night_efficiency_starch * sucrose_loading_frequency)
+        * assimilation_cost_nitrogen * leaf_biomass / (total_biomass + epsylon);
+
+    float second_term = (photosynthesis / max_photosyntetic_rate) * min_nitrogen_photosyntesis;
+
+    return first_term + second_term;
+}
+
+float phosphorus_cost(
+    float respiration_frequency,
+    float sucrose,
+    float starch,
+    float sucrose_loading_frequency,
+    float night_efficiency_starch,
+    float assimilation_cost_phosphorus,
+    float leaf_biomass,
+    float total_biomass,
+    float photosynthesis,
+    float max_photosyntetic_rate,
+    float min_phosphorus_photosyntesis)
+{
+    float first_term = (respiration_frequency * (sucrose + starch) + night_efficiency_starch * sucrose_loading_frequency)
+        * assimilation_cost_phosphorus * leaf_biomass / (total_biomass + epsylon);
+
+    float second_term = (photosynthesis / max_photosyntetic_rate) * min_phosphorus_photosyntesis;
+
+    return first_term + second_term;
+}
+
+float min_nitrogen(
+    float respiration_frequency,
+    float max_sucrose,
+    float max_starch,
+    float sucrose_loading_frequency,
+    float assimilation_cost_nitrogen,
+    float min_nitrogen_photosynthesis,
+    float nutrient_conversion_parameter,
+    float photoperiod)
+{
+
+    float n_min = ((respiration_frequency * (max_sucrose + max_starch) + sucrose_loading_frequency * max_sucrose) * (1.0f + 0.035f) * assimilation_cost_nitrogen * 24.0f + min_nitrogen_photosynthesis * nutrient_conversion_parameter * photoperiod);
+
+    return n_min;
+}
+
+float min_phosphorus(
+    float respiration_frequency,
+    float max_sucrose,
+    float max_starch,
+    float sucrose_loading_frequency,
+    float assimilation_cost_phosphorus,
+    float min_phosphorus_photosynthesis,
+    float nutrient_conversion_parameter,
+    float photoperiod)
+{
+
+    float n_min = ((respiration_frequency * (max_sucrose + max_starch) + sucrose_loading_frequency * max_sucrose) * (1.0f + 0.035f) * assimilation_cost_phosphorus * 24.0f + min_phosphorus_photosynthesis * nutrient_conversion_parameter * photoperiod);
+
+    return n_min;
+}
+
+float max_nitrogen(float min_nitrogen)
+{
+    return min_nitrogen * 4.0f;
+}
+
+float max_phosphorus(float max_nitrogen, float optimal_stechiometric_ratio)
+{
+    return max_nitrogen / optimal_stechiometric_ratio;
+}
+
+float starch_production(
+    float photosynthesis,
+    float starch_partition_coeff,
+    float starch_degradation_rate)
+{
+
+    return starch_partition_coeff * photosynthesis - starch_degradation_rate;
+}
+
+float sucrose_production(
+    float sucrose_partition_coeff,
+    float photosynthesis,
+    float starch_degradation_rate,
+    float uptake_cost,
+    float transport_cost,
+    float respiration_frequency,
+    float sucrose,
+    float sucrose_loading_frequency,
+    float night_efficiency_starch)
+{
+    return (1.0f - sucrose_partition_coeff) * photosynthesis + starch_degradation_rate - uptake_cost - transport_cost - (respiration_frequency * sucrose) - (sucrose_loading_frequency * night_efficiency_starch);
+}
+
+float night_efficieny_starch(
+    float sucrose,
+    float max_sucrose,
+    float lambda_g,
+    float light,
+    float starch_partition_coeff)
+{
+
+    return fminf(sucrose, max_sucrose) * (lambda_g + (1.0f - lambda_g) * (1.0f - light + light * (1.0f - starch_partition_coeff)));
+}
+
+float uptake_cost(
+    float nitrogen_uptake_sucrose_consumption,
+    float nitrogen_uptake,
+    float phosphorus_uptake_sucrose_consumption,
+    float phosphorus_uptake)
+{
+    return nitrogen_uptake_sucrose_consumption * nitrogen_uptake + phosphorus_uptake_sucrose_consumption * phosphorus_uptake;
+}
+
+float transport_cost(
+    float sucrose_consumption_transport,
+    float respiration_frequency,
+    float sucrose,
+    float sucrose_loading_frequency,
+    float night_efficiency_starch)
+{
+    return sucrose_consumption_transport * (respiration_frequency * sucrose + sucrose_loading_frequency * night_efficiency_starch);
+}
+
+float leaf_growth(
+    float labmda_sb,
+    float sucrose_root_allocation,
+    float sucrose_loading_frequency,
+    float night_efficiency_starch,
+    float leaf_biomass,
+    float leaf_death_rate,
+    float leaf_competative_rate)
+{
+    return labmda_sb * (1.0f - sucrose_root_allocation) * sucrose_loading_frequency * night_efficiency_starch * leaf_biomass - leaf_death_rate * leaf_biomass - leaf_competative_rate * leaf_biomass * leaf_biomass;
+}
+
+float root_growth(
+    float labmda_sb,
+    float sucrose_root_allocation,
+    float sucrose_loading_frequency,
+    float night_efficiency_starch,
+    float leaf_biomass,
+    float root_biomass,
+    float root_death_rate,
+    float root_competative_rate)
+{
+    return labmda_sb * sucrose_root_allocation * sucrose_loading_frequency * night_efficiency_starch * leaf_biomass - root_death_rate * root_biomass - root_competative_rate * root_biomass * root_biomass;
+}
+
+float stochiometric_signal(
+    float optimal_stechiometric_ratio,
+    float nitrogen,
+    float phosphorus)
+{
+    return optimal_stechiometric_ratio / (optimal_stechiometric_ratio + nitrogen / (phosphorus + epsylon));
+}
+
+// resource_allocation -> tissue_priority
+float sucrose_root_allocation(
+    float sucrose_root_allocation,
+    float nitrogen_affinity,
+    float phospsorus_affinity,
+    float stochiometric_signal,
+    float sucrose,
+    float min_sucrose,
+    float nitrogen,
+    float min_nitrogen,
+    float phosphorus,
+    float min_phosphorus)
+{
+    return (1.0f - sucrose_root_allocation) * (nitrogen_affinity * stochiometric_signal + (1.0f - stochiometric_signal) * phospsorus_affinity) - sucrose_root_allocation * ((nitrogen * stochiometric_signal) / (nitrogen + min_nitrogen) + ((phosphorus * (1.0f - stochiometric_signal)) / (phosphorus + min_phosphorus) + min_sucrose / (min_sucrose + sucrose)));
+}
+// Maksimov
+float moistureAvailability(
+    float evapotranspiration,
+    float slope_runoff,
+    float vertial_filtration_down,
+    float vertial_filtration_up,
+    float initial_soil_moisture_reserve,
+    float precipitation);
+
+float lightAvailability(
+    float available_light_coef,
+    float leaf_radiation,
+    float soil_radiation);
+
+float heatAvailability(
+    float heat_capacity_air_layer,
+    float temp_change_air_layer,
+    float heat_capacity_plant_mass,
+    float temp_change_plant_layer,
+    float heat_capacity_root_zone_soil,
+    float temp_change_root_zone,
+    float thermal_conductivity_soil,
+    float temp_gradient_deep_soil,
+    float shortwave_radiation,
+    float longwave_radiation);
+
+float foodSecurity(
+    float sum_total_nutrients_on_slope,
+    float sum_mastered_by_system,
+    float sum_initial_nutrients,
+    float sum_applied_nutrients,
+    float sum_hardened_nutrients,
+    float sum_lost_nutrients,
+    int is_accumulation_zone);
+
+float compute_gas_supply_coefficient(
+    float CO2_density,
+    float turbulent_diffusion_coefficient,
+    float dCO2_soil_dx,
+    float dCO2_air_dx,
+    float co2_production_plant_layer);
+
+float growthPotential(
+    float power_spent,
+    float mass);

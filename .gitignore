@@ -1,0 +1,38 @@
+# Binaries
+*.out
+*.o
+*.obj
+*.so
+*.dll
+*.exe
+*.a
+*.lib
+
+# CMake build directories
+/build/
+/out/
+/cmake-build-*/
+/CMakeFiles/
+/CMakeCache.txt
+/Makefile
+/install_manifest.txt
+/compile_commands.json
+
+# IDE specific (optional, ako koristiš neki editor)
+.vscode/
+.idea/
+.cache/
+
+# Backup and temp files
+*~
+*.swp
+*.swo
+*.tmp
+
+# Test output (optional, ako praviš posebne foldere za test rezultate)
+tests/build/
+tests/output/
+
+# Logs
+*.log
+*.py
