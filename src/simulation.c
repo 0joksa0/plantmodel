@@ -4,9 +4,10 @@
 #include <raylib.h>
 #include <stdio.h>
 
-#define SIMULATION_DT 0.1f // novi vremenski korak 0.1h (6 minuta)
+#define SIMULATION_DT 0.01f 
 
 float eps = 1e-6f;
+bool trigger = false;
 
 void DrawAxisGrid(int scrollX, int scrollY, float zoom)
 {
@@ -42,7 +43,15 @@ void LogSimulationStep(int t, Input* input)
                 "Sucrose,Starch,StarchDegr,StarchProd,SucroseProd,"
                 "Nitrogen,Phosphorus,N_Aff,P_Aff,"
                 "RespCost,UptakeCost,TransportCost,"
-                "LeafBiomass,RootBiomass,TotalBiomass,Photoperiod\n");
+                "LeafBiomass,RootBiomass,TotalBiomass,Photoperiod,"
+                "LimPhotRate,MaxPhotRate,MinLeafBiomass,FeedbackOnPhot,"
+                "MaxStarch,MaxStarchDegr,MinSucrose,MaxSucrose,"
+                "StarchNightStart,MinStarch,LambdaSdr,LambdaSdi,LambdaSni,LambdaG,LambdaSb,"
+                "LambdaCsn,AssimCostN,AssimCostP,MinNPhotosynth,MinPPhotosynth,NutrConvParam,"
+                "MaxNitrogen,MinNitrogen,MaxPhosphorus,MinPhosphorus,"
+                "NitSoilContent,PhosSoilContent,MaxNitUptake,MaxPhosUptake,"
+                "MMConstantN,MMConstantP,RootAllocation,StochSignal,"
+                "LeafDeathRate,RootDeathRate,LeafCompRate,RootCompRate\n");
         }
 
         fprintf(log,
@@ -50,18 +59,33 @@ void LogSimulationStep(int t, Input* input)
             "%.4f,%.4f,%.4f,%.4f,%.4f,"
             "%.4f,%.4f,%.4f,%.4f,"
             "%.4f,%.4f,%.4f,"
-            "%.4f,%.4f,%.4f,%.2f\n",
+            "%.4f,%.4f,%.4f,%.2f,"
+            "%.4f,%.4f,%.4f,%.4f,"
+            "%.4f,%.4f,%.4f,%.4f,"
+            "%.4f,%.4f,%.4f,%.4f,%.4f,%.4f,%.4f,"
+            "%.4f,%.4f,%.4f,%.4f,%.4f,"
+            "%.4f,%.4f,%.4f,%.4f,"
+            "%.4f,%.4f,%.4f,%.4f,"
+            "%.4f,%.4f,%.4f,%.4f,%.4f,"
+            "%.4f,%.4f,%.4f,%.4f\n",
             t, input->light,
             input->starch_partition_coeff, input->photosynthesis,
             input->sucrose, input->starch,
-            input->starch_degradation_rate, // ovo je degradacija
-            input->starch_partition_coeff * input->photosynthesis - input->starch_degradation_rate, // starch_prod
-            (1.0f - input->starch_partition_coeff) * input->photosynthesis + input->starch_degradation_rate - input->uptake_cost - input->transport_cost - (input->respiration_frequency * input->sucrose) - (input->sucrose_loading_frequency * input->night_efficiency_starch), // sucrose_prod
+            input->starch_degradation_rate,
+            input->starch_partition_coeff * input->photosynthesis - input->starch_degradation_rate,
+            (1.0f - input->starch_partition_coeff) * input->photosynthesis + input->starch_degradation_rate - input->uptake_cost - input->transport_cost - (input->respiration_frequency * input->sucrose) - (input->sucrose_loading_frequency * input->night_efficiency_starch),
             input->nitrogen, input->phosphorus,
             input->nitrogen_affinity, input->phosphorus_affinity,
             input->night_efficiency_starch, input->uptake_cost, input->transport_cost,
-            input->leaf_biomass, input->root_biomass, input->total_biomass,
-            input->photoperiod);
+            input->leaf_biomass, input->root_biomass, input->total_biomass, input->photoperiod,
+            input->limitation_of_photosyntetic_rate, input->max_photosyntetic_rate, input->min_leaf_biomass, input->feedback_on_photosynthesis,
+            input->max_starch, input->max_starch_degradation_rate, input->min_sucrose, input->max_sucrose,
+            input->starch_night_start, input->min_starch, input->lambda_sdr, input->lambda_sdi, input->lambda_sni, input->lambda_g, input->lambda_sb,
+            input->lambda_csn, input->assimilation_cost_nitrogen, input->assimilation_cost_phorphorus, input->min_nitrogen_photosynthesis, input->min_phosphorus_photosynthesis, input->nutrient_conversion_parameter,
+            input->max_nitrogen, input->min_nitrogen, input->max_phosphorus, input->min_phosphorus,
+            input->nitrogen_soil_content, input->phosphorus_soil_content, input->max_nitrogen_uptake, input->max_phosphorus_uptake,
+            input->Michaelis_Menten_constant_nitrogen, input->Michaelis_Menten_constant_phosphorus, input->sucrose_root_allocation, input->stochiometric_signal,
+            input->leaf_deathrate, input->root_deathrate, input->leaf_competitive_rate, input->root_competitive_rate);
 
         fclose(log);
     }
@@ -71,11 +95,15 @@ void simulate_step(float current_time, int step, Input* input)
 {
     // --- Osvetljenje na osnovu trenutnog vremena ---
     float hour_of_day = fmodf(current_time, 24.0f);
-    printf("\ncurrent time: %f, hour of day: %f \n", current_time, hour_of_day);
     input->light = (hour_of_day >= 6.0f && hour_of_day < 18.0f) ? 1 : 0;
-    if (input->light == 0)
-        input->starch_night_start = input->starch;
-    printf("light : %f", input->light);
+    if (input->light == 0) {
+        if (!trigger) {
+            input->starch_night_start = input->starch;
+        }
+        trigger = true;
+    } else
+        trigger = false;
+    input->max_starch = max_starch(input->max_starch_degradation_rate, input->photoperiod);
 
     // --- Ograničenje fotosinteze ---
     input->limitation_of_photosyntetic_rate = limitation_of_photosyntethic_rate(
@@ -136,6 +164,9 @@ void simulate_step(float current_time, int step, Input* input)
     // 13. Troškovi transporta
     input->transport_cost = transport_cost(input->sucrose_consumption_transport, input->respiration_frequency, input->sucrose, input->sucrose_loading_frequency, input->night_efficiency_starch);
 
+    input->nitrogen_cost = nitrogen_cost(input->respiration_frequency, input->sucrose, input->starch, input->sucrose_loading_frequency, input->night_efficiency_starch, input->assimilation_cost_nitrogen, input->leaf_biomass, input->total_biomass, input->photosynthesis, input->max_photosyntetic_rate, input->min_nitrogen_photosynthesis);
+    input->phosphorus_cost = phosphorus_cost(input->respiration_frequency, input->sucrose, input->starch, input->sucrose_loading_frequency, input->night_efficiency_starch, input->assimilation_cost_phorphorus, input->leaf_biomass, input->total_biomass, input->photosynthesis, input->max_photosyntetic_rate, input->min_phosphorus_photosynthesis);
+
     // 15. Korekcije afiniteta
     input->nitrogen_affinity = runge_kutta_4(input->nitrogen_affinity, current_time, SIMULATION_DT, nitrogen_affinity_f, input);
     input->phosphorus_affinity = runge_kutta_4(input->phosphorus_affinity, current_time, SIMULATION_DT, phosphorus_affinity_f, input);
@@ -185,7 +216,7 @@ void simulate_days(int days)
         .root_biomass = 1.0f,
         .total_biomass = 2.0f,
         .min_leaf_biomass = 0.5f,
-        .feedback_on_photosynthesis = 0.5f,
+        .feedback_on_photosynthesis = 0.62f,
         .max_starch = 72.0f,
         .max_starch_degradation_rate = 6.0f,
         .photoperiod = 12.0f,
@@ -204,7 +235,7 @@ void simulate_days(int days)
         .lambda_sdr = 0.25f,
         .lambda_sdi = 0.10f,
         .lambda_sni = 0.08f,
-        .lambda_g = 0.1f,
+        .lambda_g = 0.65f,
         .lambda_sb = 0.00587f,
         .sucrose = 1.5f,
         .starch = 2.0f,
@@ -214,8 +245,8 @@ void simulate_days(int days)
         .phosphorus_uptake = 0.0f,
         .assimilation_cost_nitrogen = 0.04758f,
         .lambda_csn = 0.0267f,
-        .min_nitrogen_photosynthesis = 0.75f,
-        .min_phosphorus_photosynthesis = 0.075f,
+        .min_nitrogen_photosynthesis = 5.75f,
+        .min_phosphorus_photosynthesis = 0.575f,
         .nutrient_conversion_parameter = 0.066f,
         .assimilation_cost_phorphorus = 0.004758f,
         .pot_nitrogen_uptake = 0.0f,
@@ -224,15 +255,15 @@ void simulate_days(int days)
         .phosphorus_nutrient_uptake = 0.0f,
         .nitrogen_affinity = 0.5f,
         .phosphorus_affinity = 0.5f,
-        .nitrogen_soil_content = 10.0f,
-        .phosphorus_soil_content = 0.15f,
-        .nitrogen_uptake_sucrose_consumption = 0.11f,
-        .phosphorus_uptake_sucrose_consumption = 0.11f,
+        .nitrogen_soil_content = 15.0f,
+        .phosphorus_soil_content = 0.65f,
+        .nitrogen_uptake_sucrose_consumption = 0.68f,
+        .phosphorus_uptake_sucrose_consumption = 0.308f,
         .max_nitrogen_uptake = 6.44f,
         .max_phosphorus_uptake = 0.4f,
         .Michaelis_Menten_constant_nitrogen = 0.125f,
         .Michaelis_Menten_constant_phosphorus = 0.006736f,
-        .lambda_k = 1.0f,
+        .lambda_k = 50.0f,
         .max_nitrogen = 23.0f,
         .min_nitrogen = 5.75f,
         .max_phosphorus = 2.3f,
@@ -248,7 +279,7 @@ void simulate_days(int days)
         .root_competitive_rate = 0.000005f
     };
 
-    InitWindow(GetMonitorWidth(GetCurrentMonitor()), GetMonitorHeight(GetCurrentMonitor()), "Plant Simulation");
+    // InitWindow(GetMonitorWidth(GetCurrentMonitor()), GetMonitorHeight(GetCurrentMonitor()), "Plant Simulation");
     SetTargetFPS(60);
     int scrollX = 0;
     int scrollY = 0;
@@ -256,44 +287,44 @@ void simulate_days(int days)
     for (int step = 0; step < total_steps; step++) {
         simulate_step(current_time, step, &input);
         current_time += SIMULATION_DT;
-        sucroseValues[step] = input.sucrose;
-        starchValues[step] = input.starch;
-        phValues[step] = input.photosynthesis;
-        partition[step] = input.total_biomass;
+        // sucroseValues[step] = input.sucrose;
+        // starchValues[step] = input.starch;
+        // phValues[step] = input.photosynthesis;
+        // partition[step] = input.total_biomass;
         printf("%d\n", step);
     }
 
-    while (!WindowShouldClose()) {
-        if (IsKeyDown(KEY_RIGHT))
-            scrollX += 5;
-        if (IsKeyDown(KEY_LEFT))
-            scrollX -= 5;
-        if (IsKeyDown(KEY_DOWN))
-            scrollY += 5;
-        if (IsKeyDown(KEY_UP))
-            scrollY -= 5;
-        if (IsKeyPressed(KEY_A))
-            zoom *= 2.0f;
-        if (IsKeyPressed(KEY_B))
-            zoom /= 1.1f;
-
-        BeginDrawing();
-        ClearBackground(RAYWHITE);
-        DrawAxisGrid(scrollX, scrollY, zoom);
-        for (int i = 1; i < total_steps; ++i) {
-            DrawLine(2 + (i - 1 - scrollX) * zoom, 50 - sucroseValues[i - 1] * 20 * zoom - scrollY, 2 + (i - scrollX) * zoom, 50 - sucroseValues[i] * 20 * zoom - scrollY, RED);
-            DrawLine(2 + (i - 1 - scrollX) * zoom, 50 - starchValues[i - 1] * 20 * zoom - scrollY, 2 + (i - scrollX) * zoom, 50 - starchValues[i] * 20 * zoom - scrollY, BLUE);
-            DrawLine(2 + (i - 1 - scrollX) * zoom, 50 - phValues[i - 1] * 20 * zoom - scrollY, 2 + (i - scrollX) * zoom, 50 - phValues[i] * 20 * zoom - scrollY, GREEN);
-            DrawLine(2 + (i - 1 - scrollX) * zoom, 50 - partition[i - 1] * 20 * zoom - scrollY, 2 + (i - scrollX) * zoom, 50 - partition[i] * 20 * zoom - scrollY, BLACK);
-        }
-
-        DrawText("Sucrose", 20, 20, 20, RED);
-        DrawText("Starch", 20, 40, 20, BLUE);
-        DrawText("Photosynthesis", 20, 60, 20, GREEN);
-        DrawText("Biomass", 20, 80, 20, BLACK);
-        DrawText(TextFormat("Zoom: %.2fx", zoom), 1000, 20, 20, DARKGRAY);
-
-        EndDrawing();
-    }
-    CloseWindow();
+    // while (!WindowShouldClose()) {
+    //     if (IsKeyDown(KEY_RIGHT))
+    //         scrollX += 5;
+    //     if (IsKeyDown(KEY_LEFT))
+    //         scrollX -= 5;
+    //     if (IsKeyDown(KEY_DOWN))
+    //         scrollY += 5;
+    //     if (IsKeyDown(KEY_UP))
+    //         scrollY -= 5;
+    //     if (IsKeyPressed(KEY_A))
+    //         zoom *= 2.0f;
+    //     if (IsKeyPressed(KEY_B))
+    //         zoom /= 1.1f;
+    //
+    //     BeginDrawing();
+    //     ClearBackground(RAYWHITE);
+    //     DrawAxisGrid(scrollX, scrollY, zoom);
+    //     for (int i = 1; i < total_steps; ++i) {
+    //         DrawLine(2 + (i - 1 - scrollX) * zoom, 500 - sucroseValues[i - 1] * 20 * zoom - scrollY, 2 + (i - scrollX) * zoom, 500 - sucroseValues[i] * 20 * zoom - scrollY, RED);
+    //         DrawLine(2 + (i - 1 - scrollX) * zoom, 500 - starchValues[i - 1] * 20 * zoom - scrollY, 2 + (i - scrollX) * zoom, 500 - starchValues[i] * 20 * zoom - scrollY, BLUE);
+    //         DrawLine(2 + (i - 1 - scrollX) * zoom, 500 - phValues[i - 1] * 20 * zoom - scrollY, 2 + (i - scrollX) * zoom, 500 - phValues[i] * 20 * zoom - scrollY, GREEN);
+    //         DrawLine(2 + (i - 1 - scrollX) * zoom, 50 - partition[i - 1] * 20 * zoom - scrollY, 2 + (i - scrollX) * zoom, 50 - partition[i] * 20 * zoom - scrollY, BLACK);
+    //     }
+    //
+    //     DrawText("Sucrose", 20, 20, 20, RED);
+    //     DrawText("Starch", 20, 40, 20, BLUE);
+    //     DrawText("Photosynthesis", 20, 60, 20, GREEN);
+    //     DrawText("Biomass", 20, 80, 20, BLACK);
+    //     DrawText(TextFormat("Zoom: %.2fx", zoom), 1000, 20, 20, DARKGRAY);
+    //
+    //     EndDrawing();
+    // }
+    // CloseWindow();
 }

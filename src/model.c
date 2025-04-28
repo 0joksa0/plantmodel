@@ -14,17 +14,17 @@ float photosynthesis(
     float min_leaf_biomass)
 {
     if (leaf_biomass < min_leaf_biomass) {
-        printf("asdasd");
+        // printf("asdasd");
         return 0;
     }
-printf("light: %.3f, lim_phot_rate: %.3f, max_phot_rate: %.3f, N_sat: %.3f, P_sat: %.3f, leaf_biomass: %.3f, min_leaf_biomass: %.3f\n",
-    light,
-    limitation_of_photosynthetic_rate,
-    max_photosyntetic_rate,
-    nitrogen_saturation,
-    phosphorus_saturation,
-    leaf_biomass,
-    min_leaf_biomass);
+// printf("light: %.3f, lim_phot_rate: %.3f, max_phot_rate: %.3f, N_sat: %.3f, P_sat: %.3f, leaf_biomass: %.3f, min_leaf_biomass: %.3f\n",
+    // light,
+    // limitation_of_photosynthetic_rate,
+    // max_photosyntetic_rate,
+    // nitrogen_saturation,
+    // phosphorus_saturation,
+    // leaf_biomass,
+    // min_leaf_biomass);
 
     float photo = light * limitation_of_photosynthetic_rate * max_photosyntetic_rate * fminf(nitrogen_saturation, phosphorus_saturation);
     return photo;
@@ -34,7 +34,7 @@ float nitrogen_saturation(
     float nitrogen,
     float min_nitrogen_photosynthesis)
 {
-    printf("nit: %f, min_nit: %f", nitrogen, min_nitrogen_photosynthesis);
+    // printf("nit: %f, min_nit: %f", nitrogen, min_nitrogen_photosynthesis);
     if (nitrogen < min_nitrogen_photosynthesis) {
         return 0;
     }
@@ -236,7 +236,7 @@ float nitrogen_uptake(
     float nitrogen_uptake_sucrose_consumption)
 {
 
-    return pot_nitrogen_uptake * sucrose / (sucrose + nitrogen_uptake_sucrose_consumption * pot_nitrogen_uptake * 1.0f + epsylon);
+    return pot_nitrogen_uptake * (sucrose / (sucrose + (nitrogen_uptake_sucrose_consumption * pot_nitrogen_uptake * 1.0f) + epsylon));
 }
 
 float nitrogen_nutrient_uptake(
@@ -341,7 +341,7 @@ float phosphorus_affinity(
     float starch_partition_coeff,
     float starch_degradation_rate)
 {
-    printf("\np_aff: %f ", phosphorus_affinity);
+    // printf("\np_aff: %f ", phosphorus_affinity);
     float n_nmax = (max_phosphorus / (phosphorus + max_phosphorus));
     float un_real = (1.0f - (phosphorus_uptake / (phosphorus_uptake + phosphorus_cost + epsylon)));
     float n_op = phosphorus_affinity * lambda_k * (nitrogen - (optimal_stochiometric_ratio * phosphorus)) / (nitrogen + (optimal_stochiometric_ratio * phosphorus) + epsylon);
@@ -349,7 +349,7 @@ float phosphorus_affinity(
 
     float n_nmin = (min_phosphorus / (phosphorus / min_phosphorus));
     float term2 = phosphorus_affinity * (n_nmin + ((phosphorus_uptake_sucrose_consumption * phosphorus_uptake) / ((phosphorus_uptake_sucrose_consumption * phosphorus_uptake) + (photosynthesis * (1.0f - starch_partition_coeff)) + starch_degradation_rate + epsylon)));
-    printf("\np_nmax: %f, up_real %f, p_op %f, term1: %f, p_nmin: %f, term2: %f, term: %f\n", n_nmax, un_real, n_op, term1, n_nmin, term2, term1 - term2);
+    // printf("\np_nmax: %f, up_real %f, p_op %f, term1: %f, p_nmin: %f, term2: %f, term: %f\n", n_nmax, un_real, n_op, term1, n_nmin, term2, term1 - term2);
     return term1 - term2;
 }
 float phosphorus_affinity_f(
