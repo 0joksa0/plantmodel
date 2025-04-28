@@ -18,4 +18,5 @@ add_executable(simulator ${SOURCES})
 
 # Povezivanje sa raylib i njegovim zavisnostima
 target_link_libraries(simulator raylib m pthread dl GL)
+message(STATUS "Found sources: ${SOURCES}")
 

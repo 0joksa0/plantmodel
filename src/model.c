@@ -1,5 +1,6 @@
 #include "../include/model.h"
 #include <math.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 float epsylon = 0.000001f;
@@ -13,17 +14,27 @@ float photosynthesis(
     float min_leaf_biomass)
 {
     if (leaf_biomass < min_leaf_biomass) {
+        printf("asdasd");
         return 0;
     }
+printf("light: %.3f, lim_phot_rate: %.3f, max_phot_rate: %.3f, N_sat: %.3f, P_sat: %.3f, leaf_biomass: %.3f, min_leaf_biomass: %.3f\n",
+    light,
+    limitation_of_photosynthetic_rate,
+    max_photosyntetic_rate,
+    nitrogen_saturation,
+    phosphorus_saturation,
+    leaf_biomass,
+    min_leaf_biomass);
 
     float photo = light * limitation_of_photosynthetic_rate * max_photosyntetic_rate * fminf(nitrogen_saturation, phosphorus_saturation);
-    return photo < 0 ? 0 : photo;
+    return photo;
 }
 
 float nitrogen_saturation(
     float nitrogen,
     float min_nitrogen_photosynthesis)
 {
+    printf("nit: %f, min_nit: %f", nitrogen, min_nitrogen_photosynthesis);
     if (nitrogen < min_nitrogen_photosynthesis) {
         return 0;
     }
@@ -174,24 +185,24 @@ float phosphorus_content(
 float phosphorus_content_f(
     float t,
     float phosphorus,
-    void * params){
-    Input* input = (Input*) params;
+    void* params)
+{
+    Input* input = (Input*)params;
 
     return phosphorus_content(
-    input->phosphorus_uptake,
-    input->respiration_frequency,
-    input->sucrose,
-    input->starch,
-    input->sucrose_loading_frequency,
-    input->night_efficiency_starch,
-    input->assimilation_cost_phorphorus,
-    input->leaf_biomass,
-    input->total_biomass,
-    input->photosynthesis,
-    input->max_photosyntetic_rate,
-    input->nutrient_conversion_parameter,
-    input->min_phosphorus_photosynthesis);
-
+        input->phosphorus_uptake,
+        input->respiration_frequency,
+        input->sucrose,
+        input->starch,
+        input->sucrose_loading_frequency,
+        input->night_efficiency_starch,
+        input->assimilation_cost_phorphorus,
+        input->leaf_biomass,
+        input->total_biomass,
+        input->photosynthesis,
+        input->max_photosyntetic_rate,
+        input->nutrient_conversion_parameter,
+        input->min_phosphorus_photosynthesis);
 }
 
 float assimilation_cost_nitrogen(
@@ -279,10 +290,16 @@ float nitrogen_affinity(
     float starch_partition_coeff,
     float starch_degradation_rate)
 {
-    float term1 = (1.0f - nitrogen_affinity) * (((1.0f - nitrogen_uptake / (nitrogen_uptake + nitrogen_cost + epsylon)) * max_nitrogen / (max_nitrogen + nitrogen) + photosynthesis / max_photosyntetic_rate - nitrogen_affinity * lambda_k * (nitrogen - optimal_stochiometric_ratio * phosphorus) / (nitrogen + optimal_stochiometric_ratio * phosphorus + epsylon)));
+    // printf("\nn_aff: %f ", nitrogen_affinity);
+    float n_nmax = (max_nitrogen / (nitrogen + max_nitrogen));
+    float un_real = (1.0f - (nitrogen_uptake / (nitrogen_uptake + nitrogen_cost + epsylon)));
+    float n_op = nitrogen_affinity * lambda_k * (nitrogen - (optimal_stochiometric_ratio * phosphorus)) / (nitrogen + (optimal_stochiometric_ratio * phosphorus) + epsylon);
 
-    float term2 = nitrogen_affinity * (nitrogen / (nitrogen + min_nitrogen) + nitrogen_uptake_sucrose_consumption * nitrogen_uptake / (nitrogen_uptake_sucrose_consumption * nitrogen_uptake + photosynthesis * (1.0f - starch_partition_coeff) + starch_degradation_rate + epsylon));
+    float term1 = (1.0f - nitrogen_affinity) * ((un_real * n_nmax) + (photosynthesis / max_photosyntetic_rate) - n_op);
 
+    float n_nmin = (min_nitrogen / (nitrogen / min_nitrogen));
+    float term2 = nitrogen_affinity * (n_nmin + ((nitrogen_uptake_sucrose_consumption * nitrogen_uptake) / ((nitrogen_uptake_sucrose_consumption * nitrogen_uptake) + (photosynthesis * (1.0f - starch_partition_coeff)) + starch_degradation_rate + epsylon)));
+    // printf("\nn_nmax: %f, un_real %f, n_op %f, term1: %f, n_nmin: %f, term2: %f, term: %f\n", n_nmax, un_real, n_op, term1, n_nmin, term2, term1 - term2);
     return term1 - term2;
 }
 
@@ -324,10 +341,15 @@ float phosphorus_affinity(
     float starch_partition_coeff,
     float starch_degradation_rate)
 {
-    float term1 = (1.0f - phosphorus_affinity) * (((1.0f - phosphorus_uptake / (phosphorus_uptake + phosphorus_cost + epsylon)) * max_phosphorus / (max_phosphorus + phosphorus) + photosynthesis / max_photosyntetic_rate - phosphorus_affinity * lambda_k * (nitrogen - optimal_stochiometric_ratio * phosphorus) / (nitrogen + optimal_stochiometric_ratio * phosphorus + epsylon)));
+    printf("\np_aff: %f ", phosphorus_affinity);
+    float n_nmax = (max_phosphorus / (phosphorus + max_phosphorus));
+    float un_real = (1.0f - (phosphorus_uptake / (phosphorus_uptake + phosphorus_cost + epsylon)));
+    float n_op = phosphorus_affinity * lambda_k * (nitrogen - (optimal_stochiometric_ratio * phosphorus)) / (nitrogen + (optimal_stochiometric_ratio * phosphorus) + epsylon);
+    float term1 = (1.0f - phosphorus_affinity) * ((un_real * n_nmax) + (photosynthesis / max_photosyntetic_rate) + n_op);
 
-    float term2 = phosphorus_affinity * (phosphorus / (phosphorus + min_phosphorus) + phosphorus_uptake_sucrose_consumption * phosphorus_uptake / (phosphorus_uptake_sucrose_consumption * phosphorus_uptake + photosynthesis * (1.0f - starch_partition_coeff) + starch_degradation_rate + epsylon));
-
+    float n_nmin = (min_phosphorus / (phosphorus / min_phosphorus));
+    float term2 = phosphorus_affinity * (n_nmin + ((phosphorus_uptake_sucrose_consumption * phosphorus_uptake) / ((phosphorus_uptake_sucrose_consumption * phosphorus_uptake) + (photosynthesis * (1.0f - starch_partition_coeff)) + starch_degradation_rate + epsylon)));
+    printf("\np_nmax: %f, up_real %f, p_op %f, term1: %f, p_nmin: %f, term2: %f, term: %f\n", n_nmax, un_real, n_op, term1, n_nmin, term2, term1 - term2);
     return term1 - term2;
 }
 float phosphorus_affinity_f(
@@ -499,6 +521,14 @@ float leaf_growth(
     float leaf_death_rate,
     float leaf_competative_rate)
 {
+//     printf("\n\nlambda_sb: %.6f\n", labmda_sb);
+// printf("sucrose_root_allocation: %.6f\n", sucrose_root_allocation);
+// printf("sucrose_loading_frequency: %.6f\n", sucrose_loading_frequency);
+// printf("night_efficiency_starch: %.6f\n", night_efficiency_starch);
+// printf("leaf_biomass: %.6f\n", leaf_biomass);
+// printf("leaf_death_rate: %.6f\n", leaf_death_rate);
+// printf("leaf_competative_rate: %.6f\n\n", leaf_competative_rate);
+
     return labmda_sb * (1.0f - sucrose_root_allocation) * sucrose_loading_frequency * night_efficiency_starch * leaf_biomass - leaf_death_rate * leaf_biomass - leaf_competative_rate * leaf_biomass * leaf_biomass;
 }
 float leaf_growth_f(
@@ -535,18 +565,17 @@ float root_growth_f(
     float root_biomass,
     void* params)
 {
-    
-Input* input = (Input*)params;
-return root_growth(
-    input->lambda_sb,
-    input->sucrose_root_allocation,
-    input->sucrose_loading_frequency,
-    input->night_efficiency_starch,
-    input->leaf_biomass,
-    root_biomass,
-    input->root_deathrate,
-    input->root_competitive_rate);
 
+    Input* input = (Input*)params;
+    return root_growth(
+        input->lambda_sb,
+        input->sucrose_root_allocation,
+        input->sucrose_loading_frequency,
+        input->night_efficiency_starch,
+        input->leaf_biomass,
+        root_biomass,
+        input->root_deathrate,
+        input->root_competitive_rate);
 }
 
 float stochiometric_signal(
