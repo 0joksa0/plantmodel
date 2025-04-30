@@ -1,4 +1,4 @@
-#include "../include/runge_cutta.h"
+#include "simulation/runge_cutta.h"
 
 float runge_kutta_4(float y_n, float t_n, float h, ODEFunction f, void* params)
 {

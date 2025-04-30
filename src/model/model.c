@@ -1,7 +1,5 @@
-#include "../include/model.h"
 #include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include "model/model.h"
 
 float epsylon = 0.000001f;
 float photosynthesis(
@@ -17,7 +15,7 @@ float photosynthesis(
         // printf("asdasd");
         return 0;
     }
-// printf("light: %.3f, lim_phot_rate: %.3f, max_phot_rate: %.3f, N_sat: %.3f, P_sat: %.3f, leaf_biomass: %.3f, min_leaf_biomass: %.3f\n",
+    // printf("light: %.3f, lim_phot_rate: %.3f, max_phot_rate: %.3f, N_sat: %.3f, P_sat: %.3f, leaf_biomass: %.3f, min_leaf_biomass: %.3f\n",
     // light,
     // limitation_of_photosynthetic_rate,
     // max_photosyntetic_rate,
@@ -521,13 +519,13 @@ float leaf_growth(
     float leaf_death_rate,
     float leaf_competative_rate)
 {
-//     printf("\n\nlambda_sb: %.6f\n", labmda_sb);
-// printf("sucrose_root_allocation: %.6f\n", sucrose_root_allocation);
-// printf("sucrose_loading_frequency: %.6f\n", sucrose_loading_frequency);
-// printf("night_efficiency_starch: %.6f\n", night_efficiency_starch);
-// printf("leaf_biomass: %.6f\n", leaf_biomass);
-// printf("leaf_death_rate: %.6f\n", leaf_death_rate);
-// printf("leaf_competative_rate: %.6f\n\n", leaf_competative_rate);
+    //     printf("\n\nlambda_sb: %.6f\n", labmda_sb);
+    // printf("sucrose_root_allocation: %.6f\n", sucrose_root_allocation);
+    // printf("sucrose_loading_frequency: %.6f\n", sucrose_loading_frequency);
+    // printf("night_efficiency_starch: %.6f\n", night_efficiency_starch);
+    // printf("leaf_biomass: %.6f\n", leaf_biomass);
+    // printf("leaf_death_rate: %.6f\n", leaf_death_rate);
+    // printf("leaf_competative_rate: %.6f\n\n", leaf_competative_rate);
 
     return labmda_sb * (1.0f - sucrose_root_allocation) * sucrose_loading_frequency * night_efficiency_starch * leaf_biomass - leaf_death_rate * leaf_biomass - leaf_competative_rate * leaf_biomass * leaf_biomass;
 }
