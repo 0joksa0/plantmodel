@@ -1,15 +1,21 @@
-#include "model/input.h"
 #include "export/export.h"
+#include "model/input.h"
 #include "model/model.h"
 #include "simulation/runge_cutta.h"
 #include <math.h>
-#include <stdio.h>
 #include <stdbool.h>
+#include <stdio.h>
 
-#define SIMULATION_DT 0.01f 
+#define SIMULATION_DT 0.1f
 
 float eps = 1e-6f;
 bool trigger = false;
+float rgr(float fw_now, float fw_start, float hours_passed)
+{
+    return (logf(fw_now) - logf(fw_start)) / hours_passed;
+}
+
+/* poziv na kraju simulacije */
 
 void simulate_step(float current_time, int step, Input* input)
 {
@@ -23,7 +29,6 @@ void simulate_step(float current_time, int step, Input* input)
         trigger = true;
     } else
         trigger = false;
-    input->max_starch = max_starch(input->max_starch_degradation_rate, input->photoperiod);
 
     // --- Ograničenje fotosinteze ---
     input->limitation_of_photosyntetic_rate = limitation_of_photosyntethic_rate(
@@ -104,6 +109,7 @@ void simulate_step(float current_time, int step, Input* input)
 
     // 19. Ukupna biomasa
     input->total_biomass = input->leaf_biomass + input->root_biomass;
+    input->max_starch = max_starch(input->max_starch_degradation_rate, input->photoperiod);
     input->stochiometric_signal = stochiometric_signal(input->optimal_stechiometric_ratio, input->nitrogen, input->phosphorus);
 
     // 20. Korekcija alokacije sukroze
@@ -128,6 +134,8 @@ void simulate_days(int days)
 
     Input input = generate_input();
 
+    float start_leafe_biomass = input.leaf_biomass;
+
     for (int step = 0; step < total_steps; step++) {
         simulate_step(current_time, step, &input);
         current_time += SIMULATION_DT;
@@ -135,7 +143,13 @@ void simulate_days(int days)
         // starchValues[step] = input.starch;
         // phValues[step] = input.photosynthesis;
         // partition[step] = input.total_biomass;
-        printf("%d\n", step);
+        // printf("%d\n", step);
     }
+/* simulation.c, posle simulacije */
+printf("t_end - t0  = %.0f h\n", days * 24.0f);      //  EXPECT 696
+printf("currentTime = %.0f h\n", current_time);      //  Šta zapravo dobiješ?
 
+    float RGR_total = rgr(input.leaf_biomass, start_leafe_biomass, current_time);
+    printf("leaf FW in t0: %f, leaf FW u t: %f, t0:%f, t:%f, dt:%f", start_leafe_biomass, input.leaf_biomass, 0.0f, current_time, SIMULATION_DT);
+    printf("\nRGR: %f  RGR_F: %f \n", RGR_total, RGR_total*24.0f);
 }

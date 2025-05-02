@@ -24,7 +24,7 @@ float photosynthesis(
     // leaf_biomass,
     // min_leaf_biomass);
 
-    float photo = light * limitation_of_photosynthetic_rate * max_photosyntetic_rate * fminf(nitrogen_saturation, phosphorus_saturation);
+    float photo = light * limitation_of_photosynthetic_rate * max_photosyntetic_rate * fminf(nitrogen_saturation, phosphorus_saturation) ;
     return photo;
 }
 
@@ -137,7 +137,7 @@ float nitrogen_content(
     float min_nitrogen_photosynthesis)
 {
 
-    return nitrogen_uptake - (respiration_frequency * (sucrose + starch) + night_efficiency_starch * sucrose_loading_frequency) * assimilaton_cost * (leaf_biomass / (total_biomass + epsylon)) - (photosyntesis / max_photosyntetic_rate) * min_nitrogen_photosynthesis * nutrient_conversion_parameter;
+    return nitrogen_uptake - ((respiration_frequency * (sucrose + starch) + night_efficiency_starch * sucrose_loading_frequency) * assimilaton_cost * (leaf_biomass / (total_biomass + epsylon))) - ((photosyntesis / max_photosyntetic_rate) * min_nitrogen_photosynthesis * nutrient_conversion_parameter);
 }
 
 float nitrogen_content_f(
@@ -178,7 +178,7 @@ float phosphorus_content(
     float min_phosphorus_photosynthesis)
 {
 
-    return phosphorus_uptake - (respiration_frequency * (sucrose + starch) + night_efficiency_starch * sucrose_loading_frequency) * assimilaton_cost * (leaf_biomass / (total_biomass + epsylon)) - (photosyntesis / max_photosyntetic_rate) * min_phosphorus_photosynthesis * nutrient_conversion_parameter;
+    return phosphorus_uptake - ((respiration_frequency * (sucrose + starch) + night_efficiency_starch * sucrose_loading_frequency) * assimilaton_cost * (leaf_biomass / (total_biomass + epsylon))) - ((photosyntesis / max_photosyntetic_rate) * min_phosphorus_photosynthesis * nutrient_conversion_parameter);
 }
 float phosphorus_content_f(
     float t,
@@ -617,6 +617,9 @@ float sucrose_root_allocation_f(
         input->phosphorus,
         input->min_phosphorus);
 }
+
+
+
 // Maksimov
 float moistureAvailability(
     float evapotranspiration,

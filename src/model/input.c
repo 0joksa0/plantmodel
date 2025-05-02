@@ -17,7 +17,7 @@ Input generate_input()
         .max_starch_degradation_rate = 6.0f,
         .photoperiod = 12.0f,
         .optimal_stechiometric_ratio = 10.0f,
-        .starch_partition_coeff = 0.5f,
+        .starch_partition_coeff = 0.6f,
         .starch_degradation_rate = 0.0f,
         .uptake_cost = 0.0f,
         .transport_cost = 0.0f,
