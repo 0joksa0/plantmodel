@@ -1,13 +1,19 @@
 #include "export/export.h"
+#include "gui/plot.h"
 #include "model/input.h"
 #include "model/model.h"
 #include "simulation/runge_cutta.h"
 #include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
-
+#include <stdlib.h>
 #define SIMULATION_DT 0.1f
 
+int total_steps = 0;
+float* sucrose = NULL;
+float* starch = NULL;
+float* ph = NULL;
+float* partition = NULL;
 float eps = 1e-6f;
 bool trigger = false;
 float rgr(float fw_now, float fw_start, float hours_passed)
@@ -125,12 +131,14 @@ void simulate_step(float current_time, int step, Input* input)
 
 void simulate_days(int days)
 {
-    int total_steps = (int)(days * 24.0f / SIMULATION_DT);
+    total_steps = (int)(days * 24.0f / SIMULATION_DT);
     float current_time = 0.0f;
-    float sucroseValues[10000] = { 0 };
-    float starchValues[10000] = { 0 };
-    float phValues[10000] = { 0 };
-    float partition[10000] = { 0 };
+    sucrose = malloc(total_steps * sizeof(float));
+    starch = malloc(total_steps * sizeof(float));
+
+    ph = malloc(total_steps * sizeof(float));
+
+    partition = malloc(total_steps * sizeof(float));
 
     Input input = generate_input();
 
@@ -139,17 +147,19 @@ void simulate_days(int days)
     for (int step = 0; step < total_steps; step++) {
         simulate_step(current_time, step, &input);
         current_time += SIMULATION_DT;
-        // sucroseValues[step] = input.sucrose;
-        // starchValues[step] = input.starch;
-        // phValues[step] = input.photosynthesis;
-        // partition[step] = input.total_biomass;
+        sucrose[step] = input.sucrose;
+        starch[step] = input.starch;
+        ph[step] = input.photosynthesis;
+        partition[step] = input.total_biomass;
         // printf("%d\n", step);
     }
-/* simulation.c, posle simulacije */
-printf("t_end - t0  = %.0f h\n", days * 24.0f);      //  EXPECT 696
-printf("currentTime = %.0f h\n", current_time);      //  Šta zapravo dobiješ?
+
+    main_thread();
+    /* simulation.c, posle simulacije */
+    printf("t_end - t0  = %.0f h\n", days * 24.0f); //  EXPECT 696
+    printf("currentTime = %d h\n", total_steps); //  Šta zapravo dobiješ?
 
     float RGR_total = rgr(input.leaf_biomass, start_leafe_biomass, current_time);
     printf("leaf FW in t0: %f, leaf FW u t: %f, t0:%f, t:%f, dt:%f", start_leafe_biomass, input.leaf_biomass, 0.0f, current_time, SIMULATION_DT);
-    printf("\nRGR: %f  RGR_F: %f \n", RGR_total, RGR_total*24.0f);
+    printf("\nRGR: %f  RGR_F: %f \n", RGR_total / 0.018, RGR_total * 24.0f);
 }

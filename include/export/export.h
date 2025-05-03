@@ -3,6 +3,6 @@
 
 #include "model/input.h"
 
-void log_simulation_step(int t, Input* input);
+void log_simulation_step(float t, Input* input);
 
 #endif

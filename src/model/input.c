@@ -10,7 +10,7 @@ Input generate_input()
         .phosphorus_saturation = 1.0f,
         .leaf_biomass = 0.6f,
         .root_biomass = 1.0f,
-        .total_biomass = 2.0f,
+        .total_biomass = 1.6f,
         .min_leaf_biomass = 0.5f,
         .feedback_on_photosynthesis = 0.62f,
         .max_starch = 72.0f,

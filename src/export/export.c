@@ -1,12 +1,12 @@
 #include "export/export.h"
 #include <stdio.h>
 
-void log_simulation_step(int t, Input* input)
+void log_simulation_step(float t, Input* input)
 {
-    t--;
+    
     FILE* log = fopen("sim_log.csv", t == 0 ? "w" : "a");
     if (log) {
-        if (t == 0) {
+        if (t == 0.0f) {
             fprintf(log,
                 "Hour,Light,Gamma,Photosynthesis,"
                 "Sucrose,Starch,StarchDegr,StarchProd,SucroseProd,"
@@ -24,7 +24,7 @@ void log_simulation_step(int t, Input* input)
         }
 
         fprintf(log,
-            "%d,%.0f,%.4f,%.4f,"
+            "%.4f,%.0f,%.4f,%.4f,"
             "%.4f,%.4f,%.4f,%.4f,%.4f,"
             "%.4f,%.4f,%.4f,%.4f,"
             "%.4f,%.4f,%.4f,"

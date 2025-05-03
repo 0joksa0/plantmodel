@@ -1,72 +1,126 @@
-#include <raylib.h>
+#include "gui/plot.h"
+#include "raylib.h"
+#include "raymath.h"
+#include <math.h>
+#include <stdbool.h>
+#include <stdio.h>
 
-void DrawAxisGrid(int scrollX, int scrollY, float zoom)
+typedef struct {
+    const char* name;
+    float* values;
+    bool active;
+    Color color;
+    Rectangle buttonBounds;
+
+} DataPlotEntry;
+
+Rectangle ShrinkRect(Rectangle r, float amount)
 {
-    int screenWidth = GetScreenWidth();
-    int screenHeight = GetScreenHeight();
+    r.x += amount;
+    r.y += amount;
+    r.width -= 2 * amount;
+    r.height -= 2 * amount;
+    return r;
+}
 
-    // X-axis
-    DrawLine(0, 500 - scrollY, screenWidth, 500 - scrollY, LIGHTGRAY);
-    for (int i = -scrollX; i < screenWidth / zoom + scrollX; i += 24) {
-        int worldX = i;
-        int screenX = 20 + worldX * zoom - scrollX;
-        DrawLine(screenX, 495 - scrollY, screenX, 505 - scrollY, GRAY);
-        DrawText(TextFormat("%d", worldX), screenX - 10, 510 - scrollY, 10, DARKGRAY);
+float ComputeYScale(DataPlotEntry* entries, int count, int total_steps, float screenHeight, float topPadding, float bottomPadding)
+{
+    float max_val = 0.0001f;
+    for (int i = 0; i < count; i++) {
+        if (!entries[i].active)
+            continue;
+
+        for (int j = 0; j < total_steps; j++) {
+            if (entries[i].values[j] > max_val) {
+                max_val = entries[i].values[j];
+            }
+        }
     }
 
-    // Y-axis
-    DrawLine(20 - scrollX, 0, 20 - scrollX, screenHeight, LIGHTGRAY);
-    for (int j = -scrollY; j < screenHeight / (20 * zoom) + scrollY; j += 5) {
-        int worldY = j;
-        int screenY = 500 - worldY * 20 * zoom - scrollY;
-        DrawLine(15 - scrollX, screenY, 25 - scrollX, screenY, GRAY);
-        DrawText(TextFormat("%d", worldY), 0, screenY - 5, 10, DARKGRAY);
+    float plotHeight = screenHeight - topPadding;
+    return plotHeight / max_val;
+}
+
+void DrawDataPlot(DataPlotEntry* entries, int count, int total_steps, float y_scale, float centerY, int margin)
+{
+    Vector2 mouse = GetMousePosition();
+
+    for (int i = 0; i < count; i++) {
+        DataPlotEntry* e = &entries[i];
+
+        DrawRectangleRec(e->buttonBounds, e->active ? e->color : LIGHTGRAY);
+        DrawText(e->name, e->buttonBounds.x + e->buttonBounds.width * 1.5f, e->buttonBounds.y, 20, BLACK);
+
+        if (CheckCollisionPointRec(mouse, e->buttonBounds) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+            e->active = !(e->active);
+        }
+
+        if (!e->active)
+            continue;
+
+        for (int j = 1; j < total_steps; ++j) {
+            int x1 = margin + (j - 1) * (GetScreenWidth() - margin*2) / total_steps;
+            int y1 = centerY - e->values[j - 1] * y_scale;
+            int x2 = margin + j * (GetScreenWidth() - margin*2) / total_steps;
+            int y2 = centerY - e->values[j] * y_scale;
+            DrawLineEx((Vector2){x1, y1}, (Vector2){x2, y2},2.0f, e->color);
+        }
     }
 }
 
+void printGrid(int width, int height, int margine, int steps, int total_steps, float y_scale)
+{
 
+    float tickStep = (((float)height / 2) - 40) / y_scale;
+    tickStep /= steps;
+    for (float i = 1; i <= steps; i++) {
+        float val = i * tickStep;
 
-void main_thread(){
+        float y = ((float)height / 2) - (val * y_scale);
+        DrawLine(margine, y, width, y, LIGHTGRAY);
+        DrawText(TextFormat("%.1f", val), margine - 5 - MeasureText(TextFormat("%.1f", val), 12), y - 8, 12, DARKGRAY); 
+        y = ((float)height / 2) + (val * y_scale);
 
-      InitWindow(GetMonitorWidth(GetCurrentMonitor()), GetMonitorHeight(GetCurrentMonitor()), "Plant Simulation");
+        DrawLine(margine, y, width, y, LIGHTGRAY);
+        DrawText(TextFormat("-%.1f", val), margine - 5 - MeasureText(TextFormat("-%.1f", val), 12), y - 8, 12, DARKGRAY);
+    }
+
+    for (int i = 0; i <= total_steps; i+= 240) {
+    DrawLine(margine+ i , 0, margine+ i , height, LIGHTGRAY);        
+    DrawText(TextFormat("%d", i), margine + i - MeasureText(TextFormat("%d", i), 12)/2 , height/2 + MeasureTextEx(GetFontDefault(), TextFormat("%d", i),12, 1).y/2, 12, DARKGRAY);
+    }
+    DrawLine(0, height / 2, width, height / 2, BLACK);
+    DrawLine(margine, 0, margine, height, BLACK);
+}
+
+void main_thread(void)
+{
+    InitWindow(GetMonitorWidth(GetCurrentMonitor()),
+        GetMonitorHeight(GetCurrentMonitor()),
+        "Plant Simulation");
     SetTargetFPS(60);
-    int scrollX = 0;
-    int scrollY = 0;
-    int zoom = 5.0f;
-    // while (!WindowShouldClose()) {
-    //     if (IsKeyDown(KEY_RIGHT))
-    //         scrollX += 5;
-    //     if (IsKeyDown(KEY_LEFT))
-    //         scrollX -= 5;
-    //     if (IsKeyDown(KEY_DOWN))
-    //         scrollY += 5;
-    //     if (IsKeyDown(KEY_UP))
-    //         scrollY -= 5;
-    //     if (IsKeyPressed(KEY_A))
-    //         zoom *= 2.0f;
-    //     if (IsKeyPressed(KEY_B))
-    //         zoom /= 1.1f;
-    //
-    //     BeginDrawing();
-    //     ClearBackground(RAYWHITE);
-    //     DrawAxisGrid(scrollX, scrollY, zoom);
-    //     for (int i = 1; i < total_steps; ++i) {
-    //         DrawLine(2 + (i - 1 - scrollX) * zoom, 500 - sucroseValues[i - 1] * 20 * zoom - scrollY, 2 + (i - scrollX) * zoom, 500 - sucroseValues[i] * 20 * zoom - scrollY, RED);
-    //         DrawLine(2 + (i - 1 - scrollX) * zoom, 500 - starchValues[i - 1] * 20 * zoom - scrollY, 2 + (i - scrollX) * zoom, 500 - starchValues[i] * 20 * zoom - scrollY, BLUE);
-    //         DrawLine(2 + (i - 1 - scrollX) * zoom, 500 - phValues[i - 1] * 20 * zoom - scrollY, 2 + (i - scrollX) * zoom, 500 - phValues[i] * 20 * zoom - scrollY, GREEN);
-    //         DrawLine(2 + (i - 1 - scrollX) * zoom, 50 - partition[i - 1] * 20 * zoom - scrollY, 2 + (i - scrollX) * zoom, 50 - partition[i] * 20 * zoom - scrollY, BLACK);
-    //     }
-    //
-    //     DrawText("Sucrose", 20, 20, 20, RED);
-    //     DrawText("Starch", 20, 40, 20, BLUE);
-    //     DrawText("Photosynthesis", 20, 60, 20, GREEN);
-    //     DrawText("Biomass", 20, 80, 20, BLACK);
-    //     DrawText(TextFormat("Zoom: %.2fx", zoom), 1000, 20, 20, DARKGRAY);
-    //
-    //     EndDrawing();
-    // }
-    // CloseWindow();
+    float screenHeight = GetMonitorHeight(GetCurrentMonitor());
+    float screenWidht = GetMonitorWidth(GetCurrentMonitor());
+    int margine = 30;
+    float y_scale = 1;
+    float max_val = 0;
 
+    DataPlotEntry plots[4] = {
+        { "Sucrose", sucrose, false, RED, { screenWidht - 250, 20, 20, 20 } },
+        { "Starch", starch, false, BLUE, { screenWidht - 250, 50, 20, 20 } },
+        { "Photos", ph, false, GREEN, { screenWidht - 250, 80, 20, 20 } },
+        { "Y", partition, false, BLACK, { screenWidht - 250, 110, 20, 20 } },
+    };
+    while (!WindowShouldClose()) {
+        /* –– PAN –– */
 
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+        y_scale = ComputeYScale(plots, 4, total_steps, screenHeight / 2, 40, 40);
+        printGrid(screenWidht, screenHeight, margine, 20, total_steps, y_scale);
+        DrawDataPlot(plots, 4, total_steps, y_scale, screenHeight / 2, margine);
 
+        EndDrawing();
+    }
+    CloseWindow();
 }
