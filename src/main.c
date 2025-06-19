@@ -1,15 +1,13 @@
-
-
-
 #include <stdio.h>
-#include "../include/model/model.h"
+#include "model/input.h"
 
-void simulate_days(int days); 
-
+void simulate_days(int days, Input* input); 
 
 int main() {
     printf("=== Simulacija rasta biljke (24h) ===\n");
-    simulate_days(29);
+    Input input = generate_input();
+    simulate_days(16, &input);
     return 0;
+
 }
 

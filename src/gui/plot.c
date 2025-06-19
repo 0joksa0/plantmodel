@@ -85,9 +85,9 @@ void printGrid(int width, int height, int margine, int steps, int total_steps, f
         DrawText(TextFormat("-%.1f", val), margine - 5 - MeasureText(TextFormat("-%.1f", val), 12), y - 8, 12, DARKGRAY);
     }
 
-    for (int i = 0; i <= total_steps; i+= 240) {
+    for (float i = 0; i <= total_steps; i+= 24) {
     DrawLine(margine+ i , 0, margine+ i , height, LIGHTGRAY);        
-    DrawText(TextFormat("%d", i), margine + i - MeasureText(TextFormat("%d", i), 12)/2 , height/2 + MeasureTextEx(GetFontDefault(), TextFormat("%d", i),12, 1).y/2, 12, DARKGRAY);
+    DrawText(TextFormat("%.0f", i), margine + i - MeasureText(TextFormat("%.0f", i), 12)/2 , height/2 + MeasureTextEx(GetFontDefault(), TextFormat("%.0f", i),12, 1).y/2, 12, DARKGRAY);
     }
     DrawLine(0, height / 2, width, height / 2, BLACK);
     DrawLine(margine, 0, margine, height, BLACK);

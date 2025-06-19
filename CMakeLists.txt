@@ -12,7 +12,7 @@ include_directories(include)
 find_package(raylib REQUIRED)
 
 # Izvori koda
-file(GLOB SOURCES "src/*.c" "src/*/*.c")
+file(GLOB SOURCES "src/*.c" "src/*/*.c" "src/*/*/*.c")
 
 # Kreiranje izvršne datoteke
 add_executable(simulator ${SOURCES})
