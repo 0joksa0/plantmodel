@@ -1,12 +1,12 @@
 #include "export/export.h"
 #include <stdio.h>
 
-void log_simulation_step(float t, Input* input)
+void log_simulation_step(real_t t, Input* input)
 {
     
     FILE* log = fopen("sim_log.csv", t == 0 ? "w" : "a");
     if (log) {
-        if (t == 0.0f) {
+        if (t == REAL(0.0)) {
             fprintf(log,
                 "Hour,Light,Gamma,Photosynthesis,"
                 "Sucrose,Starch,StarchDegr,StarchProd,SucroseProd,"
@@ -42,7 +42,7 @@ void log_simulation_step(float t, Input* input)
             input->sucrose, input->starch,
             input->starch_degradation_rate,
             input->starch_partition_coeff * input->photosynthesis - input->starch_degradation_rate,
-            (1.0f - input->starch_partition_coeff) * input->photosynthesis + input->starch_degradation_rate - input->uptake_cost - input->transport_cost - (input->respiration_frequency * input->sucrose) - (input->sucrose_loading_frequency * input->night_efficiency_starch),
+            (REAL(1.0) - input->starch_partition_coeff) * input->photosynthesis + input->starch_degradation_rate - input->uptake_cost - input->transport_cost - (input->respiration_frequency * input->sucrose) - (input->sucrose_loading_frequency * input->night_efficiency_starch),
             input->nitrogen, input->phosphorus,
             input->nitrogen_affinity, input->phosphorus_affinity,
             input->night_efficiency_starch, input->uptake_cost, input->transport_cost,
