@@ -311,6 +311,11 @@ real_t sucrose_root_allocation_f(
     real_t t,
     real_t sucrose_root_allocation_p,
     void* params);
+
+real_t lambda_sb_f(real_t lambda_sb, real_t nitrogen_soil, real_t phosphorus_soil);
+
+real_t R_plus(real_t nitrogen_soil, real_t phosphorus_soil);
+
 // Farquhar C3 Photosynthesis Model
 
 real_t rubisco_limited_photosynthesis(
@@ -397,4 +402,18 @@ real_t growthPotential(
     real_t mass);
 
 real_t iterate_ci(Input* input, int max_iter, real_t epsilon);
+
+real_t calculate_stomatal_conductance_jarvis(
+    real_t incoming_PAR,
+    real_t vapor_pressure_deficit,
+    real_t leaf_temperature_celsius,
+    real_t ambient_CO2_concentration,
+    real_t leaf_water_potential);
+
+real_t calculate_vapor_pressure_deficit(real_t temperature_celsius, real_t relative_humidity_percent);
+
+void update_light_conditions(Input* input, real_t current_hour);
+
+
+
 #endif

@@ -30,21 +30,30 @@ real_t farquhar_photosynthesis(Input* input)
         return REAL(0.0);
     }
 
+    real_t VPD = calculate_vapor_pressure_deficit(input->leaf_temperature, input->relative_humidity);
+    input->stomatal_conductance = calculate_stomatal_conductance_jarvis(
+        input->light_PAR,
+        VPD,
+        input->leaf_temperature,
+        input->ambient_CO2_concentration,
+        input->leaf_water_potential);
+    // printf("stomal cond: %f ", input->stomatal_conductance);
     real_t An = iterate_ci(input, 50, REAL(0.0001));
 
     real_t limitation = input->limitation_of_photosyntetic_rate;
     real_t np_saturation = RMIN(input->nitrogen_saturation, input->phosphorus_saturation);
-    printf("lim:%f psat:%f nsat:%f", input->limitation_of_photosyntetic_rate, input->phosphorus_saturation, input->nitrogen_saturation);
+    // printf("lim:%f psat:%f nsat:%f ", input->limitation_of_photosyntetic_rate, input->phosphorus_saturation, input->nitrogen_saturation);
 
     input->convert_to_photosynthesis_per_gram_per_hour = convert_to_photosynthesis_per_gram_per_hour(
         An,
         input->leaf_biomass,
         input->specific_leaf_area);
-    real_t adjusted_PH = input->convert_to_photosynthesis_per_gram_per_hour * limitation * np_saturation;
+    real_t adjusted_PH = input->convert_to_photosynthesis_per_gram_per_hour * np_saturation;
 
     // printf("An=%.2f  lim=%.2f  Nsat=%.2f  Psat=%.2f  adjPH=%.2f anConv=%f\n", An, limitation, input->nitrogen_saturation, input->phosphorus_saturation, adjusted_PH, input->convert_to_photosynthesis_per_gram_per_hour);
-
-    return adjusted_PH > input->max_photosyntetic_rate ? input->max_photosyntetic_rate : adjusted_PH;
+    // printf("adjusted: %f\n", adjusted_PH);
+    return RMAX(REAL(0), RMIN(adjusted_PH, input->max_photosyntetic_rate));
+    // return adjusted_PH > input->max_photosyntetic_rate ? input->max_photosyntetic_rate : adjusted_PH;
 }
 
 real_t nitrogen_saturation(
@@ -791,6 +800,33 @@ real_t sucrose_root_allocation_f(
         input->min_phosphorus);
 }
 
+// enviromental contrubution tedone
+
+real_t lambda_sb_f(real_t lambda_sb, real_t nitrogen_soil, real_t phosphorus_soil)
+{
+    real_t n = nitrogen_soil / REAL(12.0);
+    real_t p = phosphorus_soil / REAL(0.15);
+    real_t g = -(REAL(0.5) * (RPOW(n, 2) + RPOW(p, 2))) + (n + p);
+    real_t R_minus = RMAX(g, 0);
+    if (RMIN(n, p) >= 1) {
+        return lambda_sb;
+    } else {
+        return lambda_sb * R_minus;
+    }
+}
+
+real_t R_plus(real_t nitrogen_soil, real_t phosphorus_soil)
+{
+    real_t n = nitrogen_soil / REAL(12.0);
+    real_t p = phosphorus_soil / REAL(0.15);
+
+    real_t R_plus = (REAL(69.0) * (RPOW(n, 2) + RPOW(p, 2))) - REAL(138.0) * (n + p) + REAL(139);
+    if (RMIN(n, p) >= 1) {
+        return 1;
+    }
+    return R_plus;
+}
+
 // Farquhar C3 Photosynthesis Model
 
 real_t rubisco_limited_photosynthesis(
@@ -854,7 +890,6 @@ real_t iterate_ci(Input* input, int max_iter, real_t epsilon)
     real_t An = 0.0;
 
     for (int i = 0; i < max_iter; i++) {
-        // 1. Rubisco-limited rate
         real_t Ac = rubisco_limited_photosynthesis(
             Ci,
             input->CO2_compensation_point,
@@ -863,19 +898,15 @@ real_t iterate_ci(Input* input, int max_iter, real_t epsilon)
             input->michaelis_constant_O2,
             input->oxygen_concentration);
 
-        // 2. Light-limited rate
         real_t Aj = light_limited_photosynthesis(
             Ci,
             input->CO2_compensation_point,
             input->electron_transport_rate);
 
-        // 3. Net photosynthesis
         An = net_photosynthesis(Ac, Aj, input->respiration_rate);
 
-        // 4. Update intercellular CO₂
         real_t new_Ci = input->ambient_CO2_concentration - An / input->stomatal_conductance;
 
-        // 5. Check for convergence
         if (RABS(new_Ci - Ci) < epsilon && RABS(An - prev_An) < epsilon) {
             break;
         }
@@ -884,9 +915,78 @@ real_t iterate_ci(Input* input, int max_iter, real_t epsilon)
         prev_An = An;
     }
 
-    // Save to input
     input->intercellular_CO2 = Ci;
     input->net_photosynthesis = An;
     input->net_photosynthesis_rate = An;
     return An;
+}
+
+// Jarvis stomal
+
+real_t calculate_stomatal_conductance_jarvis(
+    real_t incoming_PAR,
+    real_t vapor_pressure_deficit,
+    real_t leaf_temperature_celsius,
+    real_t ambient_CO2_concentration,
+    real_t leaf_water_potential)
+{
+    const real_t b1 = REAL(0.6);
+    const real_t b2 = REAL(0.002);
+    const real_t b10 = REAL(0.05);
+    real_t q = b10 / b1;
+    real_t f_PAR = (incoming_PAR <= q) ? b10 : (b1 * b2 * (incoming_PAR - q)) / (b1 + b2 * (incoming_PAR - q));
+
+    const real_t b5 = REAL(0.2);
+    real_t f_VPD = RMAX(REAL(0.0), REAL(1.0) - b5 * vapor_pressure_deficit);
+
+    const real_t T0 = REAL(25.0);
+    const real_t T1 = REAL(5.0);
+    const real_t Th = REAL(45.0);
+    const real_t b4 = (Th - T0) / (Th - T1);
+    const real_t b3 = REAL(1.0) / ((T0 - T1) * RPOW((Th - T1), b4));
+    real_t f_T = b3 * (leaf_temperature_celsius - T1) * RPOW((Th - leaf_temperature_celsius), b4);
+    f_T = RMAX(REAL(0.0), RMIN(f_T, REAL(1.0))); 
+
+    const real_t b8 = REAL(0.2);
+    real_t f_CO2 = REAL(1.0);
+    if (ambient_CO2_concentration < 100.0) {
+        f_CO2 = 1.0;
+    } else if (ambient_CO2_concentration < 1000.0) {
+        const real_t b7 = (1.0 - b8) / 900.0;
+        f_CO2 = 1.0 - b7 * (ambient_CO2_concentration - 100.0);
+    } else {
+        f_CO2 = b8;
+    }
+
+    const real_t b6 = 3.0; 
+    const real_t psi_min = -1.5; 
+    real_t sigma_psi = leaf_water_potential - psi_min;
+    real_t f_water = 1.0 - REXP(-b6 * sigma_psi);
+    f_water = RMAX(0.0, RMIN(f_water, 1.0)); 
+
+    return f_PAR * f_VPD * f_T * f_CO2 * f_water;
+}
+
+real_t calculate_vapor_pressure_deficit(real_t temperature_celsius, real_t relative_humidity_percent)
+{
+    real_t saturation_vapor_pressure = REAL(0.61078) * REXP((REAL(17.27) * temperature_celsius) / (temperature_celsius + REAL(237.3)));
+    real_t actual_vapor_pressure = saturation_vapor_pressure * (relative_humidity_percent / REAL(100.0));
+    return saturation_vapor_pressure - actual_vapor_pressure;
+}
+
+void update_light_conditions(Input* input, real_t current_hour)
+{
+    const real_t max_PAR = 1200.0;
+
+    real_t sunrise = 0.0;
+    real_t sunset = sunrise + input->photoperiod;
+
+    if (current_hour >= sunrise && current_hour < sunset) {
+        input->light = 1.0;
+        real_t day_fraction = (current_hour - sunrise) / (sunset - sunrise);
+        input->light_PAR = max_PAR * RSIN(day_fraction * M_PI);
+    } else {
+        input->light = 0.0;
+        input->light_PAR = 0.0;
+    }
 }

@@ -4,6 +4,7 @@
 
 typedef struct {
     real_t light;
+    real_t light_PAR;
     real_t limitation_of_photosyntetic_rate;
     real_t max_photosyntetic_rate;
     real_t nitrogen_saturation;
@@ -92,7 +93,9 @@ typedef struct {
     real_t michaelis_constant_CO2;
     real_t michaelis_constant_O2;
     real_t oxygen_concentration;
-
+    real_t leaf_temperature;
+    real_t relative_humidity;
+    real_t leaf_water_potential;
 } Input;
 
 Input generate_input();

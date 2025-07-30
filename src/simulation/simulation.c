@@ -2,6 +2,8 @@
 #include "gui/plot.h"
 #include "model/input.h"
 #include "model/model.h"
+#include <bits/pthreadtypes.h>
+#include <pthread.h>
 #include <solver.h>
 
 #include <math.h>
@@ -9,10 +11,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define SIMULATION_DT REAL(1.0)
-#define PHOTO_PERIOD REAL(8.0)
+#define SIMULATION_DT REAL(0.01)
 
-SolverType solver_type = SOLVER_ODE45;
+SolverType solver_type = SOLVER_RKF78;
 
 real_t solver_tolerance = REAL(1e-8);
 
@@ -21,19 +22,20 @@ real_t* sucrose = NULL;
 real_t* starch = NULL;
 real_t* ph = NULL;
 real_t* partition = NULL;
+real_t photoperiod = 0;
 real_t eps = REAL_EPSILON;
 
 bool trigger = false;
 
 real_t rgr(real_t fw_now, real_t fw_start, real_t hours_passed)
 {
-    return (log(fw_now / fw_start)) / hours_passed;
+    return (RLOG(fw_now / fw_start)) / hours_passed;
 }
 
 void simulate_step(real_t current_time, int step, Input* input)
 {
     real_t hour_of_day = fmod(current_time, REAL(24.0));
-    input->light = (hour_of_day >= REAL(0.0) && hour_of_day <= PHOTO_PERIOD) ? 1 : 0;
+    update_light_conditions(input, hour_of_day);
     if (input->light == 0) {
         if (!trigger) {
             input->starch_night_start = input->starch;
@@ -85,8 +87,6 @@ void simulate_step(real_t current_time, int step, Input* input)
         hour_of_day,
         input->photoperiod);
 
-
-
     input->starch_partition_coeff = solve_step(solver_type, solver_tolerance, input->starch_partition_coeff, current_time, SIMULATION_DT, starch_sucrose_partition_f, input);
 
     input->starch = solve_step(solver_type, solver_tolerance, input->starch, current_time, SIMULATION_DT, starch_production_f, input);
@@ -123,6 +123,8 @@ void simulate_step(real_t current_time, int step, Input* input)
 
 void simulate_days(int days, Input* input)
 {
+
+    pthread_t gut_thread;
     total_steps = (int)(days * REAL(24.0) / SIMULATION_DT);
     real_t current_time = REAL(0.0);
     sucrose = malloc(total_steps * sizeof(real_t));
@@ -131,10 +133,11 @@ void simulate_days(int days, Input* input)
     ph = malloc(total_steps * sizeof(real_t));
 
     partition = malloc(total_steps * sizeof(real_t));
+    photoperiod = input->photoperiod;
 
     real_t start_biomass = input->leaf_biomass;
-    input->photoperiod = PHOTO_PERIOD;
-
+    input->lambda_sb = lambda_sb_f(input->lambda_sb, input->nitrogen_soil_content, input->phosphorus_soil_content);
+    
     for (int step = 0; step < total_steps; step++) {
         simulate_step(current_time, step, input);
         current_time += SIMULATION_DT;
@@ -145,14 +148,6 @@ void simulate_days(int days, Input* input)
         printf("\n%d\n", step);
     }
 
-    main_thread();
-    /* simulation.c, posle simulacije */
-    printf("t_end - t0  = %.0f h\n", days * REAL(24.0)); //  EXPECT 696
-    printf("currentTime = %d h\n", total_steps); //  Šta zapravo dobiješ?
-
-    real_t RGR_total = rgr(input->leaf_biomass, start_biomass, days);
-    printf("leaf FW in t0: %f, leaf FW u t: %f, t0:%f, t:%f, dt:%f", start_biomass, input->leaf_biomass, REAL(0.0), current_time, SIMULATION_DT);
-    printf("\nRGR: %f  RGR_F: %f \n", RGR_total, RGR_total * REAL(24.0));
-
-    printf("total_biomass: %f", input->total_biomass);
+    pthread_create(&gut_thread, NULL, (void* (*)(void*))main_thread, NULL);
+    pthread_join(gut_thread, NULL); // sačekaj da GUI završi (ako ikad)
 }

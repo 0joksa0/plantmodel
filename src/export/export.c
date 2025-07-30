@@ -3,8 +3,10 @@
 
 void log_simulation_step(real_t t, Input* input)
 {
-    
-    FILE* log = fopen("sim_log.csv", t == 0 ? "w" : "a");
+
+    char filename[64];
+    snprintf(filename, sizeof(filename), "sim_log_%.0fh.csv", (double)input->photoperiod);
+    FILE* log = fopen(filename, t == 0 ? "w" : "a");
     if (log) {
         if (t == REAL(0.0)) {
             fprintf(log,
@@ -59,4 +61,3 @@ void log_simulation_step(real_t t, Input* input)
         fclose(log);
     }
 }
-

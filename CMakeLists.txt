@@ -53,3 +53,27 @@ target_link_libraries(simulator
 message(STATUS "Solver at : ${SOLVER_DOUBLE_PATH}")
 message(STATUS "Sources   : ${SRC}")
 
+
+# ---------------- Criterion test framework ----------------
+pkg_check_modules(CRITERION REQUIRED IMPORTED_TARGET criterion)
+
+file(GLOB_RECURSE TEST_SRC CONFIGURE_DEPENDS tests/*.c)
+
+if(TEST_SRC)
+    list(FILTER SRC EXCLUDE REGEX ".*/main\\.c$")
+    add_executable(unit_tests ${SRC} ${TEST_SRC})
+    target_include_directories(unit_tests PRIVATE ${PROJECT_SOURCE_DIR}/include)
+    target_link_libraries(unit_tests
+        PRIVATE
+            PkgConfig::CRITERION
+            solver_double
+            PkgConfig::RAYLIB
+            ${LIBM}
+            ${LIBPTH}
+            ${LIBDL}
+            ${LIBGL}
+    )
+    enable_testing()
+    add_test(NAME all_tests COMMAND unit_tests)
+endif()
+

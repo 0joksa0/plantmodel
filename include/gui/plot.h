@@ -7,6 +7,7 @@ extern real_t *sucrose;      /* niz[total_steps] */
 extern real_t *starch;
 extern real_t *ph;
 extern real_t *partition;
+extern real_t photoperiod;
 
 
 void main_thread(void);

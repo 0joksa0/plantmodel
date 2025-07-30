@@ -4,6 +4,7 @@
 #include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <string.h>
 
 typedef struct {
     const char* name;
@@ -59,11 +60,11 @@ void DrawDataPlot(DataPlotEntry* entries, int count, int total_steps, real_t y_s
             continue;
 
         for (int j = 1; j < total_steps; ++j) {
-            int x1 = margin + (j - 1) * (GetScreenWidth() - margin*2) / total_steps;
+            int x1 = margin + (j - 1) * (GetScreenWidth() - margin * 2) / total_steps;
             int y1 = centerY - e->values[j - 1] * y_scale;
-            int x2 = margin + j * (GetScreenWidth() - margin*2) / total_steps;
+            int x2 = margin + j * (GetScreenWidth() - margin * 2) / total_steps;
             int y2 = centerY - e->values[j] * y_scale;
-            DrawLineEx((Vector2){x1, y1}, (Vector2){x2, y2},REAL(2.0), e->color);
+            DrawLineEx((Vector2) { x1, y1 }, (Vector2) { x2, y2 }, REAL(2.0), e->color);
         }
     }
 }
@@ -78,16 +79,16 @@ void printGrid(int width, int height, int margine, int steps, int total_steps, r
 
         real_t y = ((real_t)height / 2) - (val * y_scale);
         DrawLine(margine, y, width, y, LIGHTGRAY);
-        DrawText(TextFormat("%.1f", val), margine - 5 - MeasureText(TextFormat("%.1f", val), 12), y - 8, 12, DARKGRAY); 
+        DrawText(TextFormat("%.1f", val), margine - 5 - MeasureText(TextFormat("%.1f", val), 12), y - 8, 12, DARKGRAY);
         y = ((real_t)height / 2) + (val * y_scale);
 
         DrawLine(margine, y, width, y, LIGHTGRAY);
         DrawText(TextFormat("-%.1f", val), margine - 5 - MeasureText(TextFormat("-%.1f", val), 12), y - 8, 12, DARKGRAY);
     }
 
-    for (real_t i = 0; i <= total_steps; i+= 24) {
-    DrawLine(margine+ i , 0, margine+ i , height, LIGHTGRAY);        
-    DrawText(TextFormat("%.0f", i), margine + i - MeasureText(TextFormat("%.0f", i), 12)/2 , height/2 + MeasureTextEx(GetFontDefault(), TextFormat("%.0f", i),12, 1).y/2, 12, DARKGRAY);
+    for (real_t i = 0; i <= total_steps; i += 24) {
+        DrawLine(margine + i, 0, margine + i, height, LIGHTGRAY);
+        DrawText(TextFormat("%.0f", i), margine + i - MeasureText(TextFormat("%.0f", i), 12) / 2, height / 2 + MeasureTextEx(GetFontDefault(), TextFormat("%.0f", i), 12, 1).y / 2, 12, DARKGRAY);
     }
     DrawLine(0, height / 2, width, height / 2, BLACK);
     DrawLine(margine, 0, margine, height, BLACK);
@@ -113,10 +114,14 @@ void main_thread(void)
     };
     while (!WindowShouldClose()) {
         /* –– PAN –– */
+        SetTraceLogLevel(LOG_ERROR);
 
         BeginDrawing();
         ClearBackground(RAYWHITE);
         y_scale = ComputeYScale(plots, 4, total_steps, screenHeight / 2, 40, 40);
+        char text[30];
+        sprintf(text, "%f.0 horus", photoperiod);
+        DrawText(text, screenWidht / 2, 10, 15, GREEN);
         printGrid(screenWidht, screenHeight, margine, 20, total_steps, y_scale);
         DrawDataPlot(plots, 4, total_steps, y_scale, screenHeight / 2, margine);
 
