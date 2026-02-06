@@ -5,7 +5,7 @@ set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
 # ---------------- kompilacija ----------------
-# add_compile_options(-Wall -Wextra -O3 -ffast-math)
+ add_compile_options(-Wall -Wextra -O3 -ffast-math)
 
 # ---------------- fajlovi --------------------
 add_compile_definitions(SOLVER_REAL_AS=double )
@@ -42,7 +42,7 @@ find_library(LIBGL  GL      REQUIRED)
 
 target_link_libraries(simulator
     PRIVATE
-        solver_double          # ← sada ima punu putanju
+        solver_double 
         PkgConfig::RAYLIB
         ${LIBM}
         ${LIBPTH}
@@ -76,4 +76,16 @@ if(TEST_SRC)
     enable_testing()
     add_test(NAME all_tests COMMAND unit_tests)
 endif()
+
+
+# ---------------- OpenMP -----------------------
+# find_package(OpenMP REQUIRED)
+#
+# if(OpenMP_FOUND)
+#     target_link_libraries(simulator PRIVATE OpenMP::OpenMP_C)
+#     if(TEST_SRC)
+#         target_link_libraries(unit_tests PRIVATE OpenMP::OpenMP_C)
+#     endif()
+# endif()
+
 

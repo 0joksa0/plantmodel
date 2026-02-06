@@ -361,28 +361,28 @@ real_t nitrogen_affinity_f(
     real_t nitrogen_affinity_p,
     void* params)
 {
-    Input* input = (Input*)params;
-    real_t loc_nitrogen_nutrient_uptake = nitrogen_nutrient_uptake(input->max_nitrogen_uptake, input->nitrogen_soil_content, input->Michaelis_Menten_constant_nitrogen);
-    real_t loc_pot_nitrogen_uptake = pot_nitrogen_uptake(loc_nitrogen_nutrient_uptake, nitrogen_affinity_p, input->root_biomass, input->total_biomass);
-    real_t loc_nitrogen_uptake = nitrogen_uptake(loc_pot_nitrogen_uptake, input->sucrose, input->nitrogen_uptake_sucrose_consumption);
-    real_t loc_min_nitrogen = min_nitrogen(input->respiration_frequency, input->max_sucrose, input->max_starch, input->sucrose_loading_frequency, input->assimilation_cost_nitrogen, input->min_nitrogen_photosynthesis, input->nutrient_conversion_parameter, input->photoperiod);
-    real_t loc_max_nitrogen = max_nitrogen(loc_min_nitrogen);
-    real_t loc_nitrogen_cost = nitrogen_cost(input->respiration_frequency, input->sucrose, input->starch, input->sucrose_loading_frequency, input->night_efficiency_starch, input->assimilation_cost_nitrogen, input->leaf_biomass, input->total_biomass, input->photosynthesis, input->max_photosyntetic_rate, input->min_nitrogen_photosynthesis);
+    Input* in = (Input*)params;
+    // real_t loc_nitrogen_nutrient_uptake = nitrogen_nutrient_uptake(input->max_nitrogen_uptake, input->nitrogen_soil_content, input->Michaelis_Menten_constant_nitrogen);
+    // real_t loc_pot_nitrogen_uptake = pot_nitrogen_uptake(loc_nitrogen_nutrient_uptake, nitrogen_affinity_p, input->root_biomass, input->total_biomass);
+    // real_t loc_nitrogen_uptake = nitrogen_uptake(loc_pot_nitrogen_uptake, input->sucrose, input->nitrogen_uptake_sucrose_consumption);
+    // real_t loc_min_nitrogen = min_nitrogen(input->respiration_frequency, input->max_sucrose, input->max_starch, input->sucrose_loading_frequency, input->assimilation_cost_nitrogen, input->min_nitrogen_photosynthesis, input->nutrient_conversion_parameter, input->photoperiod);
+    // real_t loc_max_nitrogen = max_nitrogen(loc_min_nitrogen);
+    // real_t loc_nitrogen_cost = nitrogen_cost(input->respiration_frequency, input->sucrose, input->starch, input->sucrose_loading_frequency, input->night_efficiency_starch, input->assimilation_cost_nitrogen, input->leaf_biomass, input->total_biomass, input->photosynthesis, input->max_photosyntetic_rate, input->min_nitrogen_photosynthesis);
 
     return nitrogen_affinity(nitrogen_affinity_p,
-        loc_nitrogen_uptake,
-        loc_nitrogen_cost,
-        loc_max_nitrogen,
-        input->nitrogen,
-        input->photosynthesis,
-        input->max_photosyntetic_rate,
-        input->lambda_k,
-        input->optimal_stechiometric_ratio,
-        input->phosphorus,
-        loc_min_nitrogen,
-        input->nitrogen_uptake_sucrose_consumption,
-        input->starch_partition_coeff,
-        input->starch_degradation_rate);
+        in->nitrogen_uptake,
+        in->nitrogen_cost,
+        in->max_nitrogen,
+        in->nitrogen,
+        in->photosynthesis,
+        in->max_photosyntetic_rate,
+        in->lambda_k,
+        in->optimal_stechiometric_ratio,
+        in->phosphorus,
+        in->min_nitrogen,
+        in->nitrogen_uptake_sucrose_consumption,
+        in->starch_partition_coeff,
+        in->starch_degradation_rate);
 }
 
 real_t phosphorus_affinity(
@@ -449,16 +449,16 @@ real_t phosphorus_affinity_f(
     void* params)
 {
     Input* input = (Input*)params;
-    real_t loc_phosphorus_nutrient_uptake = phosphorus_nutrient_uptake(input->max_phosphorus_uptake, input->phosphorus_soil_content, input->Michaelis_Menten_constant_phosphorus);
-    real_t loc_pot_phosphorus_uptake = pot_phosphorus_uptake(loc_phosphorus_nutrient_uptake, phosphorus_affinity_p, input->root_biomass, input->total_biomass);
-    real_t loc_phosphorus_uptake = phosphorus_uptake(loc_pot_phosphorus_uptake, input->sucrose, input->phosphorus_uptake_sucrose_consumption);
+    // real_t loc_phosphorus_nutrient_uptake = phosphorus_nutrient_uptake(input->max_phosphorus_uptake, input->phosphorus_soil_content, input->Michaelis_Menten_constant_phosphorus);
+    // real_t loc_pot_phosphorus_uptake = pot_phosphorus_uptake(loc_phosphorus_nutrient_uptake, phosphorus_affinity_p, input->root_biomass, input->total_biomass);
+    // real_t loc_phosphorus_uptake = phosphorus_uptake(loc_pot_phosphorus_uptake, input->sucrose, input->phosphorus_uptake_sucrose_consumption);
+    //
+    // real_t loc_min_phosphorus = min_phosphorus(
+    //     input->respiration_frequency, input->max_sucrose, input->max_starch, input->sucrose_loading_frequency, input->assimilation_cost_phorphorus, input->min_phosphorus_photosynthesis, input->nutrient_conversion_parameter, input->photoperiod);
+    //
+    // real_t loc_max_phosphorus = max_phosphorus(input->max_nitrogen, input->optimal_stechiometric_ratio);
 
-    real_t loc_min_phosphorus = min_phosphorus(
-        input->respiration_frequency, input->max_sucrose, input->max_starch, input->sucrose_loading_frequency, input->assimilation_cost_phorphorus, input->min_phosphorus_photosynthesis, input->nutrient_conversion_parameter, input->photoperiod);
-
-    real_t loc_max_phosphorus = max_phosphorus(input->max_nitrogen, input->optimal_stechiometric_ratio);
-
-    return phosphorus_affinity(phosphorus_affinity_p, loc_phosphorus_uptake, input->phosphorus_cost, loc_max_phosphorus, input->phosphorus, input->photosynthesis, input->max_photosyntetic_rate, input->lambda_k, input->optimal_stechiometric_ratio, input->nitrogen, loc_min_phosphorus, input->phosphorus_uptake_sucrose_consumption, input->starch_partition_coeff, input->starch_degradation_rate);
+    return phosphorus_affinity(phosphorus_affinity_p, input->phosphorus_uptake, input->phosphorus_cost, input->max_phosphorus, input->phosphorus, input->photosynthesis, input->max_photosyntetic_rate, input->lambda_k, input->optimal_stechiometric_ratio, input->nitrogen, input->min_phosphorus, input->phosphorus_uptake_sucrose_consumption, input->starch_partition_coeff, input->starch_degradation_rate);
 }
 real_t nitrogen_cost(
     real_t respiration_frequency,
@@ -595,35 +595,44 @@ real_t sucrose_production_f(
 {
     Input* in = (Input*)params;
 
-    real_t loc_photosynthesis = photosynthesis(
-        in->light,
-        in->limitation_of_photosyntetic_rate,
-        in->max_photosyntetic_rate,
-        in->nitrogen_saturation,
-        in->phosphorus_saturation,
-        in->leaf_biomass,
-        in->min_leaf_biomass);
-    real_t loc_night_efficiency_starch = night_efficieny_starch(sucrose, in->max_sucrose, in->lambda_g, in->light, in->starch_partition_coeff);
-    real_t loc_uptake_cost = uptake_cost(in->nitrogen_uptake_sucrose_consumption,
-        in->nitrogen_uptake,
-        in->phosphorus_uptake_sucrose_consumption,
-        in->phosphorus_uptake);
-
-    real_t loc_transport_cost = transport_cost(in->sucrose_consumption_transport,
-        in->respiration_frequency,
-        sucrose,
-        in->sucrose_loading_frequency,
-        loc_night_efficiency_starch);
-
+    // real_t loc_photosynthesis = photosynthesis(
+    //     in->light,
+    //     in->limitation_of_photosyntetic_rate,
+    //     in->max_photosyntetic_rate,
+    //     in->nitrogen_saturation,
+    //     in->phosphorus_saturation,
+    //     in->leaf_biomass,
+    //     in->min_leaf_biomass);
+    // real_t loc_night_efficiency_starch = night_efficieny_starch(sucrose, in->max_sucrose, in->lambda_g, in->light, in->starch_partition_coeff);
+    // real_t loc_uptake_cost = uptake_cost(in->nitrogen_uptake_sucrose_consumption,
+    //     in->nitrogen_uptake,
+    //     in->phosphorus_uptake_sucrose_consumption,
+    //     in->phosphorus_uptake);
+    //
+    // real_t loc_transport_cost = transport_cost(in->sucrose_consumption_transport,
+    //     in->respiration_frequency,
+    //     sucrose,
+    //     in->sucrose_loading_frequency,
+    //     loc_night_efficiency_starch);
+    //
+    // return sucrose_production(in->starch_partition_coeff,
+    //     loc_photosynthesis,
+    //     in->starch_degradation_rate,
+    //     loc_uptake_cost,
+    //     loc_transport_cost,
+    //     in->respiration_frequency,
+    //     sucrose,
+    //     in->sucrose_loading_frequency,
+    //     loc_night_efficiency_starch);
     return sucrose_production(in->starch_partition_coeff,
-        loc_photosynthesis,
+        in->photosynthesis,
         in->starch_degradation_rate,
-        loc_uptake_cost,
-        loc_transport_cost,
+        in->uptake_cost,
+        in->transport_cost,
         in->respiration_frequency,
         sucrose,
         in->sucrose_loading_frequency,
-        loc_night_efficiency_starch);
+        in->night_efficiency_starch);
 }
 
 real_t night_efficieny_starch(
@@ -945,7 +954,7 @@ real_t calculate_stomatal_conductance_jarvis(
     const real_t b4 = (Th - T0) / (Th - T1);
     const real_t b3 = REAL(1.0) / ((T0 - T1) * RPOW((Th - T1), b4));
     real_t f_T = b3 * (leaf_temperature_celsius - T1) * RPOW((Th - leaf_temperature_celsius), b4);
-    f_T = RMAX(REAL(0.0), RMIN(f_T, REAL(1.0))); 
+    f_T = RMAX(REAL(0.0), RMIN(f_T, REAL(1.0)));
 
     const real_t b8 = REAL(0.2);
     real_t f_CO2 = REAL(1.0);
@@ -958,11 +967,11 @@ real_t calculate_stomatal_conductance_jarvis(
         f_CO2 = b8;
     }
 
-    const real_t b6 = 3.0; 
-    const real_t psi_min = -1.5; 
+    const real_t b6 = 3.0;
+    const real_t psi_min = -1.5;
     real_t sigma_psi = leaf_water_potential - psi_min;
     real_t f_water = 1.0 - REXP(-b6 * sigma_psi);
-    f_water = RMAX(0.0, RMIN(f_water, 1.0)); 
+    f_water = RMAX(0.0, RMIN(f_water, 1.0));
 
     return f_PAR * f_VPD * f_T * f_CO2 * f_water;
 }

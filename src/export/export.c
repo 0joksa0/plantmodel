@@ -1,11 +1,11 @@
 #include "export/export.h"
 #include <stdio.h>
 
-void log_simulation_step(real_t t, Input* input)
+void log_simulation_step(int days,real_t t, Input* input)
 {
 
     char filename[64];
-    snprintf(filename, sizeof(filename), "sim_log_%.0fh.csv", (double)input->photoperiod);
+    snprintf(filename, sizeof(filename), "sim_log_%.0fh_%dd.csv", (double)input->photoperiod, days);
     FILE* log = fopen(filename, t == 0 ? "w" : "a");
     if (log) {
         if (t == REAL(0.0)) {
