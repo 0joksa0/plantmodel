@@ -3,8 +3,10 @@ project(digital_twin_c C)
 
 set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_STANDARD_REQUIRED ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # ---------------- kompilacija ----------------
+# TODO: Split compile flags by build type (`Debug` vs `Release`) and avoid forcing `-ffast-math` globally.
  add_compile_options(-Wall -Wextra -O3 -ffast-math)
 
 # ---------------- fajlovi --------------------
@@ -15,6 +17,7 @@ target_include_directories(simulator PRIVATE ${PROJECT_SOURCE_DIR}/include)
 
 # ---------------- solver_double --------------
 # 1) nađi statičku ili deljenu biblioteku
+# TODO: Replace hardcoded `/usr/local/lib` and `/usr/lib` search paths with a configurable CMake cache variable or package config.
 find_library(SOLVER_DOUBLE_PATH
              NAMES solver_double
              PATHS /usr/local/lib /usr/lib
@@ -50,6 +53,19 @@ target_link_libraries(simulator
         ${LIBGL}
 )
 
+list(FILTER SRC EXCLUDE REGEX ".*/main\\.c$")
+add_executable(sweep_runner ${SRC} tools/sweep_runner.c)
+target_include_directories(sweep_runner PRIVATE ${PROJECT_SOURCE_DIR}/include)
+target_link_libraries(sweep_runner
+    PRIVATE
+        solver_double
+        PkgConfig::RAYLIB
+        ${LIBM}
+        ${LIBPTH}
+        ${LIBDL}
+        ${LIBGL}
+)
+
 message(STATUS "Solver at : ${SOLVER_DOUBLE_PATH}")
 message(STATUS "Sources   : ${SRC}")
 
@@ -60,7 +76,6 @@ pkg_check_modules(CRITERION REQUIRED IMPORTED_TARGET criterion)
 file(GLOB_RECURSE TEST_SRC CONFIGURE_DEPENDS tests/*.c)
 
 if(TEST_SRC)
-    list(FILTER SRC EXCLUDE REGEX ".*/main\\.c$")
     add_executable(unit_tests ${SRC} ${TEST_SRC})
     target_include_directories(unit_tests PRIVATE ${PROJECT_SOURCE_DIR}/include)
     target_link_libraries(unit_tests
@@ -74,7 +89,8 @@ if(TEST_SRC)
             ${LIBGL}
     )
     enable_testing()
-    add_test(NAME all_tests COMMAND unit_tests)
+    add_test(NAME all_tests COMMAND unit_tests --jobs 1 --verbose=1 --timeout 300)
+    set_tests_properties(all_tests PROPERTIES TIMEOUT 360)
 endif()
 
 
@@ -87,5 +103,3 @@ endif()
 #         target_link_libraries(unit_tests PRIVATE OpenMP::OpenMP_C)
 #     endif()
 # endif()
-
-

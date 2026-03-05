@@ -5,8 +5,8 @@
 typedef struct {
     real_t light;
     real_t light_PAR;
-    real_t limitation_of_photosyntetic_rate;
-    real_t max_photosyntetic_rate;
+    real_t limitation_of_photosynthetic_rate;
+    real_t max_photosynthetic_rate;
     real_t nitrogen_saturation;
     real_t phosphorus_saturation;
     real_t leaf_biomass;
@@ -15,7 +15,7 @@ typedef struct {
     real_t max_starch;
     real_t max_starch_degradation_rate;
     real_t photoperiod;
-    real_t optimal_stechiometric_ratio;
+    real_t optimal_stoichiometric_ratio;
     real_t photosynthesis;
     real_t starch_partition_coeff;
     real_t starch_degradation_rate;
@@ -45,7 +45,7 @@ typedef struct {
     real_t min_phosphorus_photosynthesis;
     real_t nutrient_conversion_parameter;
     real_t total_biomass;
-    real_t assimilation_cost_phorphorus;
+    real_t assimilation_cost_phosphorus;
     real_t pot_nitrogen_uptake;
     real_t pot_phosphorus_uptake;
     real_t nitrogen_nutrient_uptake;
@@ -70,11 +70,14 @@ typedef struct {
     real_t phosphorus_cost;
     real_t sucrose_consumption_transport;
     real_t sucrose_root_allocation;
-    real_t stochiometric_signal;
+    real_t stoichiometric_signal;
     real_t leaf_deathrate;
     real_t root_deathrate;
     real_t leaf_competitive_rate;
     real_t root_competitive_rate;
+} InputCore;
+
+typedef struct {
     real_t intercellular_CO2;
     real_t ambient_CO2_concentration;
     real_t net_photosynthesis_rate;
@@ -96,6 +99,11 @@ typedef struct {
     real_t leaf_temperature;
     real_t relative_humidity;
     real_t leaf_water_potential;
+} InputGasExchange;
+
+typedef struct {
+    InputCore core;
+    InputGasExchange gas_exchange;
 } Input;
 
 Input generate_input();

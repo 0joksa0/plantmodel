@@ -1,3 +1,4 @@
+// TODO: Re-enable this file as an opt-in sweep target or remove it to avoid stale commented-out test code.
 // #include <criterion/criterion.h>
 // #include <solver.h>
 // #include <stdio.h>
@@ -60,7 +61,21 @@
 // static const int N_FIELDS = sizeof(FIELDS) / sizeof(FIELDS[0]);
 //
 // // Multiplikatori za OAT (možeš da proširiš/izmeniš)
-// static const real_t MULTS[] = { REAL(1.21),REAL(1.23),REAL(1.25),REAL(1.27),REAL(1.29) };
+// static const real_t MULTS[] = {
+//     // globalno (reda veličine)
+//     REAL(0.75),
+//
+//     // lokalno oko 1.0
+//     REAL(0.85), REAL(0.9), REAL(0.95),
+//     REAL(1.0),
+//     REAL(1.05), REAL(1.1), REAL(1.15),
+//
+//     // tvoje ranije vrednosti
+//     REAL(1.2), REAL(1.25), REAL(1.3)
+//
+//     // agresivno
+// };
+//
 // static const int N_MULTS = sizeof(MULTS) / sizeof(MULTS[0]);
 //
 // // Jedan run: vrati model RGR i apsolutnu grešku za dati fotoperiod i postavke

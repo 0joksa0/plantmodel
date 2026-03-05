@@ -36,3 +36,8 @@ tests/output/
 # Logs
 *.log
 *.py
+
+AGENTS.md
+*.csv
+
+Testing/

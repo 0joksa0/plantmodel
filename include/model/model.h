@@ -3,10 +3,12 @@
 #include "model/input.h"
 #include <solver.h>
 
+/* TODO: Consolidate API naming and spelling to reduce typo-driven bugs in call sites and future bindings. */
+
 real_t photosynthesis(
     real_t light,
-    real_t limitation_of_photosyntethic_rate,
-    real_t max_photosyntetic_rate,
+    real_t limitation_of_photosynthetic_rate,
+    real_t max_photosynthetic_rate,
     real_t nitrogen_saturation,
     real_t phosphorus_saturation,
     real_t leaf_biomass,
@@ -19,10 +21,10 @@ real_t nitrogen_saturation(
 
 real_t phosphorus_saturation(
     real_t min_nitrogen_photosynthesis,
-    real_t optimal_stechimetric_ratio,
+    real_t optimal_stoichiometric_ratio,
     real_t phosphorus);
 
-real_t limitation_of_photosyntethic_rate(
+real_t limitation_of_photosynthetic_rate(
     real_t starch,
     real_t feedback_on_photosynthesis,
     real_t max_starch);
@@ -63,11 +65,11 @@ real_t nitrogen_content(
     real_t starch,
     real_t sucrose_loading_frequency,
     real_t night_efficiency_starch,
-    real_t assimilaton_cost,
+    real_t assimilation_cost,
     real_t leaf_biomass,
     real_t total_biomass,
-    real_t photosyntesis,
-    real_t max_photosyntetic_rate,
+    real_t photosynthesis,
+    real_t max_photosynthetic_rate,
     real_t nutrient_conversion_parameter,
     real_t min_nitrogen_photosynthesis);
 real_t nitrogen_content_f(
@@ -81,11 +83,11 @@ real_t phosphorus_content(
     real_t starch,
     real_t sucrose_loading_frequency,
     real_t night_efficiency_starch,
-    real_t assimilaton_cost,
+    real_t assimilation_cost,
     real_t leaf_biomass,
     real_t total_biomass,
-    real_t photosyntesis,
-    real_t max_photosyntetic_rate,
+    real_t photosynthesis,
+    real_t max_photosynthetic_rate,
     real_t nutrient_conversion_parameter,
     real_t min_phosphorus_photosynthesis);
 real_t phosphorus_content_f(
@@ -98,7 +100,7 @@ real_t assimilation_cost_nitrogen(
 
 real_t assimilation_cost_phosphorus(
     real_t assimilation_cost_nitrogen,
-    real_t optimal_stechiometric_ratio);
+    real_t optimal_stoichiometric_ratio);
 
 real_t pot_nitrogen_uptake(
     real_t nitrogen_nutrient_uptake,
@@ -138,9 +140,9 @@ real_t nitrogen_affinity(
     real_t max_nitrogen,
     real_t nitrogen,
     real_t photosynthesis,
-    real_t max_photosyntetic_rate,
+    real_t max_photosynthetic_rate,
     real_t lambda_k,
-    real_t optimal_stochiometric_ratio,
+    real_t optimal_stoichiometric_ratio,
     real_t phosphorus,
     real_t min_nitrogen,
     real_t nitrogen_uptake_sucrose_consumption,
@@ -157,9 +159,9 @@ real_t phosphorus_affinity(
     real_t max_phosphorus,
     real_t phosphorus,
     real_t photosynthesis,
-    real_t max_photosyntetic_rate,
+    real_t max_photosynthetic_rate,
     real_t lambda_k,
-    real_t optimal_stochiometric_ratio,
+    real_t optimal_stoichiometric_ratio,
     real_t nitrogen,
     real_t min_phosphorus,
     real_t phosphorus_uptake_sucrose_consumption,
@@ -179,8 +181,8 @@ real_t nitrogen_cost(
     real_t leaf_biomass,
     real_t total_biomass,
     real_t photosynthesis,
-    real_t max_photosyntetic_rate,
-    real_t min_nitrogen_photosyntesis);
+    real_t max_photosynthetic_rate,
+    real_t min_nitrogen_photosynthesis);
 
 real_t phosphorus_cost(
     real_t respiration_frequency,
@@ -192,8 +194,8 @@ real_t phosphorus_cost(
     real_t leaf_biomass,
     real_t total_biomass,
     real_t photosynthesis,
-    real_t max_photosyntetic_rate,
-    real_t min_phosphorus_photosyntesis);
+    real_t max_photosynthetic_rate,
+    real_t min_phosphorus_photosynthesis);
 
 real_t min_nitrogen(
     real_t respiration_frequency,
@@ -217,7 +219,7 @@ real_t min_phosphorus(
 
 real_t max_nitrogen(real_t min_nitrogen);
 
-real_t max_phosphorus(real_t max_nitrogen, real_t optimal_stechiometric_ratio);
+real_t max_phosphorus(real_t max_nitrogen, real_t optimal_stoichiometric_ratio);
 
 real_t starch_production(
     real_t photosynthesis,
@@ -245,7 +247,7 @@ real_t sucrose_production_f(
     real_t sucrose,
     void* params);
 
-real_t night_efficieny_starch(
+real_t night_efficiency_starch(
     real_t sucrose,
     real_t max_sucrose,
     real_t lambda_g,
@@ -266,32 +268,32 @@ real_t transport_cost(
     real_t night_efficiency_starch);
 
 real_t leaf_growth(
-    real_t labmda_sb,
+    real_t lambda_sb,
     real_t sucrose_root_allocation,
     real_t sucrose_loading_frequency,
     real_t night_efficiency_starch,
     real_t leaf_biomass,
     real_t leaf_death_rate,
-    real_t leaf_competative_rate);
+    real_t leaf_competitive_rate);
 real_t leaf_growth_f(
     real_t t,
     real_t leaf_biomass,
     void* params);
 real_t root_growth(
-    real_t labmda_sb,
+    real_t lambda_sb,
     real_t sucrose_root_allocation,
     real_t sucrose_loading_frequency,
     real_t night_efficiency_starch,
     real_t leaf_biomass,
     real_t root_biomass,
     real_t root_death_rate,
-    real_t root_competative_rate);
+    real_t root_competitive_rate);
 real_t root_growth_f(
     real_t t,
     real_t root_biomass,
     void* params);
-real_t stochiometric_signal(
-    real_t optimal_stechiometric_ratio,
+real_t stoichiometric_signal(
+    real_t optimal_stoichiometric_ratio,
     real_t nitrogen,
     real_t phosphorus);
 
@@ -299,8 +301,8 @@ real_t stochiometric_signal(
 real_t sucrose_root_allocation(
     real_t sucrose_root_allocation,
     real_t nitrogen_affinity,
-    real_t phospsorus_affinity,
-    real_t stochiometric_signal,
+    real_t phosphorus_affinity,
+    real_t stoichiometric_signal,
     real_t sucrose,
     real_t min_sucrose,
     real_t nitrogen,

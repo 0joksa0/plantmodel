@@ -19,6 +19,8 @@ It was developed as part of a master's thesis focused on plant digital twins and
 
 ## Project Structure
 
+<!-- TODO: Keep this tree in sync with the actual repository layout (src/include/tests/docs currently diverge from this simplified view). -->
+
 ```
 plantModel/
 ├── src/
@@ -57,8 +59,14 @@ Binary will be located at: `build/simulator`
 ## Usage
 
 ```bash
-./simulator
+./simulator --gui
+# or
+./simulator --no-gui
+# or custom config file
+./simulator --config config/default.config --no-gui
 ```
+
+Configuration is loaded from key/value `.config` files (see [config/default.config](/home/joksa/workspaces/c-ws/plantmodel/config/default.config)).
 
 The program:
 - Initializes plant inputs (light, NDVI, nutrients)
@@ -73,5 +81,3 @@ The program:
 - Support for plant-type parameterization
 - Real-time control/feedback via sensors
 - Calibration from experimental data
-
-

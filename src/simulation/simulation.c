@@ -2,8 +2,11 @@
 #include "gui/plot.h"
 #include "model/input.h"
 #include "model/model.h"
-#include <bits/pthreadtypes.h>
-#include <omp.h>
+#include "simulation/dynamics.h"
+#include "simulation/observers.h"
+#include "simulation/simulation.h"
+#include <logger.h>
+#include <observers.h>
 #include <pthread.h>
 #include <solver.h>
 
@@ -12,177 +15,234 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define SIMULATION_DT REAL(0.1)
+static const real_t DEFAULT_SIMULATION_DT = REAL(0.01);
 
-SolverType solver_type = SOLVER_ODE45;
-
-real_t solver_tolerance = REAL(1e-8);
-
-int total_steps = 0;
-real_t* sucrose = NULL;
-real_t* starch = NULL;
-real_t* ph = NULL;
-real_t* partition = NULL;
-real_t photoperiod = 0;
-real_t eps = REAL_EPSILON;
-int days_g = 0;
-
-bool trigger = false;
-
-real_t rgr(real_t fw_now, real_t fw_start, real_t hours_passed)
+void simulate_step(real_t current_time, int step, Input* input, int days)
 {
-    return (RLOG(fw_now / fw_start)) / hours_passed;
-}
-
-void simulate_step(real_t current_time, int step, Input* input)
-{
+    /* TODO: Remove or wire this function into production flow; it is currently unused with `vector_solve` path. */
     real_t hour_of_day = fmod(current_time, REAL(24.0));
     update_light_conditions(input, hour_of_day);
 
-    if (input->light == 0) {
+    static bool trigger = false;
+    static real_t starch_night_start = REAL(0.0);
+
+    if (input->core.light == REAL(0.0)) {
         if (!trigger) {
-            input->starch_night_start = input->starch;
+            starch_night_start = input->core.starch;
         }
         trigger = true;
     } else {
         trigger = false;
     }
 
-    // === PRVI BLOK: sve fije koje nisu međuzavisne ===
-    Input out = generate_input();
-#pragma omp parallel sections
-    {
-#pragma omp section
-        input->min_nitrogen = min_nitrogen(input->respiration_frequency, input->max_sucrose, input->max_starch, input->sucrose_loading_frequency, input->assimilation_cost_nitrogen, input->min_nitrogen_photosynthesis, input->nutrient_conversion_parameter, input->photoperiod);
+    real_t x[X_DIM];
+    simulation_pack_state(x, input);
 
-#pragma omp section
-        input->min_phosphorus = min_phosphorus(input->respiration_frequency, input->max_sucrose, input->max_starch, input->sucrose_loading_frequency, input->assimilation_cost_phorphorus, input->min_phosphorus_photosynthesis, input->nutrient_conversion_parameter, input->photoperiod);
+    PlantCtx ctx = {
+        .base = input,
+        .starch_night_start = starch_night_start
+    };
 
-#pragma omp section
-        input->max_starch = max_starch(input->max_starch_degradation_rate, input->photoperiod);
-    }
+    vector_solve_step(
+        SOLVER_ODE45,
+        REAL(1e-8),
+        x,
+        sizeof(x),
+        current_time,
+        DEFAULT_SIMULATION_DT,
+        simulation_plant_rhs_adapter,
+        &ctx);
 
-    input->max_nitrogen = max_nitrogen(input->min_nitrogen);
-    input->max_phosphorus = max_phosphorus(input->max_nitrogen, input->optimal_stechiometric_ratio);
+    simulation_unpack_state(input, x);
 
-    input->nitrogen_saturation = nitrogen_saturation(input->nitrogen, input->min_nitrogen_photosynthesis);
-    input->phosphorus_saturation = phosphorus_saturation(input->min_nitrogen_photosynthesis, input->optimal_stechiometric_ratio, input->phosphorus);
-
-    input->limitation_of_photosyntetic_rate = limitation_of_photosyntethic_rate(input->starch, input->feedback_on_photosynthesis, input->max_starch);
-
-    // input->photosynthesis = photosynthesis(input->light, input->limitation_of_photosyntetic_rate, input->max_photosyntetic_rate, input->nitrogen_saturation, input->phosphorus_saturation, input->leaf_biomass, input->min_leaf_biomass);
-
-    input->photosynthesis = farquhar_photosynthesis(input);
-
-    input->night_efficiency_starch = night_efficieny_starch(input->sucrose, input->max_sucrose, input->lambda_g, input->light, input->starch_partition_coeff);
-
-// === DRUGI BLOK: zavise od prethodnih ===
-#pragma omp parallel sections
-    {
-#pragma omp section
-        input->uptake_cost = uptake_cost(input->nitrogen_uptake_sucrose_consumption, input->nitrogen_uptake, input->phosphorus_uptake_sucrose_consumption, input->phosphorus_uptake);
-
-#pragma omp section
-        input->transport_cost = transport_cost(input->sucrose_consumption_transport, input->respiration_frequency, input->sucrose, input->sucrose_loading_frequency, input->night_efficiency_starch);
-
-#pragma omp section
-        input->nitrogen_cost = nitrogen_cost(input->respiration_frequency, input->sucrose, input->starch, input->sucrose_loading_frequency, input->night_efficiency_starch, input->assimilation_cost_nitrogen, input->leaf_biomass, input->total_biomass, input->photosynthesis, input->max_photosyntetic_rate, input->min_nitrogen_photosynthesis);
-
-#pragma omp section
-        input->phosphorus_cost = phosphorus_cost(input->respiration_frequency, input->sucrose, input->starch, input->sucrose_loading_frequency, input->night_efficiency_starch, input->assimilation_cost_phorphorus, input->leaf_biomass, input->total_biomass, input->photosynthesis, input->max_photosyntetic_rate, input->min_phosphorus_photosynthesis);
-    }
-
-    input->starch_degradation_rate = starch_degradation(input->max_starch_degradation_rate, input->max_sucrose, input->starch_night_start, input->min_starch, input->sucrose, input->light, hour_of_day, input->photoperiod);
-
-// === TREĆI BLOK: solve_step paralelizacija ===
-#pragma omp parallel sections
-    {
-#pragma omp section
-        out.starch_partition_coeff = solve_step(solver_type, solver_tolerance, input->starch_partition_coeff, current_time, SIMULATION_DT, starch_sucrose_partition_f, input);
-
-#pragma omp section
-        out.starch = solve_step(solver_type, solver_tolerance, input->starch, current_time, SIMULATION_DT, starch_production_f, input);
-
-#pragma omp section
-        out.sucrose = solve_step(solver_type, solver_tolerance, input->sucrose, current_time, SIMULATION_DT, sucrose_production_f, input);
-
-#pragma omp section
-        out.nitrogen_affinity = solve_step(solver_type, solver_tolerance, input->nitrogen_affinity, current_time, SIMULATION_DT, nitrogen_affinity_f, input);
-
-#pragma omp section
-        out.phosphorus_affinity = solve_step(solver_type, solver_tolerance, input->phosphorus_affinity, current_time, SIMULATION_DT, phosphorus_affinity_f, input);
-
-#pragma omp section
-        out.nitrogen = solve_step(solver_type, solver_tolerance, input->nitrogen, current_time, SIMULATION_DT, nitrogen_content_f, input);
-
-#pragma omp section
-        out.phosphorus = solve_step(solver_type, solver_tolerance, input->phosphorus, current_time, SIMULATION_DT, phosphorus_content_f, input);
-
-#pragma omp section
-        out.sucrose_root_allocation = solve_step(solver_type, solver_tolerance, input->sucrose_root_allocation, current_time, SIMULATION_DT, sucrose_root_allocation_f, input);
-
-#pragma omp section
-        input->leaf_biomass = solve_step(solver_type, solver_tolerance, input->leaf_biomass, current_time, SIMULATION_DT, leaf_growth_f, input);
-
-#pragma omp section
-        input->root_biomass = solve_step(solver_type, solver_tolerance, input->root_biomass, current_time, SIMULATION_DT, root_growth_f, input);
-    }
-
-    input->nitrogen_nutrient_uptake = nitrogen_nutrient_uptake(input->max_nitrogen_uptake, input->nitrogen_soil_content, input->Michaelis_Menten_constant_nitrogen);
-    input->phosphorus_nutrient_uptake = phosphorus_nutrient_uptake(input->max_phosphorus_uptake, input->phosphorus_soil_content, input->Michaelis_Menten_constant_phosphorus);
-
-    input->pot_nitrogen_uptake = pot_nitrogen_uptake(input->nitrogen_nutrient_uptake, input->nitrogen_affinity, input->root_biomass, input->total_biomass);
-    input->pot_phosphorus_uptake = pot_phosphorus_uptake(input->phosphorus_nutrient_uptake, input->phosphorus_affinity, input->root_biomass, input->total_biomass);
-
-    input->nitrogen_uptake = nitrogen_uptake(input->pot_nitrogen_uptake, input->sucrose, input->nitrogen_uptake_sucrose_consumption);
-    input->phosphorus_uptake = phosphorus_uptake(input->pot_phosphorus_uptake, input->sucrose, input->phosphorus_uptake_sucrose_consumption);
-
-    input->stochiometric_signal = stochiometric_signal(input->optimal_stechiometric_ratio, input->nitrogen, input->phosphorus);
-    // printf("kraj");
-    input->starch_partition_coeff = out.starch_partition_coeff;
-    input->starch = out.starch;
-    input->sucrose = out.sucrose;
-    input->nitrogen_affinity = out.nitrogen_affinity;
-    input->phosphorus_affinity = out.phosphorus_affinity;
-    input->nitrogen = out.nitrogen;
-    input->phosphorus = out.phosphorus;
-    input->sucrose_root_allocation = out.sucrose_root_allocation;
-    // input->leaf_biomass = out.leaf_biomass;
-    // input->root_biomass = out.root_biomass;
-    input->total_biomass = input->leaf_biomass + input->root_biomass;
-
-    log_simulation_step(days_g, current_time, input);
+    simulation_compute_algebraic(
+        input,
+        fmod(current_time + DEFAULT_SIMULATION_DT, REAL(24.0)),
+        starch_night_start);
+    log_simulation_step(days, current_time, input);
 }
 
-void simulate_days(int days, Input* input)
+SimulationConfig simulation_default_config(void)
 {
-    days_g = days;
-    pthread_t gut_thread;
-    total_steps = (int)(days * REAL(24.0) / SIMULATION_DT);
-    real_t current_time = REAL(0.0);
-    sucrose = malloc(total_steps * sizeof(real_t));
-    starch = malloc(total_steps * sizeof(real_t));
+    SimulationConfig cfg = {
+        .days = 30,
+        .dt_hours = DEFAULT_SIMULATION_DT,
+        .solver_tolerance = REAL(1e-8),
+        .solver_type = SOLVER_ODE45,
+        .gui_enabled = 1,
+        .write_csv = 1
+    };
+    return cfg;
+}
 
-    ph = malloc(total_steps * sizeof(real_t));
+void simulate_days(const SimulationConfig* config, Input* input, SimulationResult* result)
+{
+    SimulationConfig cfg = config ? *config : simulation_default_config();
+    if (cfg.days <= 0)
+        cfg.days = 1;
+    if (cfg.dt_hours <= REAL(0.0))
+        cfg.dt_hours = DEFAULT_SIMULATION_DT;
 
-    partition = malloc(total_steps * sizeof(real_t));
-    photoperiod = input->photoperiod;
+    int days = cfg.days;
+    result->days = days;
+    result->photoperiod = input->core.photoperiod;
+    result->total_steps = (int)(days * REAL(24.0) / cfg.dt_hours);
+    result->filled_steps = 0;
 
-    input->lambda_sb = lambda_sb_f(input->lambda_sb, input->nitrogen_soil_content, input->phosphorus_soil_content);
-    real_t start_biomass = input->leaf_biomass;
+    result->sucrose = calloc((size_t)result->total_steps, sizeof(real_t));
+    result->starch = calloc((size_t)result->total_steps, sizeof(real_t));
+    result->ph = calloc((size_t)result->total_steps, sizeof(real_t));
+    result->partition = calloc((size_t)result->total_steps, sizeof(real_t));
+    /* TODO: Validate allocation results and return an explicit error code instead of assuming success. */
 
+    input->core.lambda_sb = lambda_sb_f(
+        input->core.lambda_sb,
+        input->core.nitrogen_soil_content,
+        input->core.phosphorus_soil_content);
 
-    // // pthread_create(&gut_thread, NULL, (void* (*)(void*))main_thread, NULL);
-    printf("sta se sava de");
-    for (int step = 0; step < total_steps; step++) {
-        // printf("%d\n", step);
-        simulate_step(current_time, step, input);
-        current_time += SIMULATION_DT;
-        sucrose[step] = input->sucrose;
-        starch[step] = input->starch;
-        ph[step] = input->photosynthesis;
-        partition[step] = input->total_biomass;
+    real_t x[X_DIM];
+    simulation_pack_state(x, input);
+
+    PlantCtx rhs_ctx = {
+        .base = input,
+        .starch_night_start = input->core.starch
+    };
+
+    Input tmp = *input;
+    update_light_conditions(&tmp, REAL(0.0));
+    rhs_ctx.was_light = (tmp.core.light != REAL(0.0));
+
+    char filename[64];
+    snprintf(filename, sizeof(filename), "plant_%dh.csv", (int)input->core.photoperiod);
+
+    CSVObserverCtx csv_ctx = {
+        .f = cfg.write_csv ? fopen(filename, "w") : NULL,
+        .plant_ctx = &rhs_ctx,
+        .unpack_state = simulation_unpack_state,
+        .compute_algebraic = simulation_compute_algebraic
+    };
+    /* TODO: Surface CSV open failures to caller/tests (currently silently continues without output file). */
+
+    if (csv_ctx.f) {
+        fprintf(csv_ctx.f,
+            "t,light,photosynthesis,"
+            "leaf_biomass,root_biomass,total_biomass,"
+            "sucrose,starch,"
+            "nitrogen,phosphorus,"
+            "nitrogen_uptake,phosphorus_uptake,"
+            "uptake_cost,transport_cost,"
+            "starch_degradation_rate,night_efficiency\n");
+
+        fflush(csv_ctx.f);
     }
 
-    // pthread_join(gut_thread, NULL); // sačekaj da GUI završi (ako ikad)
+    SimObsCtx sample_ctx = {
+        .next_t = REAL(0.0),
+        .dt_sample = cfg.dt_hours,
+        .step = 0,
+        .max_steps = result->total_steps,
+        .rhs_ctx = &rhs_ctx,
+        .result = result,
+        .unpack_state = simulation_unpack_state,
+        .compute_algebraic = simulation_compute_algebraic
+    };
+    NightStartObserverCtx night_ctx = {
+        .plant_ctx = &rhs_ctx,
+        .starch_index = X_STARCH
+    };
+
+    VectorObserver obs_list[4] = {
+        nan_guard_observer,
+        night_start_observer,
+        sim_sampling_observer,
+        csv_ctx.f ? csv_observer : NULL
+    };
+    void* ctx_list[4] = {
+        NULL,
+        &night_ctx,
+        &sample_ctx,
+        csv_ctx.f ? (void*)&csv_ctx : NULL
+    };
+    ObserverChain chain = {
+        .obs = obs_list,
+        .ctx = ctx_list,
+        .count = 4
+    };
+    SolverStats stats;
+    SolverLogger logger;
+    SolverLogger* logger_ptr = NULL;
+    if (cfg.write_csv) {
+        solver_logger_init(&logger, "steps.csv", "summary.csv");
+        logger_ptr = &logger;
+    }
+
+    GuiOutput gui_output = {
+        .sucrose = result->sucrose,
+        .starch = result->starch,
+        .photosynthesis = result->ph,
+        .total_biomass = result->partition,
+        .filled_steps = &result->filled_steps,
+        .total_steps = result->total_steps,
+        .dt_hours = cfg.dt_hours,
+        .photoperiod = result->photoperiod,
+        .days = result->days
+    };
+    GuiThreadArgs gui_args = {
+        .output = &gui_output,
+        .title = "Plant Simulation",
+        .target_fps = 60,
+        .summary_csv_path = "summary.csv"
+    };
+
+    pthread_t gui_thread;
+    int gui_started = 0;
+    if (cfg.gui_enabled) {
+        gui_started = (pthread_create(&gui_thread, NULL, gui_main_thread, &gui_args) == 0);
+    }
+    /* TODO: Surface GUI thread startup failures so caller can react (headless fallback/logging). */
+
+    vector_solve(
+        cfg.solver_type,
+        x,
+        X_DIM,
+        REAL(0.0),
+        (real_t)days * REAL(24.0),
+        cfg.dt_hours,
+        cfg.solver_tolerance,
+        simulation_plant_rhs_adapter,
+        &rhs_ctx,
+        observer_chain_cb,
+        &chain,
+        &stats,
+        logger_ptr);
+
+    if (logger_ptr) {
+        solver_logger_close(&logger);
+    }
+    simulation_unpack_state(input, x);
+
+    if (csv_ctx.f)
+        fclose(csv_ctx.f);
+
+    if (gui_started)
+        pthread_join(gui_thread, NULL);
+}
+
+void simulation_result_free(SimulationResult* result)
+{
+    if (!result)
+        return;
+    free(result->sucrose);
+    free(result->starch);
+    free(result->ph);
+    free(result->partition);
+    result->sucrose = NULL;
+    result->starch = NULL;
+    result->ph = NULL;
+    result->partition = NULL;
+}
+
+real_t compute_rgr(real_t FW_start, real_t FW_end, real_t duration_hours)
+{
+    return (RLOG(FW_end) - RLOG(FW_start)) / duration_hours;
 }
