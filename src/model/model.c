@@ -29,6 +29,9 @@ real_t farquhar_photosynthesis(Input* input)
     if (input->core.light <= REAL(0.0) || input->core.leaf_biomass < input->core.min_leaf_biomass) {
         return REAL(0.0);
     }
+    if (input->core.light_PAR < REAL(20.0)) {
+        return REAL(0.0);
+    }
 
     real_t VPD = calculate_vapor_pressure_deficit(input->gas_exchange.leaf_temperature, input->gas_exchange.relative_humidity);
     input->gas_exchange.stomatal_conductance = calculate_stomatal_conductance_jarvis(
@@ -37,23 +40,22 @@ real_t farquhar_photosynthesis(Input* input)
         input->gas_exchange.leaf_temperature,
         input->gas_exchange.ambient_CO2_concentration,
         input->gas_exchange.leaf_water_potential);
+
     // printf("stomal cond: %f ", input->gas_exchange.stomatal_conductance);
     real_t An = iterate_ci(input, 50, REAL(0.0001));
 
-    real_t limitation = input->core.limitation_of_photosynthetic_rate;
-    real_t np_saturation = RMIN(input->core.nitrogen_saturation, input->core.phosphorus_saturation);
-    // printf("lim:%f psat:%f nsat:%f ", input->core.limitation_of_photosynthetic_rate, input->core.phosphorus_saturation, input->core.nitrogen_saturation);
+    // Farquhar output should come from gas-exchange coupling directly; nutrient effects
+    // are better represented via capacity parameters (e.g., Vcmax/Jmax), not a post-hoc scalar.
 
     input->gas_exchange.convert_to_photosynthesis_per_gram_per_hour = convert_to_photosynthesis_per_gram_per_hour(
         An,
         input->core.leaf_biomass,
         input->gas_exchange.specific_leaf_area);
-    real_t adjusted_PH = input->gas_exchange.convert_to_photosynthesis_per_gram_per_hour * np_saturation;
+    real_t adjusted_PH = input->gas_exchange.convert_to_photosynthesis_per_gram_per_hour;
 
     // printf("An=%.2f  lim=%.2f  Nsat=%.2f  Psat=%.2f  adjPH=%.2f anConv=%f\n", An, limitation, input->core.nitrogen_saturation, input->core.phosphorus_saturation, adjusted_PH, input->gas_exchange.convert_to_photosynthesis_per_gram_per_hour);
     // printf("adjusted: %f\n", adjusted_PH);
-    return RMAX(REAL(0), RMIN(adjusted_PH, input->core.max_photosynthetic_rate));
-    // return adjusted_PH > input->core.max_photosynthetic_rate ? input->core.max_photosynthetic_rate : adjusted_PH;
+    return RMAX(REAL(0.0), adjusted_PH);
 }
 
 real_t nitrogen_saturation(
@@ -878,8 +880,18 @@ real_t convert_to_photosynthesis_per_gram_per_hour(
     real_t leaf_biomass,
     real_t specific_leaf_area)
 {
+    /*
+     * Scale Farquhar An [umol CO2 m^-2 s^-1] into the model's historical
+     * photosynthesis magnitude domain (roughly 0..~max_photosynthetic_rate)
+     * without hard capping.
+     */
+    const real_t base_scale = REAL(1.10);
+    const real_t ref_specific_leaf_area = REAL(0.025);
+    real_t safe_sla = RMAX(specific_leaf_area, REAL(1e-6));
+    real_t sla_scale = safe_sla / ref_specific_leaf_area;
 
-    return net_photosynthesis_rate * REAL(0.0025) * 600;
+    (void)leaf_biomass;
+    return net_photosynthesis_rate * base_scale * sla_scale;
 }
 
 // Intercellular CO2 based on diffusion from ambient and net photosynthesis
@@ -897,6 +909,7 @@ real_t iterate_ci(Input* input, int max_iter, real_t epsilon)
     real_t Ci = input->gas_exchange.ambient_CO2_concentration * REAL(0.7); // inicijalna pretpostavka
     real_t prev_An = 0.0;
     real_t An = 0.0;
+    real_t gs = RMAX(input->gas_exchange.stomatal_conductance, REAL(1e-6));
 
     for (int i = 0; i < max_iter; i++) {
         real_t Ac = rubisco_limited_photosynthesis(
@@ -914,7 +927,8 @@ real_t iterate_ci(Input* input, int max_iter, real_t epsilon)
 
         An = net_photosynthesis(Ac, Aj, input->gas_exchange.respiration_rate);
 
-        real_t new_Ci = input->gas_exchange.ambient_CO2_concentration - An / input->gas_exchange.stomatal_conductance;
+        real_t new_Ci = input->gas_exchange.ambient_CO2_concentration - An / gs;
+        new_Ci = RMAX(REAL(0.0), new_Ci);
 
         if (RABS(new_Ci - Ci) < epsilon && RABS(An - prev_An) < epsilon) {
             break;
