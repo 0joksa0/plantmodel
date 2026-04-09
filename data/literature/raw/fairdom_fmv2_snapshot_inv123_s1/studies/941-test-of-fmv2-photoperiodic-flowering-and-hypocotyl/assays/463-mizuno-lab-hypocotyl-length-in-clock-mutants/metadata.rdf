@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<rdf:RDF xmlns:dcterms='http://purl.org/dc/terms/' xmlns:jerm='http://jermontology.org/ontology/JERMOntology#' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#' xmlns:sioc='http://rdfs.org/sioc/ns#'>
+<jerm:Experimental_assay rdf:about='https://fairdomhub.org/assays/463'>
+<dcterms:title>Mizuno lab, Hypocotyl length in clock mutants</dcterms:title>
+
+<jerm:description>Seedling hypocotyl data from literature for prr7 prr9 and Col wild-type plants under various photoperiods</jerm:description>
+
+<jerm:hasContributor rdf:resource='https://fairdomhub.org/people/850' />
+
+<jerm:hasCreator rdf:resource='https://fairdomhub.org/people/851' />
+
+<jerm:hasPart rdf:resource='https://fairdomhub.org/publications/307' />
+ <jerm:hasPart rdf:resource='https://fairdomhub.org/data_files/1613' />
+
+<jerm:hasType rdf:resource='http://jermontology.org/ontology/JERMOntology#Experimental_assay_type' />
+ <jerm:hasType rdf:resource='http://jermontology.org/ontology/JERMOntology#Technology_type' />
+
+<jerm:investigates rdf:resource='https://fairdomhub.org/organisms/1933753714' />
+ <jerm:investigates rdf:resource='https://fairdomhub.org/strains/95' />
+ <jerm:investigates rdf:resource='https://fairdomhub.org/strains/94' />
+
+<jerm:isPartOf rdf:resource='https://fairdomhub.org/studies/941' />
+
+<jerm:itemProducedBy rdf:resource='https://fairdomhub.org/projects/59' />
+ <jerm:itemProducedBy rdf:resource='https://fairdomhub.org/projects/92' />
+
+<jerm:seekID rdf:datatype='http://www.w3.org/2001/XMLSchema#anyURI'>https://fairdomhub.org/assays/463</jerm:seekID>
+
+<jerm:title>Mizuno lab, Hypocotyl length in clock mutants</jerm:title>
+
+<dcterms:created rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2017-02-01T20:49:37Z</dcterms:created>
+
+<dcterms:description>Seedling hypocotyl data from literature for prr7 prr9 and Col wild-type plants under various photoperiods</dcterms:description>
+
+<dcterms:modified rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2022-04-15T10:35:06Z</dcterms:modified>
+
+<sioc:has_creator rdf:resource='https://fairdomhub.org/people/851' />
+
+<sioc:has_owner rdf:resource='https://fairdomhub.org/people/850' />
+
+</jerm:Experimental_assay>
+
+</rdf:RDF>

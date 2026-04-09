@@ -9,6 +9,19 @@
 #include <string.h>
 
 #define SERIES_COUNT 4
+#define REF_POINT_CAP 256
+
+typedef struct {
+    real_t zt;
+    real_t starch;
+    real_t sucrose;
+} RefPoint;
+
+typedef struct {
+    int available;
+    int count;
+    RefPoint points[REF_POINT_CAP];
+} RefOverlay;
 
 typedef enum {
     VIEW_FULL = 0,
@@ -241,6 +254,106 @@ static int read_summary_csv(const char* path, SummaryStats* out)
     return 1;
 }
 
+static int parse_real_strict(const char* token, real_t* out)
+{
+    if (!token || !*token)
+        return 0;
+
+    char* end = NULL;
+    double v = strtod(token, &end);
+    if (end == token || !isfinite(v))
+        return 0;
+
+    while (*end == ' ' || *end == '\t' || *end == '\r' || *end == '\n')
+        ++end;
+    if (*end != '\0')
+        return 0;
+
+    *out = (real_t)v;
+    return 1;
+}
+
+static int parse_photoperiod_hours(const char* token, int* out)
+{
+    if (!token || !*token)
+        return 0;
+
+    char* end = NULL;
+    long h = strtol(token, &end, 10);
+    if (end == token)
+        return 0;
+
+    while (*end == ' ' || *end == '\t')
+        ++end;
+    if (*end == 'h' || *end == 'H')
+        ++end;
+    while (*end == ' ' || *end == '\t' || *end == '\r' || *end == '\n')
+        ++end;
+    if (*end != '\0')
+        return 0;
+
+    if (h <= 0 || h > 24)
+        return 0;
+    *out = (int)h;
+    return 1;
+}
+
+static int load_reference_overlay(const char* path, int photoperiod_h, RefOverlay* out)
+{
+    if (!path || !out)
+        return 0;
+
+    FILE* f = fopen(path, "r");
+    if (!f)
+        return 0;
+
+    char line[2048];
+    int line_no = 0;
+    out->count = 0;
+    out->available = 0;
+
+    while (fgets(line, sizeof(line), f)) {
+        line_no++;
+        if (line_no == 1)
+            continue;
+
+        char* cols[16];
+        int col_count = 0;
+        char* save = NULL;
+        for (char* tok = strtok_r(line, ",", &save); tok && col_count < 16; tok = strtok_r(NULL, ",", &save)) {
+            cols[col_count++] = tok;
+        }
+        if (col_count < 7)
+            continue;
+
+        int ph = 0;
+        real_t zt = REAL(0.0);
+        real_t starch = REAL(0.0);
+        real_t sucrose = REAL(0.0);
+        if (!parse_photoperiod_hours(cols[0], &ph))
+            continue;
+        if (ph != photoperiod_h)
+            continue;
+        if (!parse_real_strict(cols[1], &zt))
+            continue;
+        if (!parse_real_strict(cols[3], &starch))
+            continue;
+        if (!parse_real_strict(cols[6], &sucrose))
+            continue;
+        if (out->count >= REF_POINT_CAP)
+            break;
+
+        out->points[out->count].zt = zt;
+        out->points[out->count].starch = starch;
+        out->points[out->count].sucrose = sucrose;
+        out->count++;
+    }
+
+    fclose(f);
+    out->available = out->count > 0;
+    return out->available;
+}
+
 static void draw_summary_panel(Font font, const UiTheme* theme, Rectangle panel, const SummaryStats* s)
 {
     DrawRectangleRec(panel, theme->panel);
@@ -395,6 +508,48 @@ static void draw_series(const Series* series, Rectangle area, int from_idx, int 
     }
 }
 
+static void draw_reference_overlay(
+    const GuiOutput* out,
+    const Series* series,
+    const RefOverlay* ref,
+    Rectangle area,
+    int from_idx,
+    int to_idx,
+    real_t yscale,
+    real_t y_min)
+{
+    if (!out || !ref || !ref->available || ref->count <= 0)
+        return;
+
+    int sucrose_visible = series[0].visible;
+    int starch_visible = series[1].visible;
+    if (!sucrose_visible && !starch_visible)
+        return;
+
+    real_t day_start = (real_t)(out->days - 1) * REAL(24.0);
+    Color sucrose_ref = Fade(series[0].color, 0.40f);
+    Color starch_ref = Fade(series[1].color, 0.40f);
+
+    for (int i = 0; i < ref->count; ++i) {
+        real_t t = day_start + ref->points[i].zt;
+        int idx = (int)llround((double)(t / out->dt_hours));
+        if (idx < from_idx || idx > to_idx)
+            continue;
+
+        float x = to_x(idx, area, from_idx, to_idx);
+        if (sucrose_visible) {
+            float y = area.y + area.height - (float)((ref->points[i].sucrose - y_min) * yscale);
+            DrawCircleV((Vector2){ x, y }, 4.5f, sucrose_ref);
+            DrawCircleLines((int)x, (int)y, 4.5f, Fade(series[0].color, 0.55f));
+        }
+        if (starch_visible) {
+            float y = area.y + area.height - (float)((ref->points[i].starch - y_min) * yscale);
+            DrawCircleV((Vector2){ x, y }, 4.5f, starch_ref);
+            DrawCircleLines((int)x, (int)y, 4.5f, Fade(series[1].color, 0.55f));
+        }
+    }
+}
+
 static void draw_probe(Font font, const UiTheme* theme, const GuiOutput* out, const Series* series, Rectangle area, int from_idx, int to_idx)
 {
     Vector2 m = GetMousePosition();
@@ -488,6 +643,16 @@ void* gui_main_thread(void* arg)
         { "48h", VIEW_LAST_48H, { 1076, 102, 78, 30 } },
     };
     SummaryStats summary = { 0 };
+    RefOverlay ref_overlay = { 0 };
+    const char* ref_paths[] = {
+        "data/paper/sugars_starch_reference.csv",
+        "../data/paper/sugars_starch_reference.csv"
+    };
+    int photoperiod_h = clamp_i((int)lround((double)out->photoperiod), 1, 24);
+    for (size_t i = 0; i < sizeof(ref_paths) / sizeof(ref_paths[0]); ++i) {
+        if (load_reference_overlay(ref_paths[i], photoperiod_h, &ref_overlay))
+            break;
+    }
     int summary_refresh_tick = 0;
 
     while (!WindowShouldClose()) {
@@ -680,6 +845,7 @@ void* gui_main_thread(void* arg)
             real_t t1 = (real_t)to_idx * out->dt_hours;
             draw_grid(&theme, plot_area, y_min, y_max, t0, t1);
             draw_series(series, plot_area, from_idx, to_idx, yscale, y_min);
+            draw_reference_overlay(out, series, &ref_overlay, plot_area, from_idx, to_idx, yscale, y_min);
             draw_probe(ui_font, &theme, out, series, plot_area, from_idx, to_idx);
         }
 
@@ -693,6 +859,13 @@ void* gui_main_thread(void* arg)
             "controls: 1-4 toggle, A all, N none, F/T/Y view modes, drag to pan, wheel zoom X+Y, +/- custom window, R reset",
             (Vector2){ 32, 860 },
             16.0f,
+            theme.text_dim);
+        draw_label(ui_font,
+            ref_overlay.available
+                ? TextFormat("reference overlay: %d sugar/starch points (photoperiod %dh, last day)", ref_overlay.count, photoperiod_h)
+                : "reference overlay: data/paper/sugars_starch_reference.csv not loaded",
+            (Vector2){ 32, 880 },
+            15.0f,
             theme.text_dim);
 
         EndDrawing();

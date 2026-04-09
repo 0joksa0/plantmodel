@@ -1,0 +1,27 @@
+{
+  "id": 1610,
+  "uri": "https://fairdomhub.org/data_files/1610?version=1",
+  "title": "Sensitivity analysis results (.mat file)",
+  "description": "Model analysis results in binary Matlab format",
+  "version": 1,
+  "doi": null,
+  "contributor": {
+    "name": "Daniel Seaton",
+    "uri": "https://fairdomhub.org/people/851",
+    "orcid": "https://orcid.org/0000-0002-5222-3893"
+  },
+  "creators": [
+    {
+      "name": "Daniel Seaton",
+      "uri": "https://fairdomhub.org/people/851",
+      "orcid": "https://orcid.org/0000-0002-5222-3893"
+    }
+  ],
+  "contains": [
+    "data_files/1610-sensitivity-analysis-results-mat-file/sens_analysis_results_WT.mat"
+  ],
+  "license": {
+    "title": "Creative Commons Attribution 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  }
+}

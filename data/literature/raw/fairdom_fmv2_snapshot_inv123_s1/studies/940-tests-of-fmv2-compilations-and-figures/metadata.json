@@ -1,0 +1,21 @@
+{
+  "id": 940,
+  "uri": "https://fairdomhub.org/studies/940",
+  "title": "Tests of FMv2, compilations and figures",
+  "description": "Assorted files prepared during the publication process of the FMv2, its validation and testing, mostly focussed on the Arabidopsis double mutant prr7prr9 and its parent accession Col. \r\nData from other studies that are described separately, and linked by Atribution to the File records under this Study.",
+  "contributor": {
+    "name": "Andrew Millar",
+    "uri": "https://fairdomhub.org/people/850",
+    "orcid": "https://orcid.org/0000-0003-1756-3654"
+  },
+  "creators": [
+    {
+      "name": "Andrew Millar",
+      "uri": "https://fairdomhub.org/people/850",
+      "orcid": "https://orcid.org/0000-0003-1756-3654"
+    }
+  ],
+  "assays": [
+    "studies/940-tests-of-fmv2-compilations-and-figures/assays/1660-biomass-leaf-area-and-gas-exchange-data/"
+  ]
+}

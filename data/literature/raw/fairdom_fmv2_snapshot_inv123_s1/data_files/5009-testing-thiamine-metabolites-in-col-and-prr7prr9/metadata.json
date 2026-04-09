@@ -1,0 +1,27 @@
+{
+  "id": 5009,
+  "uri": "https://fairdomhub.org/data_files/5009?version=2",
+  "title": "Testing thiamine metabolites in Col and prr7prr9",
+  "description": "Excel file with data on levels of thiamine and its metabolites TMP and active cofactor TDP, tested in Col and prr7prr9 samples from study Laurel and Hardy 3.\r\nAltered levels of TDP could potentially affect enzymes with TDP cofactors that metabolise malate and fumarate levels, altering their levels in prr7prr9.",
+  "version": 2,
+  "doi": null,
+  "contributor": {
+    "name": "Andrew Millar",
+    "uri": "https://fairdomhub.org/people/850",
+    "orcid": "https://orcid.org/0000-0003-1756-3654"
+  },
+  "creators": [
+    {
+      "name": "Yin Hoon Chew",
+      "uri": "https://fairdomhub.org/people/854",
+      "orcid": "https://orcid.org/0000-0002-9258-583X"
+    }
+  ],
+  "contains": [
+    "data_files/5009-testing-thiamine-metabolites-in-col-and-prr7prr9/Thiamin Geneva results 10_05_2015_AJM.xlsx"
+  ],
+  "license": {
+    "title": "CC0 1.0",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  }
+}

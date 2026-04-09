@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<rdf:RDF xmlns:dcterms='http://purl.org/dc/terms/' xmlns:jerm='http://jermontology.org/ontology/JERMOntology#' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#' xmlns:sioc='http://rdfs.org/sioc/ns#'>
+<jerm:Experimental_assay rdf:about='https://fairdomhub.org/assays/1662'>
+<dcterms:title>Thiamine vitamers</dcterms:title>
+
+<jerm:description>Follow-up to the validation experiments on FMv2, testing candidate mechanisms for high malate and fumarate accumulation in the Arabidopsis double mutant prr7prr9 and its parent accession Col.
+
+In this study, thiamine vitamers were quantified to test whether the essential cofactor TDP had altered enzyme activities to affect the malate and fumarate levels, using existing plant samples harvested from am earlier L&amp;H study.</jerm:description>
+
+<jerm:hasContributor rdf:resource='https://fairdomhub.org/people/850' />
+
+<jerm:hasPart rdf:resource='https://fairdomhub.org/data_files/5009' />
+
+<jerm:hasType rdf:resource='http://jermontology.org/ontology/JERMOntology#Technology_type' />
+ <jerm:hasType rdf:resource='http://jermontology.org/ontology/JERMOntology#Metabolite_profiling' />
+
+<jerm:investigates rdf:resource='https://fairdomhub.org/organisms/1933753714' />
+ <jerm:investigates rdf:resource='https://fairdomhub.org/strains/95' />
+ <jerm:investigates rdf:resource='https://fairdomhub.org/strains/94' />
+
+<jerm:isPartOf rdf:resource='https://fairdomhub.org/studies/938' />
+
+<jerm:itemProducedBy rdf:resource='https://fairdomhub.org/projects/59' />
+ <jerm:itemProducedBy rdf:resource='https://fairdomhub.org/projects/92' />
+
+<jerm:seekID rdf:datatype='http://www.w3.org/2001/XMLSchema#anyURI'>https://fairdomhub.org/assays/1662</jerm:seekID>
+
+<jerm:title>Thiamine vitamers</jerm:title>
+
+<dcterms:created rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2022-04-08T17:52:19Z</dcterms:created>
+
+<dcterms:description>Follow-up to the validation experiments on FMv2, testing candidate mechanisms for high malate and fumarate accumulation in the Arabidopsis double mutant prr7prr9 and its parent accession Col.
+
+In this study, thiamine vitamers were quantified to test whether the essential cofactor TDP had altered enzyme activities to affect the malate and fumarate levels, using existing plant samples harvested from am earlier L&amp;H study.</dcterms:description>
+
+<dcterms:modified rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2022-04-15T10:35:05Z</dcterms:modified>
+
+<sioc:has_owner rdf:resource='https://fairdomhub.org/people/850' />
+
+</jerm:Experimental_assay>
+
+</rdf:RDF>

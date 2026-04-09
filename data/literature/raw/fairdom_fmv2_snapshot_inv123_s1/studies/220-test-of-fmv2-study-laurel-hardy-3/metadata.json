@@ -1,0 +1,22 @@
+{
+  "id": 220,
+  "uri": "https://fairdomhub.org/studies/220",
+  "title": "Test of FMv2, study Laurel & Hardy 3",
+  "description": "Modelling and experiments for FMv2 as a whole; Testing Framework Model version 2 (FMv2)",
+  "contributor": {
+    "name": "Andrew Millar",
+    "uri": "https://fairdomhub.org/people/850",
+    "orcid": "https://orcid.org/0000-0003-1756-3654"
+  },
+  "creators": [
+    {
+      "name": "Andrew Millar",
+      "uri": "https://fairdomhub.org/people/850",
+      "orcid": "https://orcid.org/0000-0003-1756-3654"
+    }
+  ],
+  "assays": [
+    "studies/220-test-of-fmv2-study-laurel-hardy-3/assays/477-biomass-and-metabolites/",
+    "studies/220-test-of-fmv2-study-laurel-hardy-3/assays/479-fmv2-simulation/"
+  ]
+}

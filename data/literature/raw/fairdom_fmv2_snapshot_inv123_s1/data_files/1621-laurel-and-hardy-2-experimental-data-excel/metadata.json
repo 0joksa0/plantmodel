@@ -1,0 +1,27 @@
+{
+  "id": 1621,
+  "uri": "https://fairdomhub.org/data_files/1621?version=1",
+  "title": "Laurel and Hardy 2 - Experimental data (excel)",
+  "description": "Mean and SD data for metabolites and biomass, along with metadata used to simulate this experiment.",
+  "version": 1,
+  "doi": null,
+  "contributor": {
+    "name": "Daniel Seaton",
+    "uri": "https://fairdomhub.org/people/851",
+    "orcid": "https://orcid.org/0000-0002-5222-3893"
+  },
+  "creators": [
+    {
+      "name": "Daniel Seaton",
+      "uri": "https://fairdomhub.org/people/851",
+      "orcid": "https://orcid.org/0000-0002-5222-3893"
+    }
+  ],
+  "contains": [
+    "data_files/1621-laurel-and-hardy-2-experimental-data-excel/Laurel and Hardy 2 - experimental data (excel).xlsx"
+  ],
+  "license": {
+    "title": "CC0 1.0",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  }
+}

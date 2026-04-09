@@ -1,0 +1,36 @@
+{
+  "id": 1626,
+  "uri": "https://fairdomhub.org/data_files/1626?version=1",
+  "title": "Laurel and Hardy 3 - complete data",
+  "description": "Excel spreadsheets for biomass, leaf number, gas exchange and metabolites, including pgm and lhycca1.\r\nKey data are for 27-28 day old plants for Col and prr7prr9, analysed for the preprint/publication.\r\nGas exchange data for lhycca1 showed lower Assimilation per unit area than Col, prr7prr9; A in pgm was higher than Col.\r\nMetabolite data were also collected for Col and lhycca1 at 18 days, before the lhycca1 flowered, but these are marked as unreliable.",
+  "version": 1,
+  "doi": null,
+  "contributor": {
+    "name": "Daniel Seaton",
+    "uri": "https://fairdomhub.org/people/851",
+    "orcid": "https://orcid.org/0000-0002-5222-3893"
+  },
+  "creators": [
+    {
+      "name": "Yin Hoon Chew",
+      "uri": "https://fairdomhub.org/people/854",
+      "orcid": "https://orcid.org/0000-0002-9258-583X"
+    },
+    {
+      "name": "Virginie Mengin",
+      "uri": "https://fairdomhub.org/people/984"
+    },
+    {
+      "name": "Daniel Seaton",
+      "uri": "https://fairdomhub.org/people/851",
+      "orcid": "https://orcid.org/0000-0002-5222-3893"
+    }
+  ],
+  "contains": [
+    "data_files/1626-laurel-and-hardy-3-complete-data/Laurel and Hardy 3 - complete data.zip"
+  ],
+  "license": {
+    "title": "CC0 1.0",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  }
+}

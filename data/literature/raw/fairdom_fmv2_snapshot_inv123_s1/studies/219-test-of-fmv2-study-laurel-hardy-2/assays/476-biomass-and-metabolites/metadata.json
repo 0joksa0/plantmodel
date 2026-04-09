@@ -1,0 +1,34 @@
+{
+  "id": 476,
+  "uri": "https://fairdomhub.org/assays/476",
+  "title": "Biomass and metabolites",
+  "description": "Biomass (fresh mass, dry mass), leaf numbers, leaf area, gas exchange and 12 metabolites in Col0 (WT), prr7prr9, and lsf1 (presented in the preprint/paper) and pgm (not analysed further).",
+  "assay_type_uri": "http://jermontology.org/ontology/JERMOntology#Organism_or_strain_characterisation",
+  "technology_type_uri": "http://jermontology.org/ontology/JERMOntology#Technology_type",
+  "contributor": {
+    "name": "Daniel Seaton",
+    "uri": "https://fairdomhub.org/people/851",
+    "orcid": "https://orcid.org/0000-0002-5222-3893"
+  },
+  "creators": [
+    {
+      "name": "Yin Hoon Chew",
+      "uri": "https://fairdomhub.org/people/854",
+      "orcid": "https://orcid.org/0000-0002-9258-583X"
+    },
+    {
+      "name": "Virginie Mengin",
+      "uri": "https://fairdomhub.org/people/984"
+    },
+    {
+      "name": "Daniel Seaton",
+      "uri": "https://fairdomhub.org/people/851",
+      "orcid": "https://orcid.org/0000-0002-5222-3893"
+    }
+  ],
+  "assets": [
+    "data_files/1606-laurel-and-hardy-2-experimental-data-mat-file/",
+    "data_files/1621-laurel-and-hardy-2-experimental-data-excel/",
+    "data_files/1627-laurel-and-hardy-2-complete-data/"
+  ]
+}

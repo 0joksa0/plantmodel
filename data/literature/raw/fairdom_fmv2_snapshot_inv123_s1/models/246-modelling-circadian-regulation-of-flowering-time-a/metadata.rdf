@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<rdf:RDF xmlns:dcterms='http://purl.org/dc/terms/' xmlns:jerm='http://jermontology.org/ontology/JERMOntology#' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#' xmlns:sioc='http://rdfs.org/sioc/ns#'>
+<jerm:Model rdf:about='https://fairdomhub.org/models/246'>
+<dcterms:title>Modelling circadian regulation of flowering time and hypocotyl elongation, Seaton et al., 2015</dcterms:title>
+
+<jerm:description>Matlab model (could not be represented in SBML) from publication with abstract: 
+Clock-regulated pathways coordinate the response of many developmental processes to changes in photoperiod and temperature. We model two of the best-understood clock output pathways in Arabidopsis, which control key regulators of flowering and elongation growth. In flowering, the model predicted regulatory links from the clock to CYCLING DOF FACTOR 1 (CDF1) and FLAVIN-BINDING, KELCH REPEAT, F-BOX 1 (FKF1) transcription. Physical interaction data support these links, which create threefold feed?forward motifs from two clock components to the floral regulator FT. In hypocotyl growth, the model described clock?regulated transcription of PHYTOCHROME?INTERACTING FACTOR 4 and 5 (PIF4, PIF5), interacting with post?translational regulation of PIF proteins by phytochrome B (phyB) and other light?activated pathways. The model predicted bimodal and end?of?day PIF activity profiles that are observed across hundreds of PIF?regulated target genes. In the response to temperature, warmth?enhanced PIF4 activity explained the observed hypocotyl growth dynamics but additional, temperature?dependent regulators were implicated in the flowering response. Integrating these two pathways with the clock model highlights the molecular mechanisms that coordinate plant development across changing conditions.</jerm:description>
+
+<jerm:hasContributor rdf:resource='https://fairdomhub.org/people/850' />
+
+<jerm:hasCreator rdf:resource='https://fairdomhub.org/people/851' />
+ <jerm:hasCreator rdf:resource='https://fairdomhub.org/people/850' />
+
+<jerm:isPartOf rdf:resource='https://fairdomhub.org/assays/468' />
+
+<jerm:itemProducedBy rdf:resource='https://fairdomhub.org/projects/59' />
+
+<jerm:seekID rdf:datatype='http://www.w3.org/2001/XMLSchema#anyURI'>https://fairdomhub.org/models/246</jerm:seekID>
+
+<jerm:title>Modelling circadian regulation of flowering time and hypocotyl elongation, Seaton et al., 2015</jerm:title>
+
+<dcterms:created rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2017-02-06T12:55:41Z</dcterms:created>
+
+<dcterms:description>Matlab model (could not be represented in SBML) from publication with abstract: 
+Clock-regulated pathways coordinate the response of many developmental processes to changes in photoperiod and temperature. We model two of the best-understood clock output pathways in Arabidopsis, which control key regulators of flowering and elongation growth. In flowering, the model predicted regulatory links from the clock to CYCLING DOF FACTOR 1 (CDF1) and FLAVIN-BINDING, KELCH REPEAT, F-BOX 1 (FKF1) transcription. Physical interaction data support these links, which create threefold feed?forward motifs from two clock components to the floral regulator FT. In hypocotyl growth, the model described clock?regulated transcription of PHYTOCHROME?INTERACTING FACTOR 4 and 5 (PIF4, PIF5), interacting with post?translational regulation of PIF proteins by phytochrome B (phyB) and other light?activated pathways. The model predicted bimodal and end?of?day PIF activity profiles that are observed across hundreds of PIF?regulated target genes. In the response to temperature, warmth?enhanced PIF4 activity explained the observed hypocotyl growth dynamics but additional, temperature?dependent regulators were implicated in the flowering response. Integrating these two pathways with the clock model highlights the molecular mechanisms that coordinate plant development across changing conditions.</dcterms:description>
+
+<dcterms:modified rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2022-04-15T10:35:11Z</dcterms:modified>
+
+<sioc:has_creator rdf:resource='https://fairdomhub.org/people/851' />
+ <sioc:has_creator rdf:resource='https://fairdomhub.org/people/850' />
+
+<sioc:has_owner rdf:resource='https://fairdomhub.org/people/850' />
+
+</jerm:Model>
+
+</rdf:RDF>

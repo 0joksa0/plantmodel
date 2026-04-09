@@ -1,0 +1,35 @@
+{
+  "id": 345,
+  "uri": "https://fairdomhub.org/publications/345",
+  "title": "Linking circadian time to growth rate quantitatively\r\n            via\r\n            carbon metabolism",
+  "description": "\r\n          Summary paragraph\r\n          \r\n            Predicting a multicellular organism’s phenotype quantitatively from its genotype is challenging, as genetic effects must propagate up time and length scales. Circadian clocks are intracellular regulators that control temporal gene expression patterns and hence metabolism, physiology and behaviour, from sleep/wake cycles in mammals to flowering in plants\r\n            1–3\r\n            . Clock genes are rarely essential but appropriate alleles can confer a competitive advantage\r\n            4,5\r\n            and have been repeatedly selected during crop domestication\r\n            3,6\r\n            . Here we quantitatively explain and predict canonical phenotypes of circadian timing in a multicellular, model organism. We used metabolic and physiological data to combine and extend mathematical models of rhythmic gene expression, photoperiod-dependent flowering, elongation growth and starch metabolism within a Framework Model for growth of\r\n            Arabidopsis thaliana\r\n            7–9\r\n            . The model predicted the effect of altered circadian timing upon each particular phenotype in clock-mutant plants. Altered night-time metabolism of stored starch accounted for most but not all of the decrease in whole-plant growth rate. Altered mobilisation of a secondary store of organic acids explained the remaining defect. Our results link genotype through specific processes to higher-level phenotypes, formalising our understanding of a subtle, pleiotropic syndrome at the whole-organism level, and validating the systems approach to understand complex traits starting from intracellular circuits.\r\n          \r\n        ",
+  "doi": "10.1101/105437",
+  "doi_uri": "https://doi.org/10.1101/105437",
+  "pubmed_id": null,
+  "pubmed_uri": null,
+  "contributor": {
+    "name": "Andrew Millar",
+    "uri": "https://fairdomhub.org/people/850",
+    "orcid": "https://orcid.org/0000-0003-1756-3654"
+  },
+  "creators": [
+    {
+      "name": "Yin Hoon Chew",
+      "uri": "https://fairdomhub.org/people/854",
+      "orcid": "https://orcid.org/0000-0002-9258-583X"
+    },
+    {
+      "name": "Daniel Seaton",
+      "uri": "https://fairdomhub.org/people/851",
+      "orcid": "https://orcid.org/0000-0002-5222-3893"
+    },
+    {
+      "name": "Andrew Millar",
+      "uri": "https://fairdomhub.org/people/850",
+      "orcid": "https://orcid.org/0000-0003-1756-3654"
+    }
+  ],
+  "contains": [
+
+  ]
+}

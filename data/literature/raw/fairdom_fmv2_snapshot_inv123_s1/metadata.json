@@ -1,0 +1,43 @@
+{
+  "id": 123,
+  "uri": "https://fairdomhub.org/investigations/123",
+  "title": "Prediction and analysis of phenotypes in the Arabidopsis clock mutant <i>prr7 prr9</i> using the Framework Model v2 (FMv2)",
+  "description": "Data, FMv2 model and simulations for the Chew et al. 2017 paper (bioRxiv https://doi.org/10.1101/105437 ), updated 2022 as bioRxiv [https://doi.org/10.1101/105437v2](https://doi.org/10.1101/105437v2), mostly on the prr7 prr9 double mutant, with controls in lsf1 and prr7 single mutants. This is one of the outputs from the EU TiMet project, https://fairdomhub.org/projects/92.\r\n\r\nThis data archive was updated during submisson to the journal _in Silico _Plants in 2022, and a Snapshot was published. NB the updates are not changing the core data, or the FMv2 model that has been public for some years, just enhancing annotations and adding supporting data files, including from follow-up studies. We will add the paper and its DOI to this Investigation when it's published. The same Snapshot will likely be shared on the University of Edinburgh Datashare and on Zenodo.\r\n\r\nWe request that users gives appropriate credit to the authors of any data released here, as a norm of academic practice, including data released under CC-0 licence.",
+  "contributor": {
+    "name": "Andrew Millar",
+    "uri": "https://fairdomhub.org/people/850",
+    "orcid": "https://orcid.org/0000-0003-1756-3654"
+  },
+  "creators": [
+    {
+      "name": "Andrew Millar",
+      "uri": "https://fairdomhub.org/people/850",
+      "orcid": "https://orcid.org/0000-0003-1756-3654"
+    },
+    {
+      "name": "Yin Hoon Chew",
+      "uri": "https://fairdomhub.org/people/854",
+      "orcid": "https://orcid.org/0000-0002-9258-583X"
+    },
+    {
+      "name": "Daniel Seaton",
+      "uri": "https://fairdomhub.org/people/851",
+      "orcid": "https://orcid.org/0000-0002-5222-3893"
+    },
+    {
+      "name": "Virginie Mengin",
+      "uri": "https://fairdomhub.org/people/984"
+    }
+  ],
+  "studies": [
+    "studies/211-test-of-fmv2-study-laurel-hardy-1/",
+    "studies/215-construction-of-framework-model-version-2-fmv2/",
+    "studies/216-analysis-of-framework-model-version-2-fmv2/",
+    "studies/219-test-of-fmv2-study-laurel-hardy-2/",
+    "studies/220-test-of-fmv2-study-laurel-hardy-3/",
+    "studies/222-test-of-fmv2-study-gibberellins-1/",
+    "studies/938-test-of-fmv2-follow-on-mechanisms-of-malate-fumara/",
+    "studies/940-tests-of-fmv2-compilations-and-figures/",
+    "studies/941-test-of-fmv2-photoperiodic-flowering-and-hypocotyl/"
+  ]
+}

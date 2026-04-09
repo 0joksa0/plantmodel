@@ -1,0 +1,19 @@
+{
+  "id": 1662,
+  "uri": "https://fairdomhub.org/assays/1662",
+  "title": "Thiamine vitamers",
+  "description": "Follow-up to the validation experiments on FMv2, testing candidate mechanisms for high malate and fumarate accumulation in the Arabidopsis double mutant prr7prr9 and its parent accession Col.\r\n\r\nIn this study, thiamine vitamers were quantified to test whether the essential cofactor TDP had altered enzyme activities to affect the malate and fumarate levels, using existing plant samples harvested from am earlier L&H study.\r\n",
+  "assay_type_uri": "http://jermontology.org/ontology/JERMOntology#Metabolite_profiling",
+  "technology_type_uri": "http://jermontology.org/ontology/JERMOntology#Technology_type",
+  "contributor": {
+    "name": "Andrew Millar",
+    "uri": "https://fairdomhub.org/people/850",
+    "orcid": "https://orcid.org/0000-0003-1756-3654"
+  },
+  "creators": [
+
+  ],
+  "assets": [
+    "data_files/5009-testing-thiamine-metabolites-in-col-and-prr7prr9/"
+  ]
+}

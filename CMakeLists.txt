@@ -66,6 +66,18 @@ target_link_libraries(sweep_runner
         ${LIBGL}
 )
 
+add_executable(validation_runner ${SRC} tools/validation_runner.c)
+target_include_directories(validation_runner PRIVATE ${PROJECT_SOURCE_DIR}/include)
+target_link_libraries(validation_runner
+    PRIVATE
+        solver_double
+        PkgConfig::RAYLIB
+        ${LIBM}
+        ${LIBPTH}
+        ${LIBDL}
+        ${LIBGL}
+)
+
 message(STATUS "Solver at : ${SOLVER_DOUBLE_PATH}")
 message(STATUS "Sources   : ${SRC}")
 

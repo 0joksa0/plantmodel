@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<rdf:RDF xmlns:dcterms='http://purl.org/dc/terms/' xmlns:jerm='http://jermontology.org/ontology/JERMOntology#' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#' xmlns:sioc='http://rdfs.org/sioc/ns#'>
+<jerm:Publication rdf:about='https://fairdomhub.org/publications/308'>
+<dcterms:title>Arabidopsis clock-associated pseudo-response regulators PRR9, PRR7 and PRR5 coordinately and positively regulate flowering time through the canonical CONSTANS-dependent photoperiodic pathway</dcterms:title>
+
+<jerm:description>Photoperiodism allows organisms to measure daylength, or external photoperiod, and to anticipate coming seasons. Daylength measurement requires the integration of light signal and temporal information by the circadian clock. In the long-day plant Arabidopsis thaliana, CONSTANS (CO) plays a crucial role in integrating the circadian rhythm and environmental light signals into the photoperiodic flowering pathway. Nevertheless, the molecular mechanism by which the circadian clock modulates the cyclic expression profile of CO is poorly understood. Here, we first showed that the clock-associated genes PSEUDO-RESPONSE REGULATOR (PRR) PRR9, PRR7 and PRR5 are involved in activation of CO expression during the daytime. Then, extensive genetic studies using CIRCADIAN CLOCK-ASSOCIATED1 (CCA1)/LATE ELONGATED HYPOCOTYL (LHY) double mutants (cca1/lhy) and prr7/prr5 were conducted. The results suggested that PRR genes act coordinately in a manner parallel with and antagonistic to CCA/LHY, upstream of the canonical CO-FLOWERING LOCUS T (FT) photoperiodic flowering pathway. Finally, we provided evidence to propose a model, in which CCA1/LHY repress CO through GIGANTEA (GI), while PRR9, PRR7 and PRR5 activate CO predominantly by repressing CYCLING DOF FACTOR1 (CDF1) encoding a DNA-binding transcriptional repressor.</jerm:description>
+
+<jerm:hasContributor rdf:resource='https://fairdomhub.org/people/851' />
+
+<jerm:isPartOf rdf:resource='https://fairdomhub.org/assays/462' />
+
+<jerm:itemProducedBy rdf:resource='https://fairdomhub.org/projects/59' />
+
+<jerm:title>Arabidopsis clock-associated pseudo-response regulators PRR9, PRR7 and PRR5 coordinately and positively regulate flowering time through the canonical CONSTANS-dependent photoperiodic pathway</jerm:title>
+
+<dcterms:created rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2017-02-04T13:26:43Z</dcterms:created>
+
+<dcterms:description>Photoperiodism allows organisms to measure daylength, or external photoperiod, and to anticipate coming seasons. Daylength measurement requires the integration of light signal and temporal information by the circadian clock. In the long-day plant Arabidopsis thaliana, CONSTANS (CO) plays a crucial role in integrating the circadian rhythm and environmental light signals into the photoperiodic flowering pathway. Nevertheless, the molecular mechanism by which the circadian clock modulates the cyclic expression profile of CO is poorly understood. Here, we first showed that the clock-associated genes PSEUDO-RESPONSE REGULATOR (PRR) PRR9, PRR7 and PRR5 are involved in activation of CO expression during the daytime. Then, extensive genetic studies using CIRCADIAN CLOCK-ASSOCIATED1 (CCA1)/LATE ELONGATED HYPOCOTYL (LHY) double mutants (cca1/lhy) and prr7/prr5 were conducted. The results suggested that PRR genes act coordinately in a manner parallel with and antagonistic to CCA/LHY, upstream of the canonical CO-FLOWERING LOCUS T (FT) photoperiodic flowering pathway. Finally, we provided evidence to propose a model, in which CCA1/LHY repress CO through GIGANTEA (GI), while PRR9, PRR7 and PRR5 activate CO predominantly by repressing CYCLING DOF FACTOR1 (CDF1) encoding a DNA-binding transcriptional repressor.</dcterms:description>
+
+<dcterms:modified rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2017-02-04T13:26:43Z</dcterms:modified>
+
+<sioc:has_owner rdf:resource='https://fairdomhub.org/people/851' />
+
+</jerm:Publication>
+
+</rdf:RDF>

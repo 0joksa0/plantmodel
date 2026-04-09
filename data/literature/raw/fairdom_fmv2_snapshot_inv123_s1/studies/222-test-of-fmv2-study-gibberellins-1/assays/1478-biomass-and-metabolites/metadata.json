@@ -1,0 +1,20 @@
+{
+  "id": 1478,
+  "uri": "https://fairdomhub.org/assays/1478",
+  "title": "Biomass and metabolites",
+  "description": "Biomass and metabolites in Col0 (WT) and prr7prr9, with and without exogenous gibberellins (GA)",
+  "assay_type_uri": "http://jermontology.org/ontology/JERMOntology#Organism_or_strain_characterisation",
+  "technology_type_uri": "http://jermontology.org/ontology/JERMOntology#Technology_type",
+  "contributor": {
+    "name": "Andrew Millar",
+    "uri": "https://fairdomhub.org/people/850",
+    "orcid": "https://orcid.org/0000-0003-1756-3654"
+  },
+  "creators": [
+
+  ],
+  "assets": [
+    "data_files/5006-all-biomass-data-for-study-gibberellins-1/",
+    "data_files/5007-biomass-and-metabolite-data-for-study-gibberellins/"
+  ]
+}

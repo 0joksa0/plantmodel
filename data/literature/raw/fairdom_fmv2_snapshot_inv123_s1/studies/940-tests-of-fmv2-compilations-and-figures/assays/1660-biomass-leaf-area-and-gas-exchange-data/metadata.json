@@ -1,0 +1,28 @@
+{
+  "id": 1660,
+  "uri": "https://fairdomhub.org/assays/1660",
+  "title": "Biomass, leaf area and gas exchange data",
+  "description": "Biomass, leaf number and gas exchange data for Col0 (WT), prr7prr9, and lsf1, compiled from four studies: L&H1-3 and the 'no GA' controls of Gibberellins 1.",
+  "assay_type_uri": "http://jermontology.org/ontology/JERMOntology#Organism_or_strain_characterisation",
+  "technology_type_uri": "http://jermontology.org/ontology/JERMOntology#Technology_type",
+  "contributor": {
+    "name": "Andrew Millar",
+    "uri": "https://fairdomhub.org/people/850",
+    "orcid": "https://orcid.org/0000-0003-1756-3654"
+  },
+  "creators": [
+    {
+      "name": "Yin Hoon Chew",
+      "uri": "https://fairdomhub.org/people/854",
+      "orcid": "https://orcid.org/0000-0002-9258-583X"
+    },
+    {
+      "name": "Andrew Millar",
+      "uri": "https://fairdomhub.org/people/850",
+      "orcid": "https://orcid.org/0000-0003-1756-3654"
+    }
+  ],
+  "assets": [
+    "data_files/5005-four-study-data-compilation-with-charts/"
+  ]
+}

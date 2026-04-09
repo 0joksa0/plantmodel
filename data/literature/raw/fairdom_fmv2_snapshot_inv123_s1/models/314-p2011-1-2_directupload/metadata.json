@@ -1,0 +1,27 @@
+{
+  "id": 314,
+  "uri": "https://fairdomhub.org/models/314?version=1",
+  "title": "P2011.1.2_directupload",
+  "description": "Exactly the same as model 243, but uploaded as a file rather than copied from PlaSMo.",
+  "version": 1,
+  "doi": null,
+  "contributor": {
+    "name": "Andrew Millar",
+    "uri": "https://fairdomhub.org/people/850",
+    "orcid": "https://orcid.org/0000-0003-1756-3654"
+  },
+  "creators": [
+    {
+      "name": "Andrew Millar",
+      "uri": "https://fairdomhub.org/people/850",
+      "orcid": "https://orcid.org/0000-0003-1756-3654"
+    }
+  ],
+  "contains": [
+    "models/314-p2011-1-2_directupload/PLM_71.xml"
+  ],
+  "license": {
+    "title": "Creative Commons Attribution 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  }
+}

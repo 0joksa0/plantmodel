@@ -1,0 +1,33 @@
+{
+  "id": 245,
+  "uri": "https://fairdomhub.org/models/245?version=1",
+  "title": "Arabidopsis - starch and the circadian clock, Model 2 (Seaton et al., 2013)",
+  "description": "A model of the circadian regulation of starch turnover, as published in Seaton, Ebenhoeh, Millar, Pokhilko, \"Regulatory principles and experimental approaches to the circadian control of starch turnover\", J. Roy. Soc. Interface, 2013. This model is referred to as \"Model Variant 2\". \r\nThe other model variants are all available from www.plasmo.ed.ac.uk as stated in the publication. \r\nNote that the 'P2011' circadian clock model was modified for this publication (as described), in order to replicate the responses to skeleton photoperiods first demonstrated by the 'P2010' model.",
+  "version": 1,
+  "doi": null,
+  "contributor": {
+    "name": "Andrew Millar",
+    "uri": "https://fairdomhub.org/people/850",
+    "orcid": "https://orcid.org/0000-0003-1756-3654"
+  },
+  "creators": [
+    {
+      "name": "Andrew Millar",
+      "uri": "https://fairdomhub.org/people/850",
+      "orcid": "https://orcid.org/0000-0003-1756-3654"
+    },
+    {
+      "name": "Daniel Seaton",
+      "uri": "https://fairdomhub.org/people/851",
+      "orcid": "https://orcid.org/0000-0002-5222-3893"
+    }
+  ],
+  "contains": [
+    "models/245-arabidopsis-starch-and-the-circadian-clock-model-2/PLM_78.xml",
+    "http://www.plasmo.ed.ac.uk/plasmo/models/model.shtml?accession=PLM_78"
+  ],
+  "license": {
+    "title": "Creative Commons Attribution 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  }
+}

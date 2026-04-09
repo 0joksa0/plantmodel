@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<rdf:RDF xmlns:dcterms='http://purl.org/dc/terms/' xmlns:jerm='http://jermontology.org/ontology/JERMOntology#' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#' xmlns:sioc='http://rdfs.org/sioc/ns#'>
+<jerm:Study rdf:about='https://fairdomhub.org/studies/938'>
+<dcterms:title>Test of FMv2, follow-on: mechanisms of malate/fumarate accumulation</dcterms:title>
+
+<jerm:description>Follow-up to the validation experiments on FMv2, testing candidate mechanisms for high malate and fumarate accumulation in the Arabidopsis double mutant prr7prr9 and its parent accession Col. New collaborations with the groups of Teresa Fitzpatrick and TiMet partner Samuel Zeeman.</jerm:description>
+
+<jerm:hasContributor rdf:resource='https://fairdomhub.org/people/850' />
+
+<jerm:hasPart rdf:resource='https://fairdomhub.org/assays/1661' />
+ <jerm:hasPart rdf:resource='https://fairdomhub.org/assays/1662' />
+
+<jerm:isPartOf rdf:resource='https://fairdomhub.org/investigations/123' />
+
+<jerm:itemProducedBy rdf:resource='https://fairdomhub.org/projects/59' />
+ <jerm:itemProducedBy rdf:resource='https://fairdomhub.org/projects/92' />
+
+<jerm:seekID rdf:datatype='http://www.w3.org/2001/XMLSchema#anyURI'>https://fairdomhub.org/studies/938</jerm:seekID>
+
+<jerm:title>Test of FMv2, follow-on: mechanisms of malate/fumarate accumulation</jerm:title>
+
+<dcterms:created rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2022-04-08T09:45:20Z</dcterms:created>
+
+<dcterms:description>Follow-up to the validation experiments on FMv2, testing candidate mechanisms for high malate and fumarate accumulation in the Arabidopsis double mutant prr7prr9 and its parent accession Col. New collaborations with the groups of Teresa Fitzpatrick and TiMet partner Samuel Zeeman.</dcterms:description>
+
+<dcterms:modified rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2022-04-08T17:54:46Z</dcterms:modified>
+
+<sioc:has_owner rdf:resource='https://fairdomhub.org/people/850' />
+
+</jerm:Study>
+
+</rdf:RDF>

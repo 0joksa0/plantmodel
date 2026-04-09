@@ -1,0 +1,19 @@
+{
+  "id": 1661,
+  "uri": "https://fairdomhub.org/assays/1661",
+  "title": "Assimilation and partitioning of 14CO2 at night",
+  "description": "Follow-up to the validation experiments on FMv2, testing candidate mechanisms for high malate and fumarate accumulation in the Arabidopsis double mutant prr7prr9 and its parent accession Col.\r\n\r\nIn this study, 14CO2 labelling was used to test the rate of carbon assimilation in the dark at the end of the subjective night (starting about ZT21), which is indicative of PEPC activity in forming malate, and the subsequent partitioning of this labelled C into various cellular fractions. The short-period mutant lhycca1 was also tested, with its parent accession Ws.\r\n",
+  "assay_type_uri": "http://jermontology.org/ontology/JERMOntology#Metabolite_profiling",
+  "technology_type_uri": "http://jermontology.org/ontology/JERMOntology#Technology_type",
+  "contributor": {
+    "name": "Andrew Millar",
+    "uri": "https://fairdomhub.org/people/850",
+    "orcid": "https://orcid.org/0000-0003-1756-3654"
+  },
+  "creators": [
+
+  ],
+  "assets": [
+    "data_files/5008-carbon-assimilation-and-partitioning-in-darkness/"
+  ]
+}

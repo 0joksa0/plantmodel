@@ -1,0 +1,24 @@
+{
+  "id": 475,
+  "uri": "https://fairdomhub.org/assays/475",
+  "title": "FMv2 simulation",
+  "description": "",
+  "assay_type_uri": "http://jermontology.org/ontology/JERMOntology#Model_analysis_type",
+  "technology_type_uri": null,
+  "contributor": {
+    "name": "Daniel Seaton",
+    "uri": "https://fairdomhub.org/people/851",
+    "orcid": "https://orcid.org/0000-0002-5222-3893"
+  },
+  "creators": [
+    {
+      "name": "Daniel Seaton",
+      "uri": "https://fairdomhub.org/people/851",
+      "orcid": "https://orcid.org/0000-0002-5222-3893"
+    }
+  ],
+  "assets": [
+    "data_files/1605-laurel-and-hardy-1-simulation-data-mat-file/",
+    "data_files/5002-laurel-and-hardy-1-mean-data-and-simulations/"
+  ]
+}

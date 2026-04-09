@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<rdf:RDF xmlns:dcterms='http://purl.org/dc/terms/' xmlns:jerm='http://jermontology.org/ontology/JERMOntology#' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#' xmlns:sioc='http://rdfs.org/sioc/ns#'>
+<jerm:Investigation rdf:about='https://fairdomhub.org/investigations/123'>
+<dcterms:title>Prediction and analysis of phenotypes in the Arabidopsis clock mutant &lt;i&gt;prr7 prr9&lt;/i&gt; using the Framework Model v2 (FMv2)</dcterms:title>
+
+<jerm:description>Data, FMv2 model and simulations for the Chew et al. 2017 paper (bioRxiv https://doi.org/10.1101/105437 ), updated 2022 as bioRxiv [https://doi.org/10.1101/105437v2](https://doi.org/10.1101/105437v2), mostly on the prr7 prr9 double mutant, with controls in lsf1 and prr7 single mutants. This is one of the outputs from the EU TiMet project, https://fairdomhub.org/projects/92.
+
+This data archive was updated during submisson to the journal _in Silico _Plants in 2022, and a Snapshot was published. NB the updates are not changing the core data, or the FMv2 model that has been public for some years, just enhancing annotations and adding supporting data files, including from follow-up studies. We will add the paper and its DOI to this Investigation when it's published. The same Snapshot will likely be shared on the University of Edinburgh Datashare and on Zenodo.
+
+We request that users gives appropriate credit to the authors of any data released here, as a norm of academic practice, including data released under CC-0 licence.</jerm:description>
+
+<jerm:hasContributor rdf:resource='https://fairdomhub.org/people/850' />
+
+<jerm:hasCreator rdf:resource='https://fairdomhub.org/people/851' />
+ <jerm:hasCreator rdf:resource='https://fairdomhub.org/people/854' />
+ <jerm:hasCreator rdf:resource='https://fairdomhub.org/people/984' />
+ <jerm:hasCreator rdf:resource='https://fairdomhub.org/people/850' />
+
+<jerm:hasPart rdf:resource='https://fairdomhub.org/studies/219' />
+ <jerm:hasPart rdf:resource='https://fairdomhub.org/studies/941' />
+ <jerm:hasPart rdf:resource='https://fairdomhub.org/studies/220' />
+ <jerm:hasPart rdf:resource='https://fairdomhub.org/studies/211' />
+ <jerm:hasPart rdf:resource='https://fairdomhub.org/studies/216' />
+ <jerm:hasPart rdf:resource='https://fairdomhub.org/studies/938' />
+ <jerm:hasPart rdf:resource='https://fairdomhub.org/studies/215' />
+ <jerm:hasPart rdf:resource='https://fairdomhub.org/studies/222' />
+ <jerm:hasPart rdf:resource='https://fairdomhub.org/studies/940' />
+
+<jerm:itemProducedBy rdf:resource='https://fairdomhub.org/projects/59' />
+ <jerm:itemProducedBy rdf:resource='https://fairdomhub.org/projects/92' />
+
+<jerm:seekID rdf:datatype='http://www.w3.org/2001/XMLSchema#anyURI'>https://fairdomhub.org/investigations/123</jerm:seekID>
+
+<jerm:title>Prediction and analysis of phenotypes in the Arabidopsis clock mutant &lt;i&gt;prr7 prr9&lt;/i&gt; using the Framework Model v2 (FMv2)</jerm:title>
+
+<dcterms:created rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2017-02-01T20:21:06Z</dcterms:created>
+
+<dcterms:description>Data, FMv2 model and simulations for the Chew et al. 2017 paper (bioRxiv https://doi.org/10.1101/105437 ), updated 2022 as bioRxiv [https://doi.org/10.1101/105437v2](https://doi.org/10.1101/105437v2), mostly on the prr7 prr9 double mutant, with controls in lsf1 and prr7 single mutants. This is one of the outputs from the EU TiMet project, https://fairdomhub.org/projects/92.
+
+This data archive was updated during submisson to the journal _in Silico _Plants in 2022, and a Snapshot was published. NB the updates are not changing the core data, or the FMv2 model that has been public for some years, just enhancing annotations and adding supporting data files, including from follow-up studies. We will add the paper and its DOI to this Investigation when it's published. The same Snapshot will likely be shared on the University of Edinburgh Datashare and on Zenodo.
+
+We request that users gives appropriate credit to the authors of any data released here, as a norm of academic practice, including data released under CC-0 licence.</dcterms:description>
+
+<dcterms:modified rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2022-05-10T17:18:41Z</dcterms:modified>
+
+<sioc:has_creator rdf:resource='https://fairdomhub.org/people/851' />
+ <sioc:has_creator rdf:resource='https://fairdomhub.org/people/854' />
+ <sioc:has_creator rdf:resource='https://fairdomhub.org/people/984' />
+ <sioc:has_creator rdf:resource='https://fairdomhub.org/people/850' />
+
+<sioc:has_owner rdf:resource='https://fairdomhub.org/people/850' />
+
+</jerm:Investigation>
+
+</rdf:RDF>

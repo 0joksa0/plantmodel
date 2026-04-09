@@ -1,0 +1,24 @@
+{
+  "id": 464,
+  "uri": "https://fairdomhub.org/assays/464",
+  "title": "TiMet WP1.1, Clock gene expression in clock mutants",
+  "description": "RNA timeseries data from TiMet for clock genes in prr7 prr9 and Col wild-type plants under 12L:12D cycle and LL",
+  "assay_type_uri": "http://jermontology.org/ontology/JERMOntology#Gene_expression_profiling",
+  "technology_type_uri": "http://jermontology.org/ontology/JERMOntology#qRT-PCR",
+  "contributor": {
+    "name": "Andrew Millar",
+    "uri": "https://fairdomhub.org/people/850",
+    "orcid": "https://orcid.org/0000-0003-1756-3654"
+  },
+  "creators": [
+    {
+      "name": "Andrew Millar",
+      "uri": "https://fairdomhub.org/people/850",
+      "orcid": "https://orcid.org/0000-0003-1756-3654"
+    }
+  ],
+  "assets": [
+    "data_files/1593-timet-wp1-1-qrt-pcr-ld-to-ll-and-dd/",
+    "publications/306-defining-the-robust-behaviour-of-the-plant-clock-g/"
+  ]
+}

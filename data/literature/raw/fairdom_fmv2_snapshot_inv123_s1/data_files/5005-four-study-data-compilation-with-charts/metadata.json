@@ -1,0 +1,32 @@
+{
+  "id": 5005,
+  "uri": "https://fairdomhub.org/data_files/5005?version=1",
+  "title": "Four-study data compilation with charts",
+  "description": "Excel workbook with included Read.Me sheet, including FW and DW biomass data derived from files linked elsewhere; \r\na compilation of the rosette area and gas exchange data for every plant measured of the Col, lsf1 and prr7prr9 genotypes;\r\nstatistical analysis across the experiments;\r\nand charts of the compiled data, some of which are presented as figure panels in the 2022 versions.",
+  "version": 1,
+  "doi": null,
+  "contributor": {
+    "name": "Andrew Millar",
+    "uri": "https://fairdomhub.org/people/850",
+    "orcid": "https://orcid.org/0000-0003-1756-3654"
+  },
+  "creators": [
+    {
+      "name": "Yin Hoon Chew",
+      "uri": "https://fairdomhub.org/people/854",
+      "orcid": "https://orcid.org/0000-0002-9258-583X"
+    },
+    {
+      "name": "Andrew Millar",
+      "uri": "https://fairdomhub.org/people/850",
+      "orcid": "https://orcid.org/0000-0003-1756-3654"
+    }
+  ],
+  "contains": [
+    "data_files/5005-four-study-data-compilation-with-charts/Biomass_FW_DW_gas_exchange_data.xlsx"
+  ],
+  "license": {
+    "title": "CC0 1.0",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  }
+}

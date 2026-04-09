@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<rdf:RDF xmlns:dcterms='http://purl.org/dc/terms/' xmlns:jerm='http://jermontology.org/ontology/JERMOntology#' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#' xmlns:sioc='http://rdfs.org/sioc/ns#'>
+<jerm:Data rdf:about='https://fairdomhub.org/data_files/5009'>
+<dcterms:title>Testing thiamine metabolites in Col and prr7prr9</dcterms:title>
+
+<jerm:description>Excel file with data on levels of thiamine and its metabolites TMP and active cofactor TDP, tested in Col and prr7prr9 samples from study Laurel and Hardy 3.
+Altered levels of TDP could potentially affect enzymes with TDP cofactors that metabolise malate and fumarate levels, altering their levels in prr7prr9.</jerm:description>
+
+<jerm:hasContributor rdf:resource='https://fairdomhub.org/people/850' />
+
+<jerm:hasCreator rdf:resource='https://fairdomhub.org/people/854' />
+
+<jerm:isPartOf rdf:resource='https://fairdomhub.org/assays/1662' />
+
+<jerm:itemProducedBy rdf:resource='https://fairdomhub.org/projects/92' />
+
+<jerm:seekID rdf:datatype='http://www.w3.org/2001/XMLSchema#anyURI'>https://fairdomhub.org/data_files/5009</jerm:seekID>
+
+<jerm:title>Testing thiamine metabolites in Col and prr7prr9</jerm:title>
+
+<dcterms:created rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2022-04-08T22:45:25Z</dcterms:created>
+
+<dcterms:description>Excel file with data on levels of thiamine and its metabolites TMP and active cofactor TDP, tested in Col and prr7prr9 samples from study Laurel and Hardy 3.
+Altered levels of TDP could potentially affect enzymes with TDP cofactors that metabolise malate and fumarate levels, altering their levels in prr7prr9.</dcterms:description>
+
+<dcterms:modified rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2022-04-15T10:35:10Z</dcterms:modified>
+
+<sioc:has_creator rdf:resource='https://fairdomhub.org/people/854' />
+
+<sioc:has_owner rdf:resource='https://fairdomhub.org/people/850' />
+
+</jerm:Data>
+
+</rdf:RDF>

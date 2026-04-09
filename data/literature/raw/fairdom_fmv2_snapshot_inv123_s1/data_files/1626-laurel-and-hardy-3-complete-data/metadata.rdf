@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<rdf:RDF xmlns:dcterms='http://purl.org/dc/terms/' xmlns:jerm='http://jermontology.org/ontology/JERMOntology#' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#' xmlns:sioc='http://rdfs.org/sioc/ns#'>
+<jerm:Data rdf:about='https://fairdomhub.org/data_files/1626'>
+<dcterms:title>Laurel and Hardy 3 - complete data</dcterms:title>
+
+<jerm:description>Excel spreadsheets for biomass, leaf number, gas exchange and metabolites, including pgm and lhycca1.
+Key data are for 27-28 day old plants for Col and prr7prr9, analysed for the preprint/publication.
+Gas exchange data for lhycca1 showed lower Assimilation per unit area than Col, prr7prr9; A in pgm was higher than Col.
+Metabolite data were also collected for Col and lhycca1 at 18 days, before the lhycca1 flowered, but these are marked as unreliable.</jerm:description>
+
+<jerm:hasContributor rdf:resource='https://fairdomhub.org/people/851' />
+
+<jerm:hasCreator rdf:resource='https://fairdomhub.org/people/851' />
+ <jerm:hasCreator rdf:resource='https://fairdomhub.org/people/854' />
+ <jerm:hasCreator rdf:resource='https://fairdomhub.org/people/984' />
+
+<jerm:isPartOf rdf:resource='https://fairdomhub.org/assays/477' />
+
+<jerm:itemProducedBy rdf:resource='https://fairdomhub.org/projects/59' />
+
+<jerm:seekID rdf:datatype='http://www.w3.org/2001/XMLSchema#anyURI'>https://fairdomhub.org/data_files/1626</jerm:seekID>
+
+<jerm:title>Laurel and Hardy 3 - complete data</jerm:title>
+
+<dcterms:created rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2017-03-09T23:11:19Z</dcterms:created>
+
+<dcterms:description>Excel spreadsheets for biomass, leaf number, gas exchange and metabolites, including pgm and lhycca1.
+Key data are for 27-28 day old plants for Col and prr7prr9, analysed for the preprint/publication.
+Gas exchange data for lhycca1 showed lower Assimilation per unit area than Col, prr7prr9; A in pgm was higher than Col.
+Metabolite data were also collected for Col and lhycca1 at 18 days, before the lhycca1 flowered, but these are marked as unreliable.</dcterms:description>
+
+<dcterms:modified rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2022-04-15T10:35:09Z</dcterms:modified>
+
+<sioc:has_creator rdf:resource='https://fairdomhub.org/people/851' />
+ <sioc:has_creator rdf:resource='https://fairdomhub.org/people/854' />
+ <sioc:has_creator rdf:resource='https://fairdomhub.org/people/984' />
+
+<sioc:has_owner rdf:resource='https://fairdomhub.org/people/851' />
+
+</jerm:Data>
+
+</rdf:RDF>

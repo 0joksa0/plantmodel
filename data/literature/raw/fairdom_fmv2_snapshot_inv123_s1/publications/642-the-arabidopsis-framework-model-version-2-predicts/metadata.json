@@ -1,0 +1,39 @@
+{
+  "id": 642,
+  "uri": "https://fairdomhub.org/publications/642",
+  "title": "The Arabidopsis Framework Model version 2 predicts the organism-level effects of circadian clock gene mis-regulation",
+  "description": "Predicting a multicellular organism’s phenotype quantitatively from its genotype is challenging, as genetic effects must propagate across scales. Circadian clocks are intracellular regulators that control temporal gene expression patterns and hence metabolism, physiology and behaviour. Here we explain and predict canonical phenotypes of circadian timing in a multicellular, model organism. We used diverse metabolic and physiological data to combine and extend mathematical models of rhythmic gene expression, photoperiod-dependent flowering, elongation growth and starch metabolism within a Framework Model for the vegetative growth of Arabidopsis thaliana, sharing the model and data files in a structured, public resource. The calibrated model predicted the effect of altered circadian timing upon each particular phenotype in clock-mutant plants under standard laboratory conditions. Altered night-time metabolism of stored starch accounted for most of the decrease in whole-plant biomass, as previously proposed. Mobilisation of a secondary store of malate and fumarate was also mis-regulated, accounting for any remaining biomass defect. We test three candidate mechanisms for the accumulation of these organic acids. Our results link genotype through specific processes to higher-level phenotypes, formalising our understanding of a subtle, pleiotropic syndrome at the whole-organism level, and validating the systems approach to understand complex traits starting from intracellular circuits.\r\n          \r\nThis work updates the first biorXiv version, February 2017,with an expanded description and additional analysis of the same core data sets and the same FMv2 model, summary tables and supporting, follow-on data from three further studies with further collaborators. This biorXiv revision constitutes the second version of this report. \r\n        ",
+  "doi": "10.1101/105437",
+  "doi_uri": "https://doi.org/10.1101/105437",
+  "pubmed_id": null,
+  "pubmed_uri": null,
+  "contributor": {
+    "name": "Andrew Millar",
+    "uri": "https://fairdomhub.org/people/850",
+    "orcid": "https://orcid.org/0000-0003-1756-3654"
+  },
+  "creators": [
+    {
+      "name": "Yin Hoon Chew",
+      "uri": "https://fairdomhub.org/people/854",
+      "orcid": "https://orcid.org/0000-0002-9258-583X"
+    },
+    {
+      "name": "Daniel Seaton",
+      "uri": "https://fairdomhub.org/people/851",
+      "orcid": "https://orcid.org/0000-0002-5222-3893"
+    },
+    {
+      "name": "Virginie Mengin",
+      "uri": "https://fairdomhub.org/people/984"
+    },
+    {
+      "name": "Andrew Millar",
+      "uri": "https://fairdomhub.org/people/850",
+      "orcid": "https://orcid.org/0000-0003-1756-3654"
+    }
+  ],
+  "contains": [
+
+  ]
+}

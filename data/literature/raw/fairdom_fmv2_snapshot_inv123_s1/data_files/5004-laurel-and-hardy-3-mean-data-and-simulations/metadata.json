@@ -1,0 +1,36 @@
+{
+  "id": 5004,
+  "uri": "https://fairdomhub.org/data_files/5004?version=1",
+  "title": "Laurel and Hardy 3 mean data and simulations",
+  "description": "Excel spreadsheet with data and simulations used to prepare figures for publication, see Metadata sheet for conditions. Data Fresh (not dry) rosette leaf biomass, measured in samples of 5 plants each on multiple days, as mean and SD; Simulation outputs from FMv2 for Col Wild Type plants, and two simulations for prr7prr9 where the mutation affects only starch degradation or both starch degradation and malate/fumarate store mobilisation.\r\n\r\nStarch levels in carbon units (not C6) measured on on days 27-28, mean and SD, simulations as above Malate and fumarate levels in carbon units (not C4) measured on days 27-28, mean and SD, simulations as above Many simulation outputs from FMv2 runs in the conditions above, from the Matlab output file\r\n",
+  "version": 1,
+  "doi": null,
+  "contributor": {
+    "name": "Andrew Millar",
+    "uri": "https://fairdomhub.org/people/850",
+    "orcid": "https://orcid.org/0000-0003-1756-3654"
+  },
+  "creators": [
+    {
+      "name": "Daniel Seaton",
+      "uri": "https://fairdomhub.org/people/851",
+      "orcid": "https://orcid.org/0000-0002-5222-3893"
+    },
+    {
+      "name": "Yin Hoon Chew",
+      "uri": "https://fairdomhub.org/people/854",
+      "orcid": "https://orcid.org/0000-0002-9258-583X"
+    },
+    {
+      "name": "Virginie Mengin",
+      "uri": "https://fairdomhub.org/people/984"
+    }
+  ],
+  "contains": [
+    "data_files/5004-laurel-and-hardy-3-mean-data-and-simulations/Laurel and Hardy 3 with malate and fumarate_DDS.xlsx"
+  ],
+  "license": {
+    "title": "CC0 1.0",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  }
+}

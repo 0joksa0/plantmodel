@@ -1,0 +1,37 @@
+{
+  "id": 248,
+  "uri": "https://fairdomhub.org/models/248?version=2",
+  "title": "Framework Model v2",
+  "description": "Framework Model for Arabidopsis vegetative growth, version 2 (FMv2), as described in Chew et al. bioRxiv 2017 (https://doi.org/10.1101/105437; please see linked Article file).\r\n\r\nThe FMv2 model record on FAIRDOMHub has the following versions, which represent the same FMv2 model:\r\nVersion 1 is an archive of the github repository of MATLAB code for the Framework Model v2, downloaded from https://github.com/danielseaton/frameworkmodel on 06/02/17. This version was not licensed for further use and was available only to collaborators. It is included here for completeness.\r\n\r\nVersion 2 links to the same GitHub repository, where the MATLAB model files have been annotated by Dr. Daniel Seaton for the convenience of new users, and are now public. This version of the FMv2 model is released in June 2018 under the Apache 2.0 license, included with the files.\r\n\r\nModel development will probably end in 2018, with an update that streamlines the simulation process.\r\n\r\n2019: the Quantitative Plant resource now redirects here to give access to the FMv2 - https://quantitative-plant.org/model/ArabidopsisFrameworkModel",
+  "version": 2,
+  "doi": null,
+  "contributor": {
+    "name": "Daniel Seaton",
+    "uri": "https://fairdomhub.org/people/851",
+    "orcid": "https://orcid.org/0000-0002-5222-3893"
+  },
+  "creators": [
+    {
+      "name": "Daniel Seaton",
+      "uri": "https://fairdomhub.org/people/851",
+      "orcid": "https://orcid.org/0000-0002-5222-3893"
+    },
+    {
+      "name": "Yin Hoon Chew",
+      "uri": "https://fairdomhub.org/people/854",
+      "orcid": "https://orcid.org/0000-0002-9258-583X"
+    },
+    {
+      "name": "Andrew Millar",
+      "uri": "https://fairdomhub.org/people/850",
+      "orcid": "https://orcid.org/0000-0003-1756-3654"
+    }
+  ],
+  "contains": [
+    "https://github.com/danielseaton/frameworkmodel"
+  ],
+  "license": {
+    "title": "Other (Open)",
+    "url": ""
+  }
+}

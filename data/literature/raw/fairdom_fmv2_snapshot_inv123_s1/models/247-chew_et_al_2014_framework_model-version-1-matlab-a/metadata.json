@@ -1,0 +1,35 @@
+{
+  "id": 247,
+  "uri": "https://fairdomhub.org/models/247?version=1",
+  "title": "Chew_et_al_2014_Framework_Model version 1, Matlab and Simile",
+  "description": "This record includes Matlab and Simile format versions of the Arabidopsis Framework Model version 1, FMv1 (Chew et al, PNAS 2014; http://www.pnas.org/content/early/2014/08/27/1410238111), copied from the PlaSMo resource (www.plasmo.ed.ac.uk), PLM_ID=76. The model description is in the Supplementary Materials of the publication, which should be uploaded somewhere here also but I don't see how to do it.\r\n\r\nThe FMv1 links the following sub-models:\r\n1. Arabidopsis leaf carbohydrate model (Rasse and Tocquin) - Carbon Dynamic Model\r\n2. Part of the Christophe et al 2008 Functional-Structural Plant Model\r\n3. Chew et al 2012 Photothermal Model\r\n4. Salazar et al 2009 Photoperiodism Model\r\n \r\nTo run the model in Simile, please download the Evaluation Edition of the software from\r\nhttp://www.simulistics.com/products/simile.php and follow the instructions detailed in the PlaSMo record linked from this Model.",
+  "version": 1,
+  "doi": null,
+  "contributor": {
+    "name": "Andrew Millar",
+    "uri": "https://fairdomhub.org/people/850",
+    "orcid": "https://orcid.org/0000-0003-1756-3654"
+  },
+  "creators": [
+    {
+      "name": "Andrew Millar",
+      "uri": "https://fairdomhub.org/people/850",
+      "orcid": "https://orcid.org/0000-0003-1756-3654"
+    },
+    {
+      "name": "Yin Hoon Chew",
+      "uri": "https://fairdomhub.org/people/854",
+      "orcid": "https://orcid.org/0000-0002-9258-583X"
+    }
+  ],
+  "contains": [
+    "http://www.plasmo.ed.ac.uk/plasmo/models/model.shtml?accession=PLM_76",
+    "models/247-chew_et_al_2014_framework_model-version-1-matlab-a/134MATLAB%20Framework%20Model.zip",
+    "models/247-chew_et_al_2014_framework_model-version-1-matlab-a/1020Framework%20Model%20in%20Simile.zip",
+    "models/247-chew_et_al_2014_framework_model-version-1-matlab-a/timet-logo-sm.png"
+  ],
+  "license": {
+    "title": "Creative Commons Attribution 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  }
+}

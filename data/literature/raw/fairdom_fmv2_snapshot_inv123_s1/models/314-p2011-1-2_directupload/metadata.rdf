@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<rdf:RDF xmlns:dcterms='http://purl.org/dc/terms/' xmlns:jerm='http://jermontology.org/ontology/JERMOntology#' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#' xmlns:sioc='http://rdfs.org/sioc/ns#'>
+<jerm:Model rdf:about='https://fairdomhub.org/models/314'>
+<dcterms:title>P2011.1.2_directupload</dcterms:title>
+
+<jerm:description>Exactly the same as model 243, but uploaded as a file rather than copied from PlaSMo.</jerm:description>
+
+<jerm:hasContributor rdf:resource='https://fairdomhub.org/people/850' />
+
+<jerm:hasCreator rdf:resource='https://fairdomhub.org/people/850' />
+
+<jerm:hasFormat rdf:resource='http://jermontology.org/ontology/JERMOntology#SBMLFormat' />
+
+<jerm:isPartOf rdf:resource='https://fairdomhub.org/assays/469' />
+
+<jerm:itemProducedBy rdf:resource='https://fairdomhub.org/projects/59' />
+
+<jerm:seekID rdf:datatype='http://www.w3.org/2001/XMLSchema#anyURI'>https://fairdomhub.org/models/314</jerm:seekID>
+
+<jerm:title>P2011.1.2_directupload</jerm:title>
+
+<dcterms:created rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2018-03-27T15:16:30Z</dcterms:created>
+
+<dcterms:description>Exactly the same as model 243, but uploaded as a file rather than copied from PlaSMo.</dcterms:description>
+
+<dcterms:modified rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2018-03-27T15:16:30Z</dcterms:modified>
+
+<sioc:has_creator rdf:resource='https://fairdomhub.org/people/850' />
+
+<sioc:has_owner rdf:resource='https://fairdomhub.org/people/850' />
+
+</jerm:Model>
+
+</rdf:RDF>

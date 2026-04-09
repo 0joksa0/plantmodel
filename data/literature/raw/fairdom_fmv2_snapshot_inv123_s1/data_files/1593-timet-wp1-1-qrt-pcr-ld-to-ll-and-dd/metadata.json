@@ -1,0 +1,27 @@
+{
+  "id": 1593,
+  "uri": "https://fairdomhub.org/data_files/1593?version=1",
+  "title": "TiMet WP1.1 qRT-PCR LD to LL and DD",
+  "description": "RNA levels for control amplicons and multiple clock genes in 2 WT (Col, Ws) and 5 clock mutants of Arabidopsis, in biological duplicates, from three conditions: Diurnal cycle (12L/12D), Extended night (DD), Extended light (LL), harvested every 2 hours. Numbers are in transcript copy per cell, obtained assuming 1 g FW contains 25000000 cells.\r\nComments:\t\r\nData from LD are concateneted with DD and LL for better visualization. Toc1-101 (col-0) gi-201 (col-0) prr7-3 prr9-1 (col-0) , lhy cca1 (ws) elf3-4 (WS) \r\nData published in Flis et al. Open Biology 2015, original file available from BioDare repository, see link attached.\r\n\r\nNote for BioDare access - no login is required to access the file. Click 'Browse Public Resources' on the login screen, then return to this page and click the link to BioDare again, you should then gain access.",
+  "version": 1,
+  "doi": null,
+  "contributor": {
+    "name": "Andrew Millar",
+    "uri": "https://fairdomhub.org/people/850",
+    "orcid": "https://orcid.org/0000-0003-1756-3654"
+  },
+  "creators": [
+    {
+      "name": "Andrew Millar",
+      "uri": "https://fairdomhub.org/people/850",
+      "orcid": "https://orcid.org/0000-0003-1756-3654"
+    }
+  ],
+  "contains": [
+    "https://www.biodare.ed.ac.uk/robust/ShowExperiment.action?experimentId=2841"
+  ],
+  "license": {
+    "title": "Open Software License 3.0",
+    "url": "https://opensource.org/licenses/OSL-3.0"
+  }
+}

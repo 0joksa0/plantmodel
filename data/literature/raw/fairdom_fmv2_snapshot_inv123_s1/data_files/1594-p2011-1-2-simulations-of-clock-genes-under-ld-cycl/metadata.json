@@ -1,0 +1,27 @@
+{
+  "id": 1594,
+  "uri": "https://fairdomhub.org/data_files/1594?version=1",
+  "title": "P2011.1.2 simulations of clock genes under LD cycles",
+  "description": "for Chew, Seaton et al. paper Figure 1",
+  "version": 1,
+  "doi": null,
+  "contributor": {
+    "name": "Andrew Millar",
+    "uri": "https://fairdomhub.org/people/850",
+    "orcid": "https://orcid.org/0000-0003-1756-3654"
+  },
+  "creators": [
+    {
+      "name": "Andrew Millar",
+      "uri": "https://fairdomhub.org/people/850",
+      "orcid": "https://orcid.org/0000-0003-1756-3654"
+    }
+  ],
+  "contains": [
+    "data_files/1594-p2011-1-2-simulations-of-clock-genes-under-ld-cycl/TiMEt WP1_1 prr79 sims P2011.zip"
+  ],
+  "license": {
+    "title": "Creative Commons Attribution 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  }
+}

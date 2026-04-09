@@ -1,0 +1,27 @@
+{
+  "id": 1604,
+  "uri": "https://fairdomhub.org/data_files/1604?version=1",
+  "title": "Laurel and Hardy 1 - experimental data (.mat file)",
+  "description": "Experimental data, in MATLAB binary file format.",
+  "version": 1,
+  "doi": null,
+  "contributor": {
+    "name": "Daniel Seaton",
+    "uri": "https://fairdomhub.org/people/851",
+    "orcid": "https://orcid.org/0000-0002-5222-3893"
+  },
+  "creators": [
+    {
+      "name": "Daniel Seaton",
+      "uri": "https://fairdomhub.org/people/851",
+      "orcid": "https://orcid.org/0000-0002-5222-3893"
+    }
+  ],
+  "contains": [
+    "data_files/1604-laurel-and-hardy-1-experimental-data-mat-file/LH1_data.mat"
+  ],
+  "license": {
+    "title": "Creative Commons Attribution 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  }
+}

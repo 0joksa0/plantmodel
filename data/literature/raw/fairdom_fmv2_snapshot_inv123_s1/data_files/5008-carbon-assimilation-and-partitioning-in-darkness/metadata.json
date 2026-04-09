@@ -1,0 +1,23 @@
+{
+  "id": 5008,
+  "uri": "https://fairdomhub.org/data_files/5008?version=1",
+  "title": "Carbon assimilation and partitioning in darkness",
+  "description": "14CO2 assimilation in the night-time, in plants of Col, prr7prr9; Ws, lhycca1 genotypes at 18 and 28 days, and partitioning among cellular fractions.",
+  "version": 1,
+  "doi": null,
+  "contributor": {
+    "name": "Andrew Millar",
+    "uri": "https://fairdomhub.org/people/850",
+    "orcid": "https://orcid.org/0000-0003-1756-3654"
+  },
+  "creators": [
+
+  ],
+  "contains": [
+    "data_files/5008-carbon-assimilation-and-partitioning-in-darkness/Labelling data from Gavin George_AJM2.xlsx"
+  ],
+  "license": {
+    "title": "CC0 1.0",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  }
+}

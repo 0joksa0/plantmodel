@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<rdf:RDF xmlns:dcterms='http://purl.org/dc/terms/' xmlns:jerm='http://jermontology.org/ontology/JERMOntology#' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#' xmlns:sioc='http://rdfs.org/sioc/ns#'>
+<jerm:Model rdf:about='https://fairdomhub.org/models/248'>
+<dcterms:title>Framework Model v2</dcterms:title>
+
+<jerm:description>Framework Model for Arabidopsis vegetative growth, version 2 (FMv2), as described in Chew et al. bioRxiv 2017 (https://doi.org/10.1101/105437; please see linked Article file).
+
+The FMv2 model record on FAIRDOMHub has the following versions, which represent the same FMv2 model:
+Version 1 is an archive of the github repository of MATLAB code for the Framework Model v2, downloaded from https://github.com/danielseaton/frameworkmodel on 06/02/17. This version was not licensed for further use and was available only to collaborators. It is included here for completeness.
+
+Version 2 links to the same GitHub repository, where the MATLAB model files have been annotated by Dr. Daniel Seaton for the convenience of new users, and are now public. This version of the FMv2 model is released in June 2018 under the Apache 2.0 license, included with the files.
+
+Model development will probably end in 2018, with an update that streamlines the simulation process.
+
+2019: the Quantitative Plant resource now redirects here to give access to the FMv2 - https://quantitative-plant.org/model/ArabidopsisFrameworkModel</jerm:description>
+
+<jerm:hasContributor rdf:resource='https://fairdomhub.org/people/851' />
+
+<jerm:hasCreator rdf:resource='https://fairdomhub.org/people/851' />
+ <jerm:hasCreator rdf:resource='https://fairdomhub.org/people/854' />
+ <jerm:hasCreator rdf:resource='https://fairdomhub.org/people/850' />
+
+<jerm:isPartOf rdf:resource='https://fairdomhub.org/assays/468' />
+
+<jerm:itemProducedBy rdf:resource='https://fairdomhub.org/projects/59' />
+ <jerm:itemProducedBy rdf:resource='https://fairdomhub.org/projects/92' />
+
+<jerm:seekID rdf:datatype='http://www.w3.org/2001/XMLSchema#anyURI'>https://fairdomhub.org/models/248</jerm:seekID>
+
+<jerm:title>Framework Model v2</jerm:title>
+
+<dcterms:created rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2017-02-06T15:43:55Z</dcterms:created>
+
+<dcterms:description>Framework Model for Arabidopsis vegetative growth, version 2 (FMv2), as described in Chew et al. bioRxiv 2017 (https://doi.org/10.1101/105437; please see linked Article file).
+
+The FMv2 model record on FAIRDOMHub has the following versions, which represent the same FMv2 model:
+Version 1 is an archive of the github repository of MATLAB code for the Framework Model v2, downloaded from https://github.com/danielseaton/frameworkmodel on 06/02/17. This version was not licensed for further use and was available only to collaborators. It is included here for completeness.
+
+Version 2 links to the same GitHub repository, where the MATLAB model files have been annotated by Dr. Daniel Seaton for the convenience of new users, and are now public. This version of the FMv2 model is released in June 2018 under the Apache 2.0 license, included with the files.
+
+Model development will probably end in 2018, with an update that streamlines the simulation process.
+
+2019: the Quantitative Plant resource now redirects here to give access to the FMv2 - https://quantitative-plant.org/model/ArabidopsisFrameworkModel</dcterms:description>
+
+<dcterms:modified rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2019-12-20T17:43:07Z</dcterms:modified>
+
+<sioc:has_creator rdf:resource='https://fairdomhub.org/people/851' />
+ <sioc:has_creator rdf:resource='https://fairdomhub.org/people/854' />
+ <sioc:has_creator rdf:resource='https://fairdomhub.org/people/850' />
+
+<sioc:has_owner rdf:resource='https://fairdomhub.org/people/851' />
+ <sioc:has_owner rdf:resource='https://fairdomhub.org/people/850' />
+
+</jerm:Model>
+
+</rdf:RDF>

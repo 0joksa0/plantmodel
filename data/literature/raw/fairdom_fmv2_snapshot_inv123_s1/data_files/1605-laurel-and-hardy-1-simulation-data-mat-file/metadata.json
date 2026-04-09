@@ -1,0 +1,27 @@
+{
+  "id": 1605,
+  "uri": "https://fairdomhub.org/data_files/1605?version=1",
+  "title": "Laurel and Hardy 1 - simulation data (.mat file)",
+  "description": "Model simulation data for Laurel and Hardy 1, in MATLAB binary format.",
+  "version": 1,
+  "doi": null,
+  "contributor": {
+    "name": "Daniel Seaton",
+    "uri": "https://fairdomhub.org/people/851",
+    "orcid": "https://orcid.org/0000-0002-5222-3893"
+  },
+  "creators": [
+    {
+      "name": "Daniel Seaton",
+      "uri": "https://fairdomhub.org/people/851",
+      "orcid": "https://orcid.org/0000-0002-5222-3893"
+    }
+  ],
+  "contains": [
+    "data_files/1605-laurel-and-hardy-1-simulation-data-mat-file/plot_LH1_biomass_and_carbon_pools.mat"
+  ],
+  "license": {
+    "title": "Creative Commons Attribution 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  }
+}

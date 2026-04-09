@@ -1,0 +1,22 @@
+{
+  "id": 461,
+  "uri": "https://fairdomhub.org/assays/461",
+  "title": "TiMet WP1.1a Metabolite analysis of clock mutants",
+  "description": "Metabolite analysis in clock mutants: Col-0 parent and mutants gi-201, toc1-101 and prr7prr9; WS parent and lhy/cca1 double mutant. Plants grown in Golm and harvested at End of Day and End of Night, , assays 22 major metabolites. More detail on TiMet wiki if required. Heteroscedastic t-tests to highlight most significant changes, without multiple-testing correction.",
+  "assay_type_uri": "http://jermontology.org/ontology/JERMOntology#Metabolite_concentration",
+  "technology_type_uri": "http://jermontology.org/ontology/JERMOntology#Chromatography",
+  "contributor": {
+    "name": "Andrew Millar",
+    "uri": "https://fairdomhub.org/people/850",
+    "orcid": "https://orcid.org/0000-0003-1756-3654"
+  },
+  "creators": [
+    {
+      "name": "Virginie Mengin",
+      "uri": "https://fairdomhub.org/people/984"
+    }
+  ],
+  "assets": [
+    "data_files/1598-timet-wp1-1a-metabolite-data-ed-en-in-clock-mutant/"
+  ]
+}

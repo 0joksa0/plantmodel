@@ -1,0 +1,27 @@
+{
+  "id": 1597,
+  "uri": "https://fairdomhub.org/data_files/1597?version=1",
+  "title": "P2011.1.2 simulations and data in prr7 prr9 mutant, normalised for plots",
+  "description": "For Chew, Seaton et al. Figure 1",
+  "version": 1,
+  "doi": null,
+  "contributor": {
+    "name": "Andrew Millar",
+    "uri": "https://fairdomhub.org/people/850",
+    "orcid": "https://orcid.org/0000-0003-1756-3654"
+  },
+  "creators": [
+    {
+      "name": "Andrew Millar",
+      "uri": "https://fairdomhub.org/people/850",
+      "orcid": "https://orcid.org/0000-0003-1756-3654"
+    }
+  ],
+  "contains": [
+    "data_files/1597-p2011-1-2-simulations-and-data-in-prr7-prr9-mutant/SBSI 79 plots final.xlsx"
+  ],
+  "license": {
+    "title": "Creative Commons Attribution 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  }
+}

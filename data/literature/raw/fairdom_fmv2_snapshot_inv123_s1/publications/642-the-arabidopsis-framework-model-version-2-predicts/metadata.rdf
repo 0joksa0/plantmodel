@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<rdf:RDF xmlns:dcterms='http://purl.org/dc/terms/' xmlns:jerm='http://jermontology.org/ontology/JERMOntology#' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#' xmlns:sioc='http://rdfs.org/sioc/ns#'>
+<jerm:Publication rdf:about='https://fairdomhub.org/publications/642'>
+<dcterms:title>The Arabidopsis Framework Model version 2 predicts the organism-level effects of circadian clock gene mis-regulation</dcterms:title>
+
+<jerm:description>Predicting a multicellular organism’s phenotype quantitatively from its genotype is challenging, as genetic effects must propagate across scales. Circadian clocks are intracellular regulators that control temporal gene expression patterns and hence metabolism, physiology and behaviour. Here we explain and predict canonical phenotypes of circadian timing in a multicellular, model organism. We used diverse metabolic and physiological data to combine and extend mathematical models of rhythmic gene expression, photoperiod-dependent flowering, elongation growth and starch metabolism within a Framework Model for the vegetative growth of Arabidopsis thaliana, sharing the model and data files in a structured, public resource. The calibrated model predicted the effect of altered circadian timing upon each particular phenotype in clock-mutant plants under standard laboratory conditions. Altered night-time metabolism of stored starch accounted for most of the decrease in whole-plant biomass, as previously proposed. Mobilisation of a secondary store of malate and fumarate was also mis-regulated, accounting for any remaining biomass defect. We test three candidate mechanisms for the accumulation of these organic acids. Our results link genotype through specific processes to higher-level phenotypes, formalising our understanding of a subtle, pleiotropic syndrome at the whole-organism level, and validating the systems approach to understand complex traits starting from intracellular circuits.
+
+This work updates the first biorXiv version, February 2017,with an expanded description and additional analysis of the same core data sets and the same FMv2 model, summary tables and supporting, follow-on data from three further studies with further collaborators. This biorXiv revision constitutes the second version of this report.</jerm:description>
+
+<jerm:hasContributor rdf:resource='https://fairdomhub.org/people/850' />
+
+<jerm:hasCreator rdf:resource='https://fairdomhub.org/people/851' />
+ <jerm:hasCreator rdf:resource='https://fairdomhub.org/people/854' />
+ <jerm:hasCreator rdf:resource='https://fairdomhub.org/people/984' />
+ <jerm:hasCreator rdf:resource='https://fairdomhub.org/people/850' />
+
+<jerm:itemProducedBy rdf:resource='https://fairdomhub.org/projects/92' />
+
+<jerm:title>The Arabidopsis Framework Model version 2 predicts the organism-level effects of circadian clock gene mis-regulation</jerm:title>
+
+<dcterms:created rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2022-05-10T17:13:08Z</dcterms:created>
+
+<dcterms:description>Predicting a multicellular organism’s phenotype quantitatively from its genotype is challenging, as genetic effects must propagate across scales. Circadian clocks are intracellular regulators that control temporal gene expression patterns and hence metabolism, physiology and behaviour. Here we explain and predict canonical phenotypes of circadian timing in a multicellular, model organism. We used diverse metabolic and physiological data to combine and extend mathematical models of rhythmic gene expression, photoperiod-dependent flowering, elongation growth and starch metabolism within a Framework Model for the vegetative growth of Arabidopsis thaliana, sharing the model and data files in a structured, public resource. The calibrated model predicted the effect of altered circadian timing upon each particular phenotype in clock-mutant plants under standard laboratory conditions. Altered night-time metabolism of stored starch accounted for most of the decrease in whole-plant biomass, as previously proposed. Mobilisation of a secondary store of malate and fumarate was also mis-regulated, accounting for any remaining biomass defect. We test three candidate mechanisms for the accumulation of these organic acids. Our results link genotype through specific processes to higher-level phenotypes, formalising our understanding of a subtle, pleiotropic syndrome at the whole-organism level, and validating the systems approach to understand complex traits starting from intracellular circuits.
+
+This work updates the first biorXiv version, February 2017,with an expanded description and additional analysis of the same core data sets and the same FMv2 model, summary tables and supporting, follow-on data from three further studies with further collaborators. This biorXiv revision constitutes the second version of this report.</dcterms:description>
+
+<dcterms:modified rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2022-05-10T17:17:05Z</dcterms:modified>
+
+<sioc:has_creator rdf:resource='https://fairdomhub.org/people/851' />
+ <sioc:has_creator rdf:resource='https://fairdomhub.org/people/854' />
+ <sioc:has_creator rdf:resource='https://fairdomhub.org/people/984' />
+ <sioc:has_creator rdf:resource='https://fairdomhub.org/people/850' />
+
+<sioc:has_owner rdf:resource='https://fairdomhub.org/people/851' />
+ <sioc:has_owner rdf:resource='https://fairdomhub.org/people/854' />
+ <sioc:has_owner rdf:resource='https://fairdomhub.org/people/984' />
+ <sioc:has_owner rdf:resource='https://fairdomhub.org/people/850' />
+
+</jerm:Publication>
+
+</rdf:RDF>

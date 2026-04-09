@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<rdf:RDF xmlns:dcterms='http://purl.org/dc/terms/' xmlns:jerm='http://jermontology.org/ontology/JERMOntology#' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#' xmlns:sioc='http://rdfs.org/sioc/ns#'>
+<jerm:Publication rdf:about='https://fairdomhub.org/publications/306'>
+<dcterms:title>Defining the robust behaviour of the plant clock gene circuit with absolute RNA timeseries and open infrastructure</dcterms:title>
+
+<jerm:description>Our understanding of the complex, transcriptional feedback loops in the circadian clock mechanism has depended upon quantitative, timeseries data from disparate sources. We measure clock gene RNA profiles in Arabidopsis thaliana seedlings, grown with or without exogenous sucrose, or in soil-grown plants and in wild-type and mutant backgrounds. The RNA profiles were strikingly robust across the experimental conditions, so current mathematical models are likely to be broadly applicable in leaf tissue. In addition to providing reference data, unexpected behaviours included co-expression of PRR9 and ELF4, and regulation of PRR5 by GI. Absolute RNA quantification revealed low levels of PRR9 transcripts (peak approx. 50 copies cell(-1)) compared with other clock genes, and threefold higher levels of LHY RNA (more than 1500 copies cell(-1)) than of its close relative CCA1. The data are disseminated from BioDare, an online repository for focused timeseries data, which is expected to benefit mechanistic modelling. One data subset successfully constrained clock gene expression in a complex model, using publicly available software on parallel computers, without expert tuning or programming. We outline the empirical and mathematical justification for data aggregation in understanding highly interconnected, dynamic networks such as the clock, and the observed design constraints on the resources required to make this approach widely accessible.</jerm:description>
+
+<jerm:hasContributor rdf:resource='https://fairdomhub.org/people/850' />
+
+<jerm:hasCreator rdf:resource='https://fairdomhub.org/people/850' />
+
+<jerm:isPartOf rdf:resource='https://fairdomhub.org/assays/464' />
+ <jerm:isPartOf rdf:resource='https://fairdomhub.org/assays/821' />
+
+<jerm:itemProducedBy rdf:resource='https://fairdomhub.org/projects/59' />
+
+<jerm:title>Defining the robust behaviour of the plant clock gene circuit with absolute RNA timeseries and open infrastructure</jerm:title>
+
+<dcterms:created rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2017-02-01T21:00:02Z</dcterms:created>
+
+<dcterms:description>Our understanding of the complex, transcriptional feedback loops in the circadian clock mechanism has depended upon quantitative, timeseries data from disparate sources. We measure clock gene RNA profiles in Arabidopsis thaliana seedlings, grown with or without exogenous sucrose, or in soil-grown plants and in wild-type and mutant backgrounds. The RNA profiles were strikingly robust across the experimental conditions, so current mathematical models are likely to be broadly applicable in leaf tissue. In addition to providing reference data, unexpected behaviours included co-expression of PRR9 and ELF4, and regulation of PRR5 by GI. Absolute RNA quantification revealed low levels of PRR9 transcripts (peak approx. 50 copies cell(-1)) compared with other clock genes, and threefold higher levels of LHY RNA (more than 1500 copies cell(-1)) than of its close relative CCA1. The data are disseminated from BioDare, an online repository for focused timeseries data, which is expected to benefit mechanistic modelling. One data subset successfully constrained clock gene expression in a complex model, using publicly available software on parallel computers, without expert tuning or programming. We outline the empirical and mathematical justification for data aggregation in understanding highly interconnected, dynamic networks such as the clock, and the observed design constraints on the resources required to make this approach widely accessible.</dcterms:description>
+
+<dcterms:modified rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2017-02-01T21:00:02Z</dcterms:modified>
+
+<sioc:has_creator rdf:resource='https://fairdomhub.org/people/850' />
+
+<sioc:has_owner rdf:resource='https://fairdomhub.org/people/850' />
+
+</jerm:Publication>
+
+</rdf:RDF>

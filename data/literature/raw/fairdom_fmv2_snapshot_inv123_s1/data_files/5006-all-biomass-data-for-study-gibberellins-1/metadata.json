@@ -1,0 +1,32 @@
+{
+  "id": 5006,
+  "uri": "https://fairdomhub.org/data_files/5006?version=1",
+  "title": "All biomass data for study Gibberellins 1",
+  "description": "Biomass data for individual plants at day 35, fresh and dry weights, as well as mean and SD, from study Gibberellins 1",
+  "version": 1,
+  "doi": null,
+  "contributor": {
+    "name": "Andrew Millar",
+    "uri": "https://fairdomhub.org/people/850",
+    "orcid": "https://orcid.org/0000-0003-1756-3654"
+  },
+  "creators": [
+    {
+      "name": "Yin Hoon Chew",
+      "uri": "https://fairdomhub.org/people/854",
+      "orcid": "https://orcid.org/0000-0002-9258-583X"
+    },
+    {
+      "name": "Andrew Millar",
+      "uri": "https://fairdomhub.org/people/850",
+      "orcid": "https://orcid.org/0000-0003-1756-3654"
+    }
+  ],
+  "contains": [
+    "data_files/5006-all-biomass-data-for-study-gibberellins-1/GA_Biomass of full sets_AJM.xlsx"
+  ],
+  "license": {
+    "title": "CC0 1.0",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  }
+}

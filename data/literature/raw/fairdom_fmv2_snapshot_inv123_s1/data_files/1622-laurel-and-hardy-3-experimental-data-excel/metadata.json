@@ -1,0 +1,27 @@
+{
+  "id": 1622,
+  "uri": "https://fairdomhub.org/data_files/1622?version=1",
+  "title": "Laurel and Hardy 3 - Experimental data (excel)",
+  "description": "",
+  "version": 1,
+  "doi": null,
+  "contributor": {
+    "name": "Daniel Seaton",
+    "uri": "https://fairdomhub.org/people/851",
+    "orcid": "https://orcid.org/0000-0002-5222-3893"
+  },
+  "creators": [
+    {
+      "name": "Daniel Seaton",
+      "uri": "https://fairdomhub.org/people/851",
+      "orcid": "https://orcid.org/0000-0002-5222-3893"
+    }
+  ],
+  "contains": [
+    "data_files/1622-laurel-and-hardy-3-experimental-data-excel/Laurel and Hardy 3 - experimental data (excel).xlsx"
+  ],
+  "license": {
+    "title": "Creative Commons Attribution 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  }
+}

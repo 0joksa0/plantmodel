@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<rdf:RDF xmlns:dcterms='http://purl.org/dc/terms/' xmlns:jerm='http://jermontology.org/ontology/JERMOntology#' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#' xmlns:sioc='http://rdfs.org/sioc/ns#'>
+<jerm:Study rdf:about='https://fairdomhub.org/studies/211'>
+<dcterms:title>Test of FMv2, study Laurel &amp; Hardy 1</dcterms:title>
+
+<jerm:description>Modelling and experiments for FMv2 as a whole; Testing Framework Model version 2 (FMv2)</jerm:description>
+
+<jerm:hasContributor rdf:resource='https://fairdomhub.org/people/850' />
+
+<jerm:hasCreator rdf:resource='https://fairdomhub.org/people/851' />
+ <jerm:hasCreator rdf:resource='https://fairdomhub.org/people/854' />
+ <jerm:hasCreator rdf:resource='https://fairdomhub.org/people/850' />
+
+<jerm:hasPart rdf:resource='https://fairdomhub.org/assays/474' />
+ <jerm:hasPart rdf:resource='https://fairdomhub.org/assays/475' />
+
+<jerm:isPartOf rdf:resource='https://fairdomhub.org/investigations/123' />
+
+<jerm:itemProducedBy rdf:resource='https://fairdomhub.org/projects/59' />
+ <jerm:itemProducedBy rdf:resource='https://fairdomhub.org/projects/92' />
+
+<jerm:seekID rdf:datatype='http://www.w3.org/2001/XMLSchema#anyURI'>https://fairdomhub.org/studies/211</jerm:seekID>
+
+<jerm:title>Test of FMv2, study Laurel &amp; Hardy 1</jerm:title>
+
+<dcterms:created rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2017-02-01T20:23:42Z</dcterms:created>
+
+<dcterms:description>Modelling and experiments for FMv2 as a whole; Testing Framework Model version 2 (FMv2)</dcterms:description>
+
+<dcterms:modified rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2022-04-15T10:35:00Z</dcterms:modified>
+
+<sioc:has_creator rdf:resource='https://fairdomhub.org/people/851' />
+ <sioc:has_creator rdf:resource='https://fairdomhub.org/people/854' />
+ <sioc:has_creator rdf:resource='https://fairdomhub.org/people/850' />
+
+<sioc:has_owner rdf:resource='https://fairdomhub.org/people/850' />
+
+</jerm:Study>
+
+</rdf:RDF>

@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<rdf:RDF xmlns:dcterms='http://purl.org/dc/terms/' xmlns:jerm='http://jermontology.org/ontology/JERMOntology#' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#' xmlns:sioc='http://rdfs.org/sioc/ns#'>
+<jerm:Experimental_assay rdf:about='https://fairdomhub.org/assays/461'>
+<dcterms:title>TiMet WP1.1a Metabolite analysis of clock mutants</dcterms:title>
+
+<jerm:description>Metabolite analysis in clock mutants: Col-0 parent and mutants gi-201, toc1-101 and prr7prr9; WS parent and lhy/cca1 double mutant. Plants grown in Golm and harvested at End of Day and End of Night, , assays 22 major metabolites. More detail on TiMet wiki if required. Heteroscedastic t-tests to highlight most significant changes, without multiple-testing correction.</jerm:description>
+
+<jerm:hasContributor rdf:resource='https://fairdomhub.org/people/850' />
+
+<jerm:hasCreator rdf:resource='https://fairdomhub.org/people/984' />
+
+<jerm:hasPart rdf:resource='https://fairdomhub.org/data_files/1598' />
+
+<jerm:hasType rdf:resource='http://jermontology.org/ontology/JERMOntology#Metabolite_concentration' />
+ <jerm:hasType rdf:resource='http://jermontology.org/ontology/JERMOntology#Chromatography' />
+
+<jerm:investigates rdf:resource='https://fairdomhub.org/organisms/1933753714' />
+ <jerm:investigates rdf:resource='https://fairdomhub.org/strains/95' />
+ <jerm:investigates rdf:resource='https://fairdomhub.org/strains/94' />
+
+<jerm:isPartOf rdf:resource='https://fairdomhub.org/studies/215' />
+
+<jerm:itemProducedBy rdf:resource='https://fairdomhub.org/projects/59' />
+ <jerm:itemProducedBy rdf:resource='https://fairdomhub.org/projects/92' />
+
+<jerm:seekID rdf:datatype='http://www.w3.org/2001/XMLSchema#anyURI'>https://fairdomhub.org/assays/461</jerm:seekID>
+
+<jerm:title>TiMet WP1.1a Metabolite analysis of clock mutants</jerm:title>
+
+<dcterms:created rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2017-02-01T20:29:24Z</dcterms:created>
+
+<dcterms:description>Metabolite analysis in clock mutants: Col-0 parent and mutants gi-201, toc1-101 and prr7prr9; WS parent and lhy/cca1 double mutant. Plants grown in Golm and harvested at End of Day and End of Night, , assays 22 major metabolites. More detail on TiMet wiki if required. Heteroscedastic t-tests to highlight most significant changes, without multiple-testing correction.</dcterms:description>
+
+<dcterms:modified rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2022-04-15T10:35:02Z</dcterms:modified>
+
+<sioc:has_creator rdf:resource='https://fairdomhub.org/people/984' />
+
+<sioc:has_owner rdf:resource='https://fairdomhub.org/people/850' />
+
+</jerm:Experimental_assay>
+
+</rdf:RDF>

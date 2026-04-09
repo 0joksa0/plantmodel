@@ -1,0 +1,34 @@
+{
+  "id": 477,
+  "uri": "https://fairdomhub.org/assays/477",
+  "title": "Biomass and metabolites",
+  "description": "Biomass (fresh mass, dry mass), leaf numbers, leaf area, gas exchange and 12 metabolites in Col0 (WT), prr7prr9, and pgm at days 29 and 35, presented in the preprint/publication, with most data also for Col and lhycca1 at days 21/22/23, not analysed further. \r\n\r\nWe suggest that the lower carbon assimilation rate measured in lhycca1 (see gas exchange data) might allow a calibirated simulation in the FMv2 model in future to incorporate the indirect effects of nightly carbon starvation in this genotype (observed growth arrest for several hours every morning, for example), which seemed potentially too complicated to address in our initial analysis. \r\nIn other words, the short period/early phase of this genotype will give it faster starch degradation at night in the model, hence it will experience carbon starvation. We postulate that that might cause the limited photosynthesis that we observe. Any other effects of C starvation (potentially many) might be minor in comparison. Hence an FMv2 simulation that mutates the LHY/CCA1 clock component and therefore inflicts nightly starvation might nonetheless hope to predict biomass growth in the mutant, if the effects of starvation are simulated sufficiently by only calibrating (reducing) photosynthetic efficiency to match the gas exchange data.\r\nWe won't try this. If you try this, do let us know.",
+  "assay_type_uri": "http://jermontology.org/ontology/JERMOntology#Organism_or_strain_characterisation",
+  "technology_type_uri": "http://jermontology.org/ontology/JERMOntology#Technology_type",
+  "contributor": {
+    "name": "Daniel Seaton",
+    "uri": "https://fairdomhub.org/people/851",
+    "orcid": "https://orcid.org/0000-0002-5222-3893"
+  },
+  "creators": [
+    {
+      "name": "Yin Hoon Chew",
+      "uri": "https://fairdomhub.org/people/854",
+      "orcid": "https://orcid.org/0000-0002-9258-583X"
+    },
+    {
+      "name": "Virginie Mengin",
+      "uri": "https://fairdomhub.org/people/984"
+    },
+    {
+      "name": "Daniel Seaton",
+      "uri": "https://fairdomhub.org/people/851",
+      "orcid": "https://orcid.org/0000-0002-5222-3893"
+    }
+  ],
+  "assets": [
+    "data_files/1607-laurel-and-hardy-3-experimental-data-mat-file/",
+    "data_files/1622-laurel-and-hardy-3-experimental-data-excel/",
+    "data_files/1626-laurel-and-hardy-3-complete-data/"
+  ]
+}

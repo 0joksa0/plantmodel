@@ -1,0 +1,24 @@
+{
+  "id": 478,
+  "uri": "https://fairdomhub.org/assays/478",
+  "title": "FMv2 simulation",
+  "description": "Simulation data from FMv2 calibrated for experiment L&H2, an experiment run at 18.5C instead of the 20.5C of the replicate and related studies. The Excel file includes the mean and SD of the relevant experimental data, and the figure panels.",
+  "assay_type_uri": "http://jermontology.org/ontology/JERMOntology#Model_analysis_type",
+  "technology_type_uri": null,
+  "contributor": {
+    "name": "Daniel Seaton",
+    "uri": "https://fairdomhub.org/people/851",
+    "orcid": "https://orcid.org/0000-0002-5222-3893"
+  },
+  "creators": [
+    {
+      "name": "Daniel Seaton",
+      "uri": "https://fairdomhub.org/people/851",
+      "orcid": "https://orcid.org/0000-0002-5222-3893"
+    }
+  ],
+  "assets": [
+    "data_files/1608-laurel-and-hardy-2-simulation-data-mat-file/",
+    "data_files/5003-laurel-and-hardy-2-mean-data-and-simulations/"
+  ]
+}

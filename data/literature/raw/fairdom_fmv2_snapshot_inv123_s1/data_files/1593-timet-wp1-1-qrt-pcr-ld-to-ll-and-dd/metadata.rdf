@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<rdf:RDF xmlns:dcterms='http://purl.org/dc/terms/' xmlns:jerm='http://jermontology.org/ontology/JERMOntology#' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#' xmlns:sioc='http://rdfs.org/sioc/ns#'>
+<jerm:Data rdf:about='https://fairdomhub.org/data_files/1593'>
+<dcterms:title>TiMet WP1.1 qRT-PCR LD to LL and DD</dcterms:title>
+
+<jerm:description>RNA levels for control amplicons and multiple clock genes in 2 WT (Col, Ws) and 5 clock mutants of Arabidopsis, in biological duplicates, from three conditions: Diurnal cycle (12L/12D), Extended night (DD), Extended light (LL), harvested every 2 hours. Numbers are in transcript copy per cell, obtained assuming 1 g FW contains 25000000 cells.
+Comments:	
+Data from LD are concateneted with DD and LL for better visualization. Toc1-101 (col-0) gi-201 (col-0) prr7-3 prr9-1 (col-0) , lhy cca1 (ws) elf3-4 (WS) 
+Data published in Flis et al. Open Biology 2015, original file available from BioDare repository, see link attached.
+
+Note for BioDare access - no login is required to access the file. Click 'Browse Public Resources' on the login screen, then return to this page and click the link to BioDare again, you should then gain access.</jerm:description>
+
+<jerm:hasContributor rdf:resource='https://fairdomhub.org/people/850' />
+
+<jerm:hasCreator rdf:resource='https://fairdomhub.org/people/850' />
+
+<jerm:isPartOf rdf:resource='https://fairdomhub.org/assays/464' />
+ <jerm:isPartOf rdf:resource='https://fairdomhub.org/assays/469' />
+
+<jerm:itemProducedBy rdf:resource='https://fairdomhub.org/projects/59' />
+
+<jerm:seekID rdf:datatype='http://www.w3.org/2001/XMLSchema#anyURI'>https://fairdomhub.org/data_files/1593</jerm:seekID>
+
+<jerm:title>TiMet WP1.1 qRT-PCR LD to LL and DD</jerm:title>
+
+<dcterms:created rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2017-02-01T20:54:56Z</dcterms:created>
+
+<dcterms:description>RNA levels for control amplicons and multiple clock genes in 2 WT (Col, Ws) and 5 clock mutants of Arabidopsis, in biological duplicates, from three conditions: Diurnal cycle (12L/12D), Extended night (DD), Extended light (LL), harvested every 2 hours. Numbers are in transcript copy per cell, obtained assuming 1 g FW contains 25000000 cells.
+Comments:	
+Data from LD are concateneted with DD and LL for better visualization. Toc1-101 (col-0) gi-201 (col-0) prr7-3 prr9-1 (col-0) , lhy cca1 (ws) elf3-4 (WS) 
+Data published in Flis et al. Open Biology 2015, original file available from BioDare repository, see link attached.
+
+Note for BioDare access - no login is required to access the file. Click 'Browse Public Resources' on the login screen, then return to this page and click the link to BioDare again, you should then gain access.</dcterms:description>
+
+<dcterms:modified rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2022-04-15T10:35:07Z</dcterms:modified>
+
+<sioc:has_creator rdf:resource='https://fairdomhub.org/people/850' />
+
+<sioc:has_owner rdf:resource='https://fairdomhub.org/people/850' />
+
+</jerm:Data>
+
+</rdf:RDF>

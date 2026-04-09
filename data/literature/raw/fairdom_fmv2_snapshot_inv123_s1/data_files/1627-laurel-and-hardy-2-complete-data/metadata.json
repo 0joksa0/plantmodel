@@ -1,0 +1,36 @@
+{
+  "id": 1627,
+  "uri": "https://fairdomhub.org/data_files/1627?version=1",
+  "title": "Laurel and Hardy 2 - complete data",
+  "description": "Complete excel spradsheets for Laurel and Hardy 2, including data for the pgm mutant that were not analysed in the Chew et al. 2017 preprint/publication. \r\nData include fresh and dry biomass, gas exchange, leaf numbers and metabolites in Col0 (WT), prr7prr9, pgm and lsf1 plants.\r\nMetabolite data are from plants after 27 days of growth (end of night) and 28 days (end of day and end of night). \r\n",
+  "version": 1,
+  "doi": null,
+  "contributor": {
+    "name": "Daniel Seaton",
+    "uri": "https://fairdomhub.org/people/851",
+    "orcid": "https://orcid.org/0000-0002-5222-3893"
+  },
+  "creators": [
+    {
+      "name": "Yin Hoon Chew",
+      "uri": "https://fairdomhub.org/people/854",
+      "orcid": "https://orcid.org/0000-0002-9258-583X"
+    },
+    {
+      "name": "Virginie Mengin",
+      "uri": "https://fairdomhub.org/people/984"
+    },
+    {
+      "name": "Daniel Seaton",
+      "uri": "https://fairdomhub.org/people/851",
+      "orcid": "https://orcid.org/0000-0002-5222-3893"
+    }
+  ],
+  "contains": [
+    "data_files/1627-laurel-and-hardy-2-complete-data/Laurel and Hardy 2 - complete data.zip"
+  ],
+  "license": {
+    "title": "CC0 1.0",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  }
+}

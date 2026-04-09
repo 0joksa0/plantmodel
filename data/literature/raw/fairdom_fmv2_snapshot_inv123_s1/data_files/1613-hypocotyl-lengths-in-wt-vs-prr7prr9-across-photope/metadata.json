@@ -1,0 +1,27 @@
+{
+  "id": 1613,
+  "uri": "https://fairdomhub.org/data_files/1613?version=1",
+  "title": "Hypocotyl lengths in WT vs prr7prr9 across photoperiods (Niwa et al, 2009)",
+  "description": "",
+  "version": 1,
+  "doi": null,
+  "contributor": {
+    "name": "Daniel Seaton",
+    "uri": "https://fairdomhub.org/people/851",
+    "orcid": "https://orcid.org/0000-0002-5222-3893"
+  },
+  "creators": [
+    {
+      "name": "Daniel Seaton",
+      "uri": "https://fairdomhub.org/people/851",
+      "orcid": "https://orcid.org/0000-0002-5222-3893"
+    }
+  ],
+  "contains": [
+    "data_files/1613-hypocotyl-lengths-in-wt-vs-prr7prr9-across-photope/niwa2009_WT_vs_prr7prr9_hypocotyl_data.xlsx"
+  ],
+  "license": {
+    "title": "Creative Commons Attribution 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  }
+}

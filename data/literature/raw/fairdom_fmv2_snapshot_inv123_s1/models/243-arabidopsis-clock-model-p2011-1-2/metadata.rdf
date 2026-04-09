@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<rdf:RDF xmlns:dcterms='http://purl.org/dc/terms/' xmlns:jerm='http://jermontology.org/ontology/JERMOntology#' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#' xmlns:sioc='http://rdfs.org/sioc/ns#'>
+<jerm:Model rdf:about='https://fairdomhub.org/models/243'>
+<dcterms:title>Arabidopsis clock model P2011.1.2</dcterms:title>
+
+<jerm:description>This version is P2011.1.2, model ID PLM_71 version 1. Dynamics identical to P2011.1.1 of the Pokhilko et al. 2012 publication.
+
+http://www.plasmo.ed.ac.uk/plasmo/models/download.shtml?accession=PLM_71&amp;version=1</jerm:description>
+
+<jerm:hasContributor rdf:resource='https://fairdomhub.org/people/850' />
+
+<jerm:hasCreator rdf:resource='https://fairdomhub.org/people/850' />
+
+<jerm:hasFormat rdf:resource='http://jermontology.org/ontology/JERMOntology#SBMLFormat' />
+
+<jerm:isPartOf rdf:resource='https://fairdomhub.org/assays/469' />
+ <jerm:isPartOf rdf:resource='https://fairdomhub.org/assays/595' />
+
+<jerm:itemProducedBy rdf:resource='https://fairdomhub.org/projects/59' />
+
+<jerm:seekID rdf:datatype='http://www.w3.org/2001/XMLSchema#anyURI'>https://fairdomhub.org/models/243</jerm:seekID>
+
+<jerm:title>Arabidopsis clock model P2011.1.2</jerm:title>
+
+<dcterms:created rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2017-02-01T21:32:47Z</dcterms:created>
+
+<dcterms:description>This version is P2011.1.2, model ID PLM_71 version 1. Dynamics identical to P2011.1.1 of the Pokhilko et al. 2012 publication.
+
+http://www.plasmo.ed.ac.uk/plasmo/models/download.shtml?accession=PLM_71&amp;version=1</dcterms:description>
+
+<dcterms:modified rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2018-03-27T13:54:05Z</dcterms:modified>
+
+<sioc:has_creator rdf:resource='https://fairdomhub.org/people/850' />
+
+<sioc:has_owner rdf:resource='https://fairdomhub.org/people/850' />
+
+</jerm:Model>
+
+</rdf:RDF>

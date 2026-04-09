@@ -1,0 +1,22 @@
+{
+  "id": 941,
+  "uri": "https://fairdomhub.org/studies/941",
+  "title": "Test of FMv2, photoperiodic flowering and hypocotyl elongation",
+  "description": "Model simulations compared to experimental data from the literature (publications from Mizuno lab are linked), testing the FMv2.",
+  "contributor": {
+    "name": "Andrew Millar",
+    "uri": "https://fairdomhub.org/people/850",
+    "orcid": "https://orcid.org/0000-0003-1756-3654"
+  },
+  "creators": [
+    {
+      "name": "Daniel Seaton",
+      "uri": "https://fairdomhub.org/people/851",
+      "orcid": "https://orcid.org/0000-0002-5222-3893"
+    }
+  ],
+  "assays": [
+    "studies/941-test-of-fmv2-photoperiodic-flowering-and-hypocotyl/assays/462-mizuno-lab-flowering-time-in-clock-mutants/",
+    "studies/941-test-of-fmv2-photoperiodic-flowering-and-hypocotyl/assays/463-mizuno-lab-hypocotyl-length-in-clock-mutants/"
+  ]
+}

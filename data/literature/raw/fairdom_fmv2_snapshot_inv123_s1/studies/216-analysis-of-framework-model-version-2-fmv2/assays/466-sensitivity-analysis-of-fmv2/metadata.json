@@ -1,0 +1,23 @@
+{
+  "id": 466,
+  "uri": "https://fairdomhub.org/assays/466",
+  "title": "Sensitivity analysis of FMv2",
+  "description": "effects of 1% increase in each parameter, more detailed analysis of water content",
+  "assay_type_uri": "http://jermontology.org/ontology/JERMOntology#Model_analysis_type",
+  "technology_type_uri": null,
+  "contributor": {
+    "name": "Andrew Millar",
+    "uri": "https://fairdomhub.org/people/850",
+    "orcid": "https://orcid.org/0000-0003-1756-3654"
+  },
+  "creators": [
+    {
+      "name": "Andrew Millar",
+      "uri": "https://fairdomhub.org/people/850",
+      "orcid": "https://orcid.org/0000-0003-1756-3654"
+    }
+  ],
+  "assets": [
+    "data_files/1610-sensitivity-analysis-results-mat-file/"
+  ]
+}

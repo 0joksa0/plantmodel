@@ -1,0 +1,18 @@
+{
+  "id": 938,
+  "uri": "https://fairdomhub.org/studies/938",
+  "title": "Test of FMv2, follow-on: mechanisms of malate/fumarate accumulation",
+  "description": "Follow-up to the validation experiments on FMv2, testing candidate mechanisms for high malate and fumarate accumulation in the Arabidopsis double mutant prr7prr9 and its parent accession Col. New collaborations with the groups of Teresa Fitzpatrick and TiMet partner Samuel Zeeman.\r\n",
+  "contributor": {
+    "name": "Andrew Millar",
+    "uri": "https://fairdomhub.org/people/850",
+    "orcid": "https://orcid.org/0000-0003-1756-3654"
+  },
+  "creators": [
+
+  ],
+  "assays": [
+    "studies/938-test-of-fmv2-follow-on-mechanisms-of-malate-fumara/assays/1661-assimilation-and-partitioning-of-14co2-at-night/",
+    "studies/938-test-of-fmv2-follow-on-mechanisms-of-malate-fumara/assays/1662-thiamine-vitamers/"
+  ]
+}

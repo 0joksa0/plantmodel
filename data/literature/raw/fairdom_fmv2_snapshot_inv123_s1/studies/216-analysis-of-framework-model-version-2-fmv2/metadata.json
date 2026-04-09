@@ -1,0 +1,22 @@
+{
+  "id": 216,
+  "uri": "https://fairdomhub.org/studies/216",
+  "title": "Analysis of Framework Model version 2 (FMv2)",
+  "description": "Simulations, parameter sensitivity analysis etc. for FMv2",
+  "contributor": {
+    "name": "Andrew Millar",
+    "uri": "https://fairdomhub.org/people/850",
+    "orcid": "https://orcid.org/0000-0003-1756-3654"
+  },
+  "creators": [
+    {
+      "name": "Andrew Millar",
+      "uri": "https://fairdomhub.org/people/850",
+      "orcid": "https://orcid.org/0000-0003-1756-3654"
+    }
+  ],
+  "assays": [
+    "studies/216-analysis-of-framework-model-version-2-fmv2/assays/466-sensitivity-analysis-of-fmv2/",
+    "studies/216-analysis-of-framework-model-version-2-fmv2/assays/467-relationship-among-fmv2-outputs/"
+  ]
+}

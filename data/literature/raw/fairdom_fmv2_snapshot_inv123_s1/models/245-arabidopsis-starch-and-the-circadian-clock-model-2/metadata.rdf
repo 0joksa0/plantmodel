@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<rdf:RDF xmlns:dcterms='http://purl.org/dc/terms/' xmlns:jerm='http://jermontology.org/ontology/JERMOntology#' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#' xmlns:sioc='http://rdfs.org/sioc/ns#'>
+<jerm:Model rdf:about='https://fairdomhub.org/models/245'>
+<dcterms:title>Arabidopsis - starch and the circadian clock, Model 2 (Seaton et al., 2013)</dcterms:title>
+
+<jerm:description>A model of the circadian regulation of starch turnover, as published in Seaton, Ebenhoeh, Millar, Pokhilko, "Regulatory principles and experimental approaches to the circadian control of starch turnover", J. Roy. Soc. Interface, 2013. This model is referred to as "Model Variant 2". 
+The other model variants are all available from www.plasmo.ed.ac.uk as stated in the publication. 
+Note that the 'P2011' circadian clock model was modified for this publication (as described), in order to replicate the responses to skeleton photoperiods first demonstrated by the 'P2010' model.</jerm:description>
+
+<jerm:hasContributor rdf:resource='https://fairdomhub.org/people/850' />
+
+<jerm:hasCreator rdf:resource='https://fairdomhub.org/people/851' />
+ <jerm:hasCreator rdf:resource='https://fairdomhub.org/people/850' />
+
+<jerm:hasFormat rdf:resource='http://jermontology.org/ontology/JERMOntology#SBMLFormat' />
+
+<jerm:isPartOf rdf:resource='https://fairdomhub.org/assays/468' />
+
+<jerm:itemProducedBy rdf:resource='https://fairdomhub.org/projects/59' />
+
+<jerm:seekID rdf:datatype='http://www.w3.org/2001/XMLSchema#anyURI'>https://fairdomhub.org/models/245</jerm:seekID>
+
+<jerm:title>Arabidopsis - starch and the circadian clock, Model 2 (Seaton et al., 2013)</jerm:title>
+
+<dcterms:created rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2017-02-06T12:46:39Z</dcterms:created>
+
+<dcterms:description>A model of the circadian regulation of starch turnover, as published in Seaton, Ebenhoeh, Millar, Pokhilko, "Regulatory principles and experimental approaches to the circadian control of starch turnover", J. Roy. Soc. Interface, 2013. This model is referred to as "Model Variant 2". 
+The other model variants are all available from www.plasmo.ed.ac.uk as stated in the publication. 
+Note that the 'P2011' circadian clock model was modified for this publication (as described), in order to replicate the responses to skeleton photoperiods first demonstrated by the 'P2010' model.</dcterms:description>
+
+<dcterms:modified rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2022-04-15T10:35:11Z</dcterms:modified>
+
+<sioc:has_creator rdf:resource='https://fairdomhub.org/people/851' />
+ <sioc:has_creator rdf:resource='https://fairdomhub.org/people/850' />
+
+<sioc:has_owner rdf:resource='https://fairdomhub.org/people/850' />
+
+</jerm:Model>
+
+</rdf:RDF>

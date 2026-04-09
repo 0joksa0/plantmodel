@@ -1,0 +1,21 @@
+{
+  "id": 307,
+  "uri": "https://fairdomhub.org/publications/307",
+  "title": "The circadian clock regulates the photoperiodic response of hypocotyl elongation through a coincidence mechanism in Arabidopsis thaliana",
+  "description": "The plant circadian clock generates rhythms with a period close to 24 h, and it controls a wide range of physiological and developmental oscillations in habitats under natural light/dark cycles. Among clock-controlled developmental events, the best characterized is the photoperiodic control of flowering time in Arabidopsis thaliana. Recently, it was also reported that the clock regulates a daily and rhythmic elongation of hypocotyls. Here, we report that the promotion of hypocotyl elongation is in fact dependent on changes in photoperiods in such a way that an accelerated hypocotyl elongation occurs especially under short-day conditions. In this regard, we provide genetic evidence to show that the circadian clock regulates the photoperiodic (or seasonal) elongation of hypocotyls by modulating the expression profiles of the PIF4 and PIF5 genes encoding phytochrome-interacting bHLH (basic helix-loop-helix) factors, in such a manner that certain short-day conditions are necessary to enhance the expression of these genes during the night-time. In other words, long-day conditions are insufficient to open the clock-gate for triggering the expression of PIF4 and PIF5 during the night-time. Based on these and other results, the photoperiodic control of hypocotyl elongation is best explained by the accumulation of PIF4 and PIF5 during the night-time of short days, due to coincidence between the internal (circadian rhythm) and external (photoperiod) time cues. This mechanism is a mirror image of the photoperiod-dependent promotion of flowering in that plants should experience long-day conditions to initiate flowering promptly. Both of these clock-mediated coincidence mechanisms may coordinately confer ecological fitness to plants growing in natural habitats with varied photoperiods.",
+  "doi": null,
+  "doi_uri": null,
+  "pubmed_id": 19233867,
+  "pubmed_uri": "https://www.ncbi.nlm.nih.gov/pubmed/19233867",
+  "contributor": {
+    "name": "Daniel Seaton",
+    "uri": "https://fairdomhub.org/people/851",
+    "orcid": "https://orcid.org/0000-0002-5222-3893"
+  },
+  "creators": [
+
+  ],
+  "contains": [
+
+  ]
+}

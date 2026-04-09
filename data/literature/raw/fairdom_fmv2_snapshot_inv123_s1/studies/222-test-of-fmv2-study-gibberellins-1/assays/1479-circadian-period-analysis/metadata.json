@@ -1,0 +1,23 @@
+{
+  "id": 1479,
+  "uri": "https://fairdomhub.org/assays/1479",
+  "title": "Circadian period analysis",
+  "description": "Luciferase reporter gene assay for circadian period of seedlings in constant light, for Col0 (WT) and prr7prr9, with and without exogenous gibberellins (GA). Supplementary Figure 11f in Chew et al., _in Silico _Plants.\r\n\r\nRaw and processed data, together with circadian period analysis and summary statistics, are available from BioDare.ed.ac.uk: choose https://biodare.ed.ac.uk/experiment (\"Browse Public Resources\" on the Login screen), then you can link to https://biodare.ed.ac.uk/robust/ShowExperiment.action?experimentId=3838, \"Effects of GA on clock in WT and prr9prr7\".\r\n\r\nBioDare experiment ID is 3838. As BioDare does not serve static files, the results cannot be linked directly as a URL from FAIRDOMHub.",
+  "assay_type_uri": "http://jermontology.org/ontology/JERMOntology#Experimental_assay_type",
+  "technology_type_uri": "http://jermontology.org/ontology/JERMOntology#Imaging",
+  "contributor": {
+    "name": "Andrew Millar",
+    "uri": "https://fairdomhub.org/people/850",
+    "orcid": "https://orcid.org/0000-0003-1756-3654"
+  },
+  "creators": [
+    {
+      "name": "Daniel Seaton",
+      "uri": "https://fairdomhub.org/people/851",
+      "orcid": "https://orcid.org/0000-0002-5222-3893"
+    }
+  ],
+  "assets": [
+
+  ]
+}

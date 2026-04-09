@@ -1,0 +1,24 @@
+{
+  "id": 462,
+  "uri": "https://fairdomhub.org/assays/462",
+  "title": "Mizuno lab, Flowering time in clock mutants",
+  "description": "Leaf number at flowering data from literature for prr7 prr9 and Col wild-type plants under long photoperiods and short photoperiods",
+  "assay_type_uri": "http://jermontology.org/ontology/JERMOntology#Experimental_assay_type",
+  "technology_type_uri": "http://jermontology.org/ontology/JERMOntology#Technology_type",
+  "contributor": {
+    "name": "Andrew Millar",
+    "uri": "https://fairdomhub.org/people/850",
+    "orcid": "https://orcid.org/0000-0003-1756-3654"
+  },
+  "creators": [
+    {
+      "name": "Daniel Seaton",
+      "uri": "https://fairdomhub.org/people/851",
+      "orcid": "https://orcid.org/0000-0002-5222-3893"
+    }
+  ],
+  "assets": [
+    "data_files/1612-flowering-time-in-wt-vs-prr7prr9-nakamichi-et-al-2/",
+    "publications/308-arabidopsis-clock-associated-pseudo-response-regul/"
+  ]
+}

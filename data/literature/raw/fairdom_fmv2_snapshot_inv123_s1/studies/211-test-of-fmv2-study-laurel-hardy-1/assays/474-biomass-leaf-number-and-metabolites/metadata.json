@@ -1,0 +1,33 @@
+{
+  "id": 474,
+  "uri": "https://fairdomhub.org/assays/474",
+  "title": "Biomass, leaf number and metabolites",
+  "description": "Biomass, leaf number and metabolites in Col0 (WT), prr7, prr7prr9, and lsf1. \r\nMetabolite data from plants after 28 days of growth were analysed most (27 days 'end of night', 28 days 'end of day' and 'end of night').\r\nThe data file also includes data from 21 days of growth ('end of day' and 'end of night'), which is useful for comparison to early-flowering plants not tested here, such as the lhycca1 double mutant, that flower before 28 days, altering their physiology. ",
+  "assay_type_uri": "http://jermontology.org/ontology/JERMOntology#Organism_or_strain_characterisation",
+  "technology_type_uri": "http://jermontology.org/ontology/JERMOntology#Technology_type",
+  "contributor": {
+    "name": "Daniel Seaton",
+    "uri": "https://fairdomhub.org/people/851",
+    "orcid": "https://orcid.org/0000-0002-5222-3893"
+  },
+  "creators": [
+    {
+      "name": "Yin Hoon Chew",
+      "uri": "https://fairdomhub.org/people/854",
+      "orcid": "https://orcid.org/0000-0002-9258-583X"
+    },
+    {
+      "name": "Daniel Seaton",
+      "uri": "https://fairdomhub.org/people/851",
+      "orcid": "https://orcid.org/0000-0002-5222-3893"
+    },
+    {
+      "name": "Virginie Mengin",
+      "uri": "https://fairdomhub.org/people/984"
+    }
+  ],
+  "assets": [
+    "data_files/1604-laurel-and-hardy-1-experimental-data-mat-file/",
+    "data_files/1616-laurel-and-hardy-1-experimental-data-excel/"
+  ]
+}

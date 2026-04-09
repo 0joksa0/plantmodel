@@ -1,0 +1,28 @@
+{
+  "id": 469,
+  "uri": "https://fairdomhub.org/assays/469",
+  "title": "Simulating clock gene expression with model P2011.1.2",
+  "description": "Comparison of simulated wild-type and prr7prr9 double mutant under 12L:12D cycles. Simulation with CVODE simulator via SBSI v1.5 framework.",
+  "assay_type_uri": "http://jermontology.org/ontology/JERMOntology#Model_analysis_type",
+  "technology_type_uri": null,
+  "contributor": {
+    "name": "Andrew Millar",
+    "uri": "https://fairdomhub.org/people/850",
+    "orcid": "https://orcid.org/0000-0003-1756-3654"
+  },
+  "creators": [
+    {
+      "name": "Andrew Millar",
+      "uri": "https://fairdomhub.org/people/850",
+      "orcid": "https://orcid.org/0000-0003-1756-3654"
+    }
+  ],
+  "assets": [
+    "data_files/1593-timet-wp1-1-qrt-pcr-ld-to-ll-and-dd/",
+    "data_files/1594-p2011-1-2-simulations-of-clock-genes-under-ld-cycl/",
+    "data_files/1595-p2011-1-2-simulations-vs-data-for-wt-normalised-fo/",
+    "data_files/1597-p2011-1-2-simulations-and-data-in-prr7-prr9-mutant/",
+    "models/243-arabidopsis-clock-model-p2011-1-2/",
+    "models/314-p2011-1-2_directupload/"
+  ]
+}

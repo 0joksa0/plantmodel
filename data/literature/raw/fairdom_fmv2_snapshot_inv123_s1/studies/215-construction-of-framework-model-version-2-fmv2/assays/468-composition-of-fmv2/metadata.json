@@ -1,0 +1,37 @@
+{
+  "id": 468,
+  "uri": "https://fairdomhub.org/assays/468",
+  "title": "Composition of FMv2",
+  "description": "Combination of multiple sub-models to form Framework Model version 2",
+  "assay_type_uri": "http://jermontology.org/ontology/JERMOntology#Model_analysis_type",
+  "technology_type_uri": null,
+  "contributor": {
+    "name": "Andrew Millar",
+    "uri": "https://fairdomhub.org/people/850",
+    "orcid": "https://orcid.org/0000-0003-1756-3654"
+  },
+  "creators": [
+    {
+      "name": "Andrew Millar",
+      "uri": "https://fairdomhub.org/people/850",
+      "orcid": "https://orcid.org/0000-0003-1756-3654"
+    },
+    {
+      "name": "Yin Hoon Chew",
+      "uri": "https://fairdomhub.org/people/854",
+      "orcid": "https://orcid.org/0000-0002-9258-583X"
+    },
+    {
+      "name": "Daniel Seaton",
+      "uri": "https://fairdomhub.org/people/851",
+      "orcid": "https://orcid.org/0000-0002-5222-3893"
+    }
+  ],
+  "assets": [
+    "models/245-arabidopsis-starch-and-the-circadian-clock-model-2/",
+    "models/246-modelling-circadian-regulation-of-flowering-time-a/",
+    "models/247-chew_et_al_2014_framework_model-version-1-matlab-a/",
+    "models/248-framework-model-v2/",
+    "publications/345-linking-circadian-time-to-growth-rate-quantitative/"
+  ]
+}

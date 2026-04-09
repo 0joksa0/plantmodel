@@ -1,0 +1,4811 @@
+<?xml version="1.0" encoding="UTF-8"?><sbml xmlns="http://www.sbml.org/sbml/level2/version4" level="2" version="4">
+<model metaid="COPASI1" id="Model_1" name="P2011_PLM_67v6">
+<notes>
+<body xmlns="http://www.w3.org/1999/xhtml">
+<pre> cL_m_degr, param m1, modified to ensure light rate &gt; dark rate.</pre>
+</body>
+</notes>
+<annotation xmlns="">
+<ns1:PLASMO xmlns:ns1="http://www.plasmo.ed.ac.uk" id="PLM_71" version="1">
+This model has been downloaded from PlaSMo:
+http://www.plasmo.ed.ac.uk/plasmo/models/model.shtml?accession=PLM_71</ns1:PLASMO>
+<COPASI xmlns="http://www.copasi.org/static/sbml">
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/">
+<rdf:Description rdf:about="#COPASI1">
+<dcterms:created>
+<rdf:Description>
+<dcterms:W3CDTF>2011-08-18T14:47:18Z</dcterms:W3CDTF>
+</rdf:Description>
+</dcterms:created>
+</rdf:Description>
+</rdf:RDF>
+</COPASI>
+<listOfParameterHistories xmlns="http://www.uk.ac.ed.csbe.sbsivisual/parameter/ns">
+<parameterHistory min="1.3" initialstep="0.26" max="10.0" use="Yes" id="n1"/>
+<parameterHistory min="0.32" initialstep="0.064" max="1.28" use="Yes" id="n2"/>
+<parameterHistory min="0.05" initialstep="0.029" max="0.58" use="Yes" id="n3"/>
+<parameterHistory min="0.035" initialstep="0.0070" max="0.14" use="Yes" id="n4"/>
+<parameterHistory min="0.115" initialstep="0.023" max="0.46" use="No" id="n5"/>
+<parameterHistory min="10.0" initialstep="2.0" max="40.0" use="No" id="n6"/>
+<parameterHistory min="0.1" initialstep="0.02" max="0.4" use="Yes" id="n7"/>
+<parameterHistory min="0.25" initialstep="0.05" max="1.0" use="Yes" id="n8"/>
+<parameterHistory min="0.1" initialstep="0.02" max="0.6" use="Yes" id="n9"/>
+<parameterHistory min="0.2" initialstep="0.04" max="0.8" use="Yes" id="n10"/>
+<parameterHistory min="0.3" initialstep="0.06" max="1.2" use="Yes" id="n11"/>
+<parameterHistory min="6.25" initialstep="1.25" max="25.0" use="Yes" id="n12"/>
+<parameterHistory min="0.65" initialstep="0.13" max="2.6" use="Yes" id="n13"/>
+<parameterHistory min="0.05" initialstep="0.01" max="0.2" use="No" id="n14"/>
+<parameterHistory min="0.02" initialstep="0.01" max="0.2" use="Yes" id="g1"/>
+<parameterHistory min="0.0010" initialstep="0.0010" max="0.02" use="Yes" id="g2"/>
+<parameterHistory min="0.3" initialstep="0.06" max="1.2" use="No" id="g3"/>
+<parameterHistory min="0.0020" initialstep="0.0010" max="0.02" use="Yes" id="g4"/>
+<parameterHistory min="0.075" initialstep="0.015" max="0.3" use="Yes" id="g5"/>
+<parameterHistory min="0.15" initialstep="0.03" max="0.6" use="Yes" id="g6"/>
+<parameterHistory min="0.3" initialstep="0.06" max="1.2" use="Yes" id="g7"/>
+<parameterHistory min="0.0050" initialstep="0.0010" max="0.04" use="Yes" id="g8"/>
+<parameterHistory min="0.15" initialstep="0.03" max="0.6" use="Yes" id="g9"/>
+<parameterHistory min="0.25" initialstep="0.05" max="1.0" use="Yes" id="g10"/>
+<parameterHistory min="0.1" initialstep="0.07" max="1.4" use="Yes" id="g11"/>
+<parameterHistory min="0.1" initialstep="0.02" max="0.4" use="No" id="g12"/>
+<parameterHistory min="0.5" initialstep="0.1" max="2.0" use="No" id="g13"/>
+<parameterHistory min="0.0020" initialstep="4.0E-4" max="0.02" use="Yes" id="g14"/>
+<parameterHistory min="0.2" initialstep="0.04" max="0.8" use="Yes" id="g15"/>
+<parameterHistory min="0.15" initialstep="0.03" max="0.6" use="Yes" id="g16"/>
+<parameterHistory min="0.5" initialstep="0.054" max="1.0" use="Yes" id="m1"/>
+<parameterHistory min="0.2" initialstep="0.024" max="0.5" use="Yes" id="m2"/>
+<parameterHistory min="0.1" initialstep="0.02" max="0.4" use="Yes" id="m3"/>
+<parameterHistory min="0.1" initialstep="0.02" max="0.4" use="No" id="m4"/>
+<parameterHistory min="0.15" initialstep="0.03" max="0.6" use="No" id="m5"/>
+<parameterHistory min="0.15" initialstep="0.03" max="0.6" use="Yes" id="m6"/>
+<parameterHistory min="0.1" initialstep="0.07" max="1.0" use="Yes" id="m7"/>
+<parameterHistory min="0.2" initialstep="0.04" max="0.8" use="Yes" id="m8"/>
+<parameterHistory min="0.55" initialstep="0.11" max="2.2" use="Yes" id="m9"/>
+<parameterHistory min="0.5" initialstep="0.1" max="2.0" use="No" id="m10"/>
+<parameterHistory min="0.5" initialstep="0.1" max="2.0" use="No" id="m11"/>
+<parameterHistory min="0.5" initialstep="0.1" max="2.0" use="No" id="m12"/>
+<parameterHistory min="0.16" initialstep="0.032" max="0.64" use="No" id="m13"/>
+<parameterHistory min="0.4" initialstep="0.04" max="0.8" use="Yes" id="m14"/>
+<parameterHistory min="0.35" initialstep="0.07" max="1.4" use="No" id="m15"/>
+<parameterHistory min="0.5" initialstep="0.05" max="1.0" use="Yes" id="m16"/>
+<parameterHistory min="0.25" initialstep="0.05" max="1.0" use="No" id="m17"/>
+<parameterHistory min="0.75" initialstep="0.34" max="3.4" use="Yes" id="m18"/>
+<parameterHistory min="0.1" initialstep="0.02" max="1.0" use="Yes" id="m19"/>
+<parameterHistory min="0.3" initialstep="0.06" max="1.2" use="No" id="m20"/>
+<parameterHistory min="0.04" initialstep="0.0080" max="0.16" use="No" id="m21"/>
+<parameterHistory min="0.05" initialstep="0.01" max="0.2" use="Yes" id="m22"/>
+<parameterHistory min="0.5" initialstep="0.18" max="2.0" use="Yes" id="m23"/>
+<parameterHistory min="0.02" initialstep="0.01" max="0.5" use="Yes" id="m24"/>
+<parameterHistory min="0.9" initialstep="0.18" max="3.6" use="No" id="m25"/>
+<parameterHistory min="0.25" initialstep="0.05" max="1.0" use="No" id="m26"/>
+<parameterHistory min="0.05" initialstep="0.01" max="0.2" use="No" id="m27"/>
+<parameterHistory min="10.0" initialstep="2.0" max="40.0" use="No" id="m28"/>
+<parameterHistory min="2.5" initialstep="0.5" max="10.0" use="Yes" id="m29"/>
+<parameterHistory min="1.5" initialstep="0.3" max="6.0" use="Yes" id="m30"/>
+<parameterHistory min="0.15" initialstep="0.03" max="0.6" use="No" id="m31"/>
+<parameterHistory min="0.1" initialstep="0.02" max="0.4" use="No" id="m32"/>
+<parameterHistory min="6.5" initialstep="1.3" max="26.0" use="No" id="m33"/>
+<parameterHistory min="0.5" initialstep="0.06" max="1.0" use="Yes" id="m34"/>
+<parameterHistory min="0.1" initialstep="0.03" max="0.6" use="Yes" id="m35"/>
+<parameterHistory min="0.05" initialstep="0.01" max="0.2" use="Yes" id="m36"/>
+<parameterHistory min="0.4" initialstep="0.08" max="1.6" use="Yes" id="m37"/>
+<parameterHistory min="0.25" initialstep="0.05" max="1.0" use="No" id="m38"/>
+<parameterHistory min="0.05" initialstep="0.03" max="0.6" use="Yes" id="m39"/>
+<parameterHistory min="1.0" initialstep="0.2" max="4.0" use="No" id="a"/>
+<parameterHistory min="1.0" initialstep="0.2" max="4.0" use="No" id="b"/>
+<parameterHistory min="1.0" initialstep="0.2" max="4.0" use="No" id="c"/>
+<parameterHistory min="1.0" initialstep="0.2" max="4.0" use="No" id="d"/>
+<parameterHistory min="1.0" initialstep="0.2" max="4.0" use="No" id="e"/>
+<parameterHistory min="1.0" initialstep="0.2" max="4.0" use="No" id="f"/>
+<parameterHistory min="0.065" initialstep="0.013" max="0.26" use="Yes" id="p1"/>
+<parameterHistory min="0.135" initialstep="0.027" max="0.54" use="Yes" id="p2"/>
+<parameterHistory min="0.05" initialstep="0.01" max="0.2" use="Yes" id="p3"/>
+<parameterHistory min="0.28" initialstep="0.056" max="1.12" use="Yes" id="p4"/>
+<parameterHistory min="1.0" initialstep="0.4" max="8.0" use="Yes" id="p5"/>
+<parameterHistory min="0.3" initialstep="0.06" max="1.2" use="No" id="p6"/>
+<parameterHistory min="0.15" initialstep="0.03" max="0.6" use="No" id="p7"/>
+<parameterHistory min="0.3" initialstep="0.06" max="1.2" use="Yes" id="p8"/>
+<parameterHistory min="0.4" initialstep="0.08" max="1.6" use="Yes" id="p9"/>
+<parameterHistory min="0.27" initialstep="0.054" max="1.08" use="Yes" id="p10"/>
+<parameterHistory min="0.255" initialstep="0.051" max="1.02" use="Yes" id="p11"/>
+<parameterHistory min="0.5" initialstep="0.34" max="6.8" use="Yes" id="p12"/>
+<parameterHistory min="0.05" initialstep="0.01" max="0.2" use="Yes" id="p13"/>
+<parameterHistory min="0.07" initialstep="0.014" max="0.28" use="Yes" id="p14"/>
+<parameterHistory min="1.5" initialstep="0.3" max="6.0" use="No" id="p15"/>
+<parameterHistory min="0.31" initialstep="0.062" max="1.24" use="Yes" id="p16"/>
+<parameterHistory min="2.4" initialstep="0.48" max="17.0" use="Yes" id="p17"/>
+<parameterHistory min="2.0" initialstep="0.4" max="8.0" use="Yes" id="p18"/>
+<parameterHistory min="0.5" initialstep="0.1" max="2.0" use="Yes" id="p19"/>
+<parameterHistory min="0.05" initialstep="0.01" max="0.2" use="Yes" id="p20"/>
+<parameterHistory min="0.5" initialstep="0.1" max="2.0" use="No" id="p21"/>
+<parameterHistory min="0.25" initialstep="0.05" max="1.0" use="No" id="p22"/>
+<parameterHistory min="0.185" initialstep="0.037" max="0.74" use="Yes" id="p23"/>
+<parameterHistory min="5.0" initialstep="1.0" max="20.0" use="Yes" id="p24"/>
+<parameterHistory min="4.0" initialstep="0.8" max="16.0" use="No" id="p25"/>
+<parameterHistory min="0.15" initialstep="0.03" max="0.6" use="No" id="p26"/>
+<parameterHistory min="0.4" initialstep="0.08" max="1.6" use="Yes" id="p27"/>
+<parameterHistory min="1.0" initialstep="0.2" max="4.0" use="No" id="p28"/>
+<parameterHistory min="0.05" initialstep="0.01" max="0.2" use="No" id="p29"/>
+<parameterHistory min="0.1" initialstep="0.09" max="1.8" use="Yes" id="p30"/>
+<parameterHistory min="0.05" initialstep="0.01" max="0.2" use="No" id="p31"/>
+<parameterHistory min="0.3" initialstep="0.12" max="1.5" use="Yes" id="q1"/>
+<parameterHistory min="0.4" initialstep="0.156" max="3.0" use="Yes" id="q2"/>
+<parameterHistory min="1.4" initialstep="0.28" max="5.6" use="Yes" id="q3"/>
+<parameterHistory min="0.5" initialstep="0.1" max="2.0" use="No" id="L"/>
+<parameterHistory min="0.0" initialstep="1.0" max="100.0" use="No" id="D"/>
+<parameterHistory min="0.5" initialstep="0.1" max="2.0" use="No" id="E34"/>
+<parameterHistory min="0.5" initialstep="0.1" max="2.0" use="No" id="Gn"/>
+<parameterHistory min="0.5" initialstep="0.1" max="2.0" use="No" id="EGn"/>
+<parameterHistory min="0.0" initialstep="0.05" max="100.0" use="No" id="step1"/>
+<parameterHistory min="0.0" initialstep="1.0" max="100.0" use="No" id="offsetStep1"/>
+<parameterHistory min="0.999" initialstep="0.1" max="1.001" use="No" id="amplitudeStep1"/>
+<parameterHistory min="0.0" initialstep="1.0" max="100.0" use="No" id="phaseStep1"/>
+<parameterHistory min="11.988" initialstep="1.2" max="12.012" use="No" id="pulseDurationStep1"/>
+<parameterHistory min="23.976" initialstep="2.4" max="24.024" use="No" id="cyclePeriodStep1"/>
+<parameterHistory min="0.04995" initialstep="0.0050" max="0.05005" use="No" id="rampDurationStep1"/>
+</listOfParameterHistories>
+<listOfConfigs xmlns="http://www.uk.ac.ed.csbe.sbsivisual/configpage/ns">
+<popSize>200</popSize>
+<MAXRG>50000</MAXRG>
+<targeted_costfunctionvalue>0.01</targeted_costfunctionvalue>
+<ckPointFreq>-1</ckPointFreq>
+<MAXCOST>10000</MAXCOST>
+<MaxNoChange>100</MaxNoChange>
+<seed>-1</seed>
+<mutantProbability>0.4</mutantProbability>
+<atol>1.0E-14</atol>
+<restartFreq>51</restartFreq>
+<mu>0.7</mu>
+<reltol>1.0E-6</reltol>
+<numBest>10</numBest>
+<printfreq>2</printfreq>
+<setupType>SobolSelect</setupType>
+<out_interval>0.1</out_interval>
+<interval>0.01</interval>
+<MaxSimilarity>95</MaxSimilarity>
+<MAX_NUMGEN>2000</MAX_NUMGEN>
+<sobolseed>-1</sobolseed>
+<t_init>0.0</t_init>
+<t_final>356.0</t_final>
+<verbose>-1</verbose>
+<maxTimes>1000000</maxTimes>
+<numGen>200</numGen>
+<PSONumGen>0</PSONumGen>
+<FFTWeight>10.0</FFTWeight>
+<X2Weight>1.0</X2Weight>
+</listOfConfigs>
+</annotation>
+<listOfFunctionDefinitions>
+<functionDefinition id="function_4_cLUX_m_trscr" name="function_4_cLUX_m_trscr">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> cEC </ci>
+</bvar>
+<bvar>
+<ci> cL </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> e </ci>
+</bvar>
+<bvar>
+<ci> g2 </ci>
+</bvar>
+<bvar>
+<ci> g6 </ci>
+</bvar>
+<bvar>
+<ci> n13 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<divide/>
+<apply>
+<times/>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> n13 </ci>
+<ci> g2 </ci>
+</apply>
+<apply>
+<plus/>
+<ci> cEC </ci>
+<ci> g2 </ci>
+</apply>
+</apply>
+<apply>
+<power/>
+<ci> g6 </ci>
+<ci> e </ci>
+</apply>
+</apply>
+<apply>
+<plus/>
+<apply>
+<power/>
+<ci> cL </ci>
+<ci> e </ci>
+</apply>
+<apply>
+<power/>
+<ci> g6 </ci>
+<ci> e </ci>
+</apply>
+</apply>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cL_degr_1" name="function_4_cL_degr_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> c </ci>
+</bvar>
+<bvar>
+<ci> cL </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> g3 </ci>
+</bvar>
+<bvar>
+<ci> m3 </ci>
+</bvar>
+<bvar>
+<ci> p3 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<plus/>
+<apply>
+<times/>
+<ci> m3 </ci>
+<ci> cL </ci>
+</apply>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> p3 </ci>
+<apply>
+<power/>
+<ci> cL </ci>
+<ci> c </ci>
+</apply>
+</apply>
+<apply>
+<plus/>
+<apply>
+<power/>
+<ci> cL </ci>
+<ci> c </ci>
+</apply>
+<apply>
+<power/>
+<ci> g3 </ci>
+<ci> c </ci>
+</apply>
+</apply>
+</apply>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cL_modif_1" name="function_4_cL_modif_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> c </ci>
+</bvar>
+<bvar>
+<ci> cL </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> g3 </ci>
+</bvar>
+<bvar>
+<ci> p3 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> p3 </ci>
+<apply>
+<power/>
+<ci> cL </ci>
+<ci> c </ci>
+</apply>
+</apply>
+<apply>
+<plus/>
+<apply>
+<power/>
+<ci> cL </ci>
+<ci> c </ci>
+</apply>
+<apply>
+<power/>
+<ci> g3 </ci>
+<ci> c </ci>
+</apply>
+</apply>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cLm_degr_1" name="function_4_cLm_degr_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> cLm </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> m4 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> m4 </ci>
+<ci> cLm </ci>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cP9_m_degr_1" name="function_4_cP9_m_degr_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> cP9_m </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> m12 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> m12 </ci>
+<ci> cP9_m </ci>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cP9_trsl_1" name="function_4_cP9_trsl_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> cP9_m </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> p8 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> p8 </ci>
+<ci> cP9_m </ci>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cP7_m_trscr_1" name="function_4_cP7_m_trscr_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> cL </ci>
+</bvar>
+<bvar>
+<ci> cLm </ci>
+</bvar>
+<bvar>
+<ci> cP9 </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> e </ci>
+</bvar>
+<bvar>
+<ci> f </ci>
+</bvar>
+<bvar>
+<ci> g10 </ci>
+</bvar>
+<bvar>
+<ci> g11 </ci>
+</bvar>
+<bvar>
+<ci> n8 </ci>
+</bvar>
+<bvar>
+<ci> n9 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<plus/>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> n8 </ci>
+<apply>
+<power/>
+<apply>
+<plus/>
+<ci> cLm </ci>
+<ci> cL </ci>
+</apply>
+<ci> e </ci>
+</apply>
+</apply>
+<apply>
+<plus/>
+<apply>
+<power/>
+<apply>
+<plus/>
+<ci> cLm </ci>
+<ci> cL </ci>
+</apply>
+<ci> e </ci>
+</apply>
+<apply>
+<power/>
+<ci> g10 </ci>
+<ci> e </ci>
+</apply>
+</apply>
+</apply>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> n9 </ci>
+<apply>
+<power/>
+<ci> cP9 </ci>
+<ci> f </ci>
+</apply>
+</apply>
+<apply>
+<plus/>
+<apply>
+<power/>
+<ci> cP9 </ci>
+<ci> f </ci>
+</apply>
+<apply>
+<power/>
+<ci> g11 </ci>
+<ci> f </ci>
+</apply>
+</apply>
+</apply>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cP7_m_degr_1" name="function_4_cP7_m_degr_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> cP7_m </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> m14 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> m14 </ci>
+<ci> cP7_m </ci>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cP7_trsl_1" name="function_4_cP7_trsl_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> cP7_m </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> p9 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> p9 </ci>
+<ci> cP7_m </ci>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cNI_m_trscr_1" name="function_4_cNI_m_trscr_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> b </ci>
+</bvar>
+<bvar>
+<ci> cLm </ci>
+</bvar>
+<bvar>
+<ci> cP7 </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> e </ci>
+</bvar>
+<bvar>
+<ci> g12 </ci>
+</bvar>
+<bvar>
+<ci> g13 </ci>
+</bvar>
+<bvar>
+<ci> n10 </ci>
+</bvar>
+<bvar>
+<ci> n11 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<plus/>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> n10 </ci>
+<apply>
+<power/>
+<ci> cLm </ci>
+<ci> e </ci>
+</apply>
+</apply>
+<apply>
+<plus/>
+<apply>
+<power/>
+<ci> cLm </ci>
+<ci> e </ci>
+</apply>
+<apply>
+<power/>
+<ci> g12 </ci>
+<ci> e </ci>
+</apply>
+</apply>
+</apply>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> n11 </ci>
+<apply>
+<power/>
+<ci> cP7 </ci>
+<ci> b </ci>
+</apply>
+</apply>
+<apply>
+<plus/>
+<apply>
+<power/>
+<ci> cP7 </ci>
+<ci> b </ci>
+</apply>
+<apply>
+<power/>
+<ci> g13 </ci>
+<ci> b </ci>
+</apply>
+</apply>
+</apply>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cNI_m_degr_1" name="function_4_cNI_m_degr_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> cNI_m </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> m16 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> m16 </ci>
+<ci> cNI_m </ci>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cNI_trsl_1" name="function_4_cNI_trsl_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> cNI_m </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> p10 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> p10 </ci>
+<ci> cNI_m </ci>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cT_m_trscr" name="function_4_cT_m_trscr">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> cEC </ci>
+</bvar>
+<bvar>
+<ci> cL </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> e </ci>
+</bvar>
+<bvar>
+<ci> g4 </ci>
+</bvar>
+<bvar>
+<ci> g5 </ci>
+</bvar>
+<bvar>
+<ci> n2 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<divide/>
+<apply>
+<times/>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> n2 </ci>
+<ci> g4 </ci>
+</apply>
+<apply>
+<plus/>
+<ci> cEC </ci>
+<ci> g4 </ci>
+</apply>
+</apply>
+<apply>
+<power/>
+<ci> g5 </ci>
+<ci> e </ci>
+</apply>
+</apply>
+<apply>
+<plus/>
+<apply>
+<power/>
+<ci> cL </ci>
+<ci> e </ci>
+</apply>
+<apply>
+<power/>
+<ci> g5 </ci>
+<ci> e </ci>
+</apply>
+</apply>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cT_m_degr_1" name="function_4_cT_m_degr_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> cT_m </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> m5 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> m5 </ci>
+<ci> cT_m </ci>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cT_trsl_1" name="function_4_cT_trsl_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> cT_m </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> p4 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> p4 </ci>
+<ci> cT_m </ci>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cE4_m_degr_1" name="function_4_cE4_m_degr_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> cE4_m </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> m34 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> m34 </ci>
+<ci> cE4_m </ci>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cE4_trsl_1" name="function_4_cE4_trsl_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> cE4_m </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> p23 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> p23 </ci>
+<ci> cE4_m </ci>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cE4_degr_1" name="function_4_cE4_degr_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> cCOP1d </ci>
+</bvar>
+<bvar>
+<ci> cCOP1n </ci>
+</bvar>
+<bvar>
+<ci> cE3n </ci>
+</bvar>
+<bvar>
+<ci> cE4 </ci>
+</bvar>
+<bvar>
+<ci> cLUX </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> m35 </ci>
+</bvar>
+<bvar>
+<ci> m36 </ci>
+</bvar>
+<bvar>
+<ci> m37 </ci>
+</bvar>
+<bvar>
+<ci> p21 </ci>
+</bvar>
+<bvar>
+<ci> p25 </ci>
+</bvar>
+<bvar>
+<ci> p26 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<minus/>
+<apply>
+<plus/>
+<apply>
+<times/>
+<ci> m35 </ci>
+<ci> cE4 </ci>
+</apply>
+<apply>
+<times/>
+<ci> p25 </ci>
+<ci> cE4 </ci>
+<ci> cE3n </ci>
+</apply>
+</apply>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> p21 </ci>
+<ci> p25 </ci>
+<ci> cE4 </ci>
+<ci> cE3n </ci>
+</apply>
+<apply>
+<plus/>
+<apply>
+<times/>
+<ci> p26 </ci>
+<ci> cLUX </ci>
+</apply>
+<ci> p21 </ci>
+<apply>
+<times/>
+<ci> m37 </ci>
+<ci> cCOP1d </ci>
+</apply>
+<apply>
+<times/>
+<ci> m36 </ci>
+<ci> cCOP1n </ci>
+</apply>
+</apply>
+</apply>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cE3_m_trscr_1" name="function_4_cE3_m_trscr_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> cL </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> e </ci>
+</bvar>
+<bvar>
+<ci> g16 </ci>
+</bvar>
+<bvar>
+<ci> n3 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> n3 </ci>
+<apply>
+<power/>
+<ci> g16 </ci>
+<ci> e </ci>
+</apply>
+</apply>
+<apply>
+<plus/>
+<apply>
+<power/>
+<ci> cL </ci>
+<ci> e </ci>
+</apply>
+<apply>
+<power/>
+<ci> g16 </ci>
+<ci> e </ci>
+</apply>
+</apply>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cE3_m_degr_1" name="function_4_cE3_m_degr_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> cE3_m </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> m26 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> m26 </ci>
+<ci> cE3_m </ci>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cE3_trsl_1" name="function_4_cE3_trsl_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> cE3_m </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> p16 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> p16 </ci>
+<ci> cE3_m </ci>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cE3_degr_1" name="function_4_cE3_degr_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> cCOP1c </ci>
+</bvar>
+<bvar>
+<ci> cE3 </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> m9 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> m9 </ci>
+<ci> cE3 </ci>
+<ci> cCOP1c </ci>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cE3n_import_1" name="function_4_cE3n_import_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> cE3 </ci>
+</bvar>
+<bvar>
+<ci> cE3n </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> p19 </ci>
+</bvar>
+<bvar>
+<ci> p20 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<minus/>
+<apply>
+<times/>
+<ci> p19 </ci>
+<ci> cE3 </ci>
+</apply>
+<apply>
+<times/>
+<ci> p20 </ci>
+<ci> cE3n </ci>
+</apply>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cE3n_degr_1" name="function_4_cE3n_degr_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> cCOP1d </ci>
+</bvar>
+<bvar>
+<ci> cCOP1n </ci>
+</bvar>
+<bvar>
+<ci> cE3n </ci>
+</bvar>
+<bvar>
+<ci> cE4 </ci>
+</bvar>
+<bvar>
+<ci> cG </ci>
+</bvar>
+<bvar>
+<ci> cLUX </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> m19 </ci>
+</bvar>
+<bvar>
+<ci> m29 </ci>
+</bvar>
+<bvar>
+<ci> m30 </ci>
+</bvar>
+<bvar>
+<ci> m36 </ci>
+</bvar>
+<bvar>
+<ci> m37 </ci>
+</bvar>
+<bvar>
+<ci> p17 </ci>
+</bvar>
+<bvar>
+<ci> p21 </ci>
+</bvar>
+<bvar>
+<ci> p25 </ci>
+</bvar>
+<bvar>
+<ci> p26 </ci>
+</bvar>
+<bvar>
+<ci> p28 </ci>
+</bvar>
+<bvar>
+<ci> p29 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<plus/>
+<apply>
+<minus/>
+<apply>
+<plus/>
+<apply>
+<times/>
+<ci> m29 </ci>
+<ci> cE3n </ci>
+<ci> cCOP1n </ci>
+</apply>
+<apply>
+<times/>
+<ci> m30 </ci>
+<ci> cE3n </ci>
+<ci> cCOP1d </ci>
+</apply>
+<apply>
+<times/>
+<ci> p25 </ci>
+<ci> cE4 </ci>
+<ci> cE3n </ci>
+</apply>
+</apply>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> p21 </ci>
+<ci> p25 </ci>
+<ci> cE4 </ci>
+<ci> cE3n </ci>
+</apply>
+<apply>
+<plus/>
+<apply>
+<times/>
+<ci> p26 </ci>
+<ci> cLUX </ci>
+</apply>
+<ci> p21 </ci>
+<apply>
+<times/>
+<ci> m37 </ci>
+<ci> cCOP1d </ci>
+</apply>
+<apply>
+<times/>
+<ci> m36 </ci>
+<ci> cCOP1n </ci>
+</apply>
+</apply>
+</apply>
+</apply>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> p17 </ci>
+<ci> cE3n </ci>
+<ci> p28 </ci>
+<ci> cG </ci>
+</apply>
+<apply>
+<plus/>
+<ci> p29 </ci>
+<ci> m19 </ci>
+<apply>
+<times/>
+<ci> p17 </ci>
+<ci> cE3n </ci>
+</apply>
+</apply>
+</apply>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cLUX_m_degr_1" name="function_4_cLUX_m_degr_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> cLUX_m </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> m34 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> m34 </ci>
+<ci> cLUX_m </ci>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cLUX_trsl_1" name="function_4_cLUX_trsl_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> cLUX_m </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> p27 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> p27 </ci>
+<ci> cLUX_m </ci>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cLUX_degr_1" name="function_4_cLUX_degr_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> cCOP1d </ci>
+</bvar>
+<bvar>
+<ci> cCOP1n </ci>
+</bvar>
+<bvar>
+<ci> cE3n </ci>
+</bvar>
+<bvar>
+<ci> cE4 </ci>
+</bvar>
+<bvar>
+<ci> cLUX </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> m36 </ci>
+</bvar>
+<bvar>
+<ci> m37 </ci>
+</bvar>
+<bvar>
+<ci> m39 </ci>
+</bvar>
+<bvar>
+<ci> p21 </ci>
+</bvar>
+<bvar>
+<ci> p25 </ci>
+</bvar>
+<bvar>
+<ci> p26 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<plus/>
+<apply>
+<times/>
+<ci> m39 </ci>
+<ci> cLUX </ci>
+</apply>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> p26 </ci>
+<ci> cLUX </ci>
+<ci> p25 </ci>
+<ci> cE4 </ci>
+<ci> cE3n </ci>
+</apply>
+<apply>
+<plus/>
+<apply>
+<times/>
+<ci> p26 </ci>
+<ci> cLUX </ci>
+</apply>
+<ci> p21 </ci>
+<apply>
+<times/>
+<ci> m37 </ci>
+<ci> cCOP1d </ci>
+</apply>
+<apply>
+<times/>
+<ci> m36 </ci>
+<ci> cCOP1n </ci>
+</apply>
+</apply>
+</apply>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cCOP1c_trsl_1" name="function_4_cCOP1c_trsl_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> n5 </ci>
+</bvar>
+<apply>
+<divide/>
+<ci> n5 </ci>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cCOP1n_import_1" name="function_4_cCOP1n_import_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> cCOP1c </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> p6 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> p6 </ci>
+<ci> cCOP1c </ci>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cG_m_degr_1" name="function_4_cG_m_degr_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> cG_m </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> m18 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> m18 </ci>
+<ci> cG_m </ci>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition metaid="COPASI10" id="function_4_cL_m_degr_L" name="function_4_cL_m_degr_L">
+<annotation>
+<COPASI xmlns="http://www.copasi.org/static/sbml">
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/">
+<rdf:Description rdf:about="#COPASI10">
+<dcterms:created>
+<rdf:Description>
+<dcterms:W3CDTF>2013-06-02T14:16:44Z</dcterms:W3CDTF>
+</rdf:Description>
+</dcterms:created>
+</rdf:Description>
+</rdf:RDF>
+</COPASI>
+</annotation>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> m1 </ci>
+</bvar>
+<bvar>
+<ci> L </ci>
+</bvar>
+<bvar>
+<ci> m2 </ci>
+</bvar>
+<bvar>
+<ci> cL_m </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<times/>
+<apply>
+<plus/>
+<apply>
+<times/>
+<ci> m1 </ci>
+<ci> L </ci>
+</apply>
+<ci> m2 </ci>
+</apply>
+<ci> cL_m </ci>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cG_trsl_1" name="function_4_cG_trsl_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> cG_m </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> p11 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> p11 </ci>
+<ci> cG_m </ci>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cG_degr_1" name="function_4_cG_degr_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> cE3n </ci>
+</bvar>
+<bvar>
+<ci> cG </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> m19 </ci>
+</bvar>
+<bvar>
+<ci> p17 </ci>
+</bvar>
+<bvar>
+<ci> p28 </ci>
+</bvar>
+<bvar>
+<ci> p29 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<minus/>
+<apply>
+<plus/>
+<apply>
+<times/>
+<ci> m19 </ci>
+<ci> cG </ci>
+</apply>
+<apply>
+<times/>
+<ci> p28 </ci>
+<ci> cG </ci>
+</apply>
+</apply>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> p29 </ci>
+<ci> p28 </ci>
+<ci> cG </ci>
+</apply>
+<apply>
+<plus/>
+<ci> p29 </ci>
+<ci> m19 </ci>
+<apply>
+<times/>
+<ci> p17 </ci>
+<ci> cE3n </ci>
+</apply>
+</apply>
+</apply>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cZTL_trsl_1" name="function_4_cZTL_trsl_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> p14 </ci>
+</bvar>
+<apply>
+<divide/>
+<ci> p14 </ci>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cZTL_degr_1" name="function_4_cZTL_degr_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> cZTL </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> m20 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> m20 </ci>
+<ci> cZTL </ci>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cZG_degr_1" name="function_4_cZG_degr_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> cZG </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> m21 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> m21 </ci>
+<ci> cZG </ci>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cG_cE3_assoc_1" name="function_4_cG_cE3_assoc_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> cE3 </ci>
+</bvar>
+<bvar>
+<ci> cG </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> p17 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> p17 </ci>
+<ci> cE3 </ci>
+<ci> cG </ci>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cEG_degr_1" name="function_4_cEG_degr_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> cCOP1c </ci>
+</bvar>
+<bvar>
+<ci> cCOP1d </ci>
+</bvar>
+<bvar>
+<ci> cCOP1n </ci>
+</bvar>
+<bvar>
+<ci> cE3n </ci>
+</bvar>
+<bvar>
+<ci> cEG </ci>
+</bvar>
+<bvar>
+<ci> cG </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> m10 </ci>
+</bvar>
+<bvar>
+<ci> m19 </ci>
+</bvar>
+<bvar>
+<ci> m9 </ci>
+</bvar>
+<bvar>
+<ci> p17 </ci>
+</bvar>
+<bvar>
+<ci> p18 </ci>
+</bvar>
+<bvar>
+<ci> p28 </ci>
+</bvar>
+<bvar>
+<ci> p29 </ci>
+</bvar>
+<bvar>
+<ci> p31 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<minus/>
+<apply>
+<plus/>
+<apply>
+<times/>
+<ci> m9 </ci>
+<ci> cEG </ci>
+<ci> cCOP1c </ci>
+</apply>
+<apply>
+<times/>
+<ci> p18 </ci>
+<ci> cEG </ci>
+</apply>
+</apply>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> p31 </ci>
+<apply>
+<plus/>
+<apply>
+<times/>
+<ci> p18 </ci>
+<ci> cEG </ci>
+</apply>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> p17 </ci>
+<ci> cE3n </ci>
+<ci> p28 </ci>
+<ci> cG </ci>
+</apply>
+<apply>
+<plus/>
+<ci> p29 </ci>
+<ci> m19 </ci>
+<apply>
+<times/>
+<ci> p17 </ci>
+<ci> cE3n </ci>
+</apply>
+</apply>
+</apply>
+</apply>
+</apply>
+<apply>
+<plus/>
+<apply>
+<times/>
+<ci> m9 </ci>
+<ci> cCOP1n </ci>
+</apply>
+<apply>
+<times/>
+<ci> m10 </ci>
+<ci> cCOP1d </ci>
+</apply>
+<ci> p31 </ci>
+</apply>
+</apply>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cEC_form_1" name="function_4_cEC_form_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> cCOP1d </ci>
+</bvar>
+<bvar>
+<ci> cCOP1n </ci>
+</bvar>
+<bvar>
+<ci> cE3n </ci>
+</bvar>
+<bvar>
+<ci> cE4 </ci>
+</bvar>
+<bvar>
+<ci> cLUX </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> m36 </ci>
+</bvar>
+<bvar>
+<ci> m37 </ci>
+</bvar>
+<bvar>
+<ci> p21 </ci>
+</bvar>
+<bvar>
+<ci> p25 </ci>
+</bvar>
+<bvar>
+<ci> p26 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> p26 </ci>
+<ci> cLUX </ci>
+<ci> p25 </ci>
+<ci> cE4 </ci>
+<ci> cE3n </ci>
+</apply>
+<apply>
+<plus/>
+<apply>
+<times/>
+<ci> p26 </ci>
+<ci> cLUX </ci>
+</apply>
+<ci> p21 </ci>
+<apply>
+<times/>
+<ci> m37 </ci>
+<ci> cCOP1d </ci>
+</apply>
+<apply>
+<times/>
+<ci> m36 </ci>
+<ci> cCOP1n </ci>
+</apply>
+</apply>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="stepFunction" name="tanh() step function">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> t </ci>
+</bvar>
+<bvar>
+<ci> offset </ci>
+</bvar>
+<bvar>
+<ci> amplitude </ci>
+</bvar>
+<bvar>
+<ci> phase </ci>
+</bvar>
+<bvar>
+<ci> pulseDuration </ci>
+</bvar>
+<bvar>
+<ci> cyclePeriod </ci>
+</bvar>
+<bvar>
+<ci> rampDuration </ci>
+</bvar>
+<apply>
+<plus/>
+<apply>
+<minus/>
+<apply>
+<plus/>
+<ci> offset </ci>
+<apply>
+<times/>
+<cn> 0.5 </cn>
+<ci> amplitude </ci>
+<apply>
+<plus/>
+<cn> 1 </cn>
+<apply>
+<tanh/>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> cyclePeriod </ci>
+<apply>
+<minus/>
+<apply>
+<divide/>
+<apply>
+<plus/>
+<ci> t </ci>
+<ci> phase </ci>
+</apply>
+<ci> cyclePeriod </ci>
+</apply>
+<apply>
+<floor/>
+<apply>
+<divide/>
+<apply>
+<plus/>
+<ci> t </ci>
+<ci> phase </ci>
+</apply>
+<ci> cyclePeriod </ci>
+</apply>
+</apply>
+</apply>
+</apply>
+<ci> rampDuration </ci>
+</apply>
+</apply>
+</apply>
+</apply>
+</apply>
+<apply>
+<times/>
+<cn> 0.5 </cn>
+<ci> amplitude </ci>
+<apply>
+<plus/>
+<cn> 1 </cn>
+<apply>
+<tanh/>
+<apply>
+<divide/>
+<apply>
+<minus/>
+<apply>
+<times/>
+<ci> cyclePeriod </ci>
+<apply>
+<minus/>
+<apply>
+<divide/>
+<apply>
+<plus/>
+<ci> t </ci>
+<ci> phase </ci>
+</apply>
+<ci> cyclePeriod </ci>
+</apply>
+<apply>
+<floor/>
+<apply>
+<divide/>
+<apply>
+<plus/>
+<ci> t </ci>
+<ci> phase </ci>
+</apply>
+<ci> cyclePeriod </ci>
+</apply>
+</apply>
+</apply>
+</apply>
+<ci> pulseDuration </ci>
+</apply>
+<ci> rampDuration </ci>
+</apply>
+</apply>
+</apply>
+</apply>
+</apply>
+<apply>
+<times/>
+<cn> 0.5 </cn>
+<ci> amplitude </ci>
+<apply>
+<plus/>
+<cn> 1 </cn>
+<apply>
+<tanh/>
+<apply>
+<divide/>
+<apply>
+<minus/>
+<apply>
+<times/>
+<ci> cyclePeriod </ci>
+<apply>
+<minus/>
+<apply>
+<divide/>
+<apply>
+<plus/>
+<ci> t </ci>
+<ci> phase </ci>
+</apply>
+<ci> cyclePeriod </ci>
+</apply>
+<apply>
+<floor/>
+<apply>
+<divide/>
+<apply>
+<plus/>
+<ci> t </ci>
+<ci> phase </ci>
+</apply>
+<ci> cyclePeriod </ci>
+</apply>
+</apply>
+</apply>
+</apply>
+<ci> cyclePeriod </ci>
+</apply>
+<ci> rampDuration </ci>
+</apply>
+</apply>
+</apply>
+</apply>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cL_m_trscr" name="function_4_cL_m_trscr">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> L </ci>
+</bvar>
+<bvar>
+<ci> a </ci>
+</bvar>
+<bvar>
+<ci> cNI </ci>
+</bvar>
+<bvar>
+<ci> cP </ci>
+</bvar>
+<bvar>
+<ci> cP7 </ci>
+</bvar>
+<bvar>
+<ci> cP9 </ci>
+</bvar>
+<bvar>
+<ci> cT </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> g1 </ci>
+</bvar>
+<bvar>
+<ci> n1 </ci>
+</bvar>
+<bvar>
+<ci> q1 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<plus/>
+<apply>
+<times/>
+<ci> L </ci>
+<ci> q1 </ci>
+<ci> cP </ci>
+</apply>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> n1 </ci>
+<apply>
+<power/>
+<ci> g1 </ci>
+<ci> a </ci>
+</apply>
+</apply>
+<apply>
+<plus/>
+<apply>
+<power/>
+<apply>
+<plus/>
+<ci> cP9 </ci>
+<ci> cP7 </ci>
+<ci> cNI </ci>
+<ci> cT </ci>
+</apply>
+<ci> a </ci>
+</apply>
+<apply>
+<power/>
+<ci> g1 </ci>
+<ci> a </ci>
+</apply>
+</apply>
+</apply>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cL_trsl" name="function_4_cL_trsl">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> L </ci>
+</bvar>
+<bvar>
+<ci> cL_m </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> p1 </ci>
+</bvar>
+<bvar>
+<ci> p2 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> cL_m </ci>
+<apply>
+<plus/>
+<apply>
+<times/>
+<ci> p1 </ci>
+<ci> L </ci>
+</apply>
+<ci> p2 </ci>
+</apply>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cP_trsl" name="function_4_cP_trsl">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> D </ci>
+</bvar>
+<bvar>
+<ci> cP </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> p7 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> p7 </ci>
+<ci> D </ci>
+<apply>
+<minus/>
+<cn> 1 </cn>
+<ci> cP </ci>
+</apply>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cP_degr" name="function_4_cP_degr">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> L </ci>
+</bvar>
+<bvar>
+<ci> cP </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> m11 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> m11 </ci>
+<ci> cP </ci>
+<ci> L </ci>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cP9_m_trscr_1" name="function_4_cP9_m_trscr_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> L </ci>
+</bvar>
+<bvar>
+<ci> cEC </ci>
+</bvar>
+<bvar>
+<ci> cL </ci>
+</bvar>
+<bvar>
+<ci> cP </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> e </ci>
+</bvar>
+<bvar>
+<ci> g8 </ci>
+</bvar>
+<bvar>
+<ci> g9 </ci>
+</bvar>
+<bvar>
+<ci> n4 </ci>
+</bvar>
+<bvar>
+<ci> n7 </ci>
+</bvar>
+<bvar>
+<ci> q3 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<plus/>
+<apply>
+<times/>
+<ci> L </ci>
+<ci> q3 </ci>
+<ci> cP </ci>
+</apply>
+<apply>
+<divide/>
+<apply>
+<times/>
+<apply>
+<plus/>
+<ci> n4 </ci>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> n7 </ci>
+<apply>
+<power/>
+<ci> cL </ci>
+<ci> e </ci>
+</apply>
+</apply>
+<apply>
+<plus/>
+<apply>
+<power/>
+<ci> cL </ci>
+<ci> e </ci>
+</apply>
+<apply>
+<power/>
+<ci> g9 </ci>
+<ci> e </ci>
+</apply>
+</apply>
+</apply>
+</apply>
+<ci> g8 </ci>
+</apply>
+<apply>
+<plus/>
+<ci> cEC </ci>
+<ci> g8 </ci>
+</apply>
+</apply>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cP9_degr" name="function_4_cP9_degr">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> D </ci>
+</bvar>
+<bvar>
+<ci> cP9 </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> m13 </ci>
+</bvar>
+<bvar>
+<ci> m22 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<times/>
+<apply>
+<plus/>
+<ci> m13 </ci>
+<apply>
+<times/>
+<ci> m22 </ci>
+<ci> D </ci>
+</apply>
+</apply>
+<ci> cP9 </ci>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cP7_degr" name="function_4_cP7_degr">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> D </ci>
+</bvar>
+<bvar>
+<ci> cP7 </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> m15 </ci>
+</bvar>
+<bvar>
+<ci> m23 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<times/>
+<apply>
+<plus/>
+<ci> m15 </ci>
+<apply>
+<times/>
+<ci> m23 </ci>
+<ci> D </ci>
+</apply>
+</apply>
+<ci> cP7 </ci>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cNI_degr" name="function_4_cNI_degr">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> D </ci>
+</bvar>
+<bvar>
+<ci> cNI </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> m17 </ci>
+</bvar>
+<bvar>
+<ci> m24 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<times/>
+<apply>
+<plus/>
+<ci> m17 </ci>
+<apply>
+<times/>
+<ci> m24 </ci>
+<ci> D </ci>
+</apply>
+</apply>
+<ci> cNI </ci>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cT_degr" name="function_4_cT_degr">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> D </ci>
+</bvar>
+<bvar>
+<ci> cT </ci>
+</bvar>
+<bvar>
+<ci> cZG </ci>
+</bvar>
+<bvar>
+<ci> cZTL </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> m6 </ci>
+</bvar>
+<bvar>
+<ci> m7 </ci>
+</bvar>
+<bvar>
+<ci> m8 </ci>
+</bvar>
+<bvar>
+<ci> p5 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<plus/>
+<apply>
+<times/>
+<apply>
+<plus/>
+<ci> m6 </ci>
+<apply>
+<times/>
+<ci> m7 </ci>
+<ci> D </ci>
+</apply>
+</apply>
+<ci> cT </ci>
+<apply>
+<plus/>
+<apply>
+<times/>
+<ci> p5 </ci>
+<ci> cZTL </ci>
+</apply>
+<ci> cZG </ci>
+</apply>
+</apply>
+<apply>
+<times/>
+<ci> m8 </ci>
+<ci> cT </ci>
+</apply>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cCOP1c_degr" name="function_4_cCOP1c_degr">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> L </ci>
+</bvar>
+<bvar>
+<ci> cCOP1c </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> m27 </ci>
+</bvar>
+<bvar>
+<ci> p15 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> m27 </ci>
+<ci> cCOP1c </ci>
+<apply>
+<plus/>
+<cn> 1 </cn>
+<apply>
+<times/>
+<ci> p15 </ci>
+<ci> L </ci>
+</apply>
+</apply>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cCOP1n_degr" name="function_4_cCOP1n_degr">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> L </ci>
+</bvar>
+<bvar>
+<ci> cCOP1n </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> m27 </ci>
+</bvar>
+<bvar>
+<ci> p15 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> m27 </ci>
+<ci> cCOP1n </ci>
+<apply>
+<plus/>
+<cn> 1 </cn>
+<apply>
+<times/>
+<ci> p15 </ci>
+<ci> L </ci>
+</apply>
+</apply>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cCOP1d_activ" name="function_4_cCOP1d_activ">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> L </ci>
+</bvar>
+<bvar>
+<ci> cCOP1n </ci>
+</bvar>
+<bvar>
+<ci> cP </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> n14 </ci>
+</bvar>
+<bvar>
+<ci> n6 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<plus/>
+<apply>
+<times/>
+<ci> n6 </ci>
+<ci> L </ci>
+<ci> cP </ci>
+<ci> cCOP1n </ci>
+</apply>
+<apply>
+<times/>
+<ci> n14 </ci>
+<ci> cCOP1n </ci>
+</apply>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition metaid="COPASI11" id="function_4_cCOP1d_degr" name="function_4_cCOP1d_degr">
+<annotation>
+<COPASI xmlns="http://www.copasi.org/static/sbml">
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/">
+<rdf:Description rdf:about="#COPASI11">
+<dcterms:created>
+<rdf:Description>
+<dcterms:W3CDTF>2013-06-02T14:19:29Z</dcterms:W3CDTF>
+</rdf:Description>
+</dcterms:created>
+</rdf:Description>
+</rdf:RDF>
+</COPASI>
+</annotation>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> D </ci>
+</bvar>
+<bvar>
+<ci> cCOP1d </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> m31 </ci>
+</bvar>
+<bvar>
+<ci> m33 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> m31 </ci>
+<apply>
+<plus/>
+<cn> 1 </cn>
+<apply>
+<times/>
+<ci> m33 </ci>
+<ci> D </ci>
+</apply>
+</apply>
+<ci> cCOP1d </ci>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cG_m_trscr_1" name="function_4_cG_m_trscr_1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> L </ci>
+</bvar>
+<bvar>
+<ci> cEC </ci>
+</bvar>
+<bvar>
+<ci> cL </ci>
+</bvar>
+<bvar>
+<ci> cP </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> e </ci>
+</bvar>
+<bvar>
+<ci> g14 </ci>
+</bvar>
+<bvar>
+<ci> g15 </ci>
+</bvar>
+<bvar>
+<ci> n12 </ci>
+</bvar>
+<bvar>
+<ci> q2 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<plus/>
+<apply>
+<times/>
+<ci> L </ci>
+<ci> q2 </ci>
+<ci> cP </ci>
+</apply>
+<apply>
+<divide/>
+<apply>
+<times/>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> n12 </ci>
+<ci> g14 </ci>
+</apply>
+<apply>
+<plus/>
+<ci> cEC </ci>
+<ci> g14 </ci>
+</apply>
+</apply>
+<apply>
+<power/>
+<ci> g15 </ci>
+<ci> e </ci>
+</apply>
+</apply>
+<apply>
+<plus/>
+<apply>
+<power/>
+<ci> cL </ci>
+<ci> e </ci>
+</apply>
+<apply>
+<power/>
+<ci> g15 </ci>
+<ci> e </ci>
+</apply>
+</apply>
+</apply>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cG_cZTL_assoc" name="function_4_cG_cZTL_assoc">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> D </ci>
+</bvar>
+<bvar>
+<ci> L </ci>
+</bvar>
+<bvar>
+<ci> cG </ci>
+</bvar>
+<bvar>
+<ci> cZG </ci>
+</bvar>
+<bvar>
+<ci> cZTL </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> p12 </ci>
+</bvar>
+<bvar>
+<ci> p13 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<minus/>
+<apply>
+<times/>
+<ci> p12 </ci>
+<ci> L </ci>
+<ci> cZTL </ci>
+<ci> cG </ci>
+</apply>
+<apply>
+<times/>
+<ci> p13 </ci>
+<ci> D </ci>
+<ci> cZG </ci>
+</apply>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+<functionDefinition id="function_4_cEC_degr" name="function_4_cEC_degr">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<lambda>
+<bvar>
+<ci> L </ci>
+</bvar>
+<bvar>
+<ci> cCOP1d </ci>
+</bvar>
+<bvar>
+<ci> cCOP1n </ci>
+</bvar>
+<bvar>
+<ci> cE3n </ci>
+</bvar>
+<bvar>
+<ci> cEC </ci>
+</bvar>
+<bvar>
+<ci> cEG </ci>
+</bvar>
+<bvar>
+<ci> cG </ci>
+</bvar>
+<bvar>
+<ci> d </ci>
+</bvar>
+<bvar>
+<ci> def </ci>
+</bvar>
+<bvar>
+<ci> g7 </ci>
+</bvar>
+<bvar>
+<ci> m10 </ci>
+</bvar>
+<bvar>
+<ci> m19 </ci>
+</bvar>
+<bvar>
+<ci> m32 </ci>
+</bvar>
+<bvar>
+<ci> m36 </ci>
+</bvar>
+<bvar>
+<ci> m37 </ci>
+</bvar>
+<bvar>
+<ci> m9 </ci>
+</bvar>
+<bvar>
+<ci> p17 </ci>
+</bvar>
+<bvar>
+<ci> p18 </ci>
+</bvar>
+<bvar>
+<ci> p24 </ci>
+</bvar>
+<bvar>
+<ci> p28 </ci>
+</bvar>
+<bvar>
+<ci> p29 </ci>
+</bvar>
+<bvar>
+<ci> p31 </ci>
+</bvar>
+<apply>
+<divide/>
+<apply>
+<plus/>
+<apply>
+<times/>
+<ci> m36 </ci>
+<ci> cCOP1n </ci>
+<ci> cEC </ci>
+</apply>
+<apply>
+<times/>
+<ci> m37 </ci>
+<ci> cCOP1d </ci>
+<ci> cEC </ci>
+</apply>
+<apply>
+<times/>
+<ci> m32 </ci>
+<ci> cEC </ci>
+<apply>
+<plus/>
+<cn> 1 </cn>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> p24 </ci>
+<ci> L </ci>
+<apply>
+<power/>
+<apply>
+<plus/>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> p28 </ci>
+<ci> cG </ci>
+</apply>
+<apply>
+<plus/>
+<ci> p29 </ci>
+<ci> m19 </ci>
+<apply>
+<times/>
+<ci> p17 </ci>
+<ci> cE3n </ci>
+</apply>
+</apply>
+</apply>
+<apply>
+<divide/>
+<apply>
+<plus/>
+<apply>
+<times/>
+<ci> p18 </ci>
+<ci> cEG </ci>
+</apply>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> p17 </ci>
+<ci> cE3n </ci>
+<ci> p28 </ci>
+<ci> cG </ci>
+</apply>
+<apply>
+<plus/>
+<ci> p29 </ci>
+<ci> m19 </ci>
+<apply>
+<times/>
+<ci> p17 </ci>
+<ci> cE3n </ci>
+</apply>
+</apply>
+</apply>
+</apply>
+<apply>
+<plus/>
+<apply>
+<times/>
+<ci> m9 </ci>
+<ci> cCOP1n </ci>
+</apply>
+<apply>
+<times/>
+<ci> m10 </ci>
+<ci> cCOP1d </ci>
+</apply>
+<ci> p31 </ci>
+</apply>
+</apply>
+</apply>
+<ci> d </ci>
+</apply>
+</apply>
+<apply>
+<plus/>
+<apply>
+<power/>
+<apply>
+<plus/>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> p28 </ci>
+<ci> cG </ci>
+</apply>
+<apply>
+<plus/>
+<ci> p29 </ci>
+<ci> m19 </ci>
+<apply>
+<times/>
+<ci> p17 </ci>
+<ci> cE3n </ci>
+</apply>
+</apply>
+</apply>
+<apply>
+<divide/>
+<apply>
+<plus/>
+<apply>
+<times/>
+<ci> p18 </ci>
+<ci> cEG </ci>
+</apply>
+<apply>
+<divide/>
+<apply>
+<times/>
+<ci> p17 </ci>
+<ci> cE3n </ci>
+<ci> p28 </ci>
+<ci> cG </ci>
+</apply>
+<apply>
+<plus/>
+<ci> p29 </ci>
+<ci> m19 </ci>
+<apply>
+<times/>
+<ci> p17 </ci>
+<ci> cE3n </ci>
+</apply>
+</apply>
+</apply>
+</apply>
+<apply>
+<plus/>
+<apply>
+<times/>
+<ci> m9 </ci>
+<ci> cCOP1n </ci>
+</apply>
+<apply>
+<times/>
+<ci> m10 </ci>
+<ci> cCOP1d </ci>
+</apply>
+<ci> p31 </ci>
+</apply>
+</apply>
+</apply>
+<ci> d </ci>
+</apply>
+<apply>
+<power/>
+<ci> g7 </ci>
+<ci> d </ci>
+</apply>
+</apply>
+</apply>
+</apply>
+</apply>
+</apply>
+<ci> def </ci>
+</apply>
+</lambda>
+</math>
+</functionDefinition>
+</listOfFunctionDefinitions>
+<listOfUnitDefinitions>
+<unitDefinition id="volume" name="volume">
+<listOfUnits>
+<unit kind="litre" scale="-6"/>
+</listOfUnits>
+</unitDefinition>
+<unitDefinition id="time" name="time">
+<listOfUnits>
+<unit kind="second" multiplier="3600"/>
+</listOfUnits>
+</unitDefinition>
+<unitDefinition id="substance" name="substance">
+<listOfUnits>
+<unit kind="mole" scale="-9"/>
+</listOfUnits>
+</unitDefinition>
+</listOfUnitDefinitions>
+<listOfCompartments>
+<compartment id="def" name="def" size="1"/>
+</listOfCompartments>
+<listOfSpecies>
+<species id="cCOP1c" name="cCOP1c" compartment="def" initialConcentration="0.3269"/>
+<species id="cCOP1d" name="cCOP1d" compartment="def" initialConcentration="0.2566"/>
+<species id="cCOP1n" name="cCOP1n" compartment="def" initialConcentration="0.65"/>
+<species id="cE3" name="cE3" compartment="def" initialConcentration="0.1503"/>
+<species id="cE3_m" name="cE3_m" compartment="def" initialConcentration="0.2991"/>
+<species id="cE3n" name="cE3n" compartment="def" initialConcentration="0.0286"/>
+<species id="cE4" name="cE4" compartment="def" initialConcentration="0.207"/>
+<species id="cE4_m" name="cE4_m" compartment="def" initialConcentration="0.1012"/>
+<species id="cEC" name="cEC" compartment="def" initialConcentration="0.0709"/>
+<species id="cEG" name="cEG" compartment="def" initialConcentration="0.0041"/>
+<species id="cG" name="cG" compartment="def" initialConcentration="0.0196"/>
+<species id="cG_m" name="cG_m" compartment="def" initialConcentration="0.1017"/>
+<species id="cL" name="cL" compartment="def" initialConcentration="0.506"/>
+<species id="cLUX" name="cLUX" compartment="def" initialConcentration="0.576"/>
+<species id="cLUX_m" name="cLUX_m" compartment="def" initialConcentration="0.1012"/>
+<species id="cL_m" name="cL_m" compartment="def" initialConcentration="1.0151"/>
+<species id="cLm" name="cLm" compartment="def" initialConcentration="0.0788"/>
+<species id="cNI" name="cNI" compartment="def" initialConcentration="0.0697"/>
+<species id="cNI_m" name="cNI_m" compartment="def" initialConcentration="0.0731"/>
+<species id="cP" name="cP" compartment="def" initialConcentration="0.956"/>
+<species id="cP7" name="cP7" compartment="def" initialConcentration="0.1167"/>
+<species id="cP7_m" name="cP7_m" compartment="def" initialConcentration="0.4016"/>
+<species id="cP9" name="cP9" compartment="def" initialConcentration="0.0238"/>
+<species id="cP9_m" name="cP9_m" compartment="def" initialConcentration="0.0658"/>
+<species id="cT" name="cT" compartment="def" initialConcentration="0.0435"/>
+<species id="cT_m" name="cT_m" compartment="def" initialConcentration="0.0977"/>
+<species id="cZG" name="cZG" compartment="def" initialConcentration="0.0755"/>
+<species id="cZTL" name="cZTL" compartment="def" initialConcentration="0.2505"/>
+</listOfSpecies>
+<listOfParameters>
+<parameter id="n1" name="n1" value="2.6"/>
+<parameter id="n2" name="n2" value="0.64"/>
+<parameter id="n3" name="n3" value="0.29"/>
+<parameter id="n4" name="n4" value="0.07"/>
+<parameter id="n5" name="n5" value="0.23"/>
+<parameter id="n6" name="n6" value="20"/>
+<parameter id="n7" name="n7" value="0.2"/>
+<parameter id="n8" name="n8" value="0.5"/>
+<parameter id="n9" name="n9" value="0.2"/>
+<parameter id="n10" name="n10" value="0.4"/>
+<parameter id="n11" name="n11" value="0.6"/>
+<parameter id="n12" name="n12" value="12.5"/>
+<parameter id="n13" name="n13" value="1.3"/>
+<parameter id="n14" name="n14" value="0.1"/>
+<parameter id="g1" name="g1" value="0.1"/>
+<parameter id="g2" name="g2" value="0.01"/>
+<parameter id="g3" name="g3" value="0.6"/>
+<parameter id="g4" name="g4" value="0.01"/>
+<parameter id="g5" name="g5" value="0.15"/>
+<parameter id="g6" name="g6" value="0.3"/>
+<parameter id="g7" name="g7" value="0.6"/>
+<parameter id="g8" name="g8" value="0.01"/>
+<parameter id="g9" name="g9" value="0.3"/>
+<parameter metaid="COPASI2" id="g10" name="g10" value="0.5">
+<annotation>
+<COPASI xmlns="http://www.copasi.org/static/sbml">
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/">
+<rdf:Description rdf:about="#COPASI2">
+<dcterms:created>
+<rdf:Description>
+<dcterms:W3CDTF>2011-08-18T14:59:52Z</dcterms:W3CDTF>
+</rdf:Description>
+</dcterms:created>
+</rdf:Description>
+</rdf:RDF>
+</COPASI>
+</annotation>
+</parameter>
+<parameter id="g11" name="g11" value="0.7"/>
+<parameter id="g12" name="g12" value="0.2"/>
+<parameter id="g13" name="g13" value="1"/>
+<parameter id="g14" name="g14" value="0.004"/>
+<parameter id="g15" name="g15" value="0.4"/>
+<parameter id="g16" name="g16" value="0.3"/>
+<parameter id="m1" name="m1" value="0.3"/>
+<parameter id="m2" name="m2" value="0.24"/>
+<parameter id="m3" name="m3" value="0.2"/>
+<parameter id="m4" name="m4" value="0.2"/>
+<parameter id="m5" name="m5" value="0.3"/>
+<parameter id="m6" name="m6" value="0.3"/>
+<parameter id="m7" name="m7" value="0.7"/>
+<parameter id="m8" name="m8" value="0.4"/>
+<parameter id="m9" name="m9" value="1.1"/>
+<parameter id="m10" name="m10" value="1"/>
+<parameter id="m11" name="m11" value="1"/>
+<parameter id="m12" name="m12" value="1"/>
+<parameter id="m13" name="m13" value="0.32"/>
+<parameter id="m14" name="m14" value="0.4"/>
+<parameter id="m15" name="m15" value="0.7"/>
+<parameter id="m16" name="m16" value="0.5"/>
+<parameter id="m17" name="m17" value="0.5"/>
+<parameter id="m18" name="m18" value="3.4"/>
+<parameter id="m19" name="m19" value="0.2"/>
+<parameter id="m20" name="m20" value="0.6"/>
+<parameter id="m21" name="m21" value="0.08"/>
+<parameter id="m22" name="m22" value="0.1"/>
+<parameter metaid="COPASI3" id="m23" name="m23" value="1.8">
+<annotation>
+<COPASI xmlns="http://www.copasi.org/static/sbml">
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/">
+<rdf:Description rdf:about="#COPASI3">
+<dcterms:created>
+<rdf:Description>
+<dcterms:W3CDTF>2011-08-18T15:12:55Z</dcterms:W3CDTF>
+</rdf:Description>
+</dcterms:created>
+</rdf:Description>
+</rdf:RDF>
+</COPASI>
+</annotation>
+</parameter>
+<parameter id="m24" name="m24" value="0.1"/>
+<parameter id="m25" name="m25" value="1.8"/>
+<parameter id="m26" name="m26" value="0.5"/>
+<parameter id="m27" name="m27" value="0.1"/>
+<parameter id="m28" name="m28" value="20"/>
+<parameter id="m29" name="m29" value="5"/>
+<parameter id="m30" name="m30" value="3"/>
+<parameter id="m31" name="m31" value="0.3"/>
+<parameter id="m32" name="m32" value="0.2"/>
+<parameter id="m33" name="m33" value="13"/>
+<parameter id="m34" name="m34" value="0.6"/>
+<parameter id="m35" name="m35" value="0.3"/>
+<parameter id="m36" name="m36" value="0.1"/>
+<parameter id="m37" name="m37" value="0.8"/>
+<parameter id="m38" name="m38" value="0.5"/>
+<parameter id="m39" name="m39" value="0.3"/>
+<parameter id="a" name="a" value="2"/>
+<parameter id="b" name="b" value="2"/>
+<parameter id="c" name="c" value="2"/>
+<parameter metaid="COPASI4" id="d" name="d" value="2">
+<annotation>
+<COPASI xmlns="http://www.copasi.org/static/sbml">
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/">
+<rdf:Description rdf:about="#COPASI4">
+<dcterms:created>
+<rdf:Description>
+<dcterms:W3CDTF>2011-08-18T14:51:31Z</dcterms:W3CDTF>
+</rdf:Description>
+</dcterms:created>
+</rdf:Description>
+</rdf:RDF>
+</COPASI>
+</annotation>
+</parameter>
+<parameter id="e" name="e" value="2"/>
+<parameter id="f" name="f" value="2"/>
+<parameter id="p1" name="p1" value="0.13"/>
+<parameter id="p2" name="p2" value="0.27"/>
+<parameter id="p3" name="p3" value="0.1"/>
+<parameter id="p4" name="p4" value="0.56"/>
+<parameter id="p5" name="p5" value="4"/>
+<parameter id="p6" name="p6" value="0.6"/>
+<parameter id="p7" name="p7" value="0.3"/>
+<parameter id="p8" name="p8" value="0.6"/>
+<parameter id="p9" name="p9" value="0.8"/>
+<parameter id="p10" name="p10" value="0.54"/>
+<parameter id="p11" name="p11" value="0.51"/>
+<parameter id="p12" name="p12" value="3.4"/>
+<parameter id="p13" name="p13" value="0.1"/>
+<parameter id="p14" name="p14" value="0.14"/>
+<parameter id="p15" name="p15" value="3"/>
+<parameter id="p16" name="p16" value="0.62"/>
+<parameter id="p17" name="p17" value="4.8"/>
+<parameter id="p18" name="p18" value="4"/>
+<parameter id="p19" name="p19" value="1"/>
+<parameter id="p20" name="p20" value="0.1"/>
+<parameter id="p21" name="p21" value="1"/>
+<parameter id="p22" name="p22" value="0.5"/>
+<parameter id="p23" name="p23" value="0.37"/>
+<parameter id="p24" name="p24" value="10"/>
+<parameter id="p25" name="p25" value="8"/>
+<parameter id="p26" name="p26" value="0.3"/>
+<parameter id="p27" name="p27" value="0.8"/>
+<parameter id="p28" name="p28" value="2"/>
+<parameter id="p29" name="p29" value="0.1"/>
+<parameter id="p30" name="p30" value="0.9"/>
+<parameter id="p31" name="p31" value="0.1"/>
+<parameter id="q1" name="q1" value="1.2"/>
+<parameter id="q2" name="q2" value="1.56"/>
+<parameter id="q3" name="q3" value="2.8"/>
+<parameter metaid="COPASI5" id="L" name="L" value="0.5" constant="false">
+<annotation>
+<COPASI xmlns="http://www.copasi.org/static/sbml">
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/">
+<rdf:Description rdf:about="#COPASI5">
+<dcterms:created>
+<rdf:Description>
+<dcterms:W3CDTF>2011-08-18T14:55:15Z</dcterms:W3CDTF>
+</rdf:Description>
+</dcterms:created>
+</rdf:Description>
+</rdf:RDF>
+</COPASI>
+</annotation>
+</parameter>
+<parameter metaid="COPASI6" id="D" name="D" value="0.5" constant="false">
+<annotation>
+<COPASI xmlns="http://www.copasi.org/static/sbml">
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/">
+<rdf:Description rdf:about="#COPASI6">
+<dcterms:created>
+<rdf:Description>
+<dcterms:W3CDTF>2011-08-18T15:00:12Z</dcterms:W3CDTF>
+</rdf:Description>
+</dcterms:created>
+</rdf:Description>
+</rdf:RDF>
+</COPASI>
+</annotation>
+</parameter>
+<parameter id="E34" name="E34" value="1"/>
+<parameter metaid="COPASI7" id="Gn" name="Gn" value="1">
+<annotation>
+<COPASI xmlns="http://www.copasi.org/static/sbml">
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/">
+<rdf:Description rdf:about="#COPASI7">
+<dcterms:created>
+<rdf:Description>
+<dcterms:W3CDTF>2011-08-18T14:48:55Z</dcterms:W3CDTF>
+</rdf:Description>
+</dcterms:created>
+</rdf:Description>
+</rdf:RDF>
+</COPASI>
+</annotation>
+</parameter>
+<parameter metaid="COPASI8" id="EGn" name="EGn" value="1">
+<annotation>
+<COPASI xmlns="http://www.copasi.org/static/sbml">
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/">
+<rdf:Description rdf:about="#COPASI8">
+<dcterms:created>
+<rdf:Description>
+<dcterms:W3CDTF>2011-08-18T14:47:43Z</dcterms:W3CDTF>
+</rdf:Description>
+</dcterms:created>
+</rdf:Description>
+</rdf:RDF>
+</COPASI>
+</annotation>
+</parameter>
+<parameter id="step1" name="Lightstep" value="0.5" constant="false"/>
+<parameter id="offsetStep1" name="offsetStep1" value="0" constant="false"/>
+<parameter id="amplitudeStep1" name="amplitudeStep1" value="1" constant="false"/>
+<parameter id="phaseStep1" name="phaseStep1" value="0"/>
+<parameter id="pulseDurationStep1" name="pulseDurationStep1" value="12"/>
+<parameter id="cyclePeriodStep1" name="cyclePeriodStep1" value="24"/>
+<parameter id="rampDurationStep1" name="rampDurationStep1" value="0.05"/>
+</listOfParameters>
+<listOfRules>
+<assignmentRule variable="step1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<ci> stepFunction </ci>
+<csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+<ci> offsetStep1 </ci>
+<ci> amplitudeStep1 </ci>
+<ci> phaseStep1 </ci>
+<ci> pulseDurationStep1 </ci>
+<ci> cyclePeriodStep1 </ci>
+<ci> rampDurationStep1 </ci>
+</apply>
+</math>
+</assignmentRule>
+<assignmentRule variable="L">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<ci> step1 </ci>
+</math>
+</assignmentRule>
+<assignmentRule variable="D">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<minus/>
+<cn> 1 </cn>
+<ci> L </ci>
+</apply>
+</math>
+</assignmentRule>
+</listOfRules>
+<listOfReactions>
+<reaction id="cL_m_trscr" name="cL_m_trscr" reversible="false">
+<listOfProducts>
+<speciesReference species="cL_m"/>
+</listOfProducts>
+<listOfModifiers>
+<modifierSpeciesReference species="cNI"/>
+<modifierSpeciesReference species="cP"/>
+<modifierSpeciesReference species="cP7"/>
+<modifierSpeciesReference species="cP9"/>
+<modifierSpeciesReference species="cT"/>
+</listOfModifiers>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cL_m_trscr </ci>
+<ci> L </ci>
+<ci> a </ci>
+<ci> cNI </ci>
+<ci> cP </ci>
+<ci> cP7 </ci>
+<ci> cP9 </ci>
+<ci> cT </ci>
+<ci> def </ci>
+<ci> g1 </ci>
+<ci> n1 </ci>
+<ci> q1 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction metaid="COPASI9" id="cL_m_degr" name="cL_m_degr" reversible="false">
+<annotation>
+<COPASI xmlns="http://www.copasi.org/static/sbml">
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/">
+<rdf:Description rdf:about="#COPASI9">
+<dcterms:created>
+<rdf:Description>
+<dcterms:W3CDTF>2013-06-02T14:18:18Z</dcterms:W3CDTF>
+</rdf:Description>
+</dcterms:created>
+</rdf:Description>
+</rdf:RDF>
+</COPASI>
+</annotation>
+<listOfReactants>
+<speciesReference species="cL_m"/>
+</listOfReactants>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cL_m_degr_L </ci>
+<ci> m1 </ci>
+<ci> L </ci>
+<ci> m2 </ci>
+<ci> cL_m </ci>
+<ci> def </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cL_trsl" name="cL_trsl" reversible="false">
+<listOfProducts>
+<speciesReference species="cL"/>
+</listOfProducts>
+<listOfModifiers>
+<modifierSpeciesReference species="cL_m"/>
+</listOfModifiers>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cL_trsl </ci>
+<ci> L </ci>
+<ci> cL_m </ci>
+<ci> def </ci>
+<ci> p1 </ci>
+<ci> p2 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cL_degr" name="cL_degr" reversible="false">
+<listOfReactants>
+<speciesReference species="cL"/>
+</listOfReactants>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cL_degr_1 </ci>
+<ci> c </ci>
+<ci> cL </ci>
+<ci> def </ci>
+<ci> g3 </ci>
+<ci> m3 </ci>
+<ci> p3 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cL_modif" name="cL_modif" reversible="false">
+<listOfProducts>
+<speciesReference species="cLm"/>
+</listOfProducts>
+<listOfModifiers>
+<modifierSpeciesReference species="cL"/>
+</listOfModifiers>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cL_modif_1 </ci>
+<ci> c </ci>
+<ci> cL </ci>
+<ci> def </ci>
+<ci> g3 </ci>
+<ci> p3 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cLm_degr" name="cLm_degr" reversible="false">
+<listOfReactants>
+<speciesReference species="cLm"/>
+</listOfReactants>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cLm_degr_1 </ci>
+<ci> cLm </ci>
+<ci> def </ci>
+<ci> m4 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cP_trsl" name="cP_trsl" reversible="false">
+<listOfProducts>
+<speciesReference species="cP"/>
+</listOfProducts>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cP_trsl </ci>
+<ci> D </ci>
+<ci> cP </ci>
+<ci> def </ci>
+<ci> p7 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cP_degr" name="cP_degr" reversible="false">
+<listOfReactants>
+<speciesReference species="cP"/>
+</listOfReactants>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cP_degr </ci>
+<ci> L </ci>
+<ci> cP </ci>
+<ci> def </ci>
+<ci> m11 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cP9_m_trscr" name="cP9_m_trscr" reversible="false">
+<listOfProducts>
+<speciesReference species="cP9_m"/>
+</listOfProducts>
+<listOfModifiers>
+<modifierSpeciesReference species="cEC"/>
+<modifierSpeciesReference species="cL"/>
+<modifierSpeciesReference species="cP"/>
+</listOfModifiers>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cP9_m_trscr_1 </ci>
+<ci> L </ci>
+<ci> cEC </ci>
+<ci> cL </ci>
+<ci> cP </ci>
+<ci> def </ci>
+<ci> e </ci>
+<ci> g8 </ci>
+<ci> g9 </ci>
+<ci> n4 </ci>
+<ci> n7 </ci>
+<ci> q3 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cP9_m_degr" name="cP9_m_degr" reversible="false">
+<listOfReactants>
+<speciesReference species="cP9_m"/>
+</listOfReactants>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cP9_m_degr_1 </ci>
+<ci> cP9_m </ci>
+<ci> def </ci>
+<ci> m12 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cP9_trsl" name="cP9_trsl" reversible="false">
+<listOfProducts>
+<speciesReference species="cP9"/>
+</listOfProducts>
+<listOfModifiers>
+<modifierSpeciesReference species="cP9_m"/>
+</listOfModifiers>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cP9_trsl_1 </ci>
+<ci> cP9_m </ci>
+<ci> def </ci>
+<ci> p8 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cP9_degr" name="cP9_degr" reversible="false">
+<listOfReactants>
+<speciesReference species="cP9"/>
+</listOfReactants>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cP9_degr </ci>
+<ci> D </ci>
+<ci> cP9 </ci>
+<ci> def </ci>
+<ci> m13 </ci>
+<ci> m22 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cP7_m_trscr" name="cP7_m_trscr" reversible="false">
+<listOfProducts>
+<speciesReference species="cP7_m"/>
+</listOfProducts>
+<listOfModifiers>
+<modifierSpeciesReference species="cL"/>
+<modifierSpeciesReference species="cLm"/>
+<modifierSpeciesReference species="cP9"/>
+</listOfModifiers>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cP7_m_trscr_1 </ci>
+<ci> cL </ci>
+<ci> cLm </ci>
+<ci> cP9 </ci>
+<ci> def </ci>
+<ci> e </ci>
+<ci> f </ci>
+<ci> g10 </ci>
+<ci> g11 </ci>
+<ci> n8 </ci>
+<ci> n9 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cP7_m_degr" name="cP7_m_degr" reversible="false">
+<listOfReactants>
+<speciesReference species="cP7_m"/>
+</listOfReactants>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cP7_m_degr_1 </ci>
+<ci> cP7_m </ci>
+<ci> def </ci>
+<ci> m14 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cP7_trsl" name="cP7_trsl" reversible="false">
+<listOfProducts>
+<speciesReference species="cP7"/>
+</listOfProducts>
+<listOfModifiers>
+<modifierSpeciesReference species="cP7_m"/>
+</listOfModifiers>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cP7_trsl_1 </ci>
+<ci> cP7_m </ci>
+<ci> def </ci>
+<ci> p9 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cP7_degr" name="cP7_degr" reversible="false">
+<listOfReactants>
+<speciesReference species="cP7"/>
+</listOfReactants>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cP7_degr </ci>
+<ci> D </ci>
+<ci> cP7 </ci>
+<ci> def </ci>
+<ci> m15 </ci>
+<ci> m23 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cNI_m_trscr" name="cNI_m_trscr" reversible="false">
+<listOfProducts>
+<speciesReference species="cNI_m"/>
+</listOfProducts>
+<listOfModifiers>
+<modifierSpeciesReference species="cLm"/>
+<modifierSpeciesReference species="cP7"/>
+</listOfModifiers>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cNI_m_trscr_1 </ci>
+<ci> b </ci>
+<ci> cLm </ci>
+<ci> cP7 </ci>
+<ci> def </ci>
+<ci> e </ci>
+<ci> g12 </ci>
+<ci> g13 </ci>
+<ci> n10 </ci>
+<ci> n11 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cNI_m_degr" name="cNI_m_degr" reversible="false">
+<listOfReactants>
+<speciesReference species="cNI_m"/>
+</listOfReactants>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cNI_m_degr_1 </ci>
+<ci> cNI_m </ci>
+<ci> def </ci>
+<ci> m16 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cNI_trsl" name="cNI_trsl" reversible="false">
+<listOfProducts>
+<speciesReference species="cNI"/>
+</listOfProducts>
+<listOfModifiers>
+<modifierSpeciesReference species="cNI_m"/>
+</listOfModifiers>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cNI_trsl_1 </ci>
+<ci> cNI_m </ci>
+<ci> def </ci>
+<ci> p10 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cNI_degr" name="cNI_degr" reversible="false">
+<listOfReactants>
+<speciesReference species="cNI"/>
+</listOfReactants>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cNI_degr </ci>
+<ci> D </ci>
+<ci> cNI </ci>
+<ci> def </ci>
+<ci> m17 </ci>
+<ci> m24 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cT_m_trscr" name="cT_m_trscr" reversible="false">
+<listOfProducts>
+<speciesReference species="cT_m"/>
+</listOfProducts>
+<listOfModifiers>
+<modifierSpeciesReference species="cEC"/>
+<modifierSpeciesReference species="cL"/>
+</listOfModifiers>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cT_m_trscr </ci>
+<ci> cEC </ci>
+<ci> cL </ci>
+<ci> def </ci>
+<ci> e </ci>
+<ci> g4 </ci>
+<ci> g5 </ci>
+<ci> n2 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cT_m_degr" name="cT_m_degr" reversible="false">
+<listOfReactants>
+<speciesReference species="cT_m"/>
+</listOfReactants>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cT_m_degr_1 </ci>
+<ci> cT_m </ci>
+<ci> def </ci>
+<ci> m5 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cT_trsl" name="cT_trsl" reversible="false">
+<listOfProducts>
+<speciesReference species="cT"/>
+</listOfProducts>
+<listOfModifiers>
+<modifierSpeciesReference species="cT_m"/>
+</listOfModifiers>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cT_trsl_1 </ci>
+<ci> cT_m </ci>
+<ci> def </ci>
+<ci> p4 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cT_degr" name="cT_degr" reversible="false">
+<listOfReactants>
+<speciesReference species="cT"/>
+</listOfReactants>
+<listOfModifiers>
+<modifierSpeciesReference species="cZG"/>
+<modifierSpeciesReference species="cZTL"/>
+</listOfModifiers>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cT_degr </ci>
+<ci> D </ci>
+<ci> cT </ci>
+<ci> cZG </ci>
+<ci> cZTL </ci>
+<ci> def </ci>
+<ci> m6 </ci>
+<ci> m7 </ci>
+<ci> m8 </ci>
+<ci> p5 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cE4_m_trscr" name="cE4_m_trscr" reversible="false">
+<listOfProducts>
+<speciesReference species="cE4_m"/>
+</listOfProducts>
+<listOfModifiers>
+<modifierSpeciesReference species="cEC"/>
+<modifierSpeciesReference species="cL"/>
+</listOfModifiers>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cLUX_m_trscr </ci>
+<ci> cEC </ci>
+<ci> cL </ci>
+<ci> def </ci>
+<ci> e </ci>
+<ci> g2 </ci>
+<ci> g6 </ci>
+<ci> n13 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cE4_m_degr" name="cE4_m_degr" reversible="false">
+<listOfReactants>
+<speciesReference species="cE4_m"/>
+</listOfReactants>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cE4_m_degr_1 </ci>
+<ci> cE4_m </ci>
+<ci> def </ci>
+<ci> m34 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cE4_trsl" name="cE4_trsl" reversible="false">
+<listOfProducts>
+<speciesReference species="cE4"/>
+</listOfProducts>
+<listOfModifiers>
+<modifierSpeciesReference species="cE4_m"/>
+</listOfModifiers>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cE4_trsl_1 </ci>
+<ci> cE4_m </ci>
+<ci> def </ci>
+<ci> p23 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cE4_degr" name="cE4_degr" reversible="false">
+<listOfReactants>
+<speciesReference species="cE4"/>
+</listOfReactants>
+<listOfModifiers>
+<modifierSpeciesReference species="cCOP1d"/>
+<modifierSpeciesReference species="cCOP1n"/>
+<modifierSpeciesReference species="cE3n"/>
+<modifierSpeciesReference species="cLUX"/>
+</listOfModifiers>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cE4_degr_1 </ci>
+<ci> cCOP1d </ci>
+<ci> cCOP1n </ci>
+<ci> cE3n </ci>
+<ci> cE4 </ci>
+<ci> cLUX </ci>
+<ci> def </ci>
+<ci> m35 </ci>
+<ci> m36 </ci>
+<ci> m37 </ci>
+<ci> p21 </ci>
+<ci> p25 </ci>
+<ci> p26 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cE3_m_trscr" name="cE3_m_trscr" reversible="false">
+<listOfProducts>
+<speciesReference species="cE3_m"/>
+</listOfProducts>
+<listOfModifiers>
+<modifierSpeciesReference species="cL"/>
+</listOfModifiers>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cE3_m_trscr_1 </ci>
+<ci> cL </ci>
+<ci> def </ci>
+<ci> e </ci>
+<ci> g16 </ci>
+<ci> n3 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cE3_m_degr" name="cE3_m_degr" reversible="false">
+<listOfReactants>
+<speciesReference species="cE3_m"/>
+</listOfReactants>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cE3_m_degr_1 </ci>
+<ci> cE3_m </ci>
+<ci> def </ci>
+<ci> m26 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cE3_trsl" name="cE3_trsl" reversible="false">
+<listOfProducts>
+<speciesReference species="cE3"/>
+</listOfProducts>
+<listOfModifiers>
+<modifierSpeciesReference species="cE3_m"/>
+</listOfModifiers>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cE3_trsl_1 </ci>
+<ci> cE3_m </ci>
+<ci> def </ci>
+<ci> p16 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cE3_degr" name="cE3_degr" reversible="false">
+<listOfReactants>
+<speciesReference species="cE3"/>
+</listOfReactants>
+<listOfModifiers>
+<modifierSpeciesReference species="cCOP1c"/>
+</listOfModifiers>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cE3_degr_1 </ci>
+<ci> cCOP1c </ci>
+<ci> cE3 </ci>
+<ci> def </ci>
+<ci> m9 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cE3n_import" name="cE3n_import" reversible="false">
+<listOfReactants>
+<speciesReference species="cE3"/>
+</listOfReactants>
+<listOfProducts>
+<speciesReference species="cE3n"/>
+</listOfProducts>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cE3n_import_1 </ci>
+<ci> cE3 </ci>
+<ci> cE3n </ci>
+<ci> def </ci>
+<ci> p19 </ci>
+<ci> p20 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cE3n_degr" name="cE3n_degr" reversible="false">
+<listOfReactants>
+<speciesReference species="cE3n"/>
+</listOfReactants>
+<listOfModifiers>
+<modifierSpeciesReference species="cCOP1d"/>
+<modifierSpeciesReference species="cCOP1n"/>
+<modifierSpeciesReference species="cE4"/>
+<modifierSpeciesReference species="cG"/>
+<modifierSpeciesReference species="cLUX"/>
+</listOfModifiers>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cE3n_degr_1 </ci>
+<ci> cCOP1d </ci>
+<ci> cCOP1n </ci>
+<ci> cE3n </ci>
+<ci> cE4 </ci>
+<ci> cG </ci>
+<ci> cLUX </ci>
+<ci> def </ci>
+<ci> m19 </ci>
+<ci> m29 </ci>
+<ci> m30 </ci>
+<ci> m36 </ci>
+<ci> m37 </ci>
+<ci> p17 </ci>
+<ci> p21 </ci>
+<ci> p25 </ci>
+<ci> p26 </ci>
+<ci> p28 </ci>
+<ci> p29 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cLUX_m_trscr" name="cLUX_m_trscr" reversible="false">
+<listOfProducts>
+<speciesReference species="cLUX_m"/>
+</listOfProducts>
+<listOfModifiers>
+<modifierSpeciesReference species="cEC"/>
+<modifierSpeciesReference species="cL"/>
+</listOfModifiers>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cLUX_m_trscr </ci>
+<ci> cEC </ci>
+<ci> cL </ci>
+<ci> def </ci>
+<ci> e </ci>
+<ci> g2 </ci>
+<ci> g6 </ci>
+<ci> n13 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cLUX_m_degr" name="cLUX_m_degr" reversible="false">
+<listOfReactants>
+<speciesReference species="cLUX_m"/>
+</listOfReactants>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cLUX_m_degr_1 </ci>
+<ci> cLUX_m </ci>
+<ci> def </ci>
+<ci> m34 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cLUX_trsl" name="cLUX_trsl" reversible="false">
+<listOfProducts>
+<speciesReference species="cLUX"/>
+</listOfProducts>
+<listOfModifiers>
+<modifierSpeciesReference species="cLUX_m"/>
+</listOfModifiers>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cLUX_trsl_1 </ci>
+<ci> cLUX_m </ci>
+<ci> def </ci>
+<ci> p27 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cLUX_degr" name="cLUX_degr" reversible="false">
+<listOfReactants>
+<speciesReference species="cLUX"/>
+</listOfReactants>
+<listOfModifiers>
+<modifierSpeciesReference species="cCOP1d"/>
+<modifierSpeciesReference species="cCOP1n"/>
+<modifierSpeciesReference species="cE3n"/>
+<modifierSpeciesReference species="cE4"/>
+</listOfModifiers>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cLUX_degr_1 </ci>
+<ci> cCOP1d </ci>
+<ci> cCOP1n </ci>
+<ci> cE3n </ci>
+<ci> cE4 </ci>
+<ci> cLUX </ci>
+<ci> def </ci>
+<ci> m36 </ci>
+<ci> m37 </ci>
+<ci> m39 </ci>
+<ci> p21 </ci>
+<ci> p25 </ci>
+<ci> p26 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cCOP1c_trsl" name="cCOP1c_trsl" reversible="false">
+<listOfProducts>
+<speciesReference species="cCOP1c"/>
+</listOfProducts>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cCOP1c_trsl_1 </ci>
+<ci> def </ci>
+<ci> n5 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cCOP1c_degr" name="cCOP1c_degr" reversible="false">
+<listOfReactants>
+<speciesReference species="cCOP1c"/>
+</listOfReactants>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cCOP1c_degr </ci>
+<ci> L </ci>
+<ci> cCOP1c </ci>
+<ci> def </ci>
+<ci> m27 </ci>
+<ci> p15 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cCOP1n_import" name="cCOP1n_import" reversible="false">
+<listOfReactants>
+<speciesReference species="cCOP1c"/>
+</listOfReactants>
+<listOfProducts>
+<speciesReference species="cCOP1n"/>
+</listOfProducts>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cCOP1n_import_1 </ci>
+<ci> cCOP1c </ci>
+<ci> def </ci>
+<ci> p6 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cCOP1n_degr" name="cCOP1n_degr" reversible="false">
+<listOfReactants>
+<speciesReference species="cCOP1n"/>
+</listOfReactants>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cCOP1n_degr </ci>
+<ci> L </ci>
+<ci> cCOP1n </ci>
+<ci> def </ci>
+<ci> m27 </ci>
+<ci> p15 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cCOP1d_activ" name="cCOP1d_activ" reversible="false">
+<listOfReactants>
+<speciesReference species="cCOP1n"/>
+</listOfReactants>
+<listOfProducts>
+<speciesReference species="cCOP1d"/>
+</listOfProducts>
+<listOfModifiers>
+<modifierSpeciesReference species="cP"/>
+</listOfModifiers>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cCOP1d_activ </ci>
+<ci> L </ci>
+<ci> cCOP1n </ci>
+<ci> cP </ci>
+<ci> def </ci>
+<ci> n14 </ci>
+<ci> n6 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cCOP1d_degr" name="cCOP1d_degr" reversible="false">
+<listOfReactants>
+<speciesReference species="cCOP1d"/>
+</listOfReactants>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cCOP1d_degr </ci>
+<ci> D </ci>
+<ci> cCOP1d </ci>
+<ci> def </ci>
+<ci> m31 </ci>
+<ci> m33 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cG_m_trscr" name="cG_m_trscr" reversible="false">
+<listOfProducts>
+<speciesReference species="cG_m"/>
+</listOfProducts>
+<listOfModifiers>
+<modifierSpeciesReference species="cEC"/>
+<modifierSpeciesReference species="cL"/>
+<modifierSpeciesReference species="cP"/>
+</listOfModifiers>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cG_m_trscr_1 </ci>
+<ci> L </ci>
+<ci> cEC </ci>
+<ci> cL </ci>
+<ci> cP </ci>
+<ci> def </ci>
+<ci> e </ci>
+<ci> g14 </ci>
+<ci> g15 </ci>
+<ci> n12 </ci>
+<ci> q2 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cG_m_degr" name="cG_m_degr" reversible="false">
+<listOfReactants>
+<speciesReference species="cG_m"/>
+</listOfReactants>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cG_m_degr_1 </ci>
+<ci> cG_m </ci>
+<ci> def </ci>
+<ci> m18 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cG_trsl" name="cG_trsl" reversible="false">
+<listOfProducts>
+<speciesReference species="cG"/>
+</listOfProducts>
+<listOfModifiers>
+<modifierSpeciesReference species="cG_m"/>
+</listOfModifiers>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cG_trsl_1 </ci>
+<ci> cG_m </ci>
+<ci> def </ci>
+<ci> p11 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cG_degr" name="cG_degr" reversible="false">
+<listOfReactants>
+<speciesReference species="cG"/>
+</listOfReactants>
+<listOfModifiers>
+<modifierSpeciesReference species="cE3n"/>
+</listOfModifiers>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cG_degr_1 </ci>
+<ci> cE3n </ci>
+<ci> cG </ci>
+<ci> def </ci>
+<ci> m19 </ci>
+<ci> p17 </ci>
+<ci> p28 </ci>
+<ci> p29 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cG_cZTL_assoc" name="cG_cZTL_assoc">
+<listOfReactants>
+<speciesReference species="cG"/>
+<speciesReference species="cZTL"/>
+</listOfReactants>
+<listOfProducts>
+<speciesReference species="cZG"/>
+</listOfProducts>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cG_cZTL_assoc </ci>
+<ci> D </ci>
+<ci> L </ci>
+<ci> cG </ci>
+<ci> cZG </ci>
+<ci> cZTL </ci>
+<ci> def </ci>
+<ci> p12 </ci>
+<ci> p13 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cZTL_trsl" name="cZTL_trsl" reversible="false">
+<listOfProducts>
+<speciesReference species="cZTL"/>
+</listOfProducts>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cZTL_trsl_1 </ci>
+<ci> def </ci>
+<ci> p14 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cZTL_degr" name="cZTL_degr" reversible="false">
+<listOfReactants>
+<speciesReference species="cZTL"/>
+</listOfReactants>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cZTL_degr_1 </ci>
+<ci> cZTL </ci>
+<ci> def </ci>
+<ci> m20 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cZG_degr" name="cZG_degr" reversible="false">
+<listOfReactants>
+<speciesReference species="cZG"/>
+</listOfReactants>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cZG_degr_1 </ci>
+<ci> cZG </ci>
+<ci> def </ci>
+<ci> m21 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cG_cE3_assoc" name="cG_cE3_assoc" reversible="false">
+<listOfReactants>
+<speciesReference species="cE3"/>
+<speciesReference species="cG"/>
+</listOfReactants>
+<listOfProducts>
+<speciesReference species="cEG"/>
+</listOfProducts>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cG_cE3_assoc_1 </ci>
+<ci> cE3 </ci>
+<ci> cG </ci>
+<ci> def </ci>
+<ci> p17 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cEG_degr" name="cEG_degr" reversible="false">
+<listOfReactants>
+<speciesReference species="cEG"/>
+</listOfReactants>
+<listOfModifiers>
+<modifierSpeciesReference species="cCOP1c"/>
+<modifierSpeciesReference species="cCOP1d"/>
+<modifierSpeciesReference species="cCOP1n"/>
+<modifierSpeciesReference species="cE3n"/>
+<modifierSpeciesReference species="cG"/>
+</listOfModifiers>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cEG_degr_1 </ci>
+<ci> cCOP1c </ci>
+<ci> cCOP1d </ci>
+<ci> cCOP1n </ci>
+<ci> cE3n </ci>
+<ci> cEG </ci>
+<ci> cG </ci>
+<ci> def </ci>
+<ci> m10 </ci>
+<ci> m19 </ci>
+<ci> m9 </ci>
+<ci> p17 </ci>
+<ci> p18 </ci>
+<ci> p28 </ci>
+<ci> p29 </ci>
+<ci> p31 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cEC_form" name="cEC_form" reversible="false">
+<listOfProducts>
+<speciesReference species="cEC"/>
+</listOfProducts>
+<listOfModifiers>
+<modifierSpeciesReference species="cCOP1d"/>
+<modifierSpeciesReference species="cCOP1n"/>
+<modifierSpeciesReference species="cE3n"/>
+<modifierSpeciesReference species="cE4"/>
+<modifierSpeciesReference species="cLUX"/>
+</listOfModifiers>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cEC_form_1 </ci>
+<ci> cCOP1d </ci>
+<ci> cCOP1n </ci>
+<ci> cE3n </ci>
+<ci> cE4 </ci>
+<ci> cLUX </ci>
+<ci> def </ci>
+<ci> m36 </ci>
+<ci> m37 </ci>
+<ci> p21 </ci>
+<ci> p25 </ci>
+<ci> p26 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+<reaction id="cEC_degr" name="cEC_degr" reversible="false">
+<listOfReactants>
+<speciesReference species="cEC"/>
+</listOfReactants>
+<listOfModifiers>
+<modifierSpeciesReference species="cCOP1d"/>
+<modifierSpeciesReference species="cCOP1n"/>
+<modifierSpeciesReference species="cE3n"/>
+<modifierSpeciesReference species="cEG"/>
+<modifierSpeciesReference species="cG"/>
+</listOfModifiers>
+<kineticLaw>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<times/>
+<ci> def </ci>
+<apply>
+<ci> function_4_cEC_degr </ci>
+<ci> L </ci>
+<ci> cCOP1d </ci>
+<ci> cCOP1n </ci>
+<ci> cE3n </ci>
+<ci> cEC </ci>
+<ci> cEG </ci>
+<ci> cG </ci>
+<ci> d </ci>
+<ci> def </ci>
+<ci> g7 </ci>
+<ci> m10 </ci>
+<ci> m19 </ci>
+<ci> m32 </ci>
+<ci> m36 </ci>
+<ci> m37 </ci>
+<ci> m9 </ci>
+<ci> p17 </ci>
+<ci> p18 </ci>
+<ci> p24 </ci>
+<ci> p28 </ci>
+<ci> p29 </ci>
+<ci> p31 </ci>
+</apply>
+</apply>
+</math>
+</kineticLaw>
+</reaction>
+</listOfReactions>
+<listOfEvents>
+<event id="event_1" name="event_0">
+<trigger>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<apply>
+<gt/>
+<csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+<cn> 314 </cn>
+</apply>
+</math>
+</trigger>
+<listOfEventAssignments>
+<eventAssignment variable="offsetStep1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<cn> 1 </cn>
+</math>
+</eventAssignment>
+<eventAssignment variable="amplitudeStep1">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<cn> 0 </cn>
+</math>
+</eventAssignment>
+</listOfEventAssignments>
+</event>
+</listOfEvents>
+</model>
+</sbml>

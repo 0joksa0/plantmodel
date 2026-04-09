@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<rdf:RDF xmlns:dcterms='http://purl.org/dc/terms/' xmlns:jerm='http://jermontology.org/ontology/JERMOntology#' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#' xmlns:sioc='http://rdfs.org/sioc/ns#'>
+<jerm:Experimental_assay rdf:about='https://fairdomhub.org/assays/474'>
+<dcterms:title>Biomass, leaf number and metabolites</dcterms:title>
+
+<jerm:description>Biomass, leaf number and metabolites in Col0 (WT), prr7, prr7prr9, and lsf1. 
+Metabolite data from plants after 28 days of growth were analysed most (27 days 'end of night', 28 days 'end of day' and 'end of night').
+The data file also includes data from 21 days of growth ('end of day' and 'end of night'), which is useful for comparison to early-flowering plants not tested here, such as the lhycca1 double mutant, that flower before 28 days, altering their physiology.</jerm:description>
+
+<jerm:hasContributor rdf:resource='https://fairdomhub.org/people/851' />
+
+<jerm:hasCreator rdf:resource='https://fairdomhub.org/people/851' />
+ <jerm:hasCreator rdf:resource='https://fairdomhub.org/people/854' />
+ <jerm:hasCreator rdf:resource='https://fairdomhub.org/people/984' />
+
+<jerm:hasOutput rdf:resource='https://fairdomhub.org/data_files/1604' />
+
+<jerm:hasPart rdf:resource='https://fairdomhub.org/data_files/1616' />
+ <jerm:hasPart rdf:resource='https://fairdomhub.org/data_files/1604' />
+
+<jerm:hasType rdf:resource='http://jermontology.org/ontology/JERMOntology#Technology_type' />
+ <jerm:hasType rdf:resource='http://jermontology.org/ontology/JERMOntology#Organism_or_strain_characterisation' />
+
+<jerm:investigates rdf:resource='https://fairdomhub.org/organisms/1933753714' />
+ <jerm:investigates rdf:resource='https://fairdomhub.org/strains/95' />
+ <jerm:investigates rdf:resource='https://fairdomhub.org/strains/98' />
+ <jerm:investigates rdf:resource='https://fairdomhub.org/strains/94' />
+ <jerm:investigates rdf:resource='https://fairdomhub.org/strains/96' />
+
+<jerm:isPartOf rdf:resource='https://fairdomhub.org/studies/211' />
+
+<jerm:itemProducedBy rdf:resource='https://fairdomhub.org/projects/59' />
+ <jerm:itemProducedBy rdf:resource='https://fairdomhub.org/projects/92' />
+
+<jerm:seekID rdf:datatype='http://www.w3.org/2001/XMLSchema#anyURI'>https://fairdomhub.org/assays/474</jerm:seekID>
+
+<jerm:title>Biomass, leaf number and metabolites</jerm:title>
+
+<dcterms:created rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2017-02-10T18:51:39Z</dcterms:created>
+
+<dcterms:description>Biomass, leaf number and metabolites in Col0 (WT), prr7, prr7prr9, and lsf1. 
+Metabolite data from plants after 28 days of growth were analysed most (27 days 'end of night', 28 days 'end of day' and 'end of night').
+The data file also includes data from 21 days of growth ('end of day' and 'end of night'), which is useful for comparison to early-flowering plants not tested here, such as the lhycca1 double mutant, that flower before 28 days, altering their physiology.</dcterms:description>
+
+<dcterms:modified rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2022-04-15T10:35:02Z</dcterms:modified>
+
+<sioc:has_creator rdf:resource='https://fairdomhub.org/people/851' />
+ <sioc:has_creator rdf:resource='https://fairdomhub.org/people/854' />
+ <sioc:has_creator rdf:resource='https://fairdomhub.org/people/984' />
+
+<sioc:has_owner rdf:resource='https://fairdomhub.org/people/851' />
+
+</jerm:Experimental_assay>
+
+</rdf:RDF>

@@ -1,0 +1,33 @@
+{
+  "id": 246,
+  "uri": "https://fairdomhub.org/models/246?version=1",
+  "title": "Modelling circadian regulation of flowering time and hypocotyl elongation, Seaton et al., 2015",
+  "description": "Matlab model (could not be represented in SBML) from publication with abstract: \r\nClock-regulated pathways coordinate the response of many developmental processes to changes in photoperiod and temperature. We model two of the best-understood clock output pathways in Arabidopsis, which control key regulators of flowering and elongation growth. In flowering, the model predicted regulatory links from the clock to CYCLING DOF FACTOR 1 (CDF1) and FLAVIN-BINDING, KELCH REPEAT, F-BOX 1 (FKF1) transcription. Physical interaction data support these links, which create threefold feed?forward motifs from two clock components to the floral regulator FT. In hypocotyl growth, the model described clock?regulated transcription of PHYTOCHROME?INTERACTING FACTOR 4 and 5 (PIF4, PIF5), interacting with post?translational regulation of PIF proteins by phytochrome B (phyB) and other light?activated pathways. The model predicted bimodal and end?of?day PIF activity profiles that are observed across hundreds of PIF?regulated target genes. In the response to temperature, warmth?enhanced PIF4 activity explained the observed hypocotyl growth dynamics but additional, temperature?dependent regulators were implicated in the flowering response. Integrating these two pathways with the clock model highlights the molecular mechanisms that coordinate plant development across changing conditions.",
+  "version": 1,
+  "doi": null,
+  "contributor": {
+    "name": "Andrew Millar",
+    "uri": "https://fairdomhub.org/people/850",
+    "orcid": "https://orcid.org/0000-0003-1756-3654"
+  },
+  "creators": [
+    {
+      "name": "Andrew Millar",
+      "uri": "https://fairdomhub.org/people/850",
+      "orcid": "https://orcid.org/0000-0003-1756-3654"
+    },
+    {
+      "name": "Daniel Seaton",
+      "uri": "https://fairdomhub.org/people/851",
+      "orcid": "https://orcid.org/0000-0002-5222-3893"
+    }
+  ],
+  "contains": [
+    "models/246-modelling-circadian-regulation-of-flowering-time-a/1031Supplementary%20File%201%20-%20MATLAB%20code.zip",
+    "http://www.plasmo.ed.ac.uk/plasmo/models/model.shtml?accession=PLM_1010"
+  ],
+  "license": {
+    "title": "Creative Commons Attribution 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  }
+}

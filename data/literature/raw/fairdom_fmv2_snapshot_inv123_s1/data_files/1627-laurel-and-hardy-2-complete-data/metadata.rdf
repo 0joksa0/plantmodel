@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<rdf:RDF xmlns:dcterms='http://purl.org/dc/terms/' xmlns:jerm='http://jermontology.org/ontology/JERMOntology#' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#' xmlns:sioc='http://rdfs.org/sioc/ns#'>
+<jerm:Data rdf:about='https://fairdomhub.org/data_files/1627'>
+<dcterms:title>Laurel and Hardy 2 - complete data</dcterms:title>
+
+<jerm:description>Complete excel spradsheets for Laurel and Hardy 2, including data for the pgm mutant that were not analysed in the Chew et al. 2017 preprint/publication. 
+Data include fresh and dry biomass, gas exchange, leaf numbers and metabolites in Col0 (WT), prr7prr9, pgm and lsf1 plants.
+Metabolite data are from plants after 27 days of growth (end of night) and 28 days (end of day and end of night).</jerm:description>
+
+<jerm:hasContributor rdf:resource='https://fairdomhub.org/people/851' />
+
+<jerm:hasCreator rdf:resource='https://fairdomhub.org/people/851' />
+ <jerm:hasCreator rdf:resource='https://fairdomhub.org/people/854' />
+ <jerm:hasCreator rdf:resource='https://fairdomhub.org/people/984' />
+
+<jerm:isPartOf rdf:resource='https://fairdomhub.org/assays/476' />
+
+<jerm:itemProducedBy rdf:resource='https://fairdomhub.org/projects/59' />
+
+<jerm:seekID rdf:datatype='http://www.w3.org/2001/XMLSchema#anyURI'>https://fairdomhub.org/data_files/1627</jerm:seekID>
+
+<jerm:title>Laurel and Hardy 2 - complete data</jerm:title>
+
+<dcterms:created rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2017-03-09T23:14:19Z</dcterms:created>
+
+<dcterms:description>Complete excel spradsheets for Laurel and Hardy 2, including data for the pgm mutant that were not analysed in the Chew et al. 2017 preprint/publication. 
+Data include fresh and dry biomass, gas exchange, leaf numbers and metabolites in Col0 (WT), prr7prr9, pgm and lsf1 plants.
+Metabolite data are from plants after 27 days of growth (end of night) and 28 days (end of day and end of night).</dcterms:description>
+
+<dcterms:modified rdf:datatype='http://www.w3.org/2001/XMLSchema#dateTime'>2022-04-15T10:35:08Z</dcterms:modified>
+
+<sioc:has_creator rdf:resource='https://fairdomhub.org/people/851' />
+ <sioc:has_creator rdf:resource='https://fairdomhub.org/people/854' />
+ <sioc:has_creator rdf:resource='https://fairdomhub.org/people/984' />
+
+<sioc:has_owner rdf:resource='https://fairdomhub.org/people/851' />
+
+</jerm:Data>
+
+</rdf:RDF>

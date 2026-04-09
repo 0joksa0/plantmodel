@@ -1,0 +1,1583 @@
+{
+  "@context": [
+    "https://w3id.org/bundle/context"
+  ],
+  "id": "/",
+  "aggregates": [
+    {
+      "uri": "/",
+      "pav:importedFrom": "https://fairdomhub.org/investigations/123"
+    },
+    {
+      "uri": "/metadata.rdf"
+    },
+    {
+      "uri": "/metadata.json"
+    },
+    {
+      "uri": "/studies/211-test-of-fmv2-study-laurel-hardy-1/",
+      "pav:importedFrom": "https://fairdomhub.org/studies/211"
+    },
+    {
+      "uri": "/studies/211-test-of-fmv2-study-laurel-hardy-1/metadata.rdf"
+    },
+    {
+      "uri": "/studies/211-test-of-fmv2-study-laurel-hardy-1/metadata.json"
+    },
+    {
+      "uri": "/studies/211-test-of-fmv2-study-laurel-hardy-1/assays/474-biomass-leaf-number-and-metabolites/",
+      "pav:importedFrom": "https://fairdomhub.org/assays/474"
+    },
+    {
+      "uri": "/studies/211-test-of-fmv2-study-laurel-hardy-1/assays/474-biomass-leaf-number-and-metabolites/metadata.rdf"
+    },
+    {
+      "uri": "/studies/211-test-of-fmv2-study-laurel-hardy-1/assays/474-biomass-leaf-number-and-metabolites/metadata.json"
+    },
+    {
+      "uri": "/studies/211-test-of-fmv2-study-laurel-hardy-1/assays/475-fmv2-simulation/",
+      "pav:importedFrom": "https://fairdomhub.org/assays/475"
+    },
+    {
+      "uri": "/studies/211-test-of-fmv2-study-laurel-hardy-1/assays/475-fmv2-simulation/metadata.rdf"
+    },
+    {
+      "uri": "/studies/211-test-of-fmv2-study-laurel-hardy-1/assays/475-fmv2-simulation/metadata.json"
+    },
+    {
+      "uri": "/studies/215-construction-of-framework-model-version-2-fmv2/",
+      "pav:importedFrom": "https://fairdomhub.org/studies/215"
+    },
+    {
+      "uri": "/studies/215-construction-of-framework-model-version-2-fmv2/metadata.rdf"
+    },
+    {
+      "uri": "/studies/215-construction-of-framework-model-version-2-fmv2/metadata.json"
+    },
+    {
+      "uri": "/studies/215-construction-of-framework-model-version-2-fmv2/assays/461-timet-wp1-1a-metabolite-analysis-of-clock-mutants/",
+      "pav:importedFrom": "https://fairdomhub.org/assays/461"
+    },
+    {
+      "uri": "/studies/215-construction-of-framework-model-version-2-fmv2/assays/461-timet-wp1-1a-metabolite-analysis-of-clock-mutants/metadata.rdf"
+    },
+    {
+      "uri": "/studies/215-construction-of-framework-model-version-2-fmv2/assays/461-timet-wp1-1a-metabolite-analysis-of-clock-mutants/metadata.json"
+    },
+    {
+      "uri": "/studies/215-construction-of-framework-model-version-2-fmv2/assays/464-timet-wp1-1-clock-gene-expression-in-clock-mutants/",
+      "pav:importedFrom": "https://fairdomhub.org/assays/464"
+    },
+    {
+      "uri": "/studies/215-construction-of-framework-model-version-2-fmv2/assays/464-timet-wp1-1-clock-gene-expression-in-clock-mutants/metadata.rdf"
+    },
+    {
+      "uri": "/studies/215-construction-of-framework-model-version-2-fmv2/assays/464-timet-wp1-1-clock-gene-expression-in-clock-mutants/metadata.json"
+    },
+    {
+      "uri": "/studies/215-construction-of-framework-model-version-2-fmv2/assays/468-composition-of-fmv2/",
+      "pav:importedFrom": "https://fairdomhub.org/assays/468"
+    },
+    {
+      "uri": "/studies/215-construction-of-framework-model-version-2-fmv2/assays/468-composition-of-fmv2/metadata.rdf"
+    },
+    {
+      "uri": "/studies/215-construction-of-framework-model-version-2-fmv2/assays/468-composition-of-fmv2/metadata.json"
+    },
+    {
+      "uri": "/studies/215-construction-of-framework-model-version-2-fmv2/assays/469-simulating-clock-gene-expression-with-model-p2011-/",
+      "pav:importedFrom": "https://fairdomhub.org/assays/469"
+    },
+    {
+      "uri": "/studies/215-construction-of-framework-model-version-2-fmv2/assays/469-simulating-clock-gene-expression-with-model-p2011-/metadata.rdf"
+    },
+    {
+      "uri": "/studies/215-construction-of-framework-model-version-2-fmv2/assays/469-simulating-clock-gene-expression-with-model-p2011-/metadata.json"
+    },
+    {
+      "uri": "/studies/216-analysis-of-framework-model-version-2-fmv2/",
+      "pav:importedFrom": "https://fairdomhub.org/studies/216"
+    },
+    {
+      "uri": "/studies/216-analysis-of-framework-model-version-2-fmv2/metadata.rdf"
+    },
+    {
+      "uri": "/studies/216-analysis-of-framework-model-version-2-fmv2/metadata.json"
+    },
+    {
+      "uri": "/studies/216-analysis-of-framework-model-version-2-fmv2/assays/466-sensitivity-analysis-of-fmv2/",
+      "pav:importedFrom": "https://fairdomhub.org/assays/466"
+    },
+    {
+      "uri": "/studies/216-analysis-of-framework-model-version-2-fmv2/assays/466-sensitivity-analysis-of-fmv2/metadata.rdf"
+    },
+    {
+      "uri": "/studies/216-analysis-of-framework-model-version-2-fmv2/assays/466-sensitivity-analysis-of-fmv2/metadata.json"
+    },
+    {
+      "uri": "/studies/216-analysis-of-framework-model-version-2-fmv2/assays/467-relationship-among-fmv2-outputs/",
+      "pav:importedFrom": "https://fairdomhub.org/assays/467"
+    },
+    {
+      "uri": "/studies/216-analysis-of-framework-model-version-2-fmv2/assays/467-relationship-among-fmv2-outputs/metadata.rdf"
+    },
+    {
+      "uri": "/studies/216-analysis-of-framework-model-version-2-fmv2/assays/467-relationship-among-fmv2-outputs/metadata.json"
+    },
+    {
+      "uri": "/studies/219-test-of-fmv2-study-laurel-hardy-2/",
+      "pav:importedFrom": "https://fairdomhub.org/studies/219"
+    },
+    {
+      "uri": "/studies/219-test-of-fmv2-study-laurel-hardy-2/metadata.rdf"
+    },
+    {
+      "uri": "/studies/219-test-of-fmv2-study-laurel-hardy-2/metadata.json"
+    },
+    {
+      "uri": "/studies/219-test-of-fmv2-study-laurel-hardy-2/assays/476-biomass-and-metabolites/",
+      "pav:importedFrom": "https://fairdomhub.org/assays/476"
+    },
+    {
+      "uri": "/studies/219-test-of-fmv2-study-laurel-hardy-2/assays/476-biomass-and-metabolites/metadata.rdf"
+    },
+    {
+      "uri": "/studies/219-test-of-fmv2-study-laurel-hardy-2/assays/476-biomass-and-metabolites/metadata.json"
+    },
+    {
+      "uri": "/studies/219-test-of-fmv2-study-laurel-hardy-2/assays/478-fmv2-simulation/",
+      "pav:importedFrom": "https://fairdomhub.org/assays/478"
+    },
+    {
+      "uri": "/studies/219-test-of-fmv2-study-laurel-hardy-2/assays/478-fmv2-simulation/metadata.rdf"
+    },
+    {
+      "uri": "/studies/219-test-of-fmv2-study-laurel-hardy-2/assays/478-fmv2-simulation/metadata.json"
+    },
+    {
+      "uri": "/studies/220-test-of-fmv2-study-laurel-hardy-3/",
+      "pav:importedFrom": "https://fairdomhub.org/studies/220"
+    },
+    {
+      "uri": "/studies/220-test-of-fmv2-study-laurel-hardy-3/metadata.rdf"
+    },
+    {
+      "uri": "/studies/220-test-of-fmv2-study-laurel-hardy-3/metadata.json"
+    },
+    {
+      "uri": "/studies/220-test-of-fmv2-study-laurel-hardy-3/assays/477-biomass-and-metabolites/",
+      "pav:importedFrom": "https://fairdomhub.org/assays/477"
+    },
+    {
+      "uri": "/studies/220-test-of-fmv2-study-laurel-hardy-3/assays/477-biomass-and-metabolites/metadata.rdf"
+    },
+    {
+      "uri": "/studies/220-test-of-fmv2-study-laurel-hardy-3/assays/477-biomass-and-metabolites/metadata.json"
+    },
+    {
+      "uri": "/studies/220-test-of-fmv2-study-laurel-hardy-3/assays/479-fmv2-simulation/",
+      "pav:importedFrom": "https://fairdomhub.org/assays/479"
+    },
+    {
+      "uri": "/studies/220-test-of-fmv2-study-laurel-hardy-3/assays/479-fmv2-simulation/metadata.rdf"
+    },
+    {
+      "uri": "/studies/220-test-of-fmv2-study-laurel-hardy-3/assays/479-fmv2-simulation/metadata.json"
+    },
+    {
+      "uri": "/studies/222-test-of-fmv2-study-gibberellins-1/",
+      "pav:importedFrom": "https://fairdomhub.org/studies/222"
+    },
+    {
+      "uri": "/studies/222-test-of-fmv2-study-gibberellins-1/metadata.rdf"
+    },
+    {
+      "uri": "/studies/222-test-of-fmv2-study-gibberellins-1/metadata.json"
+    },
+    {
+      "uri": "/studies/222-test-of-fmv2-study-gibberellins-1/assays/1478-biomass-and-metabolites/",
+      "pav:importedFrom": "https://fairdomhub.org/assays/1478"
+    },
+    {
+      "uri": "/studies/222-test-of-fmv2-study-gibberellins-1/assays/1478-biomass-and-metabolites/metadata.rdf"
+    },
+    {
+      "uri": "/studies/222-test-of-fmv2-study-gibberellins-1/assays/1478-biomass-and-metabolites/metadata.json"
+    },
+    {
+      "uri": "/studies/222-test-of-fmv2-study-gibberellins-1/assays/1479-circadian-period-analysis/",
+      "pav:importedFrom": "https://fairdomhub.org/assays/1479"
+    },
+    {
+      "uri": "/studies/222-test-of-fmv2-study-gibberellins-1/assays/1479-circadian-period-analysis/metadata.rdf"
+    },
+    {
+      "uri": "/studies/222-test-of-fmv2-study-gibberellins-1/assays/1479-circadian-period-analysis/metadata.json"
+    },
+    {
+      "uri": "/studies/938-test-of-fmv2-follow-on-mechanisms-of-malate-fumara/",
+      "pav:importedFrom": "https://fairdomhub.org/studies/938"
+    },
+    {
+      "uri": "/studies/938-test-of-fmv2-follow-on-mechanisms-of-malate-fumara/metadata.rdf"
+    },
+    {
+      "uri": "/studies/938-test-of-fmv2-follow-on-mechanisms-of-malate-fumara/metadata.json"
+    },
+    {
+      "uri": "/studies/938-test-of-fmv2-follow-on-mechanisms-of-malate-fumara/assays/1661-assimilation-and-partitioning-of-14co2-at-night/",
+      "pav:importedFrom": "https://fairdomhub.org/assays/1661"
+    },
+    {
+      "uri": "/studies/938-test-of-fmv2-follow-on-mechanisms-of-malate-fumara/assays/1661-assimilation-and-partitioning-of-14co2-at-night/metadata.rdf"
+    },
+    {
+      "uri": "/studies/938-test-of-fmv2-follow-on-mechanisms-of-malate-fumara/assays/1661-assimilation-and-partitioning-of-14co2-at-night/metadata.json"
+    },
+    {
+      "uri": "/studies/938-test-of-fmv2-follow-on-mechanisms-of-malate-fumara/assays/1662-thiamine-vitamers/",
+      "pav:importedFrom": "https://fairdomhub.org/assays/1662"
+    },
+    {
+      "uri": "/studies/938-test-of-fmv2-follow-on-mechanisms-of-malate-fumara/assays/1662-thiamine-vitamers/metadata.rdf"
+    },
+    {
+      "uri": "/studies/938-test-of-fmv2-follow-on-mechanisms-of-malate-fumara/assays/1662-thiamine-vitamers/metadata.json"
+    },
+    {
+      "uri": "/studies/940-tests-of-fmv2-compilations-and-figures/",
+      "pav:importedFrom": "https://fairdomhub.org/studies/940"
+    },
+    {
+      "uri": "/studies/940-tests-of-fmv2-compilations-and-figures/metadata.rdf"
+    },
+    {
+      "uri": "/studies/940-tests-of-fmv2-compilations-and-figures/metadata.json"
+    },
+    {
+      "uri": "/studies/940-tests-of-fmv2-compilations-and-figures/assays/1660-biomass-leaf-area-and-gas-exchange-data/",
+      "pav:importedFrom": "https://fairdomhub.org/assays/1660"
+    },
+    {
+      "uri": "/studies/940-tests-of-fmv2-compilations-and-figures/assays/1660-biomass-leaf-area-and-gas-exchange-data/metadata.rdf"
+    },
+    {
+      "uri": "/studies/940-tests-of-fmv2-compilations-and-figures/assays/1660-biomass-leaf-area-and-gas-exchange-data/metadata.json"
+    },
+    {
+      "uri": "/studies/941-test-of-fmv2-photoperiodic-flowering-and-hypocotyl/",
+      "pav:importedFrom": "https://fairdomhub.org/studies/941"
+    },
+    {
+      "uri": "/studies/941-test-of-fmv2-photoperiodic-flowering-and-hypocotyl/metadata.rdf"
+    },
+    {
+      "uri": "/studies/941-test-of-fmv2-photoperiodic-flowering-and-hypocotyl/metadata.json"
+    },
+    {
+      "uri": "/studies/941-test-of-fmv2-photoperiodic-flowering-and-hypocotyl/assays/462-mizuno-lab-flowering-time-in-clock-mutants/",
+      "pav:importedFrom": "https://fairdomhub.org/assays/462"
+    },
+    {
+      "uri": "/studies/941-test-of-fmv2-photoperiodic-flowering-and-hypocotyl/assays/462-mizuno-lab-flowering-time-in-clock-mutants/metadata.rdf"
+    },
+    {
+      "uri": "/studies/941-test-of-fmv2-photoperiodic-flowering-and-hypocotyl/assays/462-mizuno-lab-flowering-time-in-clock-mutants/metadata.json"
+    },
+    {
+      "uri": "/studies/941-test-of-fmv2-photoperiodic-flowering-and-hypocotyl/assays/463-mizuno-lab-hypocotyl-length-in-clock-mutants/",
+      "pav:importedFrom": "https://fairdomhub.org/assays/463"
+    },
+    {
+      "uri": "/studies/941-test-of-fmv2-photoperiodic-flowering-and-hypocotyl/assays/463-mizuno-lab-hypocotyl-length-in-clock-mutants/metadata.rdf"
+    },
+    {
+      "uri": "/studies/941-test-of-fmv2-photoperiodic-flowering-and-hypocotyl/assays/463-mizuno-lab-hypocotyl-length-in-clock-mutants/metadata.json"
+    },
+    {
+      "uri": "/data_files/1598-timet-wp1-1a-metabolite-data-ed-en-in-clock-mutant/",
+      "pav:importedFrom": "https://fairdomhub.org/data_files/1598?version=2"
+    },
+    {
+      "uri": "/data_files/1598-timet-wp1-1a-metabolite-data-ed-en-in-clock-mutant/metadata.rdf"
+    },
+    {
+      "uri": "/data_files/1598-timet-wp1-1a-metabolite-data-ed-en-in-clock-mutant/metadata.json"
+    },
+    {
+      "uri": "/data_files/1598-timet-wp1-1a-metabolite-data-ed-en-in-clock-mutant/Clock%20mutant%20ED-EN%20LC-MS%20data%20from%20AnnaF_stats_2.xlsx"
+    },
+    {
+      "uri": "/data_files/1612-flowering-time-in-wt-vs-prr7prr9-nakamichi-et-al-2/",
+      "pav:importedFrom": "https://fairdomhub.org/data_files/1612?version=1"
+    },
+    {
+      "uri": "/data_files/1612-flowering-time-in-wt-vs-prr7prr9-nakamichi-et-al-2/metadata.rdf"
+    },
+    {
+      "uri": "/data_files/1612-flowering-time-in-wt-vs-prr7prr9-nakamichi-et-al-2/metadata.json"
+    },
+    {
+      "uri": "/data_files/1612-flowering-time-in-wt-vs-prr7prr9-nakamichi-et-al-2/nakamichi2007_WT_vs_prr7prr9_flowering_data.xlsx"
+    },
+    {
+      "uri": "/data_files/1613-hypocotyl-lengths-in-wt-vs-prr7prr9-across-photope/",
+      "pav:importedFrom": "https://fairdomhub.org/data_files/1613?version=1"
+    },
+    {
+      "uri": "/data_files/1613-hypocotyl-lengths-in-wt-vs-prr7prr9-across-photope/metadata.rdf"
+    },
+    {
+      "uri": "/data_files/1613-hypocotyl-lengths-in-wt-vs-prr7prr9-across-photope/metadata.json"
+    },
+    {
+      "uri": "/data_files/1613-hypocotyl-lengths-in-wt-vs-prr7prr9-across-photope/niwa2009_WT_vs_prr7prr9_hypocotyl_data.xlsx"
+    },
+    {
+      "uri": "/data_files/1593-timet-wp1-1-qrt-pcr-ld-to-ll-and-dd/",
+      "pav:importedFrom": "https://fairdomhub.org/data_files/1593?version=1"
+    },
+    {
+      "uri": "/data_files/1593-timet-wp1-1-qrt-pcr-ld-to-ll-and-dd/metadata.rdf"
+    },
+    {
+      "uri": "/data_files/1593-timet-wp1-1-qrt-pcr-ld-to-ll-and-dd/metadata.json"
+    },
+    {
+      "uri": "/data_files/1610-sensitivity-analysis-results-mat-file/",
+      "pav:importedFrom": "https://fairdomhub.org/data_files/1610?version=1"
+    },
+    {
+      "uri": "/data_files/1610-sensitivity-analysis-results-mat-file/metadata.rdf"
+    },
+    {
+      "uri": "/data_files/1610-sensitivity-analysis-results-mat-file/metadata.json"
+    },
+    {
+      "uri": "/data_files/1610-sensitivity-analysis-results-mat-file/sens_analysis_results_WT.mat"
+    },
+    {
+      "uri": "/data_files/1594-p2011-1-2-simulations-of-clock-genes-under-ld-cycl/",
+      "pav:importedFrom": "https://fairdomhub.org/data_files/1594?version=1"
+    },
+    {
+      "uri": "/data_files/1594-p2011-1-2-simulations-of-clock-genes-under-ld-cycl/metadata.rdf"
+    },
+    {
+      "uri": "/data_files/1594-p2011-1-2-simulations-of-clock-genes-under-ld-cycl/metadata.json"
+    },
+    {
+      "uri": "/data_files/1594-p2011-1-2-simulations-of-clock-genes-under-ld-cycl/TiMEt%20WP1_1%20prr79%20sims%20P2011.zip"
+    },
+    {
+      "uri": "/data_files/1595-p2011-1-2-simulations-vs-data-for-wt-normalised-fo/",
+      "pav:importedFrom": "https://fairdomhub.org/data_files/1595?version=1"
+    },
+    {
+      "uri": "/data_files/1595-p2011-1-2-simulations-vs-data-for-wt-normalised-fo/metadata.rdf"
+    },
+    {
+      "uri": "/data_files/1595-p2011-1-2-simulations-vs-data-for-wt-normalised-fo/metadata.json"
+    },
+    {
+      "uri": "/data_files/1595-p2011-1-2-simulations-vs-data-for-wt-normalised-fo/SBSI%20plots%20final.xlsx"
+    },
+    {
+      "uri": "/data_files/1597-p2011-1-2-simulations-and-data-in-prr7-prr9-mutant/",
+      "pav:importedFrom": "https://fairdomhub.org/data_files/1597?version=1"
+    },
+    {
+      "uri": "/data_files/1597-p2011-1-2-simulations-and-data-in-prr7-prr9-mutant/metadata.rdf"
+    },
+    {
+      "uri": "/data_files/1597-p2011-1-2-simulations-and-data-in-prr7-prr9-mutant/metadata.json"
+    },
+    {
+      "uri": "/data_files/1597-p2011-1-2-simulations-and-data-in-prr7-prr9-mutant/SBSI%2079%20plots%20final.xlsx"
+    },
+    {
+      "uri": "/data_files/1604-laurel-and-hardy-1-experimental-data-mat-file/",
+      "pav:importedFrom": "https://fairdomhub.org/data_files/1604?version=1"
+    },
+    {
+      "uri": "/data_files/1604-laurel-and-hardy-1-experimental-data-mat-file/metadata.rdf"
+    },
+    {
+      "uri": "/data_files/1604-laurel-and-hardy-1-experimental-data-mat-file/metadata.json"
+    },
+    {
+      "uri": "/data_files/1604-laurel-and-hardy-1-experimental-data-mat-file/LH1_data.mat"
+    },
+    {
+      "uri": "/data_files/1616-laurel-and-hardy-1-experimental-data-excel/",
+      "pav:importedFrom": "https://fairdomhub.org/data_files/1616?version=1"
+    },
+    {
+      "uri": "/data_files/1616-laurel-and-hardy-1-experimental-data-excel/metadata.rdf"
+    },
+    {
+      "uri": "/data_files/1616-laurel-and-hardy-1-experimental-data-excel/metadata.json"
+    },
+    {
+      "uri": "/data_files/1616-laurel-and-hardy-1-experimental-data-excel/LH1_experimental_data.xlsx"
+    },
+    {
+      "uri": "/data_files/1605-laurel-and-hardy-1-simulation-data-mat-file/",
+      "pav:importedFrom": "https://fairdomhub.org/data_files/1605?version=1"
+    },
+    {
+      "uri": "/data_files/1605-laurel-and-hardy-1-simulation-data-mat-file/metadata.rdf"
+    },
+    {
+      "uri": "/data_files/1605-laurel-and-hardy-1-simulation-data-mat-file/metadata.json"
+    },
+    {
+      "uri": "/data_files/1605-laurel-and-hardy-1-simulation-data-mat-file/plot_LH1_biomass_and_carbon_pools.mat"
+    },
+    {
+      "uri": "/data_files/5002-laurel-and-hardy-1-mean-data-and-simulations/",
+      "pav:importedFrom": "https://fairdomhub.org/data_files/5002?version=1"
+    },
+    {
+      "uri": "/data_files/5002-laurel-and-hardy-1-mean-data-and-simulations/metadata.rdf"
+    },
+    {
+      "uri": "/data_files/5002-laurel-and-hardy-1-mean-data-and-simulations/metadata.json"
+    },
+    {
+      "uri": "/data_files/5002-laurel-and-hardy-1-mean-data-and-simulations/Laurel%20and%20Hardy%201_DDS.xlsx"
+    },
+    {
+      "uri": "/data_files/1606-laurel-and-hardy-2-experimental-data-mat-file/",
+      "pav:importedFrom": "https://fairdomhub.org/data_files/1606?version=1"
+    },
+    {
+      "uri": "/data_files/1606-laurel-and-hardy-2-experimental-data-mat-file/metadata.rdf"
+    },
+    {
+      "uri": "/data_files/1606-laurel-and-hardy-2-experimental-data-mat-file/metadata.json"
+    },
+    {
+      "uri": "/data_files/1606-laurel-and-hardy-2-experimental-data-mat-file/LH2_data.mat"
+    },
+    {
+      "uri": "/data_files/1621-laurel-and-hardy-2-experimental-data-excel/",
+      "pav:importedFrom": "https://fairdomhub.org/data_files/1621?version=1"
+    },
+    {
+      "uri": "/data_files/1621-laurel-and-hardy-2-experimental-data-excel/metadata.rdf"
+    },
+    {
+      "uri": "/data_files/1621-laurel-and-hardy-2-experimental-data-excel/metadata.json"
+    },
+    {
+      "uri": "/data_files/1621-laurel-and-hardy-2-experimental-data-excel/Laurel%20and%20Hardy%202%20-%20experimental%20data%20(excel).xlsx"
+    },
+    {
+      "uri": "/data_files/1627-laurel-and-hardy-2-complete-data/",
+      "pav:importedFrom": "https://fairdomhub.org/data_files/1627?version=1"
+    },
+    {
+      "uri": "/data_files/1627-laurel-and-hardy-2-complete-data/metadata.rdf"
+    },
+    {
+      "uri": "/data_files/1627-laurel-and-hardy-2-complete-data/metadata.json"
+    },
+    {
+      "uri": "/data_files/1627-laurel-and-hardy-2-complete-data/Laurel%20and%20Hardy%202%20-%20complete%20data.zip"
+    },
+    {
+      "uri": "/data_files/1607-laurel-and-hardy-3-experimental-data-mat-file/",
+      "pav:importedFrom": "https://fairdomhub.org/data_files/1607?version=1"
+    },
+    {
+      "uri": "/data_files/1607-laurel-and-hardy-3-experimental-data-mat-file/metadata.rdf"
+    },
+    {
+      "uri": "/data_files/1607-laurel-and-hardy-3-experimental-data-mat-file/metadata.json"
+    },
+    {
+      "uri": "/data_files/1607-laurel-and-hardy-3-experimental-data-mat-file/LH3_data.mat"
+    },
+    {
+      "uri": "/data_files/1622-laurel-and-hardy-3-experimental-data-excel/",
+      "pav:importedFrom": "https://fairdomhub.org/data_files/1622?version=1"
+    },
+    {
+      "uri": "/data_files/1622-laurel-and-hardy-3-experimental-data-excel/metadata.rdf"
+    },
+    {
+      "uri": "/data_files/1622-laurel-and-hardy-3-experimental-data-excel/metadata.json"
+    },
+    {
+      "uri": "/data_files/1622-laurel-and-hardy-3-experimental-data-excel/Laurel%20and%20Hardy%203%20-%20experimental%20data%20(excel).xlsx"
+    },
+    {
+      "uri": "/data_files/1626-laurel-and-hardy-3-complete-data/",
+      "pav:importedFrom": "https://fairdomhub.org/data_files/1626?version=1"
+    },
+    {
+      "uri": "/data_files/1626-laurel-and-hardy-3-complete-data/metadata.rdf"
+    },
+    {
+      "uri": "/data_files/1626-laurel-and-hardy-3-complete-data/metadata.json"
+    },
+    {
+      "uri": "/data_files/1626-laurel-and-hardy-3-complete-data/Laurel%20and%20Hardy%203%20-%20complete%20data.zip"
+    },
+    {
+      "uri": "/data_files/1608-laurel-and-hardy-2-simulation-data-mat-file/",
+      "pav:importedFrom": "https://fairdomhub.org/data_files/1608?version=1"
+    },
+    {
+      "uri": "/data_files/1608-laurel-and-hardy-2-simulation-data-mat-file/metadata.rdf"
+    },
+    {
+      "uri": "/data_files/1608-laurel-and-hardy-2-simulation-data-mat-file/metadata.json"
+    },
+    {
+      "uri": "/data_files/1608-laurel-and-hardy-2-simulation-data-mat-file/plot_LH2_biomass_and_carbon_pools.mat"
+    },
+    {
+      "uri": "/data_files/5003-laurel-and-hardy-2-mean-data-and-simulations/",
+      "pav:importedFrom": "https://fairdomhub.org/data_files/5003?version=1"
+    },
+    {
+      "uri": "/data_files/5003-laurel-and-hardy-2-mean-data-and-simulations/metadata.rdf"
+    },
+    {
+      "uri": "/data_files/5003-laurel-and-hardy-2-mean-data-and-simulations/metadata.json"
+    },
+    {
+      "uri": "/data_files/5003-laurel-and-hardy-2-mean-data-and-simulations/Laurel%20and%20Hardy%202%20with%20malate%20and%20fumarate_DDS.xlsx"
+    },
+    {
+      "uri": "/data_files/1609-laurel-and-hardy-3-simulation-data-mat-file/",
+      "pav:importedFrom": "https://fairdomhub.org/data_files/1609?version=1"
+    },
+    {
+      "uri": "/data_files/1609-laurel-and-hardy-3-simulation-data-mat-file/metadata.rdf"
+    },
+    {
+      "uri": "/data_files/1609-laurel-and-hardy-3-simulation-data-mat-file/metadata.json"
+    },
+    {
+      "uri": "/data_files/1609-laurel-and-hardy-3-simulation-data-mat-file/plot_LH3_biomass_and_carbon_pools.mat"
+    },
+    {
+      "uri": "/data_files/5004-laurel-and-hardy-3-mean-data-and-simulations/",
+      "pav:importedFrom": "https://fairdomhub.org/data_files/5004?version=1"
+    },
+    {
+      "uri": "/data_files/5004-laurel-and-hardy-3-mean-data-and-simulations/metadata.rdf"
+    },
+    {
+      "uri": "/data_files/5004-laurel-and-hardy-3-mean-data-and-simulations/metadata.json"
+    },
+    {
+      "uri": "/data_files/5004-laurel-and-hardy-3-mean-data-and-simulations/Laurel%20and%20Hardy%203%20with%20malate%20and%20fumarate_DDS.xlsx"
+    },
+    {
+      "uri": "/data_files/5006-all-biomass-data-for-study-gibberellins-1/",
+      "pav:importedFrom": "https://fairdomhub.org/data_files/5006?version=1"
+    },
+    {
+      "uri": "/data_files/5006-all-biomass-data-for-study-gibberellins-1/metadata.rdf"
+    },
+    {
+      "uri": "/data_files/5006-all-biomass-data-for-study-gibberellins-1/metadata.json"
+    },
+    {
+      "uri": "/data_files/5006-all-biomass-data-for-study-gibberellins-1/GA_Biomass%20of%20full%20sets_AJM.xlsx"
+    },
+    {
+      "uri": "/data_files/5007-biomass-and-metabolite-data-for-study-gibberellins/",
+      "pav:importedFrom": "https://fairdomhub.org/data_files/5007?version=1"
+    },
+    {
+      "uri": "/data_files/5007-biomass-and-metabolite-data-for-study-gibberellins/metadata.rdf"
+    },
+    {
+      "uri": "/data_files/5007-biomass-and-metabolite-data-for-study-gibberellins/metadata.json"
+    },
+    {
+      "uri": "/data_files/5007-biomass-and-metabolite-data-for-study-gibberellins/GA%20experiment%20-%20biomass%20+%20metabolite_AJM.xlsx"
+    },
+    {
+      "uri": "/data_files/5005-four-study-data-compilation-with-charts/",
+      "pav:importedFrom": "https://fairdomhub.org/data_files/5005?version=1"
+    },
+    {
+      "uri": "/data_files/5005-four-study-data-compilation-with-charts/metadata.rdf"
+    },
+    {
+      "uri": "/data_files/5005-four-study-data-compilation-with-charts/metadata.json"
+    },
+    {
+      "uri": "/data_files/5005-four-study-data-compilation-with-charts/Biomass_FW_DW_gas_exchange_data.xlsx"
+    },
+    {
+      "uri": "/data_files/5008-carbon-assimilation-and-partitioning-in-darkness/",
+      "pav:importedFrom": "https://fairdomhub.org/data_files/5008?version=1"
+    },
+    {
+      "uri": "/data_files/5008-carbon-assimilation-and-partitioning-in-darkness/metadata.rdf"
+    },
+    {
+      "uri": "/data_files/5008-carbon-assimilation-and-partitioning-in-darkness/metadata.json"
+    },
+    {
+      "uri": "/data_files/5008-carbon-assimilation-and-partitioning-in-darkness/Labelling%20data%20from%20Gavin%20George_AJM2.xlsx"
+    },
+    {
+      "uri": "/data_files/5009-testing-thiamine-metabolites-in-col-and-prr7prr9/",
+      "pav:importedFrom": "https://fairdomhub.org/data_files/5009?version=2"
+    },
+    {
+      "uri": "/data_files/5009-testing-thiamine-metabolites-in-col-and-prr7prr9/metadata.rdf"
+    },
+    {
+      "uri": "/data_files/5009-testing-thiamine-metabolites-in-col-and-prr7prr9/metadata.json"
+    },
+    {
+      "uri": "/data_files/5009-testing-thiamine-metabolites-in-col-and-prr7prr9/Thiamin%20Geneva%20results%2010_05_2015_AJM.xlsx"
+    },
+    {
+      "uri": "/models/243-arabidopsis-clock-model-p2011-1-2/",
+      "pav:importedFrom": "https://fairdomhub.org/models/243?version=1"
+    },
+    {
+      "uri": "/models/243-arabidopsis-clock-model-p2011-1-2/metadata.rdf"
+    },
+    {
+      "uri": "/models/243-arabidopsis-clock-model-p2011-1-2/metadata.json"
+    },
+    {
+      "uri": "/models/243-arabidopsis-clock-model-p2011-1-2/PLM_71.xml"
+    },
+    {
+      "uri": "/models/245-arabidopsis-starch-and-the-circadian-clock-model-2/",
+      "pav:importedFrom": "https://fairdomhub.org/models/245?version=1"
+    },
+    {
+      "uri": "/models/245-arabidopsis-starch-and-the-circadian-clock-model-2/metadata.rdf"
+    },
+    {
+      "uri": "/models/245-arabidopsis-starch-and-the-circadian-clock-model-2/metadata.json"
+    },
+    {
+      "uri": "/models/245-arabidopsis-starch-and-the-circadian-clock-model-2/PLM_78.xml"
+    },
+    {
+      "uri": "/models/246-modelling-circadian-regulation-of-flowering-time-a/",
+      "pav:importedFrom": "https://fairdomhub.org/models/246?version=1"
+    },
+    {
+      "uri": "/models/246-modelling-circadian-regulation-of-flowering-time-a/metadata.rdf"
+    },
+    {
+      "uri": "/models/246-modelling-circadian-regulation-of-flowering-time-a/metadata.json"
+    },
+    {
+      "uri": "/models/246-modelling-circadian-regulation-of-flowering-time-a/1031Supplementary%2520File%25201%2520-%2520MATLAB%2520code.zip"
+    },
+    {
+      "uri": "/models/247-chew_et_al_2014_framework_model-version-1-matlab-a/",
+      "pav:importedFrom": "https://fairdomhub.org/models/247?version=1"
+    },
+    {
+      "uri": "/models/247-chew_et_al_2014_framework_model-version-1-matlab-a/metadata.rdf"
+    },
+    {
+      "uri": "/models/247-chew_et_al_2014_framework_model-version-1-matlab-a/metadata.json"
+    },
+    {
+      "uri": "/models/247-chew_et_al_2014_framework_model-version-1-matlab-a/134MATLAB%2520Framework%2520Model.zip"
+    },
+    {
+      "uri": "/models/247-chew_et_al_2014_framework_model-version-1-matlab-a/1020Framework%2520Model%2520in%2520Simile.zip"
+    },
+    {
+      "uri": "/models/247-chew_et_al_2014_framework_model-version-1-matlab-a/timet-logo-sm.png"
+    },
+    {
+      "uri": "/models/248-framework-model-v2/",
+      "pav:importedFrom": "https://fairdomhub.org/models/248?version=2"
+    },
+    {
+      "uri": "/models/248-framework-model-v2/metadata.rdf"
+    },
+    {
+      "uri": "/models/248-framework-model-v2/metadata.json"
+    },
+    {
+      "uri": "/models/314-p2011-1-2_directupload/",
+      "pav:importedFrom": "https://fairdomhub.org/models/314?version=1"
+    },
+    {
+      "uri": "/models/314-p2011-1-2_directupload/metadata.rdf"
+    },
+    {
+      "uri": "/models/314-p2011-1-2_directupload/metadata.json"
+    },
+    {
+      "uri": "/models/314-p2011-1-2_directupload/PLM_71.xml"
+    },
+    {
+      "uri": "/publications/306-defining-the-robust-behaviour-of-the-plant-clock-g/",
+      "pav:importedFrom": "https://fairdomhub.org/publications/306"
+    },
+    {
+      "uri": "/publications/306-defining-the-robust-behaviour-of-the-plant-clock-g/metadata.rdf"
+    },
+    {
+      "uri": "/publications/306-defining-the-robust-behaviour-of-the-plant-clock-g/metadata.json"
+    },
+    {
+      "uri": "/publications/307-the-circadian-clock-regulates-the-photoperiodic-re/",
+      "pav:importedFrom": "https://fairdomhub.org/publications/307"
+    },
+    {
+      "uri": "/publications/307-the-circadian-clock-regulates-the-photoperiodic-re/metadata.rdf"
+    },
+    {
+      "uri": "/publications/307-the-circadian-clock-regulates-the-photoperiodic-re/metadata.json"
+    },
+    {
+      "uri": "/publications/308-arabidopsis-clock-associated-pseudo-response-regul/",
+      "pav:importedFrom": "https://fairdomhub.org/publications/308"
+    },
+    {
+      "uri": "/publications/308-arabidopsis-clock-associated-pseudo-response-regul/metadata.rdf"
+    },
+    {
+      "uri": "/publications/308-arabidopsis-clock-associated-pseudo-response-regul/metadata.json"
+    },
+    {
+      "uri": "/publications/345-linking-circadian-time-to-growth-rate-quantitative/",
+      "pav:importedFrom": "https://fairdomhub.org/publications/345"
+    },
+    {
+      "uri": "/publications/345-linking-circadian-time-to-growth-rate-quantitative/metadata.rdf"
+    },
+    {
+      "uri": "/publications/345-linking-circadian-time-to-growth-rate-quantitative/metadata.json"
+    },
+    {
+      "uri": "/publications/642-the-arabidopsis-framework-model-version-2-predicts/",
+      "pav:importedFrom": "https://fairdomhub.org/publications/642"
+    },
+    {
+      "uri": "/publications/642-the-arabidopsis-framework-model-version-2-predicts/metadata.rdf"
+    },
+    {
+      "uri": "/publications/642-the-arabidopsis-framework-model-version-2-predicts/metadata.json"
+    }
+  ],
+  "annotations": [
+    {
+      "about": "/",
+      "uri": "urn:uuid:37e07110-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:05+02:00"
+    },
+    {
+      "about": "/",
+      "uri": "urn:uuid:37e30c20-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/metadata.json",
+      "createdOn": "2022-05-10T19:19:05+02:00"
+    },
+    {
+      "about": "/studies/211-test-of-fmv2-study-laurel-hardy-1/",
+      "uri": "urn:uuid:37f44120-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/211-test-of-fmv2-study-laurel-hardy-1/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:05+02:00"
+    },
+    {
+      "about": "/studies/211-test-of-fmv2-study-laurel-hardy-1/",
+      "uri": "urn:uuid:37f55290-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/211-test-of-fmv2-study-laurel-hardy-1/metadata.json",
+      "createdOn": "2022-05-10T19:19:05+02:00"
+    },
+    {
+      "about": "/studies/211-test-of-fmv2-study-laurel-hardy-1/assays/474-biomass-leaf-number-and-metabolites/",
+      "uri": "urn:uuid:38024220-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/211-test-of-fmv2-study-laurel-hardy-1/assays/474-biomass-leaf-number-and-metabolites/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:05+02:00"
+    },
+    {
+      "about": "/studies/211-test-of-fmv2-study-laurel-hardy-1/assays/474-biomass-leaf-number-and-metabolites/",
+      "uri": "urn:uuid:3803a990-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/211-test-of-fmv2-study-laurel-hardy-1/assays/474-biomass-leaf-number-and-metabolites/metadata.json",
+      "createdOn": "2022-05-10T19:19:05+02:00"
+    },
+    {
+      "about": "/studies/211-test-of-fmv2-study-laurel-hardy-1/assays/475-fmv2-simulation/",
+      "uri": "urn:uuid:380c1880-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/211-test-of-fmv2-study-laurel-hardy-1/assays/475-fmv2-simulation/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:05+02:00"
+    },
+    {
+      "about": "/studies/211-test-of-fmv2-study-laurel-hardy-1/assays/475-fmv2-simulation/",
+      "uri": "urn:uuid:380cd990-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/211-test-of-fmv2-study-laurel-hardy-1/assays/475-fmv2-simulation/metadata.json",
+      "createdOn": "2022-05-10T19:19:05+02:00"
+    },
+    {
+      "about": "/studies/215-construction-of-framework-model-version-2-fmv2/",
+      "uri": "urn:uuid:38145f30-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/215-construction-of-framework-model-version-2-fmv2/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:05+02:00"
+    },
+    {
+      "about": "/studies/215-construction-of-framework-model-version-2-fmv2/",
+      "uri": "urn:uuid:3815f6b0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/215-construction-of-framework-model-version-2-fmv2/metadata.json",
+      "createdOn": "2022-05-10T19:19:05+02:00"
+    },
+    {
+      "about": "/studies/215-construction-of-framework-model-version-2-fmv2/assays/461-timet-wp1-1a-metabolite-analysis-of-clock-mutants/",
+      "uri": "urn:uuid:38211700-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/215-construction-of-framework-model-version-2-fmv2/assays/461-timet-wp1-1a-metabolite-analysis-of-clock-mutants/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:05+02:00"
+    },
+    {
+      "about": "/studies/215-construction-of-framework-model-version-2-fmv2/assays/461-timet-wp1-1a-metabolite-analysis-of-clock-mutants/",
+      "uri": "urn:uuid:3821bb30-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/215-construction-of-framework-model-version-2-fmv2/assays/461-timet-wp1-1a-metabolite-analysis-of-clock-mutants/metadata.json",
+      "createdOn": "2022-05-10T19:19:05+02:00"
+    },
+    {
+      "about": "/studies/215-construction-of-framework-model-version-2-fmv2/assays/464-timet-wp1-1-clock-gene-expression-in-clock-mutants/",
+      "uri": "urn:uuid:382a6e50-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/215-construction-of-framework-model-version-2-fmv2/assays/464-timet-wp1-1-clock-gene-expression-in-clock-mutants/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:06+02:00"
+    },
+    {
+      "about": "/studies/215-construction-of-framework-model-version-2-fmv2/assays/464-timet-wp1-1-clock-gene-expression-in-clock-mutants/",
+      "uri": "urn:uuid:382b4ff0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/215-construction-of-framework-model-version-2-fmv2/assays/464-timet-wp1-1-clock-gene-expression-in-clock-mutants/metadata.json",
+      "createdOn": "2022-05-10T19:19:06+02:00"
+    },
+    {
+      "about": "/studies/215-construction-of-framework-model-version-2-fmv2/assays/468-composition-of-fmv2/",
+      "uri": "urn:uuid:3834c260-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/215-construction-of-framework-model-version-2-fmv2/assays/468-composition-of-fmv2/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:06+02:00"
+    },
+    {
+      "about": "/studies/215-construction-of-framework-model-version-2-fmv2/assays/468-composition-of-fmv2/",
+      "uri": "urn:uuid:38362b30-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/215-construction-of-framework-model-version-2-fmv2/assays/468-composition-of-fmv2/metadata.json",
+      "createdOn": "2022-05-10T19:19:06+02:00"
+    },
+    {
+      "about": "/studies/215-construction-of-framework-model-version-2-fmv2/assays/469-simulating-clock-gene-expression-with-model-p2011-/",
+      "uri": "urn:uuid:383fe3a0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/215-construction-of-framework-model-version-2-fmv2/assays/469-simulating-clock-gene-expression-with-model-p2011-/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:06+02:00"
+    },
+    {
+      "about": "/studies/215-construction-of-framework-model-version-2-fmv2/assays/469-simulating-clock-gene-expression-with-model-p2011-/",
+      "uri": "urn:uuid:38414660-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/215-construction-of-framework-model-version-2-fmv2/assays/469-simulating-clock-gene-expression-with-model-p2011-/metadata.json",
+      "createdOn": "2022-05-10T19:19:06+02:00"
+    },
+    {
+      "about": "/studies/216-analysis-of-framework-model-version-2-fmv2/",
+      "uri": "urn:uuid:384720c0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/216-analysis-of-framework-model-version-2-fmv2/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:06+02:00"
+    },
+    {
+      "about": "/studies/216-analysis-of-framework-model-version-2-fmv2/",
+      "uri": "urn:uuid:38480880-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/216-analysis-of-framework-model-version-2-fmv2/metadata.json",
+      "createdOn": "2022-05-10T19:19:06+02:00"
+    },
+    {
+      "about": "/studies/216-analysis-of-framework-model-version-2-fmv2/assays/466-sensitivity-analysis-of-fmv2/",
+      "uri": "urn:uuid:38537520-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/216-analysis-of-framework-model-version-2-fmv2/assays/466-sensitivity-analysis-of-fmv2/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:06+02:00"
+    },
+    {
+      "about": "/studies/216-analysis-of-framework-model-version-2-fmv2/assays/466-sensitivity-analysis-of-fmv2/",
+      "uri": "urn:uuid:385425e0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/216-analysis-of-framework-model-version-2-fmv2/assays/466-sensitivity-analysis-of-fmv2/metadata.json",
+      "createdOn": "2022-05-10T19:19:06+02:00"
+    },
+    {
+      "about": "/studies/216-analysis-of-framework-model-version-2-fmv2/assays/467-relationship-among-fmv2-outputs/",
+      "uri": "urn:uuid:385ca700-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/216-analysis-of-framework-model-version-2-fmv2/assays/467-relationship-among-fmv2-outputs/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:06+02:00"
+    },
+    {
+      "about": "/studies/216-analysis-of-framework-model-version-2-fmv2/assays/467-relationship-among-fmv2-outputs/",
+      "uri": "urn:uuid:385d5d60-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/216-analysis-of-framework-model-version-2-fmv2/assays/467-relationship-among-fmv2-outputs/metadata.json",
+      "createdOn": "2022-05-10T19:19:06+02:00"
+    },
+    {
+      "about": "/studies/219-test-of-fmv2-study-laurel-hardy-2/",
+      "uri": "urn:uuid:38649a60-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/219-test-of-fmv2-study-laurel-hardy-2/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:06+02:00"
+    },
+    {
+      "about": "/studies/219-test-of-fmv2-study-laurel-hardy-2/",
+      "uri": "urn:uuid:3865a900-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/219-test-of-fmv2-study-laurel-hardy-2/metadata.json",
+      "createdOn": "2022-05-10T19:19:06+02:00"
+    },
+    {
+      "about": "/studies/219-test-of-fmv2-study-laurel-hardy-2/assays/476-biomass-and-metabolites/",
+      "uri": "urn:uuid:38733280-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/219-test-of-fmv2-study-laurel-hardy-2/assays/476-biomass-and-metabolites/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:06+02:00"
+    },
+    {
+      "about": "/studies/219-test-of-fmv2-study-laurel-hardy-2/assays/476-biomass-and-metabolites/",
+      "uri": "urn:uuid:38745b20-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/219-test-of-fmv2-study-laurel-hardy-2/assays/476-biomass-and-metabolites/metadata.json",
+      "createdOn": "2022-05-10T19:19:06+02:00"
+    },
+    {
+      "about": "/studies/219-test-of-fmv2-study-laurel-hardy-2/assays/478-fmv2-simulation/",
+      "uri": "urn:uuid:387df450-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/219-test-of-fmv2-study-laurel-hardy-2/assays/478-fmv2-simulation/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:06+02:00"
+    },
+    {
+      "about": "/studies/219-test-of-fmv2-study-laurel-hardy-2/assays/478-fmv2-simulation/",
+      "uri": "urn:uuid:387ec0a0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/219-test-of-fmv2-study-laurel-hardy-2/assays/478-fmv2-simulation/metadata.json",
+      "createdOn": "2022-05-10T19:19:06+02:00"
+    },
+    {
+      "about": "/studies/220-test-of-fmv2-study-laurel-hardy-3/",
+      "uri": "urn:uuid:3886bb70-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/220-test-of-fmv2-study-laurel-hardy-3/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:06+02:00"
+    },
+    {
+      "about": "/studies/220-test-of-fmv2-study-laurel-hardy-3/",
+      "uri": "urn:uuid:3887c500-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/220-test-of-fmv2-study-laurel-hardy-3/metadata.json",
+      "createdOn": "2022-05-10T19:19:06+02:00"
+    },
+    {
+      "about": "/studies/220-test-of-fmv2-study-laurel-hardy-3/assays/477-biomass-and-metabolites/",
+      "uri": "urn:uuid:389a1530-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/220-test-of-fmv2-study-laurel-hardy-3/assays/477-biomass-and-metabolites/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:06+02:00"
+    },
+    {
+      "about": "/studies/220-test-of-fmv2-study-laurel-hardy-3/assays/477-biomass-and-metabolites/",
+      "uri": "urn:uuid:389c2a60-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/220-test-of-fmv2-study-laurel-hardy-3/assays/477-biomass-and-metabolites/metadata.json",
+      "createdOn": "2022-05-10T19:19:06+02:00"
+    },
+    {
+      "about": "/studies/220-test-of-fmv2-study-laurel-hardy-3/assays/479-fmv2-simulation/",
+      "uri": "urn:uuid:38a819d0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/220-test-of-fmv2-study-laurel-hardy-3/assays/479-fmv2-simulation/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:06+02:00"
+    },
+    {
+      "about": "/studies/220-test-of-fmv2-study-laurel-hardy-3/assays/479-fmv2-simulation/",
+      "uri": "urn:uuid:38a8ea70-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/220-test-of-fmv2-study-laurel-hardy-3/assays/479-fmv2-simulation/metadata.json",
+      "createdOn": "2022-05-10T19:19:06+02:00"
+    },
+    {
+      "about": "/studies/222-test-of-fmv2-study-gibberellins-1/",
+      "uri": "urn:uuid:38ba9ba0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/222-test-of-fmv2-study-gibberellins-1/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:06+02:00"
+    },
+    {
+      "about": "/studies/222-test-of-fmv2-study-gibberellins-1/",
+      "uri": "urn:uuid:38bc0c60-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/222-test-of-fmv2-study-gibberellins-1/metadata.json",
+      "createdOn": "2022-05-10T19:19:06+02:00"
+    },
+    {
+      "about": "/studies/222-test-of-fmv2-study-gibberellins-1/assays/1478-biomass-and-metabolites/",
+      "uri": "urn:uuid:38c72ac0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/222-test-of-fmv2-study-gibberellins-1/assays/1478-biomass-and-metabolites/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/studies/222-test-of-fmv2-study-gibberellins-1/assays/1478-biomass-and-metabolites/",
+      "uri": "urn:uuid:38c7dcc0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/222-test-of-fmv2-study-gibberellins-1/assays/1478-biomass-and-metabolites/metadata.json",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/studies/222-test-of-fmv2-study-gibberellins-1/assays/1479-circadian-period-analysis/",
+      "uri": "urn:uuid:38d08aa0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/222-test-of-fmv2-study-gibberellins-1/assays/1479-circadian-period-analysis/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/studies/222-test-of-fmv2-study-gibberellins-1/assays/1479-circadian-period-analysis/",
+      "uri": "urn:uuid:38d10aa0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/222-test-of-fmv2-study-gibberellins-1/assays/1479-circadian-period-analysis/metadata.json",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/studies/938-test-of-fmv2-follow-on-mechanisms-of-malate-fumara/",
+      "uri": "urn:uuid:38d729a0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/938-test-of-fmv2-follow-on-mechanisms-of-malate-fumara/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/studies/938-test-of-fmv2-follow-on-mechanisms-of-malate-fumara/",
+      "uri": "urn:uuid:38d80c90-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/938-test-of-fmv2-follow-on-mechanisms-of-malate-fumara/metadata.json",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/studies/938-test-of-fmv2-follow-on-mechanisms-of-malate-fumara/assays/1661-assimilation-and-partitioning-of-14co2-at-night/",
+      "uri": "urn:uuid:38e2d930-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/938-test-of-fmv2-follow-on-mechanisms-of-malate-fumara/assays/1661-assimilation-and-partitioning-of-14co2-at-night/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/studies/938-test-of-fmv2-follow-on-mechanisms-of-malate-fumara/assays/1661-assimilation-and-partitioning-of-14co2-at-night/",
+      "uri": "urn:uuid:38e368b0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/938-test-of-fmv2-follow-on-mechanisms-of-malate-fumara/assays/1661-assimilation-and-partitioning-of-14co2-at-night/metadata.json",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/studies/938-test-of-fmv2-follow-on-mechanisms-of-malate-fumara/assays/1662-thiamine-vitamers/",
+      "uri": "urn:uuid:38eb6c70-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/938-test-of-fmv2-follow-on-mechanisms-of-malate-fumara/assays/1662-thiamine-vitamers/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/studies/938-test-of-fmv2-follow-on-mechanisms-of-malate-fumara/assays/1662-thiamine-vitamers/",
+      "uri": "urn:uuid:38ebf950-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/938-test-of-fmv2-follow-on-mechanisms-of-malate-fumara/assays/1662-thiamine-vitamers/metadata.json",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/studies/940-tests-of-fmv2-compilations-and-figures/",
+      "uri": "urn:uuid:38f1d620-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/940-tests-of-fmv2-compilations-and-figures/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/studies/940-tests-of-fmv2-compilations-and-figures/",
+      "uri": "urn:uuid:38f28c00-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/940-tests-of-fmv2-compilations-and-figures/metadata.json",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/studies/940-tests-of-fmv2-compilations-and-figures/assays/1660-biomass-leaf-area-and-gas-exchange-data/",
+      "uri": "urn:uuid:38ff0840-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/940-tests-of-fmv2-compilations-and-figures/assays/1660-biomass-leaf-area-and-gas-exchange-data/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/studies/940-tests-of-fmv2-compilations-and-figures/assays/1660-biomass-leaf-area-and-gas-exchange-data/",
+      "uri": "urn:uuid:38ffd2a0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/940-tests-of-fmv2-compilations-and-figures/assays/1660-biomass-leaf-area-and-gas-exchange-data/metadata.json",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/studies/941-test-of-fmv2-photoperiodic-flowering-and-hypocotyl/",
+      "uri": "urn:uuid:3905daa0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/941-test-of-fmv2-photoperiodic-flowering-and-hypocotyl/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/studies/941-test-of-fmv2-photoperiodic-flowering-and-hypocotyl/",
+      "uri": "urn:uuid:3906c980-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/941-test-of-fmv2-photoperiodic-flowering-and-hypocotyl/metadata.json",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/studies/941-test-of-fmv2-photoperiodic-flowering-and-hypocotyl/assays/462-mizuno-lab-flowering-time-in-clock-mutants/",
+      "uri": "urn:uuid:39126a00-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/941-test-of-fmv2-photoperiodic-flowering-and-hypocotyl/assays/462-mizuno-lab-flowering-time-in-clock-mutants/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/studies/941-test-of-fmv2-photoperiodic-flowering-and-hypocotyl/assays/462-mizuno-lab-flowering-time-in-clock-mutants/",
+      "uri": "urn:uuid:391358e0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/941-test-of-fmv2-photoperiodic-flowering-and-hypocotyl/assays/462-mizuno-lab-flowering-time-in-clock-mutants/metadata.json",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/studies/941-test-of-fmv2-photoperiodic-flowering-and-hypocotyl/assays/463-mizuno-lab-hypocotyl-length-in-clock-mutants/",
+      "uri": "urn:uuid:391c92a0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/941-test-of-fmv2-photoperiodic-flowering-and-hypocotyl/assays/463-mizuno-lab-hypocotyl-length-in-clock-mutants/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/studies/941-test-of-fmv2-photoperiodic-flowering-and-hypocotyl/assays/463-mizuno-lab-hypocotyl-length-in-clock-mutants/",
+      "uri": "urn:uuid:391d76c0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/studies/941-test-of-fmv2-photoperiodic-flowering-and-hypocotyl/assays/463-mizuno-lab-hypocotyl-length-in-clock-mutants/metadata.json",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/data_files/1598-timet-wp1-1a-metabolite-data-ed-en-in-clock-mutant/",
+      "uri": "urn:uuid:392366d0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1598-timet-wp1-1a-metabolite-data-ed-en-in-clock-mutant/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/data_files/1598-timet-wp1-1a-metabolite-data-ed-en-in-clock-mutant/",
+      "uri": "urn:uuid:39242e10-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1598-timet-wp1-1a-metabolite-data-ed-en-in-clock-mutant/metadata.json",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/data_files/1612-flowering-time-in-wt-vs-prr7prr9-nakamichi-et-al-2/",
+      "uri": "urn:uuid:392a35b0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1612-flowering-time-in-wt-vs-prr7prr9-nakamichi-et-al-2/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/data_files/1612-flowering-time-in-wt-vs-prr7prr9-nakamichi-et-al-2/",
+      "uri": "urn:uuid:392af0c0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1612-flowering-time-in-wt-vs-prr7prr9-nakamichi-et-al-2/metadata.json",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/data_files/1613-hypocotyl-lengths-in-wt-vs-prr7prr9-across-photope/",
+      "uri": "urn:uuid:39305380-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1613-hypocotyl-lengths-in-wt-vs-prr7prr9-across-photope/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/data_files/1613-hypocotyl-lengths-in-wt-vs-prr7prr9-across-photope/",
+      "uri": "urn:uuid:3930f5b0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1613-hypocotyl-lengths-in-wt-vs-prr7prr9-across-photope/metadata.json",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/data_files/1593-timet-wp1-1-qrt-pcr-ld-to-ll-and-dd/",
+      "uri": "urn:uuid:39368d60-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1593-timet-wp1-1-qrt-pcr-ld-to-ll-and-dd/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/data_files/1593-timet-wp1-1-qrt-pcr-ld-to-ll-and-dd/",
+      "uri": "urn:uuid:39373a70-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1593-timet-wp1-1-qrt-pcr-ld-to-ll-and-dd/metadata.json",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/data_files/1610-sensitivity-analysis-results-mat-file/",
+      "uri": "urn:uuid:393d0050-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1610-sensitivity-analysis-results-mat-file/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/data_files/1610-sensitivity-analysis-results-mat-file/",
+      "uri": "urn:uuid:393d9f30-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1610-sensitivity-analysis-results-mat-file/metadata.json",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/data_files/1594-p2011-1-2-simulations-of-clock-genes-under-ld-cycl/",
+      "uri": "urn:uuid:3942eca0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1594-p2011-1-2-simulations-of-clock-genes-under-ld-cycl/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/data_files/1594-p2011-1-2-simulations-of-clock-genes-under-ld-cycl/",
+      "uri": "urn:uuid:394393f0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1594-p2011-1-2-simulations-of-clock-genes-under-ld-cycl/metadata.json",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/data_files/1595-p2011-1-2-simulations-vs-data-for-wt-normalised-fo/",
+      "uri": "urn:uuid:3948f830-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1595-p2011-1-2-simulations-vs-data-for-wt-normalised-fo/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/data_files/1595-p2011-1-2-simulations-vs-data-for-wt-normalised-fo/",
+      "uri": "urn:uuid:394999b0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1595-p2011-1-2-simulations-vs-data-for-wt-normalised-fo/metadata.json",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/data_files/1597-p2011-1-2-simulations-and-data-in-prr7-prr9-mutant/",
+      "uri": "urn:uuid:394ee6c0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1597-p2011-1-2-simulations-and-data-in-prr7-prr9-mutant/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/data_files/1597-p2011-1-2-simulations-and-data-in-prr7-prr9-mutant/",
+      "uri": "urn:uuid:394f89c0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1597-p2011-1-2-simulations-and-data-in-prr7-prr9-mutant/metadata.json",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/data_files/1604-laurel-and-hardy-1-experimental-data-mat-file/",
+      "uri": "urn:uuid:3954d800-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1604-laurel-and-hardy-1-experimental-data-mat-file/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:07+02:00"
+    },
+    {
+      "about": "/data_files/1604-laurel-and-hardy-1-experimental-data-mat-file/",
+      "uri": "urn:uuid:39557b20-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1604-laurel-and-hardy-1-experimental-data-mat-file/metadata.json",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/1616-laurel-and-hardy-1-experimental-data-excel/",
+      "uri": "urn:uuid:395ade50-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1616-laurel-and-hardy-1-experimental-data-excel/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/1616-laurel-and-hardy-1-experimental-data-excel/",
+      "uri": "urn:uuid:395b7ea0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1616-laurel-and-hardy-1-experimental-data-excel/metadata.json",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/1605-laurel-and-hardy-1-simulation-data-mat-file/",
+      "uri": "urn:uuid:39615df0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1605-laurel-and-hardy-1-simulation-data-mat-file/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/1605-laurel-and-hardy-1-simulation-data-mat-file/",
+      "uri": "urn:uuid:396208d0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1605-laurel-and-hardy-1-simulation-data-mat-file/metadata.json",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/5002-laurel-and-hardy-1-mean-data-and-simulations/",
+      "uri": "urn:uuid:39686ec0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/5002-laurel-and-hardy-1-mean-data-and-simulations/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/5002-laurel-and-hardy-1-mean-data-and-simulations/",
+      "uri": "urn:uuid:39694250-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/5002-laurel-and-hardy-1-mean-data-and-simulations/metadata.json",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/1606-laurel-and-hardy-2-experimental-data-mat-file/",
+      "uri": "urn:uuid:396ed5e0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1606-laurel-and-hardy-2-experimental-data-mat-file/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/1606-laurel-and-hardy-2-experimental-data-mat-file/",
+      "uri": "urn:uuid:396f7930-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1606-laurel-and-hardy-2-experimental-data-mat-file/metadata.json",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/1621-laurel-and-hardy-2-experimental-data-excel/",
+      "uri": "urn:uuid:3974fc50-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1621-laurel-and-hardy-2-experimental-data-excel/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/1621-laurel-and-hardy-2-experimental-data-excel/",
+      "uri": "urn:uuid:3975b180-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1621-laurel-and-hardy-2-experimental-data-excel/metadata.json",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/1627-laurel-and-hardy-2-complete-data/",
+      "uri": "urn:uuid:3982a880-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1627-laurel-and-hardy-2-complete-data/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/1627-laurel-and-hardy-2-complete-data/",
+      "uri": "urn:uuid:3983a120-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1627-laurel-and-hardy-2-complete-data/metadata.json",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/1607-laurel-and-hardy-3-experimental-data-mat-file/",
+      "uri": "urn:uuid:39898610-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1607-laurel-and-hardy-3-experimental-data-mat-file/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/1607-laurel-and-hardy-3-experimental-data-mat-file/",
+      "uri": "urn:uuid:398a34f0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1607-laurel-and-hardy-3-experimental-data-mat-file/metadata.json",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/1622-laurel-and-hardy-3-experimental-data-excel/",
+      "uri": "urn:uuid:398ff4e0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1622-laurel-and-hardy-3-experimental-data-excel/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/1622-laurel-and-hardy-3-experimental-data-excel/",
+      "uri": "urn:uuid:3990a280-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1622-laurel-and-hardy-3-experimental-data-excel/metadata.json",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/1626-laurel-and-hardy-3-complete-data/",
+      "uri": "urn:uuid:399728e0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1626-laurel-and-hardy-3-complete-data/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/1626-laurel-and-hardy-3-complete-data/",
+      "uri": "urn:uuid:399806e0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1626-laurel-and-hardy-3-complete-data/metadata.json",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/1608-laurel-and-hardy-2-simulation-data-mat-file/",
+      "uri": "urn:uuid:399dd720-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1608-laurel-and-hardy-2-simulation-data-mat-file/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/1608-laurel-and-hardy-2-simulation-data-mat-file/",
+      "uri": "urn:uuid:399f1460-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1608-laurel-and-hardy-2-simulation-data-mat-file/metadata.json",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/5003-laurel-and-hardy-2-mean-data-and-simulations/",
+      "uri": "urn:uuid:39a64700-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/5003-laurel-and-hardy-2-mean-data-and-simulations/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/5003-laurel-and-hardy-2-mean-data-and-simulations/",
+      "uri": "urn:uuid:39a72490-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/5003-laurel-and-hardy-2-mean-data-and-simulations/metadata.json",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/1609-laurel-and-hardy-3-simulation-data-mat-file/",
+      "uri": "urn:uuid:39ad0d40-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1609-laurel-and-hardy-3-simulation-data-mat-file/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/1609-laurel-and-hardy-3-simulation-data-mat-file/",
+      "uri": "urn:uuid:39adb480-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/1609-laurel-and-hardy-3-simulation-data-mat-file/metadata.json",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/5004-laurel-and-hardy-3-mean-data-and-simulations/",
+      "uri": "urn:uuid:39b4c540-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/5004-laurel-and-hardy-3-mean-data-and-simulations/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/5004-laurel-and-hardy-3-mean-data-and-simulations/",
+      "uri": "urn:uuid:39b5a2e0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/5004-laurel-and-hardy-3-mean-data-and-simulations/metadata.json",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/5006-all-biomass-data-for-study-gibberellins-1/",
+      "uri": "urn:uuid:39bc1ab0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/5006-all-biomass-data-for-study-gibberellins-1/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/5006-all-biomass-data-for-study-gibberellins-1/",
+      "uri": "urn:uuid:39bcd820-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/5006-all-biomass-data-for-study-gibberellins-1/metadata.json",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/5007-biomass-and-metabolite-data-for-study-gibberellins/",
+      "uri": "urn:uuid:39c3b810-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/5007-biomass-and-metabolite-data-for-study-gibberellins/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/5007-biomass-and-metabolite-data-for-study-gibberellins/",
+      "uri": "urn:uuid:39c48a40-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/5007-biomass-and-metabolite-data-for-study-gibberellins/metadata.json",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/5005-four-study-data-compilation-with-charts/",
+      "uri": "urn:uuid:39cb14b0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/5005-four-study-data-compilation-with-charts/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/5005-four-study-data-compilation-with-charts/",
+      "uri": "urn:uuid:39cbd710-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/5005-four-study-data-compilation-with-charts/metadata.json",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/5008-carbon-assimilation-and-partitioning-in-darkness/",
+      "uri": "urn:uuid:39d127a0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/5008-carbon-assimilation-and-partitioning-in-darkness/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/5008-carbon-assimilation-and-partitioning-in-darkness/",
+      "uri": "urn:uuid:39d1b1f0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/5008-carbon-assimilation-and-partitioning-in-darkness/metadata.json",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/5009-testing-thiamine-metabolites-in-col-and-prr7prr9/",
+      "uri": "urn:uuid:39d74920-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/5009-testing-thiamine-metabolites-in-col-and-prr7prr9/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/data_files/5009-testing-thiamine-metabolites-in-col-and-prr7prr9/",
+      "uri": "urn:uuid:39d7e8d0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/data_files/5009-testing-thiamine-metabolites-in-col-and-prr7prr9/metadata.json",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/models/243-arabidopsis-clock-model-p2011-1-2/",
+      "uri": "urn:uuid:39de4bd0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/models/243-arabidopsis-clock-model-p2011-1-2/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/models/243-arabidopsis-clock-model-p2011-1-2/",
+      "uri": "urn:uuid:39dedfc0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/models/243-arabidopsis-clock-model-p2011-1-2/metadata.json",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/models/245-arabidopsis-starch-and-the-circadian-clock-model-2/",
+      "uri": "urn:uuid:39e54750-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/models/245-arabidopsis-starch-and-the-circadian-clock-model-2/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/models/245-arabidopsis-starch-and-the-circadian-clock-model-2/",
+      "uri": "urn:uuid:39e5f200-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/models/245-arabidopsis-starch-and-the-circadian-clock-model-2/metadata.json",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/models/246-modelling-circadian-regulation-of-flowering-time-a/",
+      "uri": "urn:uuid:39ec2070-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/models/246-modelling-circadian-regulation-of-flowering-time-a/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/models/246-modelling-circadian-regulation-of-flowering-time-a/",
+      "uri": "urn:uuid:39ecc6a0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/models/246-modelling-circadian-regulation-of-flowering-time-a/metadata.json",
+      "createdOn": "2022-05-10T19:19:08+02:00"
+    },
+    {
+      "about": "/models/247-chew_et_al_2014_framework_model-version-1-matlab-a/",
+      "uri": "urn:uuid:39f38a10-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/models/247-chew_et_al_2014_framework_model-version-1-matlab-a/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:09+02:00"
+    },
+    {
+      "about": "/models/247-chew_et_al_2014_framework_model-version-1-matlab-a/",
+      "uri": "urn:uuid:39f475c0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/models/247-chew_et_al_2014_framework_model-version-1-matlab-a/metadata.json",
+      "createdOn": "2022-05-10T19:19:09+02:00"
+    },
+    {
+      "about": "/models/248-framework-model-v2/",
+      "uri": "urn:uuid:39fbe210-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/models/248-framework-model-v2/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:09+02:00"
+    },
+    {
+      "about": "/models/248-framework-model-v2/",
+      "uri": "urn:uuid:39fc8aa0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/models/248-framework-model-v2/metadata.json",
+      "createdOn": "2022-05-10T19:19:09+02:00"
+    },
+    {
+      "about": "/models/314-p2011-1-2_directupload/",
+      "uri": "urn:uuid:3a033500-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/models/314-p2011-1-2_directupload/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:09+02:00"
+    },
+    {
+      "about": "/models/314-p2011-1-2_directupload/",
+      "uri": "urn:uuid:3a045080-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/models/314-p2011-1-2_directupload/metadata.json",
+      "createdOn": "2022-05-10T19:19:09+02:00"
+    },
+    {
+      "about": "/publications/306-defining-the-robust-behaviour-of-the-plant-clock-g/",
+      "uri": "urn:uuid:3a09fee0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/publications/306-defining-the-robust-behaviour-of-the-plant-clock-g/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:09+02:00"
+    },
+    {
+      "about": "/publications/306-defining-the-robust-behaviour-of-the-plant-clock-g/",
+      "uri": "urn:uuid:3a0a6eb0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/publications/306-defining-the-robust-behaviour-of-the-plant-clock-g/metadata.json",
+      "createdOn": "2022-05-10T19:19:09+02:00"
+    },
+    {
+      "about": "/publications/307-the-circadian-clock-regulates-the-photoperiodic-re/",
+      "uri": "urn:uuid:3a0ee500-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/publications/307-the-circadian-clock-regulates-the-photoperiodic-re/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:09+02:00"
+    },
+    {
+      "about": "/publications/307-the-circadian-clock-regulates-the-photoperiodic-re/",
+      "uri": "urn:uuid:3a0f3680-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/publications/307-the-circadian-clock-regulates-the-photoperiodic-re/metadata.json",
+      "createdOn": "2022-05-10T19:19:09+02:00"
+    },
+    {
+      "about": "/publications/308-arabidopsis-clock-associated-pseudo-response-regul/",
+      "uri": "urn:uuid:3a13b780-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/publications/308-arabidopsis-clock-associated-pseudo-response-regul/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:09+02:00"
+    },
+    {
+      "about": "/publications/308-arabidopsis-clock-associated-pseudo-response-regul/",
+      "uri": "urn:uuid:3a140b70-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/publications/308-arabidopsis-clock-associated-pseudo-response-regul/metadata.json",
+      "createdOn": "2022-05-10T19:19:09+02:00"
+    },
+    {
+      "about": "/publications/345-linking-circadian-time-to-growth-rate-quantitative/",
+      "uri": "urn:uuid:3a19e830-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/publications/345-linking-circadian-time-to-growth-rate-quantitative/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:09+02:00"
+    },
+    {
+      "about": "/publications/345-linking-circadian-time-to-growth-rate-quantitative/",
+      "uri": "urn:uuid:3a1a81d0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/publications/345-linking-circadian-time-to-growth-rate-quantitative/metadata.json",
+      "createdOn": "2022-05-10T19:19:09+02:00"
+    },
+    {
+      "about": "/publications/642-the-arabidopsis-framework-model-version-2-predicts/",
+      "uri": "urn:uuid:3a2132b0-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/publications/642-the-arabidopsis-framework-model-version-2-predicts/metadata.rdf",
+      "createdOn": "2022-05-10T19:19:09+02:00"
+    },
+    {
+      "about": "/publications/642-the-arabidopsis-framework-model-version-2-predicts/",
+      "uri": "urn:uuid:3a21e120-b2b3-013a-1ed8-000af7bc3dde",
+      "content": "/publications/642-the-arabidopsis-framework-model-version-2-predicts/metadata.json",
+      "createdOn": "2022-05-10T19:19:09+02:00"
+    }
+  ]
+}

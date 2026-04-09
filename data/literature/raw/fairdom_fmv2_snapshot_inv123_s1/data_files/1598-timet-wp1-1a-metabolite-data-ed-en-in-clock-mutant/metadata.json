@@ -1,0 +1,27 @@
+{
+  "id": 1598,
+  "uri": "https://fairdomhub.org/data_files/1598?version=2",
+  "title": "TiMet WP1.1a metabolite data, ED-EN in clock mutants",
+  "description": "Analysis of carbon metabolites in clock mutants by Anna Flis and Ronan Sulpice, Mark Stitt lab",
+  "version": 2,
+  "doi": null,
+  "contributor": {
+    "name": "Andrew Millar",
+    "uri": "https://fairdomhub.org/people/850",
+    "orcid": "https://orcid.org/0000-0003-1756-3654"
+  },
+  "creators": [
+    {
+      "name": "Andrew Millar",
+      "uri": "https://fairdomhub.org/people/850",
+      "orcid": "https://orcid.org/0000-0003-1756-3654"
+    }
+  ],
+  "contains": [
+    "data_files/1598-timet-wp1-1a-metabolite-data-ed-en-in-clock-mutant/Clock mutant ED-EN LC-MS data from AnnaF_stats_2.xlsx"
+  ],
+  "license": {
+    "title": "CC0 1.0",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  }
+}

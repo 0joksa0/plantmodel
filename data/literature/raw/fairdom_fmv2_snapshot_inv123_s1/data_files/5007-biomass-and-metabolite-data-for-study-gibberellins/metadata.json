@@ -1,0 +1,36 @@
+{
+  "id": 5007,
+  "uri": "https://fairdomhub.org/data_files/5007?version=1",
+  "title": "Biomass and metabolite data for study Gibberellins 1",
+  "description": "Excel sheet with mean and SD biomass data and charts, individual metabolite replicates, mean, SD and charts\r\nDetails on Read.ME worksheet",
+  "version": 1,
+  "doi": null,
+  "contributor": {
+    "name": "Andrew Millar",
+    "uri": "https://fairdomhub.org/people/850",
+    "orcid": "https://orcid.org/0000-0003-1756-3654"
+  },
+  "creators": [
+    {
+      "name": "Virginie Mengin",
+      "uri": "https://fairdomhub.org/people/984"
+    },
+    {
+      "name": "Yin Hoon Chew",
+      "uri": "https://fairdomhub.org/people/854",
+      "orcid": "https://orcid.org/0000-0002-9258-583X"
+    },
+    {
+      "name": "Andrew Millar",
+      "uri": "https://fairdomhub.org/people/850",
+      "orcid": "https://orcid.org/0000-0003-1756-3654"
+    }
+  ],
+  "contains": [
+    "data_files/5007-biomass-and-metabolite-data-for-study-gibberellins/GA experiment - biomass + metabolite_AJM.xlsx"
+  ],
+  "license": {
+    "title": "CC0 1.0",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  }
+}
