@@ -3,8 +3,6 @@
 #include "model/input.h"
 #include <solver.h>
 
-
-
 void photo_dataset_open(const char *path);
 void photo_dataset_close(void);
 void photo_dataset_flush(void);
@@ -19,7 +17,7 @@ real_t photosynthesis(
     real_t phosphorus_saturation,
     real_t leaf_biomass,
     real_t min_leaf_biomass);
-real_t farquhar_photosynthesis(Input* input);
+real_t farquhar_photosynthesis(Input *input);
 
 real_t nitrogen_saturation(
     real_t nitrogen,
@@ -62,7 +60,7 @@ real_t starch_sucrose_partition(
 real_t starch_sucrose_partition_f(
     real_t t,
     real_t starch_partition_coeff,
-    void* params);
+    void *params);
 
 real_t nitrogen_content(
     real_t nitrogen_uptake,
@@ -81,7 +79,7 @@ real_t nitrogen_content(
 real_t nitrogen_content_f(
     real_t t,
     real_t nitrogen,
-    void* params);
+    void *params);
 real_t phosphorus_content(
     real_t phosphorus_uptake,
     real_t respiration_frequency,
@@ -99,7 +97,7 @@ real_t phosphorus_content(
 real_t phosphorus_content_f(
     real_t t,
     real_t phosphorus,
-    void* params);
+    void *params);
 
 real_t assimilation_cost_nitrogen(
     real_t lambda_csn);
@@ -157,7 +155,7 @@ real_t nitrogen_affinity(
 real_t nitrogen_affinity_f(
     real_t t,
     real_t nitrogen_affinity_p,
-    void* params);
+    void *params);
 real_t phosphorus_affinity(
     real_t phosphorus_affinity,
     real_t phosphorus_uptake,
@@ -176,7 +174,7 @@ real_t phosphorus_affinity(
 real_t phosphorus_affinity_f(
     real_t t,
     real_t phosphorus_affinity_p,
-    void* params);
+    void *params);
 real_t nitrogen_cost(
     real_t respiration_frequency,
     real_t sucrose,
@@ -235,7 +233,7 @@ real_t starch_production(
 real_t starch_production_f(
     real_t t,
     real_t starch,
-    void* params);
+    void *params);
 
 real_t sucrose_production(
     real_t sucrose_partition_coeff,
@@ -251,7 +249,7 @@ real_t sucrose_production(
 real_t sucrose_production_f(
     real_t t,
     real_t sucrose,
-    void* params);
+    void *params);
 
 real_t night_efficiency_starch(
     real_t sucrose,
@@ -284,7 +282,7 @@ real_t leaf_growth(
 real_t leaf_growth_f(
     real_t t,
     real_t leaf_biomass,
-    void* params);
+    void *params);
 real_t root_growth(
     real_t lambda_sb,
     real_t sucrose_root_allocation,
@@ -297,7 +295,7 @@ real_t root_growth(
 real_t root_growth_f(
     real_t t,
     real_t root_biomass,
-    void* params);
+    void *params);
 real_t stoichiometric_signal(
     real_t optimal_stoichiometric_ratio,
     real_t nitrogen,
@@ -318,7 +316,7 @@ real_t sucrose_root_allocation(
 real_t sucrose_root_allocation_f(
     real_t t,
     real_t sucrose_root_allocation_p,
-    void* params);
+    void *params);
 
 real_t lambda_sb_f(real_t lambda_sb, real_t nitrogen_soil, real_t phosphorus_soil);
 
@@ -327,17 +325,17 @@ real_t R_plus(real_t nitrogen_soil, real_t phosphorus_soil);
 // Farquhar C3 Photosynthesis Model
 
 real_t rubisco_limited_photosynthesis(
-    real_t intercellular_CO2, // Ci
-    real_t CO2_compensation_point, // Gamma_star
+    real_t intercellular_CO2,              // Ci
+    real_t CO2_compensation_point,         // Gamma_star
     real_t max_rubisco_carboxylation_rate, // Vcmax
-    real_t michaelis_constant_CO2, // Kc
-    real_t michaelis_constant_O2, // Ko
-    real_t oxygen_concentration // O
+    real_t michaelis_constant_CO2,         // Kc
+    real_t michaelis_constant_O2,          // Ko
+    real_t oxygen_concentration            // O
 );
 
 // Light-limited (RuBP regeneration) assimilation rate
 real_t light_limited_photosynthesis(
-    real_t intercellular_CO2, // Ci
+    real_t intercellular_CO2,      // Ci
     real_t CO2_compensation_point, // Gamma_star
     real_t electron_transport_rate // J
 );
@@ -345,22 +343,22 @@ real_t light_limited_photosynthesis(
 // Net photosynthesis rate
 real_t net_photosynthesis(
     real_t rubisco_limited_rate, // Ac
-    real_t light_limited_rate, // Aj
-    real_t respiration_rate // Rd
+    real_t light_limited_rate,   // Aj
+    real_t respiration_rate      // Rd
 );
 
 // Convert An (umol CO2 m^-2 s^-1) to ph (umol C6 gFW^-1 h^-1)
 real_t convert_to_photosynthesis_per_gram_per_hour(
     real_t net_photosynthesis_rate, // An [μmol CO2 / m² / s]
-    real_t leaf_biomass, // gFW
-    real_t specific_leaf_area // SLA [m² / gFW]
+    real_t leaf_biomass,            // gFW
+    real_t specific_leaf_area       // SLA [m² / gFW]
 );
 
 // Intercellular CO2 based on diffusion from ambient and net photosynthesis
 real_t intercellular_CO2(
     real_t ambient_CO2_concentration, // Ca
-    real_t net_photosynthesis_rate, // An
-    real_t stomatal_conductance // gs
+    real_t net_photosynthesis_rate,   // An
+    real_t stomatal_conductance       // gs
 );
 
 // Maksimov
@@ -409,7 +407,7 @@ real_t growthPotential(
     real_t power_spent,
     real_t mass);
 
-real_t iterate_ci(Input* input, int max_iter, real_t epsilon);
+real_t iterate_ci(Input *input, int max_iter, real_t epsilon);
 
 real_t calculate_stomatal_conductance_jarvis(
     real_t incoming_PAR,
@@ -420,8 +418,6 @@ real_t calculate_stomatal_conductance_jarvis(
 
 real_t calculate_vapor_pressure_deficit(real_t temperature_celsius, real_t relative_humidity_percent);
 
-void update_light_conditions(Input* input, real_t current_hour);
-
-
+void update_light_conditions(Input *input, real_t current_hour);
 
 #endif
