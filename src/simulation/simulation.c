@@ -40,7 +40,7 @@ void simulate_days(const SimulationConfig* config, Input* input, SimulationResul
 
     int days = cfg.days;
     result->days = days;
-    result->photoperiod = input->core.photoperiod;
+    result->photoperiod = input->photo.photoperiod;
     result->total_steps = (int)(days * REAL(24.0) / cfg.dt_hours);
     result->filled_steps = 0;
 
@@ -50,25 +50,25 @@ void simulate_days(const SimulationConfig* config, Input* input, SimulationResul
     result->partition = calloc((size_t)result->total_steps, sizeof(real_t));
     /* TODO: Validate allocation results and return an explicit error code instead of assuming success. */
 
-    input->core.lambda_sb = lambda_sb_f(
-        input->core.lambda_sb,
-        input->core.nitrogen_soil_content,
-        input->core.phosphorus_soil_content);
+    input->growth.lambda_sb = lambda_sb_f(
+        input->growth.lambda_sb,
+        input->nutrients.nitrogen_soil_content,
+        input->nutrients.phosphorus_soil_content);
 
     real_t x[X_DIM];
     simulation_pack_state(x, input);
 
     PlantCtx rhs_ctx = {
         .base = input,
-        .starch_night_start = input->core.starch
+        .starch_night_start = input->carbohydrates.starch
     };
 
     Input tmp = *input;
     update_light_conditions(&tmp, REAL(0.0));
-    rhs_ctx.was_light = (tmp.core.light != REAL(0.0));
+    rhs_ctx.was_light = (tmp.photo.light != REAL(0.0));
 
     char filename[64];
-    snprintf(filename, sizeof(filename), "plant_%dh.csv", (int)input->core.photoperiod);
+    snprintf(filename, sizeof(filename), "plant_%dh.csv", (int)input->photo.photoperiod);
 
     CSVObserverCtx csv_ctx = {
         .f = cfg.write_csv ? fopen(filename, "w") : NULL,

@@ -21,13 +21,13 @@ real_t leaf_growth_f(
     (void)t;
 
     return leaf_growth(
-        input->core.lambda_sb,
-        input->core.sucrose_root_allocation,
-        input->core.sucrose_loading_frequency,
-        input->core.night_efficiency_starch,
+        input->growth.lambda_sb,
+        input->growth.sucrose_root_allocation,
+        input->carbohydrates.sucrose_loading_frequency,
+        input->carbohydrates.night_efficiency_starch,
         leaf_biomass,
-        input->core.leaf_deathrate,
-        input->core.leaf_competitive_rate);
+        input->growth.leaf_deathrate,
+        input->growth.leaf_competitive_rate);
 }
 
 real_t root_growth(
@@ -52,14 +52,14 @@ real_t root_growth_f(
     Input* input = (Input*)params;
     (void)t;
     return root_growth(
-        input->core.lambda_sb,
-        input->core.sucrose_root_allocation,
-        input->core.sucrose_loading_frequency,
-        input->core.night_efficiency_starch,
-        input->core.leaf_biomass,
+        input->growth.lambda_sb,
+        input->growth.sucrose_root_allocation,
+        input->carbohydrates.sucrose_loading_frequency,
+        input->carbohydrates.night_efficiency_starch,
+        input->growth.leaf_biomass,
         root_biomass,
-        input->core.root_deathrate,
-        input->core.root_competitive_rate);
+        input->growth.root_deathrate,
+        input->growth.root_competitive_rate);
 }
 
 real_t sucrose_root_allocation(
@@ -88,15 +88,15 @@ real_t sucrose_root_allocation_f(
     (void)t;
     return sucrose_root_allocation(
         sucrose_root_allocation_p,
-        input->core.nitrogen_affinity,
-        input->core.phosphorus_affinity,
-        input->core.stoichiometric_signal,
-        input->core.sucrose,
-        input->core.min_sucrose,
-        input->core.nitrogen,
-        input->core.min_nitrogen,
-        input->core.phosphorus,
-        input->core.min_phosphorus);
+        input->nutrients.nitrogen_affinity,
+        input->nutrients.phosphorus_affinity,
+        input->nutrients.stoichiometric_signal,
+        input->carbohydrates.sucrose,
+        input->carbohydrates.min_sucrose,
+        input->nutrients.nitrogen,
+        input->nutrients.min_nitrogen,
+        input->nutrients.phosphorus,
+        input->nutrients.min_phosphorus);
 }
 
 real_t lambda_sb_f(real_t lambda_sb, real_t nitrogen_soil, real_t phosphorus_soil)

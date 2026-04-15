@@ -9,14 +9,15 @@ typedef struct {
     real_t max_photosynthetic_rate;
     real_t nitrogen_saturation;
     real_t phosphorus_saturation;
-    real_t leaf_biomass;
     real_t min_leaf_biomass;
     real_t feedback_on_photosynthesis;
+    real_t photoperiod;
+    real_t photosynthesis;
+} InputPhoto;
+
+typedef struct {
     real_t max_starch;
     real_t max_starch_degradation_rate;
-    real_t photoperiod;
-    real_t optimal_stoichiometric_ratio;
-    real_t photosynthesis;
     real_t starch_partition_coeff;
     real_t starch_degradation_rate;
     real_t uptake_cost;
@@ -32,9 +33,13 @@ typedef struct {
     real_t lambda_sdi;
     real_t lambda_sni;
     real_t lambda_g;
-    real_t lambda_sb;
     real_t sucrose;
     real_t starch;
+    real_t sucrose_consumption_transport;
+} InputCarbohydrates;
+
+typedef struct {
+    real_t optimal_stoichiometric_ratio;
     real_t nitrogen;
     real_t phosphorus;
     real_t nitrogen_uptake;
@@ -44,7 +49,6 @@ typedef struct {
     real_t min_nitrogen_photosynthesis;
     real_t min_phosphorus_photosynthesis;
     real_t nutrient_conversion_parameter;
-    real_t total_biomass;
     real_t assimilation_cost_phosphorus;
     real_t pot_nitrogen_uptake;
     real_t pot_phosphorus_uptake;
@@ -52,7 +56,6 @@ typedef struct {
     real_t nitrogen_affinity;
     real_t phosphorus_nutrient_uptake;
     real_t phosphorus_affinity;
-    real_t root_biomass;
     real_t nitrogen_uptake_sucrose_consumption;
     real_t phosphorus_uptake_sucrose_consumption;
     real_t max_nitrogen_uptake;
@@ -68,14 +71,20 @@ typedef struct {
     real_t min_phosphorus;
     real_t nitrogen_cost;
     real_t phosphorus_cost;
-    real_t sucrose_consumption_transport;
-    real_t sucrose_root_allocation;
     real_t stoichiometric_signal;
+} InputNutrients;
+
+typedef struct {
+    real_t leaf_biomass;
+    real_t root_biomass;
+    real_t total_biomass;
+    real_t lambda_sb;
+    real_t sucrose_root_allocation;
     real_t leaf_deathrate;
     real_t root_deathrate;
     real_t leaf_competitive_rate;
     real_t root_competitive_rate;
-} InputCore;
+} InputGrowth;
 
 typedef struct {
     real_t intercellular_CO2;
@@ -102,7 +111,10 @@ typedef struct {
 } InputGasExchange;
 
 typedef struct {
-    InputCore core;
+    InputPhoto photo;
+    InputCarbohydrates carbohydrates;
+    InputNutrients nutrients;
+    InputGrowth growth;
     InputGasExchange gas_exchange;
 } Input;
 

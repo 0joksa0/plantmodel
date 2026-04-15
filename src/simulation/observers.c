@@ -32,10 +32,10 @@ void sim_sampling_observer(real_t t, const real_t* x, size_t n, void* vctx)
 
         o->compute_algebraic(&tmp, fmod(o->next_t, REAL(24.0)), o->rhs_ctx->starch_night_start);
 
-        o->result->sucrose[o->step] = tmp.core.sucrose;
-        o->result->starch[o->step] = tmp.core.starch;
-        o->result->ph[o->step] = tmp.core.photosynthesis;
-        o->result->partition[o->step] = tmp.core.total_biomass;
+        o->result->sucrose[o->step] = tmp.carbohydrates.sucrose;
+        o->result->starch[o->step] = tmp.carbohydrates.starch;
+        o->result->ph[o->step] = tmp.photo.photosynthesis;
+        o->result->partition[o->step] = tmp.growth.total_biomass;
 
         o->step++;
         o->result->filled_steps = o->step;
@@ -66,21 +66,21 @@ void csv_observer(real_t t, const real_t* x, size_t n, void* ctx)
         "%e,%e,"
         "%e,%e\n",
         (double)t,
-        (double)tmp.core.light,
-        (double)tmp.core.photosynthesis,
-        (double)tmp.core.leaf_biomass,
-        (double)tmp.core.root_biomass,
-        (double)tmp.core.total_biomass,
-        (double)tmp.core.sucrose,
-        (double)tmp.core.starch,
-        (double)tmp.core.nitrogen,
-        (double)tmp.core.phosphorus,
-        (double)tmp.core.nitrogen_uptake,
-        (double)tmp.core.phosphorus_uptake,
-        (double)tmp.core.uptake_cost,
-        (double)tmp.core.transport_cost,
-        (double)tmp.core.starch_degradation_rate,
-        (double)tmp.core.night_efficiency_starch);
+        (double)tmp.photo.light,
+        (double)tmp.photo.photosynthesis,
+        (double)tmp.growth.leaf_biomass,
+        (double)tmp.growth.root_biomass,
+        (double)tmp.growth.total_biomass,
+        (double)tmp.carbohydrates.sucrose,
+        (double)tmp.carbohydrates.starch,
+        (double)tmp.nutrients.nitrogen,
+        (double)tmp.nutrients.phosphorus,
+        (double)tmp.nutrients.nitrogen_uptake,
+        (double)tmp.nutrients.phosphorus_uptake,
+        (double)tmp.carbohydrates.uptake_cost,
+        (double)tmp.carbohydrates.transport_cost,
+        (double)tmp.carbohydrates.starch_degradation_rate,
+        (double)tmp.carbohydrates.night_efficiency_starch);
 }
 
 void nan_guard_observer(real_t t, const real_t* x, size_t n, void* ctx)
@@ -107,7 +107,7 @@ void night_start_observer(real_t t, const real_t* x, size_t n, void* vctx)
     Input tmp = *(ctx->base);
     update_light_conditions(&tmp, hour);
 
-    int is_light = (tmp.core.light != REAL(0.0));
+    int is_light = (tmp.photo.light != REAL(0.0));
 
     if (ctx->was_light && !is_light) {
         ctx->starch_night_start = x[observer_ctx->starch_index];

@@ -62,8 +62,8 @@ static void photo_dataset_log(
             "%.10Lf,%.10Lf,%.10Lf,"
             "%.10Lf,%.10Lf,%.10Lf,"
             "%.10Lf,%.10Lf,%.10Lf,%.10Lf,%.10Lf,%.10Lf,%.10Lf,%.10Lf\n",
-            (long double)input->core.light_PAR,
-            (long double)input->core.leaf_biomass,
+            (long double)input->photo.light_PAR,
+            (long double)input->growth.leaf_biomass,
             (long double)input->gas_exchange.leaf_temperature,
             (long double)input->gas_exchange.relative_humidity,
             (long double)input->gas_exchange.ambient_CO2_concentration,
@@ -102,18 +102,18 @@ real_t photosynthesis(
 
 real_t farquhar_photosynthesis(Input *input)
 {
-    if (input->core.light <= REAL(0.0) || input->core.leaf_biomass < input->core.min_leaf_biomass)
+    if (input->photo.light <= REAL(0.0) || input->growth.leaf_biomass < input->photo.min_leaf_biomass)
     {
         return REAL(0.0);
     }
-    if (input->core.light_PAR < REAL(20.0))
+    if (input->photo.light_PAR < REAL(20.0))
     {
         return REAL(0.0);
     }
 
     real_t VPD = calculate_vapor_pressure_deficit(input->gas_exchange.leaf_temperature, input->gas_exchange.relative_humidity);
     input->gas_exchange.stomatal_conductance = calculate_stomatal_conductance_jarvis(
-        input->core.light_PAR,
+        input->photo.light_PAR,
         VPD,
         input->gas_exchange.leaf_temperature,
         input->gas_exchange.ambient_CO2_concentration,
@@ -123,7 +123,7 @@ real_t farquhar_photosynthesis(Input *input)
 
     input->gas_exchange.convert_to_photosynthesis_per_gram_per_hour = convert_to_photosynthesis_per_gram_per_hour(
         An,
-        input->core.leaf_biomass,
+        input->growth.leaf_biomass,
         input->gas_exchange.specific_leaf_area);
     real_t adjusted_PH = input->gas_exchange.convert_to_photosynthesis_per_gram_per_hour;
 
@@ -292,17 +292,17 @@ void update_light_conditions(Input *input, real_t current_hour)
     const real_t max_PAR = 1200.0;
 
     real_t sunrise = 0.0;
-    real_t sunset = sunrise + input->core.photoperiod;
+    real_t sunset = sunrise + input->photo.photoperiod;
 
     if (current_hour >= sunrise && current_hour < sunset)
     {
-        input->core.light = 1.0;
+        input->photo.light = 1.0;
         real_t day_fraction = (current_hour - sunrise) / (sunset - sunrise);
-        input->core.light_PAR = max_PAR * RSIN(day_fraction * M_PI);
+        input->photo.light_PAR = max_PAR * RSIN(day_fraction * M_PI);
     }
     else
     {
-        input->core.light = 0.0;
-        input->core.light_PAR = 0.0;
+        input->photo.light = 0.0;
+        input->photo.light_PAR = 0.0;
     }
 }

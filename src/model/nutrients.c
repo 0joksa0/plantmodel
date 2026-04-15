@@ -52,19 +52,19 @@ real_t nitrogen_content_f(
     (void)t;
     (void)nitrogen;
     return nitrogen_content(
-        input->core.nitrogen_uptake,
-        input->core.respiration_frequency,
-        input->core.sucrose,
-        input->core.starch,
-        input->core.sucrose_loading_frequency,
-        input->core.night_efficiency_starch,
-        input->core.assimilation_cost_nitrogen,
-        input->core.leaf_biomass,
-        input->core.total_biomass,
-        input->core.photosynthesis,
-        input->core.max_photosynthetic_rate,
-        input->core.nutrient_conversion_parameter,
-        input->core.min_nitrogen_photosynthesis);
+        input->nutrients.nitrogen_uptake,
+        input->carbohydrates.respiration_frequency,
+        input->carbohydrates.sucrose,
+        input->carbohydrates.starch,
+        input->carbohydrates.sucrose_loading_frequency,
+        input->carbohydrates.night_efficiency_starch,
+        input->nutrients.assimilation_cost_nitrogen,
+        input->growth.leaf_biomass,
+        input->growth.total_biomass,
+        input->photo.photosynthesis,
+        input->photo.max_photosynthetic_rate,
+        input->nutrients.nutrient_conversion_parameter,
+        input->nutrients.min_nitrogen_photosynthesis);
 }
 
 real_t phosphorus_content(
@@ -96,19 +96,19 @@ real_t phosphorus_content_f(
     (void)phosphorus;
 
     return phosphorus_content(
-        input->core.phosphorus_uptake,
-        input->core.respiration_frequency,
-        input->core.sucrose,
-        input->core.starch,
-        input->core.sucrose_loading_frequency,
-        input->core.night_efficiency_starch,
-        input->core.assimilation_cost_phosphorus,
-        input->core.leaf_biomass,
-        input->core.total_biomass,
-        input->core.photosynthesis,
-        input->core.max_photosynthetic_rate,
-        input->core.nutrient_conversion_parameter,
-        input->core.min_phosphorus_photosynthesis);
+        input->nutrients.phosphorus_uptake,
+        input->carbohydrates.respiration_frequency,
+        input->carbohydrates.sucrose,
+        input->carbohydrates.starch,
+        input->carbohydrates.sucrose_loading_frequency,
+        input->carbohydrates.night_efficiency_starch,
+        input->nutrients.assimilation_cost_phosphorus,
+        input->growth.leaf_biomass,
+        input->growth.total_biomass,
+        input->photo.photosynthesis,
+        input->photo.max_photosynthetic_rate,
+        input->nutrients.nutrient_conversion_parameter,
+        input->nutrients.min_phosphorus_photosynthesis);
 }
 
 real_t assimilation_cost_nitrogen(
@@ -213,19 +213,19 @@ real_t nitrogen_affinity_f(
     (void)t;
 
     return nitrogen_affinity(nitrogen_affinity_p,
-        in->core.nitrogen_uptake,
-        in->core.nitrogen_cost,
-        in->core.max_nitrogen,
-        in->core.nitrogen,
-        in->core.photosynthesis,
-        in->core.max_photosynthetic_rate,
-        in->core.lambda_k,
-        in->core.optimal_stoichiometric_ratio,
-        in->core.phosphorus,
-        in->core.min_nitrogen,
-        in->core.nitrogen_uptake_sucrose_consumption,
-        in->core.starch_partition_coeff,
-        in->core.starch_degradation_rate);
+        in->nutrients.nitrogen_uptake,
+        in->nutrients.nitrogen_cost,
+        in->nutrients.max_nitrogen,
+        in->nutrients.nitrogen,
+        in->photo.photosynthesis,
+        in->photo.max_photosynthetic_rate,
+        in->nutrients.lambda_k,
+        in->nutrients.optimal_stoichiometric_ratio,
+        in->nutrients.phosphorus,
+        in->nutrients.min_nitrogen,
+        in->nutrients.nitrogen_uptake_sucrose_consumption,
+        in->carbohydrates.starch_partition_coeff,
+        in->carbohydrates.starch_degradation_rate);
 }
 
 real_t phosphorus_affinity(
@@ -263,7 +263,7 @@ real_t phosphorus_affinity_f(
     Input* input = (Input*)params;
     (void)t;
 
-    return phosphorus_affinity(phosphorus_affinity_p, input->core.phosphorus_uptake, input->core.phosphorus_cost, input->core.max_phosphorus, input->core.phosphorus, input->core.photosynthesis, input->core.max_photosynthetic_rate, input->core.lambda_k, input->core.optimal_stoichiometric_ratio, input->core.nitrogen, input->core.min_phosphorus, input->core.phosphorus_uptake_sucrose_consumption, input->core.starch_partition_coeff, input->core.starch_degradation_rate);
+    return phosphorus_affinity(phosphorus_affinity_p, input->nutrients.phosphorus_uptake, input->nutrients.phosphorus_cost, input->nutrients.max_phosphorus, input->nutrients.phosphorus, input->photo.photosynthesis, input->photo.max_photosynthetic_rate, input->nutrients.lambda_k, input->nutrients.optimal_stoichiometric_ratio, input->nutrients.nitrogen, input->nutrients.min_phosphorus, input->nutrients.phosphorus_uptake_sucrose_consumption, input->carbohydrates.starch_partition_coeff, input->carbohydrates.starch_degradation_rate);
 }
 
 real_t nitrogen_cost(

@@ -7,7 +7,7 @@ void log_simulation_step(int days,real_t t, Input* input)
     /* TODO: Keep file handle open for the full simulation; reopening on every step is expensive and can lose data on interruption. */
 
     char filename[64];
-    snprintf(filename, sizeof(filename), "sim_log_%.0fh_%dd.csv", (double)input->core.photoperiod, days);
+    snprintf(filename, sizeof(filename), "sim_log_%.0fh_%dd.csv", (double)input->photo.photoperiod, days);
     FILE* log = fopen(filename, t == 0 ? "w" : "a");
     if (log) {
         if (t == REAL(0.0)) {
@@ -41,24 +41,24 @@ void log_simulation_step(int days,real_t t, Input* input)
             "%.4f,%.4f,%.4f,%.4f,"
             "%.4f,%.4f,%.4f,%.4f,%.4f,"
             "%.4f,%.4f,%.4f,%.4f\n",
-            t, input->core.light,
-            input->core.starch_partition_coeff, input->core.photosynthesis,
-            input->core.sucrose, input->core.starch,
-            input->core.starch_degradation_rate,
-            starch_production(input->core.photosynthesis, input->core.starch_partition_coeff, input->core.starch_degradation_rate),
-            sucrose_production(input->core.starch_partition_coeff, input->core.photosynthesis, input->core.starch_degradation_rate, input->core.uptake_cost, input->core.transport_cost, input->core.respiration_frequency, input->core.sucrose, input->core.sucrose_loading_frequency, input->core.night_efficiency_starch),
-            input->core.nitrogen, input->core.phosphorus,
-            input->core.nitrogen_affinity, input->core.phosphorus_affinity,
-            input->core.night_efficiency_starch, input->core.uptake_cost, input->core.transport_cost,
-            input->core.leaf_biomass, input->core.root_biomass, input->core.total_biomass, input->core.photoperiod,
-            input->core.limitation_of_photosynthetic_rate, input->core.max_photosynthetic_rate, input->core.min_leaf_biomass, input->core.feedback_on_photosynthesis,
-            input->core.max_starch, input->core.max_starch_degradation_rate, input->core.min_sucrose, input->core.max_sucrose,
-            input->core.starch_night_start, input->core.min_starch, input->core.lambda_sdr, input->core.lambda_sdi, input->core.lambda_sni, input->core.lambda_g, input->core.lambda_sb,
-            input->core.lambda_csn, input->core.assimilation_cost_nitrogen, input->core.assimilation_cost_phosphorus, input->core.min_nitrogen_photosynthesis, input->core.min_phosphorus_photosynthesis, input->core.nutrient_conversion_parameter,
-            input->core.max_nitrogen, input->core.min_nitrogen, input->core.max_phosphorus, input->core.min_phosphorus,
-            input->core.nitrogen_soil_content, input->core.phosphorus_soil_content, input->core.max_nitrogen_uptake, input->core.max_phosphorus_uptake,
-            input->core.Michaelis_Menten_constant_nitrogen, input->core.Michaelis_Menten_constant_phosphorus, input->core.sucrose_root_allocation, input->core.stoichiometric_signal,
-            input->core.leaf_deathrate, input->core.root_deathrate, input->core.leaf_competitive_rate, input->core.root_competitive_rate);
+            t, input->photo.light,
+            input->carbohydrates.starch_partition_coeff, input->photo.photosynthesis,
+            input->carbohydrates.sucrose, input->carbohydrates.starch,
+            input->carbohydrates.starch_degradation_rate,
+            starch_production(input->photo.photosynthesis, input->carbohydrates.starch_partition_coeff, input->carbohydrates.starch_degradation_rate),
+            sucrose_production(input->carbohydrates.starch_partition_coeff, input->photo.photosynthesis, input->carbohydrates.starch_degradation_rate, input->carbohydrates.uptake_cost, input->carbohydrates.transport_cost, input->carbohydrates.respiration_frequency, input->carbohydrates.sucrose, input->carbohydrates.sucrose_loading_frequency, input->carbohydrates.night_efficiency_starch),
+            input->nutrients.nitrogen, input->nutrients.phosphorus,
+            input->nutrients.nitrogen_affinity, input->nutrients.phosphorus_affinity,
+            input->carbohydrates.night_efficiency_starch, input->carbohydrates.uptake_cost, input->carbohydrates.transport_cost,
+            input->growth.leaf_biomass, input->growth.root_biomass, input->growth.total_biomass, input->photo.photoperiod,
+            input->photo.limitation_of_photosynthetic_rate, input->photo.max_photosynthetic_rate, input->photo.min_leaf_biomass, input->photo.feedback_on_photosynthesis,
+            input->carbohydrates.max_starch, input->carbohydrates.max_starch_degradation_rate, input->carbohydrates.min_sucrose, input->carbohydrates.max_sucrose,
+            input->carbohydrates.starch_night_start, input->carbohydrates.min_starch, input->carbohydrates.lambda_sdr, input->carbohydrates.lambda_sdi, input->carbohydrates.lambda_sni, input->carbohydrates.lambda_g, input->growth.lambda_sb,
+            input->nutrients.lambda_csn, input->nutrients.assimilation_cost_nitrogen, input->nutrients.assimilation_cost_phosphorus, input->nutrients.min_nitrogen_photosynthesis, input->nutrients.min_phosphorus_photosynthesis, input->nutrients.nutrient_conversion_parameter,
+            input->nutrients.max_nitrogen, input->nutrients.min_nitrogen, input->nutrients.max_phosphorus, input->nutrients.min_phosphorus,
+            input->nutrients.nitrogen_soil_content, input->nutrients.phosphorus_soil_content, input->nutrients.max_nitrogen_uptake, input->nutrients.max_phosphorus_uptake,
+            input->nutrients.Michaelis_Menten_constant_nitrogen, input->nutrients.Michaelis_Menten_constant_phosphorus, input->growth.sucrose_root_allocation, input->nutrients.stoichiometric_signal,
+            input->growth.leaf_deathrate, input->growth.root_deathrate, input->growth.leaf_competitive_rate, input->growth.root_competitive_rate);
 
         fclose(log);
     }

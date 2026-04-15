@@ -285,7 +285,7 @@ static void compute_run_metrics(const SimulationConfig* cfg, Input* run_input, r
     simulate_days(cfg, run_input, &result);
 
     real_t rgr_days = (real_t)(cfg->days - 1);
-    real_t model_rgr = compute_rgr(fw_start, run_input->core.total_biomass, rgr_days);
+    real_t model_rgr = compute_rgr(fw_start, run_input->growth.total_biomass, rgr_days);
 
     out->model_rgr = model_rgr;
     out->abs_err = RABS(model_rgr - lit_rgr);
@@ -300,7 +300,7 @@ static void compute_run_metrics(const SimulationConfig* cfg, Input* run_input, r
     out->max_biomass_drop = REAL(0.0);
     out->negative_biomass_steps = 0;
     out->nonfinite_samples = 0;
-    out->final_total_biomass = run_input->core.total_biomass;
+    out->final_total_biomass = run_input->growth.total_biomass;
 
     out->ref_points = 0;
     out->sucrose_scale = REAL(1.0);
@@ -342,7 +342,7 @@ static void compute_run_metrics(const SimulationConfig* cfg, Input* run_input, r
 
         real_t hour = (real_t)k * cfg->dt_hours;
         real_t hour_of_day = fmod(hour, REAL(24.0));
-        if (hour_of_day < run_input->core.photoperiod) {
+        if (hour_of_day < run_input->photo.photoperiod) {
             day_sum += ph;
             day_count++;
         } else {
@@ -365,7 +365,7 @@ static void compute_run_metrics(const SimulationConfig* cfg, Input* run_input, r
     if (night_count > 0)
         out->night_avg_ph = night_sum / (real_t)night_count;
 
-    compute_external_fit_metrics(cfg, &result, (int)run_input->core.photoperiod, ref_data, ref_count, out);
+    compute_external_fit_metrics(cfg, &result, (int)run_input->photo.photoperiod, ref_data, ref_count, out);
 
     simulation_result_free(&result);
 }
@@ -582,12 +582,12 @@ int main(int argc, char** argv)
 
     for (int i = 0; i < n; ++i) {
         Input in = base_input;
-        in.core.photoperiod = (real_t)SCENARIOS[i].photoperiod_h;
-        in.core.lambda_sni = SCENARIOS[i].lambda_sni;
-        in.core.lambda_sb = SCENARIOS[i].lambda_sb;
-        in.core.feedback_on_photosynthesis = SCENARIOS[i].feedback;
+        in.photo.photoperiod = (real_t)SCENARIOS[i].photoperiod_h;
+        in.carbohydrates.lambda_sni = SCENARIOS[i].lambda_sni;
+        in.growth.lambda_sb = SCENARIOS[i].lambda_sb;
+        in.photo.feedback_on_photosynthesis = SCENARIOS[i].feedback;
 
-        real_t fw_start = in.core.total_biomass;
+        real_t fw_start = in.growth.total_biomass;
 
         RunMetrics base_metrics;
         memset(&base_metrics, 0, sizeof(base_metrics));
@@ -600,10 +600,10 @@ int main(int argc, char** argv)
             half_cfg.dt_hours = base_cfg.dt_hours;
 
         Input in_half = base_input;
-        in_half.core.photoperiod = (real_t)SCENARIOS[i].photoperiod_h;
-        in_half.core.lambda_sni = SCENARIOS[i].lambda_sni;
-        in_half.core.lambda_sb = SCENARIOS[i].lambda_sb;
-        in_half.core.feedback_on_photosynthesis = SCENARIOS[i].feedback;
+        in_half.photo.photoperiod = (real_t)SCENARIOS[i].photoperiod_h;
+        in_half.carbohydrates.lambda_sni = SCENARIOS[i].lambda_sni;
+        in_half.growth.lambda_sb = SCENARIOS[i].lambda_sb;
+        in_half.photo.feedback_on_photosynthesis = SCENARIOS[i].feedback;
 
         RunMetrics half_metrics;
         memset(&half_metrics, 0, sizeof(half_metrics));

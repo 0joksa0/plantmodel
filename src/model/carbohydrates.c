@@ -62,14 +62,14 @@ real_t starch_sucrose_partition_f(
     (void)t;
 
     return starch_sucrose_partition(
-        input->core.light,
+        input->photo.light,
         starch_partition_coeff,
-        input->core.min_sucrose,
-        input->core.max_sucrose,
-        input->core.sucrose,
-        input->core.lambda_sdr,
-        input->core.lambda_sdi,
-        input->core.lambda_sni);
+        input->carbohydrates.min_sucrose,
+        input->carbohydrates.max_sucrose,
+        input->carbohydrates.sucrose,
+        input->carbohydrates.lambda_sdr,
+        input->carbohydrates.lambda_sdi,
+        input->carbohydrates.lambda_sni);
 }
 
 real_t starch_production(
@@ -89,7 +89,7 @@ real_t starch_production_f(
     Input* input = (Input*)params;
     (void)t;
     (void)starch;
-    return starch_production(input->core.photosynthesis, input->core.starch_partition_coeff, input->core.starch_degradation_rate);
+    return starch_production(input->photo.photosynthesis, input->carbohydrates.starch_partition_coeff, input->carbohydrates.starch_degradation_rate);
 }
 
 real_t sucrose_production(
@@ -114,15 +114,15 @@ real_t sucrose_production_f(
     Input* in = (Input*)params;
     (void)t;
 
-    return sucrose_production(in->core.starch_partition_coeff,
-        in->core.photosynthesis,
-        in->core.starch_degradation_rate,
-        in->core.uptake_cost,
-        in->core.transport_cost,
-        in->core.respiration_frequency,
+    return sucrose_production(in->carbohydrates.starch_partition_coeff,
+        in->photo.photosynthesis,
+        in->carbohydrates.starch_degradation_rate,
+        in->carbohydrates.uptake_cost,
+        in->carbohydrates.transport_cost,
+        in->carbohydrates.respiration_frequency,
         sucrose,
-        in->core.sucrose_loading_frequency,
-        in->core.night_efficiency_starch);
+        in->carbohydrates.sucrose_loading_frequency,
+        in->carbohydrates.night_efficiency_starch);
 }
 
 real_t night_efficiency_starch(
