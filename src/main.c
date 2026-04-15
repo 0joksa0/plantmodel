@@ -1,6 +1,7 @@
 #define SOLVER_REAL_AS double
 #include "config/config.h"
 #include "model/input.h"
+#include "model/model.h"
 #include "simulation/simulation.h"
 #include <solver.h>
 #include <stdio.h>
@@ -41,6 +42,7 @@ int main(int argc, char** argv)
     }
 
     printf("=== Simulacija rasta biljke ===\n");
+    photo_dataset_open("photo_surrogate_dataset.csv");
 
     real_t FW_start = input.core.total_biomass;
 
@@ -52,6 +54,7 @@ int main(int argc, char** argv)
     printf("%.1f model_RGR: %.6f, leaf_start=%.6f, leaf_end=%.6f\n",
         (double)input.core.photoperiod, (double)rgr, (double)FW_start, (double)input.core.total_biomass);
 
+    photo_dataset_close();
     simulation_result_free(&result);
     return 0;
 }

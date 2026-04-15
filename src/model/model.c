@@ -6,6 +6,81 @@
 
 real_t epsilon = REAL_EPSILON;
 
+/* surrogate dataset logger for photosynthesis */
+static FILE* g_photo_fp = NULL;
+
+void photo_dataset_open(const char* path)
+{
+    if (g_photo_fp) {
+        fclose(g_photo_fp);
+        g_photo_fp = NULL;
+    }
+
+    g_photo_fp = fopen(path, "w");
+    if (!g_photo_fp) {
+        perror("photo_dataset_open");
+        return;
+    }
+
+    fprintf(g_photo_fp,
+        "light_PAR,leaf_biomass,leaf_temperature,relative_humidity,"
+        "ambient_CO2,leaf_water_potential,specific_leaf_area,"
+        "VPD,stomatal_conductance,CO2_compensation_point,"
+        "Vcmax,Kc,Ko,O2,J,Rd,target_An,target_photosynthesis\n");
+}
+
+void photo_dataset_close(void)
+{
+    if (g_photo_fp) {
+        fflush(g_photo_fp);
+        fclose(g_photo_fp);
+        g_photo_fp = NULL;
+    }
+}
+
+void photo_dataset_flush(void)
+{
+    if (g_photo_fp) {
+        fflush(g_photo_fp);
+    }
+}
+
+void photo_dataset_log(
+    Input* input,
+    real_t VPD,
+    real_t gs,
+    real_t An,
+    real_t adjusted_PH)
+{
+    if (!g_photo_fp) {
+        return;
+    }
+
+    fprintf(g_photo_fp,
+        "%.10Lf,%.10Lf,%.10Lf,%.10Lf,"
+        "%.10Lf,%.10Lf,%.10Lf,"
+        "%.10Lf,%.10Lf,%.10Lf,"
+        "%.10Lf,%.10Lf,%.10Lf,%.10Lf,%.10Lf,%.10Lf,%.10Lf,%.10Lf\n",
+        (long double)input->core.light_PAR,
+        (long double)input->core.leaf_biomass,
+        (long double)input->gas_exchange.leaf_temperature,
+        (long double)input->gas_exchange.relative_humidity,
+        (long double)input->gas_exchange.ambient_CO2_concentration,
+        (long double)input->gas_exchange.leaf_water_potential,
+        (long double)input->gas_exchange.specific_leaf_area,
+        (long double)VPD,
+        (long double)gs,
+        (long double)input->gas_exchange.CO2_compensation_point,
+        (long double)input->gas_exchange.max_rubisco_carboxylation_rate,
+        (long double)input->gas_exchange.michaelis_constant_CO2,
+        (long double)input->gas_exchange.michaelis_constant_O2,
+        (long double)input->gas_exchange.oxygen_concentration,
+        (long double)input->gas_exchange.electron_transport_rate,
+        (long double)input->gas_exchange.respiration_rate,
+        (long double)An,
+        (long double)adjusted_PH);
+}
+
 real_t photosynthesis(
     real_t light,
     real_t limitation_of_photosynthetic_rate,
@@ -42,7 +117,7 @@ real_t farquhar_photosynthesis(Input* input)
         input->gas_exchange.leaf_water_potential);
 
     // printf("stomal cond: %f ", input->gas_exchange.stomatal_conductance);
-    real_t An = iterate_ci(input, 50, REAL(0.0001));
+    real_t An = iterate_ci(input, 1000, REAL(0.0001));
 
     // Farquhar output should come from gas-exchange coupling directly; nutrient effects
     // are better represented via capacity parameters (e.g., Vcmax/Jmax), not a post-hoc scalar.
@@ -52,6 +127,13 @@ real_t farquhar_photosynthesis(Input* input)
         input->core.leaf_biomass,
         input->gas_exchange.specific_leaf_area);
     real_t adjusted_PH = input->gas_exchange.convert_to_photosynthesis_per_gram_per_hour;
+
+    photo_dataset_log(
+        input,
+        VPD,
+        input->gas_exchange.stomatal_conductance,
+        An,
+        adjusted_PH);
 
     // printf("An=%.2f  lim=%.2f  Nsat=%.2f  Psat=%.2f  adjPH=%.2f anConv=%f\n", An, limitation, input->core.nitrogen_saturation, input->core.phosphorus_saturation, adjusted_PH, input->gas_exchange.convert_to_photosynthesis_per_gram_per_hour);
     // printf("adjusted: %f\n", adjusted_PH);

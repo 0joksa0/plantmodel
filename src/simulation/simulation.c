@@ -17,51 +17,6 @@
 
 static const real_t DEFAULT_SIMULATION_DT = REAL(0.01);
 
-void simulate_step(real_t current_time, int step, Input* input, int days)
-{
-    /* TODO: Remove or wire this function into production flow; it is currently unused with `vector_solve` path. */
-    real_t hour_of_day = fmod(current_time, REAL(24.0));
-    update_light_conditions(input, hour_of_day);
-
-    static bool trigger = false;
-    static real_t starch_night_start = REAL(0.0);
-
-    if (input->core.light == REAL(0.0)) {
-        if (!trigger) {
-            starch_night_start = input->core.starch;
-        }
-        trigger = true;
-    } else {
-        trigger = false;
-    }
-
-    real_t x[X_DIM];
-    simulation_pack_state(x, input);
-
-    PlantCtx ctx = {
-        .base = input,
-        .starch_night_start = starch_night_start
-    };
-
-    vector_solve_step(
-        SOLVER_ODE45,
-        REAL(1e-8),
-        x,
-        sizeof(x),
-        current_time,
-        DEFAULT_SIMULATION_DT,
-        simulation_plant_rhs_adapter,
-        &ctx);
-
-    simulation_unpack_state(input, x);
-
-    simulation_compute_algebraic(
-        input,
-        fmod(current_time + DEFAULT_SIMULATION_DT, REAL(24.0)),
-        starch_night_start);
-    log_simulation_step(days, current_time, input);
-}
-
 SimulationConfig simulation_default_config(void)
 {
     SimulationConfig cfg = {

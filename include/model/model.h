@@ -3,6 +3,12 @@
 #include "model/input.h"
 #include <solver.h>
 
+
+
+void photo_dataset_open(const char *path);
+void photo_dataset_close(void);
+void photo_dataset_flush(void);
+
 /* TODO: Consolidate API naming and spelling to reduce typo-driven bugs in call sites and future bindings. */
 
 real_t photosynthesis(

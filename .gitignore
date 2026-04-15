@@ -41,3 +41,5 @@ AGENTS.md
 *.csv
 
 Testing/
+
+perf.*

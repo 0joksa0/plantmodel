@@ -61,6 +61,7 @@ void simulation_compute_algebraic(
     s->core.limitation_of_photosynthetic_rate = limitation_of_photosynthetic_rate(s->core.starch, s->core.feedback_on_photosynthesis, s->core.max_starch);
 
     s->core.photosynthesis = farquhar_photosynthesis(s);
+    // s->core.photosynthesis = photosynthesis(s->core.light, s->core.limitation_of_photosynthetic_rate, s->core.max_photosynthetic_rate, s->core.nitrogen_saturation, s->core.phosphorus_saturation, s->core.leaf_biomass, s->core.min_leaf_biomass);
 
     s->core.night_efficiency_starch = night_efficiency_starch(
         s->core.sucrose, s->core.max_sucrose, s->core.lambda_g, s->core.light, s->core.starch_partition_coeff);
