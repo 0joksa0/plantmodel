@@ -39,6 +39,8 @@ tests/output/
 
 AGENTS.md
 *.csv
+docs/
+.worktrees/
 
 Testing/
 

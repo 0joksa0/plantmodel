@@ -11,24 +11,43 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # ---------------- fajlovi --------------------
 add_compile_definitions(SOLVER_REAL_AS=double )
+add_compile_definitions(SOLVER_REAL_IS_DOUBLE)
 file(GLOB_RECURSE SRC CONFIGURE_DEPENDS src/*.c)
 add_executable(simulator ${SRC})
 target_include_directories(simulator PRIVATE ${PROJECT_SOURCE_DIR}/include)
 
 # ---------------- solver_double --------------
 # 1) nađi statičku ili deljenu biblioteku
-# TODO: Replace hardcoded `/usr/local/lib` and `/usr/lib` search paths with a configurable CMake cache variable or package config.
+set(SOLVER_PREFIX "/usr/local" CACHE PATH "Prefix where solver headers and libraries are installed")
 find_library(SOLVER_DOUBLE_PATH
              NAMES solver_double
-             PATHS /usr/local/lib /usr/lib
-             NO_DEFAULT_PATH
-             REQUIRED)
+             PATHS "${SOLVER_PREFIX}/lib"
+             NO_DEFAULT_PATH)
+
+if(NOT SOLVER_DOUBLE_PATH)
+    find_library(SOLVER_DOUBLE_PATH
+                 NAMES solver_double
+                 PATHS /usr/local/lib /usr/lib
+                 REQUIRED)
+endif()
+
+find_path(SOLVER_INCLUDE_PATH
+          NAMES solver.h
+          PATHS "${SOLVER_PREFIX}/include"
+          NO_DEFAULT_PATH)
+
+if(NOT SOLVER_INCLUDE_PATH)
+    find_path(SOLVER_INCLUDE_PATH
+              NAMES solver.h
+              PATHS /usr/local/include /usr/include
+              REQUIRED)
+endif()
 
 # 2) napravi IMPORTED target
 add_library(solver_double STATIC IMPORTED)
 set_target_properties(solver_double PROPERTIES
     IMPORTED_LOCATION             ${SOLVER_DOUBLE_PATH}
-    INTERFACE_INCLUDE_DIRECTORIES /usr/local/include  # koriguje po potrebi
+    INTERFACE_INCLUDE_DIRECTORIES "${SOLVER_INCLUDE_PATH}"
 )
 
 # ---------------- raylib ----------------------

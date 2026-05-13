@@ -1,36 +1,71 @@
 #include "simulation/dynamics.h"
 
+#include "model/algebraic.h"
 #include "model/model.h"
+#include "model/outputs.h"
+#include "model/parameters.h"
 
 #include <math.h>
 
+static const ModelFieldDescriptor PLANT_STATE_FIELDS[] = {
+    { .name = "starch_partition_coeff", .kind = MODEL_FIELD_STATE, .index = X_STARCH_PART, .unit = NULL, .description = "Starch partition coefficient" },
+    { .name = "starch", .kind = MODEL_FIELD_STATE, .index = X_STARCH, .unit = NULL, .description = "Starch pool" },
+    { .name = "sucrose", .kind = MODEL_FIELD_STATE, .index = X_SUCROSE, .unit = NULL, .description = "Sucrose pool" },
+    { .name = "nitrogen_affinity", .kind = MODEL_FIELD_STATE, .index = X_N_AFF, .unit = NULL, .description = "Nitrogen affinity" },
+    { .name = "phosphorus_affinity", .kind = MODEL_FIELD_STATE, .index = X_P_AFF, .unit = NULL, .description = "Phosphorus affinity" },
+    { .name = "nitrogen", .kind = MODEL_FIELD_STATE, .index = X_N, .unit = NULL, .description = "Nitrogen content" },
+    { .name = "phosphorus", .kind = MODEL_FIELD_STATE, .index = X_P, .unit = NULL, .description = "Phosphorus content" },
+    { .name = "sucrose_root_allocation", .kind = MODEL_FIELD_STATE, .index = X_SUCROSE_ROOT_ALLOC, .unit = NULL, .description = "Sucrose root allocation" },
+    { .name = "leaf_biomass", .kind = MODEL_FIELD_STATE, .index = X_LEAF_BIOMASS, .unit = NULL, .description = "Leaf biomass" },
+    { .name = "root_biomass", .kind = MODEL_FIELD_STATE, .index = X_ROOT_BIOMASS, .unit = NULL, .description = "Root biomass" }
+};
+
+static const ModelDescriptor PLANT_MODEL_DESCRIPTOR = {
+    .name = "plantmodel",
+    .state_count = X_DIM,
+    .parameter_count = 0,
+    .input_count = 0,
+    .output_count = 0,
+    .state_fields = PLANT_STATE_FIELDS,
+    .parameter_fields = NULL,
+    .input_fields = NULL,
+    .output_fields = NULL
+};
+
+static void simulation_plant_model_rhs(
+    real_t t,
+    const real_t* state,
+    const real_t* parameters,
+    const real_t* inputs,
+    real_t* dstate,
+    void* model_ctx)
+{
+    (void)parameters;
+    (void)inputs;
+    simulation_plant_rhs(t, state, dstate, model_ctx);
+}
+
+static const ModelInterface PLANT_MODEL_INTERFACE = {
+    .descriptor = &PLANT_MODEL_DESCRIPTOR,
+    .callbacks = {
+        .rhs = simulation_plant_model_rhs,
+        .outputs = NULL
+    },
+    .model_ctx = NULL
+};
+
 void simulation_pack_state(real_t* x, const Input* in)
 {
-    x[X_STARCH_PART] = in->carbohydrates.starch_partition_coeff;
-    x[X_STARCH] = in->carbohydrates.starch;
-    x[X_SUCROSE] = in->carbohydrates.sucrose;
-    x[X_N_AFF] = in->nutrients.nitrogen_affinity;
-    x[X_P_AFF] = in->nutrients.phosphorus_affinity;
-    x[X_N] = in->nutrients.nitrogen;
-    x[X_P] = in->nutrients.phosphorus;
-    x[X_SUCROSE_ROOT_ALLOC] = in->growth.sucrose_root_allocation;
-    x[X_LEAF_BIOMASS] = in->growth.leaf_biomass;
-    x[X_ROOT_BIOMASS] = in->growth.root_biomass;
+    PlantState state = plant_state_from_input(in);
+    plant_state_pack(x, &state);
+
 }
 
 void simulation_unpack_state(Input* in, const real_t* x)
 {
-    in->carbohydrates.starch_partition_coeff = x[X_STARCH_PART];
-    in->carbohydrates.starch = x[X_STARCH];
-    in->carbohydrates.sucrose = x[X_SUCROSE];
-    in->nutrients.nitrogen_affinity = x[X_N_AFF];
-    in->nutrients.phosphorus_affinity = x[X_P_AFF];
-    in->nutrients.nitrogen = x[X_N];
-    in->nutrients.phosphorus = x[X_P];
-    in->growth.sucrose_root_allocation = x[X_SUCROSE_ROOT_ALLOC];
-    in->growth.leaf_biomass = x[X_LEAF_BIOMASS];
-    in->growth.root_biomass = x[X_ROOT_BIOMASS];
-    in->growth.total_biomass = in->growth.leaf_biomass + in->growth.root_biomass;
+    PlantState state = {0};
+    plant_state_unpack(&state, x);
+    plant_state_apply_to_input(in, &state);
 }
 
 void simulation_compute_algebraic(
@@ -38,88 +73,16 @@ void simulation_compute_algebraic(
     real_t hour_of_day,
     real_t starch_night_start)
 {
-    update_light_conditions(s, hour_of_day);
+    PlantState state = plant_state_from_input(s);
+    PlantParameters parameters = plant_parameters_from_input(s);
+    PlantEnvironment environment = {
+        .hour_of_day = hour_of_day
+    };
+    PlantOutputs outputs = {0};
 
-    s->nutrients.min_nitrogen = min_nitrogen(
-        s->carbohydrates.respiration_frequency, s->carbohydrates.max_sucrose, s->carbohydrates.max_starch,
-        s->carbohydrates.sucrose_loading_frequency, s->nutrients.assimilation_cost_nitrogen,
-        s->nutrients.min_nitrogen_photosynthesis, s->nutrients.nutrient_conversion_parameter, s->photo.photoperiod);
+    plant_compute_outputs(&state, &parameters, &environment, starch_night_start, &outputs);
+    plant_outputs_apply_to_input(s, &outputs);
 
-    s->nutrients.min_phosphorus = min_phosphorus(
-        s->carbohydrates.respiration_frequency, s->carbohydrates.max_sucrose, s->carbohydrates.max_starch,
-        s->carbohydrates.sucrose_loading_frequency, s->nutrients.assimilation_cost_phosphorus,
-        s->nutrients.min_phosphorus_photosynthesis, s->nutrients.nutrient_conversion_parameter, s->photo.photoperiod);
-
-    s->carbohydrates.max_starch = max_starch(s->carbohydrates.max_starch_degradation_rate, s->photo.photoperiod);
-    s->nutrients.max_nitrogen = max_nitrogen(s->nutrients.min_nitrogen);
-    s->nutrients.max_phosphorus = max_phosphorus(s->nutrients.max_nitrogen, s->nutrients.optimal_stoichiometric_ratio);
-
-    s->photo.nitrogen_saturation = nitrogen_saturation(s->nutrients.nitrogen, s->nutrients.min_nitrogen_photosynthesis);
-    s->photo.phosphorus_saturation = phosphorus_saturation(
-        s->nutrients.min_nitrogen_photosynthesis, s->nutrients.optimal_stoichiometric_ratio, s->nutrients.phosphorus);
-
-    s->photo.limitation_of_photosynthetic_rate = limitation_of_photosynthetic_rate(s->carbohydrates.starch, s->photo.feedback_on_photosynthesis, s->carbohydrates.max_starch);
-
-    s->photo.photosynthesis = farquhar_photosynthesis(s);
-    // s->photo.photosynthesis = photosynthesis(s->photo.light, s->photo.limitation_of_photosynthetic_rate, s->photo.max_photosynthetic_rate, s->photo.nitrogen_saturation, s->photo.phosphorus_saturation, s->growth.leaf_biomass, s->photo.min_leaf_biomass);
-
-    s->carbohydrates.night_efficiency_starch = night_efficiency_starch(
-        s->carbohydrates.sucrose, s->carbohydrates.max_sucrose, s->carbohydrates.lambda_g, s->photo.light, s->carbohydrates.starch_partition_coeff);
-
-    s->carbohydrates.starch_degradation_rate = starch_degradation(
-        s->carbohydrates.max_starch_degradation_rate,
-        s->carbohydrates.max_sucrose,
-        starch_night_start,
-        s->carbohydrates.min_starch,
-        s->carbohydrates.sucrose,
-        s->photo.light,
-        hour_of_day,
-        s->photo.photoperiod);
-
-    s->carbohydrates.uptake_cost = uptake_cost(
-        s->nutrients.nitrogen_uptake_sucrose_consumption, s->nutrients.nitrogen_uptake,
-        s->nutrients.phosphorus_uptake_sucrose_consumption, s->nutrients.phosphorus_uptake);
-
-    s->carbohydrates.transport_cost = transport_cost(
-        s->carbohydrates.sucrose_consumption_transport, s->carbohydrates.respiration_frequency,
-        s->carbohydrates.sucrose, s->carbohydrates.sucrose_loading_frequency, s->carbohydrates.night_efficiency_starch);
-
-    s->nutrients.nitrogen_cost = nitrogen_cost(
-        s->carbohydrates.respiration_frequency, s->carbohydrates.sucrose, s->carbohydrates.starch,
-        s->carbohydrates.sucrose_loading_frequency, s->carbohydrates.night_efficiency_starch,
-        s->nutrients.assimilation_cost_nitrogen,
-        s->growth.leaf_biomass, s->growth.total_biomass,
-        s->photo.photosynthesis, s->photo.max_photosynthetic_rate,
-        s->nutrients.min_nitrogen_photosynthesis);
-
-    s->nutrients.phosphorus_cost = phosphorus_cost(
-        s->carbohydrates.respiration_frequency, s->carbohydrates.sucrose, s->carbohydrates.starch,
-        s->carbohydrates.sucrose_loading_frequency, s->carbohydrates.night_efficiency_starch,
-        s->nutrients.assimilation_cost_phosphorus,
-        s->growth.leaf_biomass, s->growth.total_biomass,
-        s->photo.photosynthesis, s->photo.max_photosynthetic_rate,
-        s->nutrients.min_phosphorus_photosynthesis);
-
-    s->nutrients.nitrogen_nutrient_uptake = nitrogen_nutrient_uptake(
-        s->nutrients.max_nitrogen_uptake, s->nutrients.nitrogen_soil_content, s->nutrients.Michaelis_Menten_constant_nitrogen);
-
-    s->nutrients.phosphorus_nutrient_uptake = phosphorus_nutrient_uptake(
-        s->nutrients.max_phosphorus_uptake, s->nutrients.phosphorus_soil_content, s->nutrients.Michaelis_Menten_constant_phosphorus);
-
-    s->nutrients.pot_nitrogen_uptake = pot_nitrogen_uptake(
-        s->nutrients.nitrogen_nutrient_uptake, s->nutrients.nitrogen_affinity, s->growth.root_biomass, s->growth.total_biomass);
-
-    s->nutrients.pot_phosphorus_uptake = pot_phosphorus_uptake(
-        s->nutrients.phosphorus_nutrient_uptake, s->nutrients.phosphorus_affinity, s->growth.root_biomass, s->growth.total_biomass);
-
-    s->nutrients.nitrogen_uptake = nitrogen_uptake(
-        s->nutrients.pot_nitrogen_uptake, s->carbohydrates.sucrose, s->nutrients.nitrogen_uptake_sucrose_consumption);
-
-    s->nutrients.phosphorus_uptake = phosphorus_uptake(
-        s->nutrients.pot_phosphorus_uptake, s->carbohydrates.sucrose, s->nutrients.phosphorus_uptake_sucrose_consumption);
-
-    s->nutrients.stoichiometric_signal = stoichiometric_signal(
-        s->nutrients.optimal_stoichiometric_ratio, s->nutrients.nitrogen, s->nutrients.phosphorus);
 }
 
 void simulation_plant_rhs(
@@ -270,12 +233,16 @@ void simulation_plant_rhs(
 
 void simulation_plant_rhs_adapter(
     real_t t,
-    const void* state,
-    void* dst,
+    const real_t* state,
+    real_t* dst,
+    size_t n,
     void* ctx)
 {
-    const real_t* x = (const real_t*)state;
-    real_t* dxdt = (real_t*)dst;
+    (void)n;
+    simulation_plant_rhs(t, state, dst, ctx);
+}
 
-    simulation_plant_rhs(t, x, dxdt, ctx);
+const ModelInterface* simulation_plant_model_interface(void)
+{
+    return &PLANT_MODEL_INTERFACE;
 }
