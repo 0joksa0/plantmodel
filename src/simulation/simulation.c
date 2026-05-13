@@ -5,21 +5,44 @@
 #include "simulation/dynamics.h"
 #include "simulation/observers.h"
 #include "simulation/simulation.h"
+#include <solver.h>
 #include <logger.h>
 #include <observers.h>
 #include <pthread.h>
-#include <solver.h>
+#include <stddef.h>
+#ifndef max_align_t
+#define max_align_t long double
+#define PLANTMODEL_MAX_ALIGN_T_SHIM
+#endif
+#include <framework/default_runtime.h>
+#include <framework/model_buffers.h>
+#include <framework/model_runner.h>
+#ifdef PLANTMODEL_MAX_ALIGN_T_SHIM
+#undef max_align_t
+#undef PLANTMODEL_MAX_ALIGN_T_SHIM
+#endif
 
 #include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-static const real_t DEFAULT_SIMULATION_DT = REAL(0.01);
+static const real_t DEFAULT_SIMULATION_DT = REAL(1);
+
+static void simulation_sync_buffers_from_input(ModelBuffers* buffers, const Input* input)
+{
+    simulation_pack_state(buffers->state, input);
+}
+
+static void simulation_sync_input_from_buffers(Input* input, const ModelBuffers* buffers)
+{
+    simulation_unpack_state(input, buffers->state);
+}
 
 void simulate_step(real_t current_time, int step, Input* input, int days)
 {
-    /* TODO: Remove or wire this function into production flow; it is currently unused with `vector_solve` path. */
+    (void)step;
+    /* TODO: Remove or wire this function into production flow; it is currently unused by the main simulation path. */
     real_t hour_of_day = fmod(current_time, REAL(24.0));
     update_light_conditions(input, hour_of_day);
 
@@ -35,25 +58,42 @@ void simulate_step(real_t current_time, int step, Input* input, int days)
         trigger = false;
     }
 
-    real_t x[X_DIM];
-    simulation_pack_state(x, input);
+    const ModelInterface* model = simulation_plant_model_interface();
+    ModelBuffers buffers = {0};
+    ModelStatus status;
 
     PlantCtx ctx = {
         .base = input,
         .starch_night_start = starch_night_start
     };
+    ModelInterface runtime_model = *model;
+    runtime_model.model_ctx = &ctx;
 
-    vector_solve_step(
-        SOLVER_ODE45,
-        REAL(1e-8),
-        x,
-        sizeof(x),
-        current_time,
-        DEFAULT_SIMULATION_DT,
-        simulation_plant_rhs_adapter,
-        &ctx);
+    SolverRunConfig run_cfg = {
+        .type = SOLVER_ODE45,
+        .t0 = current_time,
+        .t_end = current_time + DEFAULT_SIMULATION_DT,
+        .h_init = DEFAULT_SIMULATION_DT,
+        .tol = REAL(1e-8),
+        .plugins = NULL
+    };
 
-    simulation_unpack_state(input, x);
+    status = model_buffers_init(&buffers, runtime_model.descriptor);
+    if (status != MODEL_STATUS_OK) {
+        fprintf(stderr, "model_buffers_init failed: %s\n", model_status_string(status));
+        return;
+    }
+
+    simulation_sync_buffers_from_input(&buffers, input);
+    status = model_run(&runtime_model, &buffers, &run_cfg);
+    if (status != MODEL_STATUS_OK) {
+        fprintf(stderr, "model_run failed: %s\n", model_status_string(status));
+        model_buffers_free(&buffers);
+        return;
+    }
+
+    simulation_sync_input_from_buffers(input, &buffers);
+    model_buffers_free(&buffers);
 
     simulation_compute_algebraic(
         input,
@@ -100,13 +140,16 @@ void simulate_days(const SimulationConfig* config, Input* input, SimulationResul
         input->core.nitrogen_soil_content,
         input->core.phosphorus_soil_content);
 
-    real_t x[X_DIM];
-    simulation_pack_state(x, input);
+    const ModelInterface* model = simulation_plant_model_interface();
+    ModelInterface runtime_model = *model;
+    ModelBuffers buffers = {0};
+    ModelStatus status;
 
     PlantCtx rhs_ctx = {
         .base = input,
         .starch_night_start = input->core.starch
     };
+    runtime_model.model_ctx = &rhs_ctx;
 
     Input tmp = *input;
     update_light_conditions(&tmp, REAL(0.0));
@@ -169,13 +212,29 @@ void simulate_days(const SimulationConfig* config, Input* input, SimulationResul
         .count = 4
     };
     SolverStats stats;
+    solver_stats_init(&stats);
+
+    SolverPluginManager plugins;
+    solver_plugin_manager_init(&plugins);
+
     SolverLogger logger;
     SolverLogger* logger_ptr = NULL;
     if (cfg.write_csv) {
-        solver_logger_init(&logger, "steps.csv", "summary.csv");
-        logger_ptr = &logger;
+        if (solver_logger_init(&logger, "steps.csv", "summary.csv") == 0) {
+            logger_ptr = &logger;
+        }
     }
 
+    SolverDefaultRuntimeConfig runtime_cfg = {
+        .observer = observer_chain_cb,
+        .observer_ctx = &chain,
+        .stats = &stats,
+        .logger = logger_ptr
+    };
+    if (solver_default_runtime_init(&plugins, &runtime_cfg) != 0) {
+        /* Fallback: run without runtime plugins if default runtime setup fails. */
+        plugins.count = 0;
+    }
     GuiOutput gui_output = {
         .sucrose = result->sucrose,
         .starch = result->starch,
@@ -201,28 +260,54 @@ void simulate_days(const SimulationConfig* config, Input* input, SimulationResul
     }
     /* TODO: Surface GUI thread startup failures so caller can react (headless fallback/logging). */
 
-    vector_solve(
-        cfg.solver_type,
-        x,
-        X_DIM,
-        REAL(0.0),
-        (real_t)days * REAL(24.0),
-        cfg.dt_hours,
-        cfg.solver_tolerance,
-        simulation_plant_rhs_adapter,
-        &rhs_ctx,
-        observer_chain_cb,
-        &chain,
-        &stats,
-        logger_ptr);
+    SolverRunConfig run_cfg = {
+        .type = cfg.solver_type,
+        .t0 = REAL(0.0),
+        .t_end = (real_t)days * REAL(24.0),
+        .h_init = cfg.dt_hours,
+        .tol = cfg.solver_tolerance,
+        .plugins = &plugins
+    };
+
+    status = model_buffers_init(&buffers, runtime_model.descriptor);
+    if (status != MODEL_STATUS_OK) {
+        fprintf(stderr, "model_buffers_init failed: %s\n", model_status_string(status));
+        if (csv_ctx.f)
+            fclose(csv_ctx.f);
+        if (logger_ptr) {
+            solver_logger_close(&logger);
+        }
+        if (gui_started) {
+            pthread_join(gui_thread, NULL);
+        }
+        return;
+    }
+
+    simulation_sync_buffers_from_input(&buffers, input);
+    status = model_run(&runtime_model, &buffers, &run_cfg);
+    if (status != MODEL_STATUS_OK) {
+        fprintf(stderr, "model_run failed: %s\n", model_status_string(status));
+        model_buffers_free(&buffers);
+        if (csv_ctx.f)
+            fclose(csv_ctx.f);
+        if (logger_ptr) {
+            solver_logger_close(&logger);
+        }
+        if (gui_started) {
+            pthread_join(gui_thread, NULL);
+        }
+        return;
+    }
+
+    simulation_sync_input_from_buffers(input, &buffers);
+    model_buffers_free(&buffers);
+
+    if (csv_ctx.f)
+        fclose(csv_ctx.f);
 
     if (logger_ptr) {
         solver_logger_close(&logger);
     }
-    simulation_unpack_state(input, x);
-
-    if (csv_ctx.f)
-        fclose(csv_ctx.f);
 
     if (gui_started)
         pthread_join(gui_thread, NULL);

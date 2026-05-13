@@ -4,6 +4,53 @@
 
 #include <math.h>
 
+static const ModelFieldDescriptor PLANT_STATE_FIELDS[] = {
+    { .name = "starch_partition_coeff", .kind = MODEL_FIELD_STATE, .index = X_STARCH_PART, .unit = NULL, .description = "Starch partition coefficient" },
+    { .name = "starch", .kind = MODEL_FIELD_STATE, .index = X_STARCH, .unit = NULL, .description = "Starch pool" },
+    { .name = "sucrose", .kind = MODEL_FIELD_STATE, .index = X_SUCROSE, .unit = NULL, .description = "Sucrose pool" },
+    { .name = "nitrogen_affinity", .kind = MODEL_FIELD_STATE, .index = X_N_AFF, .unit = NULL, .description = "Nitrogen affinity" },
+    { .name = "phosphorus_affinity", .kind = MODEL_FIELD_STATE, .index = X_P_AFF, .unit = NULL, .description = "Phosphorus affinity" },
+    { .name = "nitrogen", .kind = MODEL_FIELD_STATE, .index = X_N, .unit = NULL, .description = "Nitrogen content" },
+    { .name = "phosphorus", .kind = MODEL_FIELD_STATE, .index = X_P, .unit = NULL, .description = "Phosphorus content" },
+    { .name = "sucrose_root_allocation", .kind = MODEL_FIELD_STATE, .index = X_SUCROSE_ROOT_ALLOC, .unit = NULL, .description = "Sucrose root allocation" },
+    { .name = "leaf_biomass", .kind = MODEL_FIELD_STATE, .index = X_LEAF_BIOMASS, .unit = NULL, .description = "Leaf biomass" },
+    { .name = "root_biomass", .kind = MODEL_FIELD_STATE, .index = X_ROOT_BIOMASS, .unit = NULL, .description = "Root biomass" }
+};
+
+static const ModelDescriptor PLANT_MODEL_DESCRIPTOR = {
+    .name = "plantmodel",
+    .state_count = X_DIM,
+    .parameter_count = 0,
+    .input_count = 0,
+    .output_count = 0,
+    .state_fields = PLANT_STATE_FIELDS,
+    .parameter_fields = NULL,
+    .input_fields = NULL,
+    .output_fields = NULL
+};
+
+static void simulation_plant_model_rhs(
+    real_t t,
+    const real_t* state,
+    const real_t* parameters,
+    const real_t* inputs,
+    real_t* dstate,
+    void* model_ctx)
+{
+    (void)parameters;
+    (void)inputs;
+    simulation_plant_rhs(t, state, dstate, model_ctx);
+}
+
+static const ModelInterface PLANT_MODEL_INTERFACE = {
+    .descriptor = &PLANT_MODEL_DESCRIPTOR,
+    .callbacks = {
+        .rhs = simulation_plant_model_rhs,
+        .outputs = NULL
+    },
+    .model_ctx = NULL
+};
+
 void simulation_pack_state(real_t* x, const Input* in)
 {
     x[X_STARCH_PART] = in->core.starch_partition_coeff;
@@ -269,12 +316,16 @@ void simulation_plant_rhs(
 
 void simulation_plant_rhs_adapter(
     real_t t,
-    const void* state,
-    void* dst,
+    const real_t* state,
+    real_t* dst,
+    size_t n,
     void* ctx)
 {
-    const real_t* x = (const real_t*)state;
-    real_t* dxdt = (real_t*)dst;
+    (void)n;
+    simulation_plant_rhs(t, state, dst, ctx);
+}
 
-    simulation_plant_rhs(t, x, dxdt, ctx);
+const ModelInterface* simulation_plant_model_interface(void)
+{
+    return &PLANT_MODEL_INTERFACE;
 }
