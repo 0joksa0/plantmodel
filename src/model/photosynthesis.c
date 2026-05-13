@@ -1,4 +1,5 @@
 #include "model/model.h"
+#include "model/photo_surrogate.h"
 
 #include <math.h>
 #include <stdio.h>
@@ -119,7 +120,19 @@ real_t farquhar_photosynthesis(Input *input)
         input->gas_exchange.ambient_CO2_concentration,
         input->gas_exchange.leaf_water_potential);
 
-    real_t An = iterate_ci(input, 1000, REAL(0.0001));
+    
+    // real_t An = iterate_ci(input, 1000, REAL(0.0001));
+    
+    int used_surrogate = 0;
+    real_t An = (real_t)photo_surrogate_predict_if_applicable(
+        (double)input->photo.light_PAR,
+        (double)input->growth.leaf_biomass,
+        (double)input->gas_exchange.stomatal_conductance,
+        &used_surrogate);
+    (void)used_surrogate;
+
+    input->gas_exchange.net_photosynthesis = An;
+    input->gas_exchange.net_photosynthesis_rate = An;
 
     input->gas_exchange.convert_to_photosynthesis_per_gram_per_hour = convert_to_photosynthesis_per_gram_per_hour(
         An,
