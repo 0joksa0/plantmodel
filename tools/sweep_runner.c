@@ -266,10 +266,10 @@ static int run_simulation_with_timeout(
         msg.rgr = REAL(0.0);
 
         Input run_input = *input;
-        real_t fw_start = run_input.core.total_biomass;
+        real_t fw_start = run_input.growth.total_biomass;
         SimulationResult result;
         simulate_days(cfg, &run_input, &result);
-        msg.rgr = compute_rgr(fw_start, run_input.core.total_biomass, (real_t)cfg->days);
+        msg.rgr = compute_rgr(fw_start, run_input.growth.total_biomass, (real_t)cfg->days);
         msg.ok = 1;
         simulation_result_free(&result);
 
@@ -424,7 +424,7 @@ int main(int argc, char** argv)
             for (int si = 0; si < scenario_count; ++si) {
                 Input run_input = base_input;
                 SimulationConfig run_cfg = base_cfg;
-                run_input.core.photoperiod = (real_t)DEFAULT_SCENARIOS[si].photoperiod_h;
+                run_input.photo.photoperiod = (real_t)DEFAULT_SCENARIOS[si].photoperiod_h;
 
                 real_t* dst = (real_t*)((char*)&run_input + params[p].offset);
                 *dst = val;

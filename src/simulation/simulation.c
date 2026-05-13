@@ -340,10 +340,10 @@ void simulate_days(const SimulationConfig* config, Input* input, SimulationResul
     simulation_result_init(result, cfg.days, input->core.photoperiod, cfg.dt_hours);
     /* TODO: Validate allocation results and return an explicit error code instead of assuming success. */
 
-    input->core.lambda_sb = lambda_sb_f(
-        input->core.lambda_sb,
-        input->core.nitrogen_soil_content,
-        input->core.phosphorus_soil_content);
+    input->growth.lambda_sb = lambda_sb_f(
+        input->growth.lambda_sb,
+        input->nutrients.nitrogen_soil_content,
+        input->nutrients.phosphorus_soil_content);
 
     const ModelInterface* model = simulation_plant_model_interface();
     ModelInterface runtime_model = *model;
@@ -352,17 +352,16 @@ void simulate_days(const SimulationConfig* config, Input* input, SimulationResul
 
     PlantCtx rhs_ctx = {
         .base = input,
-        .starch_night_start = input->core.starch
+        .starch_night_start = input->carbohydrates.starch
     };
     runtime_model.model_ctx = &rhs_ctx;
 
     Input tmp = *input;
     update_light_conditions(&tmp, REAL(0.0));
-    rhs_ctx.was_light = (tmp.core.light != REAL(0.0));
+    rhs_ctx.was_light = (tmp.photo.light != REAL(0.0));
 
     SimulationRuntime runtime;
     simulation_prepare_runtime(&runtime, &cfg, input, result, &rhs_ctx);
-
     status = simulation_run_model(&cfg, input, &runtime_model, &buffers, &runtime);
     if (status == MODEL_STATUS_OK)
         model_buffers_free(&buffers);
