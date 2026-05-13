@@ -1,6 +1,9 @@
 #include "simulation/dynamics.h"
 
+#include "model/algebraic.h"
 #include "model/model.h"
+#include "model/outputs.h"
+#include "model/parameters.h"
 
 #include <math.h>
 
@@ -53,31 +56,15 @@ static const ModelInterface PLANT_MODEL_INTERFACE = {
 
 void simulation_pack_state(real_t* x, const Input* in)
 {
-    x[X_STARCH_PART] = in->core.starch_partition_coeff;
-    x[X_STARCH] = in->core.starch;
-    x[X_SUCROSE] = in->core.sucrose;
-    x[X_N_AFF] = in->core.nitrogen_affinity;
-    x[X_P_AFF] = in->core.phosphorus_affinity;
-    x[X_N] = in->core.nitrogen;
-    x[X_P] = in->core.phosphorus;
-    x[X_SUCROSE_ROOT_ALLOC] = in->core.sucrose_root_allocation;
-    x[X_LEAF_BIOMASS] = in->core.leaf_biomass;
-    x[X_ROOT_BIOMASS] = in->core.root_biomass;
+    PlantState state = plant_state_from_input(in);
+    plant_state_pack(x, &state);
 }
 
 void simulation_unpack_state(Input* in, const real_t* x)
 {
-    in->core.starch_partition_coeff = x[X_STARCH_PART];
-    in->core.starch = x[X_STARCH];
-    in->core.sucrose = x[X_SUCROSE];
-    in->core.nitrogen_affinity = x[X_N_AFF];
-    in->core.phosphorus_affinity = x[X_P_AFF];
-    in->core.nitrogen = x[X_N];
-    in->core.phosphorus = x[X_P];
-    in->core.sucrose_root_allocation = x[X_SUCROSE_ROOT_ALLOC];
-    in->core.leaf_biomass = x[X_LEAF_BIOMASS];
-    in->core.root_biomass = x[X_ROOT_BIOMASS];
-    in->core.total_biomass = in->core.leaf_biomass + in->core.root_biomass;
+    PlantState state = {0};
+    plant_state_unpack(&state, x);
+    plant_state_apply_to_input(in, &state);
 }
 
 void simulation_compute_algebraic(
@@ -85,87 +72,15 @@ void simulation_compute_algebraic(
     real_t hour_of_day,
     real_t starch_night_start)
 {
-    update_light_conditions(s, hour_of_day);
+    PlantState state = plant_state_from_input(s);
+    PlantParameters parameters = plant_parameters_from_input(s);
+    PlantEnvironment environment = {
+        .hour_of_day = hour_of_day
+    };
+    PlantOutputs outputs = {0};
 
-    s->core.min_nitrogen = min_nitrogen(
-        s->core.respiration_frequency, s->core.max_sucrose, s->core.max_starch,
-        s->core.sucrose_loading_frequency, s->core.assimilation_cost_nitrogen,
-        s->core.min_nitrogen_photosynthesis, s->core.nutrient_conversion_parameter, s->core.photoperiod);
-
-    s->core.min_phosphorus = min_phosphorus(
-        s->core.respiration_frequency, s->core.max_sucrose, s->core.max_starch,
-        s->core.sucrose_loading_frequency, s->core.assimilation_cost_phosphorus,
-        s->core.min_phosphorus_photosynthesis, s->core.nutrient_conversion_parameter, s->core.photoperiod);
-
-    s->core.max_starch = max_starch(s->core.max_starch_degradation_rate, s->core.photoperiod);
-    s->core.max_nitrogen = max_nitrogen(s->core.min_nitrogen);
-    s->core.max_phosphorus = max_phosphorus(s->core.max_nitrogen, s->core.optimal_stoichiometric_ratio);
-
-    s->core.nitrogen_saturation = nitrogen_saturation(s->core.nitrogen, s->core.min_nitrogen_photosynthesis);
-    s->core.phosphorus_saturation = phosphorus_saturation(
-        s->core.min_nitrogen_photosynthesis, s->core.optimal_stoichiometric_ratio, s->core.phosphorus);
-
-    s->core.limitation_of_photosynthetic_rate = limitation_of_photosynthetic_rate(s->core.starch, s->core.feedback_on_photosynthesis, s->core.max_starch);
-
-    s->core.photosynthesis = farquhar_photosynthesis(s);
-
-    s->core.night_efficiency_starch = night_efficiency_starch(
-        s->core.sucrose, s->core.max_sucrose, s->core.lambda_g, s->core.light, s->core.starch_partition_coeff);
-
-    s->core.starch_degradation_rate = starch_degradation(
-        s->core.max_starch_degradation_rate,
-        s->core.max_sucrose,
-        starch_night_start,
-        s->core.min_starch,
-        s->core.sucrose,
-        s->core.light,
-        hour_of_day,
-        s->core.photoperiod);
-
-    s->core.uptake_cost = uptake_cost(
-        s->core.nitrogen_uptake_sucrose_consumption, s->core.nitrogen_uptake,
-        s->core.phosphorus_uptake_sucrose_consumption, s->core.phosphorus_uptake);
-
-    s->core.transport_cost = transport_cost(
-        s->core.sucrose_consumption_transport, s->core.respiration_frequency,
-        s->core.sucrose, s->core.sucrose_loading_frequency, s->core.night_efficiency_starch);
-
-    s->core.nitrogen_cost = nitrogen_cost(
-        s->core.respiration_frequency, s->core.sucrose, s->core.starch,
-        s->core.sucrose_loading_frequency, s->core.night_efficiency_starch,
-        s->core.assimilation_cost_nitrogen,
-        s->core.leaf_biomass, s->core.total_biomass,
-        s->core.photosynthesis, s->core.max_photosynthetic_rate,
-        s->core.min_nitrogen_photosynthesis);
-
-    s->core.phosphorus_cost = phosphorus_cost(
-        s->core.respiration_frequency, s->core.sucrose, s->core.starch,
-        s->core.sucrose_loading_frequency, s->core.night_efficiency_starch,
-        s->core.assimilation_cost_phosphorus,
-        s->core.leaf_biomass, s->core.total_biomass,
-        s->core.photosynthesis, s->core.max_photosynthetic_rate,
-        s->core.min_phosphorus_photosynthesis);
-
-    s->core.nitrogen_nutrient_uptake = nitrogen_nutrient_uptake(
-        s->core.max_nitrogen_uptake, s->core.nitrogen_soil_content, s->core.Michaelis_Menten_constant_nitrogen);
-
-    s->core.phosphorus_nutrient_uptake = phosphorus_nutrient_uptake(
-        s->core.max_phosphorus_uptake, s->core.phosphorus_soil_content, s->core.Michaelis_Menten_constant_phosphorus);
-
-    s->core.pot_nitrogen_uptake = pot_nitrogen_uptake(
-        s->core.nitrogen_nutrient_uptake, s->core.nitrogen_affinity, s->core.root_biomass, s->core.total_biomass);
-
-    s->core.pot_phosphorus_uptake = pot_phosphorus_uptake(
-        s->core.phosphorus_nutrient_uptake, s->core.phosphorus_affinity, s->core.root_biomass, s->core.total_biomass);
-
-    s->core.nitrogen_uptake = nitrogen_uptake(
-        s->core.pot_nitrogen_uptake, s->core.sucrose, s->core.nitrogen_uptake_sucrose_consumption);
-
-    s->core.phosphorus_uptake = phosphorus_uptake(
-        s->core.pot_phosphorus_uptake, s->core.sucrose, s->core.phosphorus_uptake_sucrose_consumption);
-
-    s->core.stoichiometric_signal = stoichiometric_signal(
-        s->core.optimal_stoichiometric_ratio, s->core.nitrogen, s->core.phosphorus);
+    plant_compute_outputs(&state, &parameters, &environment, starch_night_start, &outputs);
+    plant_outputs_apply_to_input(s, &outputs);
 }
 
 void simulation_plant_rhs(
