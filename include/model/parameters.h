@@ -4,7 +4,10 @@
 #include "model/input.h"
 
 typedef struct PlantParameters {
-    InputCore core;
+    InputPhoto photo;
+    InputCarbohydrates carbohydrates;
+    InputNutrients nutrients;
+    InputGrowth growth;
     InputGasExchange gas_exchange;
 } PlantParameters;
 

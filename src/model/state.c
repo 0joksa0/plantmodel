@@ -3,33 +3,33 @@
 PlantState plant_state_from_input(const Input* input)
 {
     PlantState state = {
-        .starch_partition_coeff = input->core.starch_partition_coeff,
-        .starch = input->core.starch,
-        .sucrose = input->core.sucrose,
-        .nitrogen_affinity = input->core.nitrogen_affinity,
-        .phosphorus_affinity = input->core.phosphorus_affinity,
-        .nitrogen = input->core.nitrogen,
-        .phosphorus = input->core.phosphorus,
-        .sucrose_root_allocation = input->core.sucrose_root_allocation,
-        .leaf_biomass = input->core.leaf_biomass,
-        .root_biomass = input->core.root_biomass
+        .starch_partition_coeff = input->carbohydrates.starch_partition_coeff,
+        .starch = input->carbohydrates.starch,
+        .sucrose = input->carbohydrates.sucrose,
+        .nitrogen_affinity = input->nutrients.nitrogen_affinity,
+        .phosphorus_affinity = input->nutrients.phosphorus_affinity,
+        .nitrogen = input->nutrients.nitrogen,
+        .phosphorus = input->nutrients.phosphorus,
+        .sucrose_root_allocation = input->growth.sucrose_root_allocation,
+        .leaf_biomass = input->growth.leaf_biomass,
+        .root_biomass = input->growth.root_biomass
     };
     return state;
 }
 
 void plant_state_apply_to_input(Input* input, const PlantState* state)
 {
-    input->core.starch_partition_coeff = state->starch_partition_coeff;
-    input->core.starch = state->starch;
-    input->core.sucrose = state->sucrose;
-    input->core.nitrogen_affinity = state->nitrogen_affinity;
-    input->core.phosphorus_affinity = state->phosphorus_affinity;
-    input->core.nitrogen = state->nitrogen;
-    input->core.phosphorus = state->phosphorus;
-    input->core.sucrose_root_allocation = state->sucrose_root_allocation;
-    input->core.leaf_biomass = state->leaf_biomass;
-    input->core.root_biomass = state->root_biomass;
-    input->core.total_biomass = input->core.leaf_biomass + input->core.root_biomass;
+    input->carbohydrates.starch_partition_coeff = state->starch_partition_coeff;
+    input->carbohydrates.starch = state->starch;
+    input->carbohydrates.sucrose = state->sucrose;
+    input->nutrients.nitrogen_affinity = state->nitrogen_affinity;
+    input->nutrients.phosphorus_affinity = state->phosphorus_affinity;
+    input->nutrients.nitrogen = state->nitrogen;
+    input->nutrients.phosphorus = state->phosphorus;
+    input->growth.sucrose_root_allocation = state->sucrose_root_allocation;
+    input->growth.leaf_biomass = state->leaf_biomass;
+    input->growth.root_biomass = state->root_biomass;
+    input->growth.total_biomass = input->growth.leaf_biomass + input->growth.root_biomass;
 }
 
 void plant_state_pack(real_t* dst, const PlantState* state)

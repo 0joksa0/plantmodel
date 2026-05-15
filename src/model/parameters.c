@@ -3,7 +3,10 @@
 PlantParameters plant_parameters_from_input(const Input* input)
 {
     PlantParameters parameters = {
-        .core = input->core,
+        .photo = input->photo,
+        .carbohydrates = input->carbohydrates,
+        .nutrients = input->nutrients,
+        .growth = input->growth,
         .gas_exchange = input->gas_exchange
     };
     return parameters;
