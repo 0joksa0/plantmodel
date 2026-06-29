@@ -9,6 +9,8 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # TODO: Split compile flags by build type (`Debug` vs `Release`) and avoid forcing `-ffast-math` globally.
  add_compile_options(-Wall -Wextra -O3 -ffast-math)
 
+find_package(OpenMP)
+
 # ---------------- fajlovi --------------------
 add_compile_definitions(SOLVER_REAL_AS=double )
 add_compile_definitions(SOLVER_REAL_IS_DOUBLE)
@@ -110,6 +112,10 @@ target_link_libraries(sensitivity_runner
 )
 
 add_executable(ablation_runner ${SRC} tools/ablation_runner.c)
+
+add_executable(lg_sweep ${SRC} tools/lg_sweep.c)
+target_include_directories(lg_sweep PRIVATE ${PROJECT_SOURCE_DIR}/include)
+target_link_libraries(lg_sweep PRIVATE solver_double PkgConfig::RAYLIB ${LIBM} ${LIBPTH} ${LIBDL} ${LIBGL})
 target_include_directories(ablation_runner PRIVATE ${PROJECT_SOURCE_DIR}/include)
 target_link_libraries(ablation_runner
     PRIVATE
@@ -120,6 +126,9 @@ target_link_libraries(ablation_runner
         ${LIBDL}
         ${LIBGL}
 )
+if(OpenMP_C_FOUND)
+    target_link_libraries(ablation_runner PRIVATE OpenMP::OpenMP_C)
+endif()
 
 message(STATUS "Solver at : ${SOLVER_DOUBLE_PATH}")
 message(STATUS "Sources   : ${SRC}")
@@ -149,12 +158,3 @@ if(TEST_SRC)
 endif()
 
 
-# ---------------- OpenMP -----------------------
-# find_package(OpenMP REQUIRED)
-#
-# if(OpenMP_FOUND)
-#     target_link_libraries(simulator PRIVATE OpenMP::OpenMP_C)
-#     if(TEST_SRC)
-#         target_link_libraries(unit_tests PRIVATE OpenMP::OpenMP_C)
-#     endif()
-# endif()
