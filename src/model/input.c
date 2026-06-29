@@ -6,6 +6,7 @@ Input generate_input()
     /* TODO: Externalize these defaults into a config file/profile set to avoid recompilation for calibration runs. */
     Input input = {
         .photo.light = REAL(0.0),
+        .photo.max_PAR = REAL(1200.0),
         .photo.limitation_of_photosynthetic_rate = REAL(0.5),
         .photo.max_photosynthetic_rate = REAL(12.7),
         .photo.nitrogen_saturation = REAL(0.45),

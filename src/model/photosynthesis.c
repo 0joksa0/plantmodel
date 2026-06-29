@@ -100,6 +100,23 @@ real_t photosynthesis(
     return photo;
 }
 
+/*
+ * Non-rectangular hyperbola for actual electron transport rate J from PAR.
+ * Farquhar et al. (1980), Eq. 4 form widely used in practice:
+ *   θ·J² - (Jmax + φ·PAR)·J + Jmax·φ·PAR = 0
+ * φ = 0.385 mol e⁻/mol photons (quantum yield incl. absorptivity)
+ * θ = 0.7  (curvature, Farquhar & Wong 1984)
+ */
+static real_t compute_J(real_t PAR, real_t Jmax)
+{
+    const real_t phi   = REAL(0.385);
+    const real_t theta = REAL(0.7);
+    real_t b    = -(Jmax + phi * PAR);
+    real_t disc = b * b - REAL(4.0) * theta * Jmax * phi * PAR;
+    if (disc < REAL(0.0)) disc = REAL(0.0);
+    return (-b - RSQRT(disc)) / (REAL(2.0) * theta);
+}
+
 real_t farquhar_photosynthesis(Input *input)
 {
     if (input->photo.light <= REAL(0.0) || input->growth.leaf_biomass < input->photo.min_leaf_biomass)
@@ -110,6 +127,9 @@ real_t farquhar_photosynthesis(Input *input)
     {
         return REAL(0.0);
     }
+
+    input->gas_exchange.electron_transport_rate =
+        compute_J(input->photo.light_PAR, input->gas_exchange.electron_transport_rate);
 
     real_t VPD = calculate_vapor_pressure_deficit(input->gas_exchange.leaf_temperature, input->gas_exchange.relative_humidity);
     input->gas_exchange.stomatal_conductance = calculate_stomatal_conductance_jarvis(
@@ -135,6 +155,26 @@ real_t farquhar_photosynthesis(Input *input)
         adjusted_PH);
 
     return RMAX(REAL(0.0), adjusted_PH);
+}
+
+real_t farquhar_only_photosynthesis(Input *input)
+{
+    if (input->photo.light <= REAL(0.0) || input->growth.leaf_biomass < input->photo.min_leaf_biomass)
+        return REAL(0.0);
+    if (input->photo.light_PAR < REAL(20.0))
+        return REAL(0.0);
+
+    input->gas_exchange.electron_transport_rate =
+        compute_J(input->photo.light_PAR, input->gas_exchange.electron_transport_rate);
+
+    real_t An = iterate_ci(input, 1000, REAL(0.0001));
+
+    input->gas_exchange.convert_to_photosynthesis_per_gram_per_hour = convert_to_photosynthesis_per_gram_per_hour(
+        An,
+        input->growth.leaf_biomass,
+        input->gas_exchange.specific_leaf_area);
+
+    return RMAX(REAL(0.0), input->gas_exchange.convert_to_photosynthesis_per_gram_per_hour);
 }
 
 real_t rubisco_limited_photosynthesis(
@@ -213,7 +253,9 @@ real_t iterate_ci(Input *input, int max_iter, real_t epsilon)
 
         An = net_photosynthesis(Ac, Aj, input->gas_exchange.respiration_rate);
 
-        real_t new_Ci = input->gas_exchange.ambient_CO2_concentration - An / gs;
+        /* gc = gs/1.6: CO2 diffusivity is ~1.6x lower than H2O in air */
+        real_t gc = gs / REAL(1.6);
+        real_t new_Ci = input->gas_exchange.ambient_CO2_concentration - An / gc;
         new_Ci = RMAX(REAL(0.0), new_Ci);
 
         if (RABS(new_Ci - Ci) < epsilon && RABS(An - prev_An) < epsilon)
@@ -289,8 +331,6 @@ real_t calculate_vapor_pressure_deficit(real_t temperature_celsius, real_t relat
 
 void update_light_conditions(Input *input, real_t current_hour)
 {
-    const real_t max_PAR = 1200.0;
-
     real_t sunrise = 0.0;
     real_t sunset = sunrise + input->photo.photoperiod;
 
@@ -298,7 +338,7 @@ void update_light_conditions(Input *input, real_t current_hour)
     {
         input->photo.light = 1.0;
         real_t day_fraction = (current_hour - sunrise) / (sunset - sunrise);
-        input->photo.light_PAR = max_PAR * RSIN(day_fraction * M_PI);
+        input->photo.light_PAR = input->photo.max_PAR * RSIN(day_fraction * M_PI);
     }
     else
     {

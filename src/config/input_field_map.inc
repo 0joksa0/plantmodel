@@ -1,5 +1,6 @@
     {"photo.light", offsetof(Input, photo.light)},
     {"photo.light_PAR", offsetof(Input, photo.light_PAR)},
+    {"photo.max_PAR", offsetof(Input, photo.max_PAR)},
     {"photo.limitation_of_photosynthetic_rate", offsetof(Input, photo.limitation_of_photosynthetic_rate)},
     {"photo.max_photosynthetic_rate", offsetof(Input, photo.max_photosynthetic_rate)},
     {"photo.nitrogen_saturation", offsetof(Input, photo.nitrogen_saturation)},

@@ -5,6 +5,7 @@
 typedef struct {
     real_t light;
     real_t light_PAR;
+    real_t max_PAR;
     real_t limitation_of_photosynthetic_rate;
     real_t max_photosynthetic_rate;
     real_t nitrogen_saturation;
@@ -13,6 +14,7 @@ typedef struct {
     real_t feedback_on_photosynthesis;
     real_t photoperiod;
     real_t photosynthesis;
+    int    photo_mode;
 } InputPhoto;
 
 typedef struct {

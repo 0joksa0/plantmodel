@@ -93,7 +93,7 @@ static void simulation_result_init(SimulationResult* result, int days, real_t ph
 
 static void simulation_runtime_init_csv(SimulationRuntime* runtime, const SimulationConfig* cfg, real_t photoperiod)
 {
-    snprintf(runtime->filename, sizeof(runtime->filename), "plant_%dh.csv", (int)photoperiod);
+    snprintf(runtime->filename, sizeof(runtime->filename), "results/simulation/plant_%dh.csv", (int)photoperiod);
     runtime->csv_ctx.f = cfg->write_csv ? fopen(runtime->filename, "w") : NULL;
     /* TODO: Surface CSV open failures to caller/tests (currently silently continues without output file). */
 
@@ -221,7 +221,7 @@ static void simulation_prepare_runtime(
         .count = 4
     };
 
-    simulation_runtime_init_csv(runtime, cfg, input->core.photoperiod);
+    simulation_runtime_init_csv(runtime, cfg, input->photo.photoperiod);
     simulation_runtime_init_logging(runtime, cfg);
     simulation_runtime_init_gui(runtime, cfg, result);
 }
@@ -268,9 +268,9 @@ void simulate_step(real_t current_time, int step, Input* input, int days)
     static bool trigger = false;
     static real_t starch_night_start = REAL(0.0);
 
-    if (input->core.light == REAL(0.0)) {
+    if (input->photo.light == REAL(0.0)) {
         if (!trigger) {
-            starch_night_start = input->core.starch;
+            starch_night_start = input->carbohydrates.starch;
         }
         trigger = true;
     } else {
@@ -337,7 +337,7 @@ SimulationConfig simulation_default_config(void)
 void simulate_days(const SimulationConfig* config, Input* input, SimulationResult* result)
 {
     SimulationConfig cfg = simulation_normalize_config(config);
-    simulation_result_init(result, cfg.days, input->core.photoperiod, cfg.dt_hours);
+    simulation_result_init(result, cfg.days, input->photo.photoperiod, cfg.dt_hours);
     /* TODO: Validate allocation results and return an explicit error code instead of assuming success. */
 
     input->growth.lambda_sb = lambda_sb_f(

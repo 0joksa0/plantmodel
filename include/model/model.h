@@ -7,6 +7,12 @@ void photo_dataset_open(const char *path);
 void photo_dataset_close(void);
 void photo_dataset_flush(void);
 
+typedef enum {
+    PHOTO_MODE_FARQUHAR_JARVIS = 0,
+    PHOTO_MODE_BASIC           = 1,
+    PHOTO_MODE_FARQUHAR        = 2,
+} PhotosynthesisMode;
+
 /* TODO: Consolidate API naming and spelling to reduce typo-driven bugs in call sites and future bindings. */
 
 real_t photosynthesis(
@@ -18,6 +24,7 @@ real_t photosynthesis(
     real_t leaf_biomass,
     real_t min_leaf_biomass);
 real_t farquhar_photosynthesis(Input *input);
+real_t farquhar_only_photosynthesis(Input *input);
 
 real_t nitrogen_saturation(
     real_t nitrogen,

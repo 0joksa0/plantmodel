@@ -426,7 +426,7 @@ static PassFlags evaluate_passes(const RunMetrics* base_metrics, real_t fw_start
 int main(int argc, char** argv)
 {
     const char* config_path = "config/default.config";
-    const char* out_path = "validation_summary.csv";
+    const char* out_path = "results/validation/validation_summary.csv";
     const char* sugars_starch_data_path = "data/paper/sugars_starch_reference.csv";
 
     int days = 30;

@@ -97,6 +97,30 @@ target_link_libraries(validation_runner
         ${LIBGL}
 )
 
+add_executable(sensitivity_runner ${SRC} tools/sensitivity_runner.c)
+target_include_directories(sensitivity_runner PRIVATE ${PROJECT_SOURCE_DIR}/include)
+target_link_libraries(sensitivity_runner
+    PRIVATE
+        solver_double
+        PkgConfig::RAYLIB
+        ${LIBM}
+        ${LIBPTH}
+        ${LIBDL}
+        ${LIBGL}
+)
+
+add_executable(ablation_runner ${SRC} tools/ablation_runner.c)
+target_include_directories(ablation_runner PRIVATE ${PROJECT_SOURCE_DIR}/include)
+target_link_libraries(ablation_runner
+    PRIVATE
+        solver_double
+        PkgConfig::RAYLIB
+        ${LIBM}
+        ${LIBPTH}
+        ${LIBDL}
+        ${LIBGL}
+)
+
 message(STATUS "Solver at : ${SOLVER_DOUBLE_PATH}")
 message(STATUS "Sources   : ${SRC}")
 
