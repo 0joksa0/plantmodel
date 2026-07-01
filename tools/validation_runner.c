@@ -57,10 +57,10 @@ typedef struct {
 } PassFlags;
 
 static const Scenario SCENARIOS[] = {
-    { 4, REAL(0.0680), REAL(0.16), REAL(0.00344), REAL(0.82) },
-    { 6, REAL(0.1135), REAL(0.15), REAL(0.00413), REAL(0.79) },
-    { 8, REAL(0.1708), REAL(0.13), REAL(0.00515), REAL(0.67) },
-    { 12, REAL(0.2600), REAL(0.08), REAL(0.00578), REAL(0.62) },
+    { 4, REAL(0.0680), REAL(0.16), REAL(0.003843), REAL(0.82) },
+    { 6, REAL(0.1135), REAL(0.15), REAL(0.004433), REAL(0.79) },
+    { 8, REAL(0.1708), REAL(0.13), REAL(0.005246), REAL(0.67) },
+    { 12, REAL(0.2600), REAL(0.08), REAL(0.005850), REAL(0.62) },
 };
 
 #define REF_POINTS_CAP 2048
