@@ -1,0 +1,32 @@
+Mechanistic models of plant growth usually prescribe carbon input or compute it
+from a photosynthesis routine that is solved separately from stomatal
+conductance. This work reports a modular simulation model in which the supply
+and demand sides of leaf gas exchange are closed against each other at every
+evaluation: a Jarvis conductance and a Farquhar assimilation function are
+combined into a quadratic in the intercellular CO$_2$ concentration and solved
+in closed form, replacing a fixed-point iteration that we show admits a
+period-two orbit under water stress. Around this closure the model integrates
+eleven states covering starch, sucrose and vacuolar sugar, nitrogen and
+phosphorus acquisition with explicit costs, and leaf and root biomass. Carbon
+conservation over the carbohydrate subsystem closes to machine precision.
+Rather than fitting coefficients per experimental condition, we hold a single
+parameter set across four photoperiods and report what that costs: relative
+growth rate is reproduced with a mean absolute percentage error of 8.58~\% and a
+worst case of 11.75~\%, against a published baseline whose apparent agreement is
+a bisection residual of eight coefficients fitted to eight observations.
+Leave-one-photoperiod-out cross-validation gives a held-out error of 13.18~\%
+for a photoperiod-independent growth coefficient and 4.36~\% when the
+coefficient is allowed a linear photoperiod dependence. Diel starch is
+reproduced in both shape and level; sucrose is reproduced in shape but is a
+factor two to three low in absolute concentration, which we report rather than
+absorb. Ablation shows that computing the carbon input, rather than prescribing
+it, is what carries the photoperiod response. Variance-based sensitivity
+analysis attributes only 20~\% of output variance to parameters acting alone,
+placing the remainder in interactions rather than
+main effects. Finally we locate one boundary of the model's diel starch balance: under the
+reference chamber forcing the diel starch balance returns to its dawn value up
+to a 15~h photoperiod, whereas from 16~h the pool gains carbon on every cycle
+and still drifts upward after 90 simulated days. Under the higher light dose of
+the shipped configuration the balance does not return at any photoperiod tested,
+so the boundary is a property of the forcing as well as of the photoperiod. We
+characterise this limitation rather than conceal it.

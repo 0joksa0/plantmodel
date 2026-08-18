@@ -1,0 +1,135 @@
+\appendix
+
+\section{Boundary cases of the gas-exchange closure}
+\label{app:closure}
+
+Section~\ref{sec:closure} solves the supply--demand closure as a quadratic in
+$C_i$ and returns the admissible positive root on each branch. Two limiting
+conductance states need a separate treatment. Both have physical answers rather
+than clamps, and neither is exercised in any reported run, but stating them
+completes the definition of the closure.
+
+The vanishing-conductance case has a physical answer rather than a clamp, and the
+one-sided limit and the closed boundary are two different states. As
+$g_c \to 0^{+}$ the quadratic degenerates: $a \to 0$ and
+$b \to R_d d_1 - \mathrm{num}$, and the finite root of the remaining linear
+equation is
+
+\begin{equation}
+\lim_{g_c \to 0^{+}} C_i
+= \frac{\mathrm{num}\,\Gamma^{*} + R_d d_0}{\mathrm{num} - R_d d_1},
+\label{eq:ci_limit}
+\end{equation}
+
+provided the denominator is positive, which holds for both branches at the
+parameter values used here. Substituting this root into
+Eq.~\eqref{eq:branch_form} gives $A_b = R_d$ and hence $A_n \to 0$: supply and
+demand meet at the compensation point, where diffusion delivers nothing and
+gross assimilation exactly pays respiration. The limit is a finite
+$C_i$, not $\Gamma^{*}$. At the production values it evaluates to
+$67.94~\mu\mathrm{mol\,mol^{-1}}$ on the Rubisco-limited branch and
+$53.35$ on the electron-transport-limited branch, and a numerical sweep in
+$g_c$ reproduces both.
+
+Exactly closed stomata are a separate case. At $g_c = 0$ the supply relation
+carries no information about $C_i$, the quadratic is empty, and the physical
+state is a leaf that admits no CO$_2$ and only respires. The implementation
+returns that state directly at the boundary $g_c \leq 0$,
+
+\begin{equation}
+C_i = \Gamma^{*}, \qquad A_n = -R_d ,
+\label{eq:ci_dark}
+\end{equation}
+
+which is the dark limit and replaces a clamp on the conductance.
+
+This assignment is an implementation boundary convention and not the continuous
+extension of Eq.~\eqref{eq:ci_limit}. The one-sided limit derived above gives
+$A_n \to 0$ as $g_c \to 0^{+}$, whereas the convention returns $A_n = -R_d$ at
+$g_c = 0$, so the two differ by $R_d$ at the boundary. We state the difference
+rather than smooth it over. The convention is the physically meaningful one for a
+leaf with no gas exchange, since gross assimilation requires a CO$_2$ supply that
+a shut stoma does not provide, while the limit describes a leaf whose stomata are
+almost shut and which is still exchanging enough CO$_2$ to break even. Whether
+the discrepancy matters is a question about the trajectory: the conductance model
+of Section~\ref{sec:jarvis} has a positive floor on its light response, so
+$g_c = 0$ is never reached in any reported run and the branch is not exercised.
+Respiration in darkness is carried by the same expression that carries
+assimilation in the light.
+
+One numerical caveat belongs with this derivation. Written in the form above the
+quadratic loses significance when $a = -g_c d_1$ becomes comparable to the
+rounding error of $b$, which at these parameter values occurs below
+$g_c \approx 10^{-8}$; a sweep to $g_c = 10^{-11}$ returns a spurious positive
+$A_n$. The conductance model of Section~\ref{sec:jarvis} has a positive floor on
+its light response, so no reported run enters that range, and we record the
+bound rather than rely on it being unreachable.
+
+\section{Parameter provenance ledger}
+\label{app:params}
+
+Every numerical constant in the released model carries a provenance record in
+\texttt{config/parameter\_provenance.csv}, reproduced in full as Table~S1 of the
+Supplementary Material. The tier states how the value
+was obtained: T1 measured, T2 derived, T3 inherited, T4 constrained, T5 fitted, T6 unsourced. A T6 entry is a value that
+we could not trace to a measurement, a derivation or the source model, and it is
+declared as such rather than presented as sourced. The ledger holds 124 entries, of which 4 are measured (T1), 55 are derived (T2), 27 are inherited (T3), 9 are constrained (T4), 15 are fitted (T5) and 14 are unsourced (T6). Every key of the released configuration appears in the ledger, as does every constant hard-coded in the model source, and every ledger value that names a configuration key matches the value the reported runs load; these properties are checked by script rather than by reading. Two rows are attributed to this work rather than to a publication, because no external source exists for them: the growth coefficient obtained by the held-out sweep and the assimilation scale constrained by the reference data.
+
+The complete ledger of all 124 entries, with value, unit, tier, source and
+locator for each, is provided as Table~S1 in the Supplementary Material and is
+released with the code as \texttt{config/parameter\_provenance.csv}. The curated
+physical parameter table in the main text (Table~\ref{tab:params}) is the subset
+most relevant to reading the model equations.
+
+\section{Sensitivity analysis: parameters, ranges and sampling scales}
+\label{app:sa}
+
+Table~\ref{tab:sa_ranges} is generated from
+\texttt{config/sensitivity\_params.csv} and gives the factors varied in the
+sensitivity study together with their ranges, sampling scales and the role each
+factor plays in the model. All reported Sobol' and Morris indices are conditional
+on exactly these ranges: an index is a statement about output variance over a
+declared input distribution, and it is not transferable to a different one. A
+factor sampled on a logarithmic scale is varied uniformly in $\log_{10}$, which
+is the appropriate choice for a rate constant spanning more than one order of
+magnitude. Of the 20 factors listed, 16 are active in the reported design and 4
+are disabled; the reasons for disabling are given in the table.
+
+\begin{table*}[!htbp]
+\centering
+\scriptsize
+\caption{Sensitivity analysis design, generated from
+\texttt{config/sensitivity\_params.csv}. Role distinguishes a model parameter from
+an environmental driver, an initial condition and a physical constant. The basis
+column records why the range was chosen.}
+\label{tab:sa_ranges}
+\begin{tabular}{@{}p{46mm}ccccp{54mm}@{}}
+\toprule
+Factor & Lower & Upper & Scale & Role & Basis \\
+\midrule
+\multicolumn{6}{@{}l}{\textit{Active in the reported design}} \\
+\texttt{growth.lambda\_sb} & 0.002 & 0.01 & linear & model parameter & Calibrated; $\pm$70\% around default 0.00587 (Schulz et al. 2019) \\
+\texttt{carbohydrates.respiration\_frequency} & 0.4 & 1.2 & linear & model parameter & Calibrated; $\pm$50\% around default 0.79 \\
+\texttt{nutrients.max\_nitrogen\_uptake} & 1 & 15 & log & model parameter & Literature range for herbaceous crops (Barber 1995; Lambers et al. 2008) \\
+\texttt{nutrients.max\_phosphorus\_uptake} & 0.05 & 1.5 & log & model parameter & Literature range for herbaceous crops (Barber 1995) \\
+\texttt{nutrients.nitrogen\_soil\_content} & 3 & 30 & linear & environment & Low-nutrient to high-nutrient agricultural soil (Brady \& Weil 2010) \\
+\texttt{nutrients.phosphorus\_soil\_content} & 0.03 & 0.5 & log & environment & Low to high-P agricultural soil (Brady \& Weil 2010) \\
+\texttt{gas\_exchange.leaf\_temperature} & 10 & 35 & linear & environment & Controlled environment range; cold stress to heat stress \\
+\texttt{gas\_exchange.relative\_humidity} & 30 & 90 & linear & environment & Arid to humid growing conditions \\
+\texttt{gas\_exchange.ambient\_CO2\_concentration} & 280 & 800 & linear & environment & Pre-industrial to RCP 8.5 projected 2100 (Meinshausen et al. 2011) \\
+\texttt{gas\_exchange.leaf\_water\_potential} & -1.5 & -0.1 & linear & environment & Severe water stress to turgid (Hsiao 1973; Jones 2014) \\
+\texttt{gas\_exchange.max\_rubisco\_carboxylation\_rate} & 20 & 120 & log & model parameter & C3 herbaceous range (Wullschleger 1993; Medlyn et al. 2002) \\
+\texttt{gas\_exchange.electron\_transport\_rate} & 50 & 200 & log & model parameter & C3 herbaceous range (Wullschleger 1993) \\
+\texttt{photo.max\_PAR} & 300 & 2000 & linear & environment & Shade canopy (300) to full sun (2000 $\mu$mol m⁻² s⁻¹) (McCree 1972) \\
+\texttt{carbohydrates.sucrose} & 0.8 & 3 & linear & initial condition & Observed range in spinach seedlings (\% DW; Geiger \& Servaites 1994) \\
+\texttt{growth.total\_biomass} & 0.01 & 0.12 & linear & initial condition & Seedling (0.01 g FW) to established juvenile plant (0.12 g FW) \\
+\texttt{carbohydrates.k\_vacuole\_in} & 0.005 & 0.4 & linear & model parameter & Cytosol→vacuole exchange rate; covers calibrated per-PP range 0.011-0.230 h-1 (Lohaus 2007) \\
+\midrule
+\multicolumn{6}{@{}l}{\textit{Disabled}} \\
+\texttt{carbohydrates.lambda\_sni} & 0.04 & 0.18 & linear & model parameter & Disabled: mu*$\approx$0 everywhere; excluded to keep d$\le$16 (solver limit) \\
+\texttt{photo.feedback\_on\_photosynthesis} & 0.5 & 0.9 & linear & model parameter & Disabled: inactive in Farquhar path (light\_PAR>20 ⟹ simple model never called) \\
+\texttt{gas\_exchange.oxygen\_concentration} & 210 & 210 & fixed & physical constant & Fixed atmospheric O2; excluded as non-varying \\
+\texttt{carbohydrates.starch} & 0.05 & 1 & linear & initial condition & Observed range in spinach seedlings (\% DW; Geiger \& Servaites 1994) \\
+\bottomrule
+\end{tabular}
+\end{table*}

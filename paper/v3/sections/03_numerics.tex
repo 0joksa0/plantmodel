@@ -1,0 +1,511 @@
+\section{Numerical Implementation}
+\label{sec:numerics}
+\label{sec:implementation}
+
+The model is implemented as a modular simulation engine in C (ISO~C99) and
+built with CMake. Environmental forcing, gas exchange, carbohydrate dynamics,
+nutrient uptake and biomass growth are written as separate translation units.
+Each physiological block can therefore be tested on its own, while the coupled
+path from forcing to growth stays intact. This section describes how the state
+equations are advanced, and which checks were applied to the solver components
+before any result was produced.
+
+\subsection{Simulation architecture and time integration}
+
+Each right-hand-side evaluation follows the fast--slow structure of
+Section~\ref{sec:model} and Figure~\ref{fig:overview}. Four blocks are executed
+in sequence. The first block
+evaluates the clock time and the environmental drivers: PAR, leaf temperature,
+relative humidity, vapour-pressure deficit, ambient CO$_2$ and leaf water
+potential. The second block computes the gas-exchange layer: stomatal
+conductance, the electron transport rate and the two Farquhar branches. The
+intercellular CO$_2$ concentration follows from the closed-form solution of
+Eq.~\eqref{eq:ci_quadratic}. The third block converts net assimilation into the
+carbon-input term $\Phi_c$. The fourth block assembles the derivatives of the
+eleven slow states. These are starch, cytosolic and vacuolar sucrose, the
+partition and allocation variables, the two nutrient pools, the two affinity
+states, and leaf and root biomass.
+
+Gas exchange is algebraic and is solved at every stage of every step, not once
+per output sample. This matters for the coupling. Conductance, assimilation and
+$C_i$ are functions of the current state and the current forcing, so a stage
+value taken from a stale operating point would break the supply--demand balance
+that the closure enforces. The eleven slow states carry no algebraic
+constraint and are integrated as an explicit system.
+
+Integration uses a separate, reusable C ODE-solver library through a single
+interface, so the model does not depend on one backend. The production
+configuration selects an adaptive Dormand--Prince embedded pair
+(\texttt{ODE45}) with an error tolerance of $10^{-8}$
+\citep{HairerNorsettWanner1993}. Under an adaptive method the configuration
+entry \texttt{dt\_hours} is not the integration step. It sets the initial trial
+step, which the step controller immediately overrides, and it sets the interval
+at which the trajectory is sampled for output. Production runs use
+$\texttt{dt\_hours}=0.1$~h, so the reported trajectory is a fixed
+0.1~h grid over a 30-day horizon, while the accuracy of that trajectory is
+controlled by the tolerance alone.
+
+A fixed step is used where the adaptive controller is either unusable or
+unnecessary. The sensitivity and sweep runners override the backend to
+fixed-step RK4, because those designs draw parameter values at the edges of the
+declared ranges, where the adaptive step can collapse. A fixed step also gives a
+predictable cost over several thousand evaluations. The carbon-balance
+tool of Section~\ref{sec:carbon_closure} uses fixed-step RK4 for a different
+reason: only a fixed-step driver can advance the flux accumulators with the same
+weights and the same step as the states. Both backends are run through the same
+production path at the same settings, so the effect of the choice can be
+measured rather than assumed.
+
+Two runtime guards protect batch work. A non-finite guard and a domain guard
+observe the trajectory and classify a run as divergent. A step-budget plugin
+counts attempted steps and stops the run when a generous budget is exhausted.
+The second guard covers a failure the first cannot see: for some parameter
+combinations the adaptive step collapses while the state stays finite, so the
+integrator neither advances nor reports an error. Such a run then unwinds
+normally and is recorded as inadmissible, which is how the batch drivers already
+treat divergence.
+
+\subsection{Verification of the solver components}
+\label{sec:verification}
+
+The gas-exchange closure was verified by substitution rather than by assertion.
+For a reference leaf and PAR from 10 to
+2000~$\mu$mol~m$^{-2}$~s$^{-1}$, the analytic solution was inserted back into
+the supply relation and the residual $|A_n - g_c(C_a - C_i)|$ was recorded. The
+analytic branch solution reproduces the intended operating point. The residual
+stays at machine precision over the whole light range, so the closed-form root
+solves the coupled system rather than approximating it.
+
+Two limits were checked separately, because both are boundaries where an
+implementation can silently disagree with the equations. When conductance
+reaches zero the implementation returns $C_i = \Gamma^\ast$ and
+$A_n = -R_d$, which is the dark limit of the formulation. Above that limit,
+assimilation crosses zero smoothly at $\mathrm{PAR}=13.36$~$\mu$mol~m$^{-2}$~s$^{-1}$
+under the reference conditions. An earlier hard cut-off at
+$\mathrm{PAR}=20$~$\mu$mol~m$^{-2}$~s$^{-1}$ was removed, because $f_{PAR}$ is
+not zero there and the returned assimilation jumped across the threshold. With
+the analytic closure the terminal $\max(0,\cdot)$ clamp already returns exactly
+zero below the light compensation point, continuously and without a special
+case. Removing the gate therefore also removes a discontinuity that an adaptive
+step controller has to resolve twice per simulated day.
+
+\subsection{Carbohydrate-subsystem bookkeeping closure}
+\label{sec:carbon_closure}
+
+Whether the carbon bookkeeping closes cannot be answered by post-processing the
+solver output. The trajectory records pool sizes, whereas closure is a statement
+about time-integrated fluxes, and a quadrature applied afterwards would test the
+quadrature as much as the model. The carbon-balance tool therefore appends ten
+flux accumulators to the eleven states and advances the augmented system with
+identical RK4 weights and an identical step. Both parts come from one call to the
+right-hand side, so the accumulators see the same stage values as the state
+integration. The resulting budget is then exact to the arithmetic of the
+integrator.
+
+The closure is asserted for the carbohydrate subsystem
+$\{a, s, s_v\}$, that is starch, cytosolic sucrose and vacuolar sucrose. Adding
+Eqs.~\eqref{eq:starch}, \eqref{eq:sucrose} and \eqref{eq:sucrose_vac} makes the
+partition terms $k_s \Phi_c$ and $(1-k_s)\Phi_c$ recombine, the degradation flux
+$D_a$ cancel between the starch and sucrose equations, and the vacuolar exchange
+$k_{\mathrm{in}} s - k_{\mathrm{out}} s_v$ cancel between the sucrose and
+vacuolar equations. Integrating what remains over $[0,T]$ gives
+\begin{equation}
+\bigl(a + s + s_v\bigr)\Big|_0^{T}
+=
+\int_0^{T} \Phi_c \, dt
+-
+\int_0^{T}
+\bigl( C_u + C_t + R_m + \eta\,E + C_g \bigr) dt ,
+\label{eq:budget}
+\end{equation}
+with every symbol as defined in Eqs.~\eqref{eq:uptake_cost}--\eqref{eq:growth_cost}
+and~\eqref{eq:sucrose}, so
+the identity can be read off the model equations without translation. Two points
+about the terms. The integrand on the input side is the model carbon input
+$\Phi_c$ of Eq.~\eqref{eq:conversion}, in $\mu$mol hexose gFW$^{-1}$ h$^{-1}$,
+and not the leaf-level $A_n$: the accumulator integrates the same converted
+quantity that drives the pools, so both sides carry one set of units. And the construction
+cost $C_g$ is identically zero in every reported run because $Y = 0$, so the
+implementation carries no accumulator for it: the ten accumulators are
+assimilation, the two partition fluxes, starch degradation, the uptake,
+transport, maintenance and loading costs, and the two vacuolar exchange fluxes.
+The term is written in the identity because it is required whenever $Y$ is
+activated, and a reader checking the residual against the code should expect it
+to be absent there for that reason. The residual is the difference between the two sides, reported
+relative to cumulative carbon input,
+\begin{equation}
+\varepsilon_{C}
+=
+\frac{1}{\int_0^{T} \Phi_c \, dt}
+\left[
+\bigl(a + s + s_v\bigr)\Big|_0^{T}
+-
+\int_0^{T} \Phi_c \, dt
++
+\int_0^{T}
+\bigl( C_u + C_t + R_m + \eta\,E + C_g \bigr) dt
+\right].
+\label{eq:residual}
+\end{equation}
+Across the four calibration photoperiods the relative residual lies between
+$2.9\times10^{-14}$ and $6.1\times10^{-14}$, which is machine precision for
+double-precision accumulation over this many steps. No carbon is created or
+destroyed numerically inside the declared scope.
+
+The scope must be stated exactly, because it does not cover the whole plant.
+The biomass gain term sits outside the budget by construction. In the growth law
+of Eq.~\eqref{eq:dBl} the sucrose drain is
+$\phi_{\text{load}} E_{\text{night}}$ while the biomass gain is
+$\lambda_{sb}\,\phi_{\text{load}} E_{\text{night}} B_l$, so the two differ by
+the factor $\lambda_{sb} B_l$. That factor equals unity only at
+$B_l = 1/\lambda_{sb}$, which is of order $10^{2}$~gFW. Over the simulated
+seedling range the factor stays $10^{2}$ to $10^{3}$ away from unity, so the two
+terms are not two views of one carbon flow. The growth
+term is a rate law calibrated against observed RGR, not a stoichiometric
+conversion of sucrose into biomass carbon. Eq.~\eqref{eq:residual} therefore
+verifies bookkeeping closure of the carbohydrate subsystem, and it is reported
+under that name only. A budget that included biomass would require a
+stoichiometric growth equation, which the model does not have.
+
+\subsection{Convergence and tolerance study}
+
+Three numerical settings can in principle contaminate a reported number, and
+each was refined independently around its production value. The solver
+tolerance was swept over $10^{-4}$ to $10^{-12}$ at the production output
+interval. The output interval was swept over 0.4 to 0.00625~h at the production
+tolerance, which separates an output-grid effect from a discretisation effect.
+The gas-exchange tolerance was swept over $10^{-3}$ to $10^{-10}$; this sweep
+necessarily runs the legacy iterative comparator, because the analytic closure
+is closed-form and has no convergence tolerance at all. A fourth sweep refines
+the step of the fixed-step backend, where the step genuinely is the independent
+variable, and a fifth compares the two backends at production settings. Every
+step used in the sweeps divides both 24~h and the photoperiod exactly, so the
+end-of-day sample lands on a grid point and no interpolation error enters the
+comparison.
+
+The reported quantities are insensitive to these settings over the tested range.
+Refining any of the three beyond its production value moves RGR, end-of-day
+starch and end-of-day sucrose by far less than the differences between the
+parameterisation regimes of Section~\ref{sec:protocol}. The
+measured order of the fixed-step sweep is close to one rather than four, and
+this is expected. Starch degradation is multiplied by the light state, so the
+right-hand side is discontinuous twice per simulated day, and those transitions
+set the global error. One integrator offered by the external solver library
+was excluded from the comparison after it failed a consistency check against an
+ODE with a known closed-form solution.
+
+The step-size study sweeps seven steps from $0.4$ to $0.00625$~h and takes the
+finest grid as the $dt \to 0$ reference. At the production step of $0.1$~h the
+worst-case relative deviation over the four photoperiods is
+$4.3\times10^{-4}$ in RGR, $3.1\times10^{-3}$ in final biomass and
+$2.0\times10^{-3}$ in end-of-day starch. The cytosolic sucrose pool is the least
+well resolved quantity at $6.8\times10^{-2}$, falling to $1.8\times10^{-2}$ for
+the cytosolic and vacuolar pools together; it is the smallest and fastest-turning
+state in the model, and its deviation from the limit rises monotonically with
+photoperiod. The algebraic tolerance inside the $C_i$ solve is not a source of
+uncertainty by comparison: swept from $10^{-3}$ to $10^{-10}$ in the
+fixed-point mode it moves RGR by at most $3.2\times10^{-7}$, three orders of
+magnitude below the step-size error, and the production configuration uses the
+closed-form solver which has no such tolerance. Comparing the production
+embedded-pair integrator against fixed-step RK4 at the same nominal step, the
+two differ by $1.1\times10^{-4}$ to $1.2\times10^{-3}$ in RGR across the
+photoperiods, and the production backend sits closer to the $dt \to 0$ limit
+than fixed-step RK4 does.
+
+None of these deviations approaches the discrepancies the model shows against
+measurement, which are $10^{-2}$ to $10^{-1}$ in relative terms. The numerical
+error is therefore not what limits agreement, which is the point of reporting
+it. The full study, including the Richardson estimates and the per-photoperiod
+tables, is in \path{docs/revision/convergence_study.md}.
+
+\section{Model Evaluation Protocol}
+\label{sec:protocol}
+
+This section defines the evaluation rules and reports no results. The reference
+data are stated with their source, the fitted coefficients are counted in each
+regime, and every metric is defined together with what it does not measure. No
+number in Section~\ref{sec:results} should then be readable as more than it is.
+
+\subsection{Reference data and growth conditions}
+
+Four photoperiods are used for calibration and cross-validation: 4, 6, 8 and
+12~h of light per 24~h cycle. An 18~h photoperiod is held out of every fit
+entirely and is used only as an out-of-sample condition. The four short
+photoperiods span the range over which the reference experiments report growth,
+and 18~h lies outside it, which is why it is treated separately.
+
+All reported runs reproduce the growth conditions of the reference experiments.
+PAR is 160~$\mu$mol~m$^{-2}$~s$^{-1}$ delivered as a square wave over the light
+phase, and leaf temperature is 21~$^\circ$C by day and 19~$^\circ$C by night.
+This is a methodological requirement, not a detail. The shipped configuration
+instead runs a half-sine profile peaking at
+1200~$\mu$mol~m$^{-2}$~s$^{-1}$ at a single temperature. A half-sine averages
+$2/\pi$ of its peak, so that daily light integral is about 4.8 times the chamber
+value at the same day length. A coefficient fitted under one light dose does not
+transfer to another:
+the carbon-input coefficient would absorb the dose mismatch, and the resulting
+value would describe the forcing rather than the plant. Scoring the model
+against chamber data under the shipped forcing would therefore compare a model
+driven at one photon dose with plants grown at another.
+
+Every reference value used in this paper comes from one study
+\citep{Sulpice2014}, and we state how that was established because an earlier
+draft of this work attributed part of the data to the wrong source. The RGR
+targets are 0.068, 0.114, 0.171 and 0.260~d$^{-1}$ for the 4, 6, 8 and 12~h
+photoperiods. The diel carbohydrate reference is
+\path{data/paper/sugars_starch_reference.csv}, which holds 65 rows over five
+photoperiods, that is 13 sampling times per photoperiod at a 2~h resolution
+through the 24~h cycle, with the row at ZT${}=24$ a copy of ZT${}=0$. Starch and
+sucrose are used; the remaining assayed metabolites are not part of this
+evaluation.
+
+The diel file was traced to Supplemental Table S4 of that study, the sheet of
+replicate means, by a cell-by-cell comparison against the published supplement
+rather than by its filename: every numeric cell agrees, once one sampling point
+listed in the source as three unaveraged replicates is averaged. Three
+independent fingerprints confirm the identification, including a negative
+fructose value that survives in both files. The comparison script and its output
+are released with the code, so the identification can be repeated rather than
+taken on trust.
+
+That the growth rates, the dusk starch values and the diel series all come from
+one growth experiment is what makes the reference set internally consistent: a
+model scored against it is not being asked to reconcile two laboratories. Two
+other studies of diel carbohydrate behaviour cover only a subset of these day
+lengths, at 12~h \citep{Annunziata2017} and at 6 and 12~h \citep{Mengin2017}, and
+neither can supply the four-point series.
+
+
+
+\subsection{Parameterisation regimes}
+
+Three parameterisation regimes are evaluated (Table~\ref{tab:scenarios}). They
+differ only in how many coefficients are fitted and in whether those
+coefficients are allowed to depend on photoperiod. Everything else, including
+the forcing, the initial state and all sourced parameters, is identical.
+
+The saturated regime is the legacy per-photoperiod baseline. It fits two coefficients per
+photoperiod by nested bisection: the growth coefficient $\lambda_{sb}$ against
+the observed RGR, and the daytime starch synthesis rate $\lambda_{sdi}$ against
+the observed end-of-day starch. With four photoperiods that is eight fitted
+values against eight observations, so the regime has zero degrees of freedom.
+Its agreement with the data cannot be reported as predictive accuracy. What a
+bisection leaves behind is a convergence residual of the search, controlled by
+the resolution of the parameter grid, and it goes to zero as the search is
+tightened. The regime is retained so that the published result stays
+reproducible, and it is reported as a calibration diagnostic only.
+
+The shared regime fits four coefficients for all photoperiods together:
+$\lambda_{sb}$, $\lambda_{sdr}$, $\lambda_{sdi}$ and the sink activation
+constant. Photoperiod is then the only thing that differs between the four
+runs, so any photoperiod response the model produces is generated by its
+dynamics rather than supplied by its parameters. The third regime keeps the
+same shared set but allows the growth coefficient to vary linearly with
+photoperiod $P$,
+\begin{equation}
+\lambda_{sb}(P) = c_0 + c_1 P ,
+\label{eq:lsb_linear}
+\end{equation}
+which replaces one shared constant by two coefficients. Eq.~\eqref{eq:lsb_linear}
+encodes the hypothesis that the growth response to photoperiod is smooth in $P$
+and is not fully generated by the coupled dynamics. It remains a prediction for
+a held-out photoperiod, because the held-out observation never enters the fit.
+
+\begin{table}[!htbp]
+\centering
+\small
+\caption{Parameterisation regimes. All three use the same chamber forcing
+(PAR 160~$\mu$mol~m$^{-2}$~s$^{-1}$, square wave, 21/19~$^\circ$C), the same
+initial state and the same sourced parameters. $P$ denotes photoperiod in
+hours. The observation count is two per photoperiod, the published RGR and the
+published end-of-day starch. Regime R1 is reported as a calibration diagnostic;
+only R2 and R3 enter the cross-validation of
+Section~\ref{sec:crossval_design}.}
+\label{tab:scenarios}
+\begin{tabular}{@{}llrrl@{}}
+\toprule
+\textbf{Regime} & \textbf{Fitted coefficients} & \textbf{Fitted} &
+\textbf{Obs.} & \textbf{Role} \\
+ & & \multicolumn{1}{c}{\footnotesize values} &
+\multicolumn{1}{c}{\footnotesize used} & \\
+\midrule
+R1 saturated & $\lambda_{sb}$, $\lambda_{sdi}$, per photoperiod & 8 & 8 &
+calibration diagnostic \\
+R2 shared & $\lambda_{sb}$, $\lambda_{sdr}$, $\lambda_{sdi}$, sink constant & 4
+& 8 & held-out prediction \\
+R3 shared, linear & as R2 with $\lambda_{sb}=c_0+c_1 P$ & 5 & 8 &
+held-out prediction \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Metrics}
+
+Growth is evaluated on relative growth rate, computed from total biomass over
+the simulated interval,
+\begin{equation}
+\mathrm{RGR} = \frac{\ln B(t_2) - \ln B(t_1)}{t_2 - t_1} .
+\label{eq:rgr}
+\end{equation}
+Per photoperiod we report the signed relative error. Over a set of photoperiods
+we report the mean absolute percentage error:
+\begin{equation}
+E_{\text{rel}}
+= 100\,\frac{\widehat{\mathrm{RGR}} - \mathrm{RGR}_{\text{ref}}}
+{\mathrm{RGR}_{\text{ref}}},
+\qquad
+\mathrm{MAPE} = \frac{1}{m}\sum_{j=1}^{m} \bigl| E_{\text{rel},j} \bigr| ,
+\label{eq:rgr_error}
+\end{equation}
+where $\widehat{\mathrm{RGR}}$ is the simulated value and $m$ is the number of
+photoperiods in the set. In-sample and held-out MAPE are always reported as
+separate quantities and never pooled.
+
+The diel carbohydrate series are evaluated with a normalised root-mean-square
+error. A single multiplicative scale $\alpha$ is first fitted to each simulated
+trace by least squares,
+\begin{equation}
+\alpha = \frac{\sum_{i=1}^{n} \hat{y}_i y_i}{\sum_{i=1}^{n} \hat{y}_i^{2}},
+\qquad
+r_i = \alpha \hat{y}_i - y_i ,
+\label{eq:alpha}
+\end{equation}
+and the metrics are then computed on the scaled residual $r_i$,
+\begin{equation}
+\mathrm{nRMSE} = \frac{1}{|\bar{y}|}
+\sqrt{\frac{1}{n}\sum_{i=1}^{n} r_i^{2}},
+\qquad
+\mathrm{MAE} = \frac{1}{n}\sum_{i=1}^{n} |r_i| .
+\label{eq:nrmse}
+\end{equation}
+Here $y_i$ is the reference value and $\hat{y}_i$ the simulated value, $n$ is
+the number of matched sampling times, and $\bar{y}$ is the mean reference
+level. MAE
+keeps the units of the reference data and is computed for the same fitted
+$\alpha$, so both metrics describe one and the same fit.
+
+The consequence of fitting $\alpha$ must be stated, because it bounds what the
+carbohydrate comparison can support. A fitted multiplicative scale removes the
+absolute level from the residual, so nRMSE scores the shape and the timing of
+the diel cycle and not the absolute pool concentration. A trace with the
+correct rhythm and a systematically wrong amplitude can pass; a trace with the
+correct amplitude and the wrong phase cannot. For that reason $\alpha$ is
+reported beside every nRMSE in Section~\ref{sec:results}: a value near unity
+means shape and level agree, and a value far from unity localises the
+disagreement in the level alone. The acceptance thresholds are
+predefined heuristic criteria rather than external standards: $\mathrm{nRMSE}
+\le 0.25$ for starch and $\mathrm{nRMSE} \le 0.50$ for sucrose. The sucrose
+threshold is the looser of the two because whole-tissue sucrose pools cytosolic
+and vacuolar sucrose, and the split between the two compartments is itself
+uncertain.
+
+\subsection{Cross-validation design}
+\label{sec:crossval_design}
+
+Growth prediction is evaluated by leave-one-photoperiod-out cross-validation.
+The split is by photoperiod rather than at random, because interpolation across
+the photoperiod range is exactly the ability in question. Four folds are run in
+each of the two shared regimes, which gives eight held-out predictions in total.
+
+One coefficient is refitted per fold, and stating this precisely bounds what the
+experiment can support. The growth coefficient $\lambda_{sb}$ is searched on a
+fixed grid of eleven values from $0.00200$ to $0.00480$~gFW ($\mu$mol
+C$_6$)$^{-1}$. For each grid value the model is run at all four
+photoperiods, and the value minimising the mean absolute percentage error in RGR
+over the three training photoperiods is selected, frozen, and used to predict the
+fourth. In regime A the selected value is applied unchanged at the held-out
+photoperiod. In regime B the straight line of Eq.~\eqref{eq:lsb_linear}
+is fitted to the three per-photoperiod grid optima of the training set by least
+squares, and evaluated at the held-out photoperiod. Regime B therefore carries two coefficients where regime A carries
+one.
+
+The other three calibrated coefficients, $\lambda_{sdr}$, $\lambda_{sdi}$ and
+$K_s$, are not refitted in any fold: they keep the values obtained from the
+full four-photoperiod calibration, as do all sourced parameters. The design
+measures how much of the photoperiod response is carried by the growth
+coefficient specifically, with the carbohydrate coefficients held fixed. It does
+not establish that this coefficient is the only one that could carry that
+response, and a design refitting all four per fold could distribute the same
+dependence differently. A grid search is used rather than a local optimiser
+because the objective is one-dimensional and bounded, so the grid resolution is
+the only accuracy limit and no starting point or convergence criterion enters
+the result.
+
+The 18~h condition is not part of any fold. It is held out of every fit in
+every regime, and it is evaluated only after the coefficients have been frozen.
+It therefore tests extrapolation beyond the calibrated range, which is a
+different and stronger question than the interpolation the four folds test.
+
+\subsection{Ablation protocol}
+
+The ablation measures what the computed carbon input contributes, by replacing
+the carbon-input pathway and leaving everything downstream untouched. Three
+variants are compared. In M0 the carbon input is prescribed by the simple
+saturating photosynthesis expression of the reference formulation. In M1 the
+carbon input comes from Farquhar C3 photosynthesis, with the supply--demand
+closure solved as in the full model, but with stomatal conductance held fixed.
+In M2 conductance is computed from the Jarvis multiplicative response, so the
+gas-exchange layer becomes sensitive to PAR, vapour-pressure deficit,
+temperature, ambient CO$_2$ and leaf water potential.
+
+All parameters are shared and frozen across the three variants. This is the
+point of the design and not a simplification. If each variant were re-fitted
+against the same observations, the fit would absorb the difference between the
+carbon-input pathways. The comparison would then measure how well a per-variant
+calibration can compensate, rather than what removing a mechanism costs. The comparison is reported on RGR error per photoperiod. RGR alone cannot
+separate M1 from M2, so we also report what the coupling changes. Two quantities
+carry that: the magnitude and diel shape of the carbon input, and the response of
+the gas-exchange layer to the environmental drivers.
+
+\subsection{Sensitivity analysis protocol}
+
+The global sensitivity analysis covers the 16 parameters listed in
+\path{config/sensitivity_params.csv}. The admissible range, the sampling scale
+and the literature basis of each are given individually in
+Appendix~\ref{app:sa}. The set spans nutrient uptake capacity
+and soil supply, gas-exchange capacity, the environmental drivers, respiration,
+the growth coefficient, vacuolar exchange and the initial carbohydrate and
+biomass state. The analysed output is RGR. Every reported index is conditional
+on these declared ranges: the analysis describes model behaviour over the
+declared domain and not parameter importance in general.
+
+Morris screening follows \citet{Morris1991} with the elementary-effect measures
+$\mu^\ast$ and $\sigma$ of \citet{Campolongo2007}. The design uses 30
+trajectories on a 6-level grid with the fixed step $\Delta = p/[2(p-1)]$, giving
+$r(d+1)$ model evaluations. Trajectory base points are drawn from an
+independent pseudo-random generator, as the method specifies, so the screening
+is not affected by the base-sample construction described below. Variance-based
+indices use the estimators of \citet{Sobol2001} in the form recommended by
+\citet{Saltelli2010}, with $n=512$ base samples and hence $n(d+2)$ evaluations
+over the $d=16$ parameters. Confidence intervals come from 1000 bootstrap
+replicates of the model evaluations, resampled by base row so that each
+resampled design remains a valid Saltelli design.
+
+The base-sample design is stated explicitly, because the estimator depends on
+it. The Saltelli estimator needs two independent base matrices $\mathbf{A}$ and
+$\mathbf{B}$ of size $n \times d$, and it attributes variance to a parameter
+through a single-column substitution between them. Any correlation between the
+corresponding columns therefore biases the index towards zero. The construction
+specified by \citet{Saltelli2010} draws one low-discrepancy sequence in $2d$
+dimensions and splits it by column, but the sampler used here supports at most
+16 dimensions and $2d=32$ at $d=16$. The two matrices are therefore drawn as two
+independent Latin-hypercube samples, stratified per dimension and independent by
+construction \citep{McKay1979}. The design actually used is written to a
+\texttt{base\_design} column of every output file, so no reported index is
+ambiguous about its own provenance. The estimator implementation was checked
+against the Ishigami function, whose indices are known in closed form
+\citep{Ishigami1990}.
+
+Uncertainty is reported at two levels, because the two levels answer different
+questions. Bootstrap intervals resample within one design, so they measure
+sampling noise given that design and are blind to error contributed by the
+design itself. Across-design spread was therefore checked separately, by
+repeating the whole analysis on independently generated base samples over base
+sample sizes from $n=512$ to $n=4096$. An estimator whose across-design spread
+does not shrink as $n$ grows is misspecified rather than noisy, so both levels
+are needed before an index is interpreted. Divergent evaluations are counted and
+reported with the indices, and no evaluation is silently discarded, because
+deleting rows from a Saltelli design breaks the pairing the estimator relies on.
+One-at-a-time sweeps and two-parameter response surfaces are also computed, but
+they are local diagnostics of the response shape and are not used as a global
+ranking.

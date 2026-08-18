@@ -1,0 +1,127 @@
+%% plantmodel v2 -- SMP&T submission
+%% Assembled from paper/v2/sections/*.tex.  Compile with:
+%%   pdflatex main && bibtex main && pdflatex main && pdflatex main
+\documentclass[a4paper,fleqn]{cas-sc}
+
+\usepackage[numbers]{natbib}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{siunitx}
+
+%% figs/ first: v2 owns its own figure set and must not silently fall back to
+%% the v1 directory, which holds superseded versions of several file names.
+\graphicspath{{figs/}}
+
+\begin{document}
+
+\let\WriteBookmarks\relax
+\def\floatpagepagefraction{1}
+\def\textpagefraction{.001}
+
+\shorttitle{Runtime supply--demand closure in a diel plant growth model}
+%% ===================================================================
+%% AUTHOR BLOCK -- the only remaining placeholders in this manuscript.
+%% Replace the six \FILLIN macro bodies below and nothing else; every
+%% other number, table, figure and citation in this paper is generated
+%% or verified from the repository.  Grep for \FILLIN to find them.
+%% ===================================================================
+\newcommand{\FILLINname}{[AUTHOR NAME]}
+%% \ead takes its argument verbatim, so the e-mail is a literal below:\n%% replace author@institution.example in \ead{} directly.
+\newcommand{\FILLINaffil}{[INSTITUTION]}
+\newcommand{\FILLINcity}{[CITY]}
+\newcommand{\FILLINcountry}{[COUNTRY]}
+\newcommand{\FILLINrepo}{[REPOSITORY URL AND DOI]}
+
+\shortauthors{\FILLINname}
+
+\title[mode=title]{Closing stomatal supply against photosynthetic demand at
+runtime: a verified diel plant growth model and the boundary of its diel starch
+balance}
+
+\author[1]{\FILLINname}
+\ead{author@institution.example}
+\affiliation[1]{organization={\FILLINaffil},
+                city={\FILLINcity},
+                country={\FILLINcountry}}
+
+\begin{abstract}
+Mechanistic models of plant growth usually prescribe carbon input or compute it
+from a photosynthesis routine that is solved separately from stomatal
+conductance. This work reports a modular simulation model in which the supply
+and demand sides of leaf gas exchange are closed against each other at every
+evaluation: a Jarvis conductance and a Farquhar assimilation function are
+combined into a quadratic in the intercellular CO$_2$ concentration and solved
+in closed form, replacing a fixed-point iteration that we show admits a
+period-two orbit under water stress. Around this closure the model integrates
+eleven states covering starch, sucrose and vacuolar sugar, nitrogen and
+phosphorus acquisition with explicit costs, and leaf and root biomass. Carbon
+conservation over the carbohydrate subsystem closes to machine precision.
+Rather than fitting coefficients per experimental condition, we hold a single
+parameter set across four photoperiods and report what that costs: relative
+growth rate is reproduced with a mean absolute percentage error of 8.58~\% and a
+worst case of 11.75~\%, against a legacy per-photoperiod baseline whose apparent agreement is
+a bisection residual of eight coefficients fitted to eight observations.
+Leave-one-photoperiod-out cross-validation gives a held-out error of 13.18~\%
+for a photoperiod-independent growth coefficient and 4.36~\% when the
+coefficient is allowed a linear photoperiod dependence. Diel starch requires only a
+near-unity multiplicative alignment, between $0.86$ and $1.15$, whereas sucrose
+requires a factor of two to three, which we report rather than absorb. Ablation shows that computing the carbon input, rather than prescribing
+it, is what carries the photoperiod response. Variance-based sensitivity
+analysis attributes only 20~\% of output variance to parameters acting alone,
+placing the remainder in interactions rather than
+main effects. Finally we locate one boundary of the model's diel starch balance: under the
+reference chamber forcing the diel starch balance returns to its dawn value up
+to a 15~h photoperiod, whereas from 16~h the pool gains carbon on every cycle
+and still drifts upward after 90 simulated days. Under the higher light dose of
+the shipped configuration the balance does not return at any photoperiod tested,
+so the boundary is a property of the forcing as well as of the photoperiod. We
+characterise this limitation rather than conceal it.
+\end{abstract}
+
+\begin{keywords}
+plant growth simulation \sep
+diel carbohydrate turnover \sep
+Farquhar--Jarvis coupling \sep
+verification and validation \sep
+variance-based sensitivity analysis \sep
+out-of-sample cross-validation
+\end{keywords}
+
+\maketitle
+
+\input{sections/01_intro}
+\input{sections/02_formulation}
+\input{sections/03_numerics}
+\input{sections/04_results}
+\input{sections/05_appendix}
+
+\section*{Declaration of competing interest}
+The authors declare no competing interests.
+
+\section*{Data and code availability}
+The simulation code, configuration files, reference data and the scripts that
+generate every table and figure in this paper are available at \FILLINrepo. The
+parameter provenance ledger reproduced as Table~S1 in the Supplementary Material
+is released with the code as \texttt{config/parameter\_provenance.csv}, and the numerical
+verification, convergence and carbon-closure studies are released as the
+documents cited in Section~\ref{sec:implementation}. The diel carbohydrate
+reference data are redistributed from the supplementary material of
+\citet{Sulpice2014} under the terms of that publication.
+
+\bibliographystyle{cas-model2-names}
+\bibliography{master_ref,cas-refs}
+
+%% The class writes the running "Page n of N" total from \thepage inside its
+%% \AtEndDocument hook, with its own \clearpage commented out, so deferred
+%% appendix float pages are typeset after that write and the total comes out
+%% short.  A \clearpage here fixes the count but adds an empty trailing page.
+%% Reading the real page count back from the compiled PDF and stating it once is
+%% the only form that is both correct and free of a blank page; regenerate this
+%% line if the paper's length changes.
+\makeatletter
+\AtEndDocument{\immediate\write\@auxout{\string\csxdef{lastpage}{40}}}
+\makeatother
+
+\end{document}

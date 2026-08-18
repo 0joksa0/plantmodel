@@ -1,0 +1,203 @@
+\appendix
+
+\section{Parameter provenance ledger}
+\label{app:params}
+
+Every numerical constant in the released model carries a provenance record in
+\texttt{config/parameter\_provenance.csv}, and Table~\ref{tab:provenance} is
+generated from that file rather than transcribed. The tier states how the value
+was obtained: T1 measured, T2 derived, T3 inherited, T4 constrained, T5 fitted, T6 unsourced. A T6 entry is a value that
+we could not trace to a measurement, a derivation or the source model, and it is
+declared as such rather than presented as sourced. The ledger holds 124 entries, of which 4 are measured (T1), 55 are derived (T2), 27 are inherited (T3), 9 are constrained (T4), 15 are fitted (T5) and 14 are unsourced (T6). Every key of the released configuration appears in the ledger, as does every constant hard-coded in the model source, and every ledger value that names a configuration key matches the value the reported runs load; these properties are checked by script rather than by reading. Two rows are attributed to this work rather than to a publication, because no external source exists for them: the growth coefficient obtained by the held-out sweep and the assimilation scale constrained by the reference data.
+
+\begin{table*}[!htbp]
+\centering
+\tiny
+\caption{Complete parameter provenance ledger, generated from
+\texttt{config/parameter\_provenance.csv}. Locator gives the equation, section or
+source line from which the value comes; a dash means no locator is recorded.}
+\label{tab:provenance}
+\begin{tabular}{@{}p{52mm}rp{20mm}cp{20mm}p{38mm}@{}}
+\toprule
+Parameter & Value & Unit & Tier & Source & Locator \\
+\midrule
+\texttt{gas\_exchange.leaf\_temperature\_day} & 21 & degC & T1 & Sulpice2014 & tools/model\_report.c:160, tools/validation\_runner.c:628 \\
+\texttt{gas\_exchange.leaf\_temperature\_night} & 19 & degC & T1 & Sulpice2014 & tools/model\_report.c:161, tools/validation\_runner.c:629 \\
+\texttt{gas\_exchange.specific\_leaf\_area} & 0.0055 & m2 gFW-1 & T1 & Tolleter2024 & Table 2, reference macroscopic metrics, Col-0 leaf 6 at 21 DAI: leaf a \\
+\texttt{photo.photoperiod} & 8 & h & T1 & Sulpice2014 & Methods / Supplemental Table 1 (4, 6, 8, 12 h treatments) \\
+\texttt{carbohydrates.k\_vacuole\_out} & 0.041959 & h-1 & T2 & Seydel2025 & Plant Physiol 198:kiaf117, Suppl. Table S5 sheet ST3, control rows, n= \\
+\texttt{carbohydrates.night\_efficiency\_starch} & 0.5 & - & T2 & -- & input.c:31; default.config:30 \\
+\texttt{carbohydrates.starch} & 0.225 & umolC6/gFW & T2 & -- & input.c:42; default.config:41 \\
+\texttt{carbohydrates.starch\_degradation\_rate} & 0 &  & T2 & -- & -- \\
+\texttt{carbohydrates.starch\_night\_start} & 2 & umolC6/gFW & T2 & -- & -- \\
+\texttt{carbohydrates.starch\_partition\_coeff} & 0.6 & - & T2 & -- & input.c:25; default.config:24 \\
+\texttt{carbohydrates.sucrose} & 1.95 & umolC6/gFW & T2 & -- & input.c:41; default.config:40 \\
+\texttt{carbohydrates.sucrose\_vacuole} & 0 & umolC6/gFW & T2 & -- & -- \\
+\texttt{carbohydrates.transport\_cost} & 0 &  & T2 & -- & -- \\
+\texttt{carbohydrates.uptake\_cost} & 0 & umol C6 gFW-1 h-1 & T2 & Tedone2020 & §2.2.8 (n\_c*U\_N + p\_c*U\_P); config entry is a slot \\
+\texttt{gas\_exchange.convert\_to\_photosynthesis\_per\_gram\_per\_hour} & 24000 & dimensionless & T2 & -- & -- \\
+\texttt{gas\_exchange.leaf\_temperature} & 25 &  & T2 & -- & Default configuration value, config/default.config:97. Overridden in e \\
+\texttt{gas\_exchange.light\_limited\_photosynthesis} & 10 &  & T2 & -- & -- \\
+\texttt{gas\_exchange.light\_limited\_rate} & 10 &  & T2 & -- & -- \\
+\texttt{gas\_exchange.net\_photosynthesis} & 10 &  & T2 & -- & -- \\
+\texttt{gas\_exchange.net\_photosynthesis\_rate} & 10 &  & T2 & -- & -- \\
+\texttt{gas\_exchange.respiration\_rate} & 1.5 &  & T2 & -- & -- \\
+\texttt{gas\_exchange.rubisco\_limited\_photosynthesis} & 12 &  & T2 & -- & -- \\
+\texttt{gas\_exchange.rubisco\_limited\_rate} & 12 &  & T2 & -- & -- \\
+\texttt{growth.leaf\_biomass} & 0.02 & gFW & T2 & -- & input.c:14; default.config:15 \\
+\texttt{growth.root\_biomass} & 0.02 & gFW & T2 & -- & input.c:15; default.config:16 \\
+\texttt{growth.sucrose\_root\_allocation} & 0.5 & - & T2 & -- & input.c:86; default.config:74 \\
+\texttt{growth.total\_biomass} & 0.04 & gFW & T2 & -- & input.c:16; default.config:17 \\
+\texttt{hardcoded.jarvis.gs\_max} & 0.707107 & mol m-2 s-1 & T2 & -- & photosynthesis.c:586, maximal unstressed conductance \\
+\texttt{hardcoded.photosynthesis.ref\_specific\_leaf\_area} & 0.025 & m2 gFW-1 & T2 & -- & -- \\
+\texttt{nutrients.assimilation\_cost\_nitrogen} & 0.0460308 & umolN/umolC6 & T2 & Tedone2020 & Eq 2.2.16, Appendix A \\
+\texttt{nutrients.assimilation\_cost\_phosphorus} & 0.00460308 & umolP/umolC6 & T2 & Tedone2020 & c\_sp = c\_sn/O, Appendix A (O = 10 umolN/umolP) \\
+\texttt{nutrients.max\_nitrogen} & 23 & umolN/gFW & T2 & Tedone2020 & Eq 2.2.25 (n\_max = D*n\_min, D = 4) \\
+\texttt{nutrients.max\_phosphorus} & 2.3 & umolP/gFW & T2 & Tedone2020 & after Eq 2.2.25 ("p\_max = n\_max / O") with O = 10 from Eq 2.2.7 \\
+\texttt{nutrients.min\_nitrogen} & 5.75 & umolN/gFW & T2 & Tedone2020 & Eq 2.2.25 \\
+\texttt{nutrients.min\_phosphorus} & 0.575 & umolP/gFW & T2 & Tedone2020 & after Eq 2.2.25 ("p\_max = n\_max / O") with O = 10 from Eq 2.2.7 \\
+\texttt{nutrients.min\_phosphorus\_photosynthesis} & 0.575 & umolP/gFW & T2 & Tedone2020 & after Eq 2.2.25 ("p\_max = n\_max / O") with O = 10 from Eq 2.2.7 \\
+\texttt{nutrients.nitrogen} & 8.625 & umolN/gFW & T2 & -- & input.c:43; default.config:42 \\
+\texttt{nutrients.nitrogen\_affinity} & 0.5 &  & T2 & -- & -- \\
+\texttt{nutrients.nitrogen\_cost} & 0 &  & T2 & -- & -- \\
+\texttt{nutrients.nitrogen\_nutrient\_uptake} & 0 &  & T2 & -- & -- \\
+\texttt{nutrients.nitrogen\_uptake} & 0 &  & T2 & -- & -- \\
+\texttt{nutrients.phosphorus} & 0.8625 & umolP/gFW & T2 & -- & input.c:44; default.config:43 \\
+\texttt{nutrients.phosphorus\_affinity} & 0.5 &  & T2 & -- & -- \\
+\texttt{nutrients.phosphorus\_cost} & 0 &  & T2 & -- & -- \\
+\texttt{nutrients.phosphorus\_nutrient\_uptake} & 0 &  & T2 & -- & -- \\
+\texttt{nutrients.phosphorus\_uptake} & 0 &  & T2 & -- & -- \\
+\texttt{nutrients.pot\_nitrogen\_uptake} & 0 &  & T2 & -- & -- \\
+\texttt{nutrients.pot\_phosphorus\_uptake} & 0 &  & T2 & -- & -- \\
+\texttt{nutrients.stoichiometric\_signal} & 0.5 & - & T2 & -- & input.c:87; default.config:75 \\
+\texttt{photo.light} & 0 &  & T2 & -- & -- \\
+\texttt{photo.limitation\_of\_photosynthetic\_rate} & 0.5 &  & T2 & -- & -- \\
+\texttt{photo.nitrogen\_saturation} & 0.45 &  & T2 & -- & -- \\
+\texttt{photo.phosphorus\_saturation} & 0.45 &  & T2 & -- & -- \\
+\texttt{simulation.days} & 35 &  & T2 & -- & -- \\
+\texttt{simulation.dt\_hours} & 0.1 &  & T2 & -- & -- \\
+\texttt{simulation.gui\_enabled} & true &  & T2 & -- & -- \\
+\texttt{simulation.solver\_tolerance} & 1e-08 &  & T2 & -- & -- \\
+\texttt{simulation.solver\_type} & ODE45 &  & T2 & -- & -- \\
+\texttt{simulation.write\_csv} & true &  & T2 & -- & -- \\
+\texttt{carbohydrates.max\_starch\_degradation\_rate} & 6 & umolC6/(gFW h) & T3 & Tedone2020 & §2.2.4 \\
+\texttt{carbohydrates.max\_sucrose} & 4.712 & umolC6/gFW & T3 & Tedone2020 & §2.2.4 (Eq 2.2.28) \\
+\texttt{carbohydrates.min\_starch} & 0.15 & umolC6/gFW & T3 & Tedone2020 & §2.2.4 \\
+\texttt{carbohydrates.min\_sucrose} & 1.3 & umolC6/gFW & T3 & Tedone2020 & §2.2.4 \\
+\texttt{carbohydrates.respiration\_frequency} & 0.79 & 1/h & T3 & Tedone2020 & Section 2.2.8 (Costs), "r\_m\_bar = 0.79 1/h" \\
+\texttt{carbohydrates.sucrose\_loading\_frequency} & 1.98 & 1/h & T3 & Tedone2020 & §2.2.8 (Eq 2.2.28) \\
+\texttt{gas\_exchange.michaelis\_constant\_CO2} & 404.9 & umol mol-1 & T3 & Bernacchi2001 & Rubisco kinetic constants at 25 C, in vivo temperature functions (tran \\
+\texttt{gas\_exchange.michaelis\_constant\_O2} & 278.4 & mmol mol-1 & T3 & Bernacchi2001 & Rubisco kinetic constants at 25 C: Ko = 278.4 mmol mol-1. Same attribu \\
+\texttt{growth.leaf\_competitive\_rate} & 5e-06 & 1/(h gFW) & T3 & Tedone2020 & §2.2.10 (paragraph after Eq 2.2.33): "fixed to the small value 5e-6" \\
+\texttt{growth.leaf\_deathrate} & 5e-06 & 1/h & T3 & Tedone2020 & §2.2.10 (paragraph after Eq 2.2.33): "fixed to the small value 5e-6" \\
+\texttt{growth.root\_competitive\_rate} & 5e-06 & 1/(h gFW) & T3 & Tedone2020 & §2.2.10 (paragraph after Eq 2.2.33): "fixed to the small value 5e-6" \\
+\texttt{growth.root\_deathrate} & 5e-06 & 1/h & T3 & Tedone2020 & §2.2.10 (paragraph after Eq 2.2.33): "fixed to the small value 5e-6" \\
+\texttt{hardcoded.jarvis.T0} & 25 & degC & T3 & -- & photosynthesis.c:536, temperature optimum of f\_T \\
+\texttt{hardcoded.jarvis.T1} & 5 & degC & T3 & -- & photosynthesis.c:537, lower zero of f\_T \\
+\texttt{hardcoded.jarvis.Th} & 45 & degC & T3 & -- & photosynthesis.c:538, upper zero of f\_T \\
+\texttt{hardcoded.jarvis.psi\_min} & -1.5 & MPa & T3 & -- & photosynthesis.c:565, potential at which f\_water reaches zero \\
+\texttt{hardcoded.photosynthesis.curvature\_theta} & 0.7 & - & T3 & Farquhar1984 & Curvature of the non-rectangular hyperbola light response, theta = 0.7 \\
+\texttt{nutrients.Michaelis\_Menten\_constant\_nitrogen} & 0.125 & umolN cm-3 & T3 & Tedone2020 & §2.2.7 (Eq 2.2.22), "k\_n = 0.125 umolN/cm3" \\
+\texttt{nutrients.Michaelis\_Menten\_constant\_phosphorus} & 0.006736 & umolP cm-3 & T3 & Tedone2020 & §2.2.7 (Eq 2.2.22), "k\_p = 0.006736 umolP/cm3" \\
+\texttt{nutrients.max\_nitrogen\_uptake} & 6.44 & umolN/(gFW h) & T3 & Tedone2020 & §2.2.7 \\
+\texttt{nutrients.max\_phosphorus\_uptake} & 0.4 & umolP/(gFW h) & T3 & Tedone2020 & §2.2.7 \\
+\texttt{nutrients.min\_nitrogen\_photosynthesis} & 5.75 & umolN/gFW & T3 & Tedone2020 & Eq 2.2.5 \\
+\texttt{nutrients.nitrogen\_uptake\_sucrose\_consumption} & 0.68 & umolC6/umolN & T3 & Tedone2020 & §2.2.8 \\
+\texttt{nutrients.optimal\_stoichiometric\_ratio} & 10 & umolN/umolP & T3 & Tedone2020 & Eq 2.2.7, Eq 2.2.31 \\
+\texttt{nutrients.phosphorus\_soil\_content} & 0.15 & umolP cm-3 & T3 & Tedone2020 & Appendix A [159] \\
+\texttt{nutrients.phosphorus\_uptake\_sucrose\_consumption} & 0.308 & umolC6/umolP & T3 & Tedone2020 & §2.2.8 \\
+\texttt{photo.max\_photosynthetic\_rate} & 12.7 & umolC6/(gFW h) & T3 & Tedone2020 & Eq 2.2.1, §2.2.2 \\
+\texttt{carbohydrates.sink\_activation\_hill} & 3 & - & T4 & -- & -- \\
+\texttt{carbohydrates.sucrose\_consumption\_transport} & 0.035 & - & T4 & Tedone2020 & Appendix A (0.0035) vs body text 2.2.8 (0.035) \\
+\texttt{gas\_exchange.ambient\_CO2\_concentration} & 400 & umol mol-1 & T4 & -- & -- \\
+\texttt{gas\_exchange.oxygen\_concentration} & 210 &  & T4 & -- & -- \\
+\texttt{hardcoded.photosynthesis.base\_scale} & 1.1 & dimensionless (umol hexose gFW-1 h-1 per umol CO2 m-2 s-1) & T4 & Sulpice2014; AtkinsonAtkin2024; this work & mmc3 sheet "Growth components" rows 2-3 (headers), row 5 "Assimilation \\
+\texttt{hardcoded.photosynthesis.ci\_init\_fraction} & 0.7 & - & T4 & -- & -- \\
+\texttt{model.nutrient\_ratio\_pool (structural, not a config key)} & max(pool,0) & - & T4 & -- & -- \\
+\texttt{nutrients.nitrogen\_soil\_content} & 15 & umolN cm-3 & T4 & Tedone2020 & Appendix A [169] \\
+\texttt{photo.min\_leaf\_biomass} & 0.001 & gFW & T4 & -- & -- \\
+\texttt{carbohydrates.k\_vacuole\_in} & 0.1 & h-1 & T5 & Seydel2025 & ratio from Suppl. Table S5; the rate itself unsourced \\
+\texttt{carbohydrates.lambda\_g} & 0.65 & - & T5 & -- & -- \\
+\texttt{carbohydrates.lambda\_sdi} & 0.12 & 1/h & T5 & -- & -- \\
+\texttt{carbohydrates.lambda\_sdr} & 0.5 & 1/h & T5 & -- & -- \\
+\texttt{carbohydrates.lambda\_sni} & 0.12 & 1/h & T5 & -- & -- \\
+\texttt{carbohydrates.sink\_activation\_half} & 0.9 & umolC6/gFW & T5 & -- & -- \\
+\texttt{gas\_exchange.electron\_transport\_rate} & 90 &  & T5 & -- & -- \\
+\texttt{gas\_exchange.leaf\_water\_potential} & -0.6 &  & T5 & -- & -- \\
+\texttt{gas\_exchange.max\_rubisco\_carboxylation\_rate} & 45 &  & T5 & -- & -- \\
+\texttt{gas\_exchange.stomatal\_conductance} & 0.1 &  & T5 & -- & -- \\
+\texttt{growth.lambda\_sb} & 0.00295 & gFW per umol C6 & T5 & this work & tools/heldout\_lsb.c; docs/revision/sucrose\_conclusion.md \\
+\texttt{nutrients.lambda\_csn} & 0.0267 & - & T5 & -- & Section 2.2.8 (csn = 0.053 ugSugar/ugN = 0.68 umolC6/umolN) \\
+\texttt{nutrients.lambda\_k} & 50 & - & T5 & -- & -- \\
+\texttt{nutrients.nutrient\_conversion\_parameter} & 0.066 & - & T5 & -- & -- \\
+\texttt{photo.feedback\_on\_photosynthesis} & 1 & - & T5 & -- & -- \\
+\texttt{carbohydrates.max\_starch} & 10 & umolC6/gFW & T6 & -- & -- \\
+\texttt{gas\_exchange.CO2\_compensation\_point} & 42 & umol mol-1 & T6 & -- & -- \\
+\texttt{gas\_exchange.relative\_humidity} & 60 &  & T6 & -- & -- \\
+\texttt{growth.growth\_stoichiometry} & 0 & umol C6 per gFW & T6 & -- & -- \\
+\texttt{hardcoded.growth.lambda\_sb\_nitrogen\_divisor} & 12 & umolN cm-3 & T6 & -- & -- \\
+\texttt{hardcoded.growth.lambda\_sb\_phosphorus\_divisor} & 0.15 & umolP cm-3 & T6 & -- & -- \\
+\texttt{hardcoded.jarvis.b1} & 0.6 & - & T6 & -- & -- \\
+\texttt{hardcoded.jarvis.b10} & 0.05 & - & T6 & -- & photosynthesis.c:515, residual light conductance below PAR = b10/b1 \\
+\texttt{hardcoded.jarvis.b2} & 0.002 & - & T6 & -- & -- \\
+\texttt{hardcoded.jarvis.b5} & 0.2 & kPa-1 & T6 & -- & photosynthesis.c:519, VPD slope of f\_VPD = max(0, 1 - b5*VPD) \\
+\texttt{hardcoded.jarvis.b6} & 3 & MPa-1 & T6 & -- & photosynthesis.c:564, water-potential slope of f\_water = 1 - exp(-b6* \\
+\texttt{hardcoded.jarvis.b8} & 0.2 & - & T6 & -- & photosynthesis.c:548, floor of the piecewise CO2 response f\_CO2 \\
+\texttt{hardcoded.photosynthesis.leaf\_biomass\_discarded} & (void) & - & T6 & -- & src/model/photosynthesis.c:230-242 \\
+\texttt{hardcoded.photosynthesis.quantum\_yield\_phi} & 0.385 & mol e- mol-1 photons & T6 & -- & -- \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\section{Sensitivity analysis: parameters, ranges and sampling scales}
+\label{app:sa}
+
+Table~\ref{tab:sa_ranges} is generated from
+\texttt{config/sensitivity\_params.csv} and gives the factors varied in the
+sensitivity study together with their ranges, sampling scales and the role each
+factor plays in the model. All reported Sobol' and Morris indices are conditional
+on exactly these ranges: an index is a statement about output variance over a
+declared input distribution, and it is not transferable to a different one. A
+factor sampled on a logarithmic scale is varied uniformly in $\log_{10}$, which
+is the appropriate choice for a rate constant spanning more than one order of
+magnitude. Of the 20 factors listed, 16 are active in the reported design and 4
+are disabled; the reasons for disabling are given in the table.
+
+\begin{table*}[!htbp]
+\centering
+\scriptsize
+\caption{Sensitivity analysis design, generated from
+\texttt{config/sensitivity\_params.csv}. Role distinguishes a model parameter from
+an environmental driver, an initial condition and a physical constant. The basis
+column records why the range was chosen.}
+\label{tab:sa_ranges}
+\begin{tabular}{@{}p{46mm}ccccp{54mm}@{}}
+\toprule
+Factor & Lower & Upper & Scale & Role & Basis \\
+\midrule
+\multicolumn{6}{@{}l}{\textit{Active in the reported design}} \\
+\texttt{growth.lambda\_sb} & 0.002 & 0.01 & linear & model parameter & Calibrated; $\pm$70\% around default 0.00587 (Schulz et al. 2019) \\
+\texttt{carbohydrates.respiration\_frequency} & 0.4 & 1.2 & linear & model parameter & Calibrated; $\pm$50\% around default 0.79 \\
+\texttt{nutrients.max\_nitrogen\_uptake} & 1 & 15 & log & model parameter & Literature range for herbaceous crops (Barber 1995; Lambers et al. 2008) \\
+\texttt{nutrients.max\_phosphorus\_uptake} & 0.05 & 1.5 & log & model parameter & Literature range for herbaceous crops (Barber 1995) \\
+\texttt{nutrients.nitrogen\_soil\_content} & 3 & 30 & linear & environment & Low-nutrient to high-nutrient agricultural soil (Brady \& Weil 2010) \\
+\texttt{nutrients.phosphorus\_soil\_content} & 0.03 & 0.5 & log & environment & Low to high-P agricultural soil (Brady \& Weil 2010) \\
+\texttt{gas\_exchange.leaf\_temperature} & 10 & 35 & linear & environment & Controlled environment range; cold stress to heat stress \\
+\texttt{gas\_exchange.relative\_humidity} & 30 & 90 & linear & environment & Arid to humid growing conditions \\
+\texttt{gas\_exchange.ambient\_CO2\_concentration} & 280 & 800 & linear & environment & Pre-industrial to RCP 8.5 projected 2100 (Meinshausen et al. 2011) \\
+\texttt{gas\_exchange.leaf\_water\_potential} & -1.5 & -0.1 & linear & environment & Severe water stress to turgid (Hsiao 1973; Jones 2014) \\
+\texttt{gas\_exchange.max\_rubisco\_carboxylation\_rate} & 20 & 120 & log & model parameter & C3 herbaceous range (Wullschleger 1993; Medlyn et al. 2002) \\
+\texttt{gas\_exchange.electron\_transport\_rate} & 50 & 200 & log & model parameter & C3 herbaceous range (Wullschleger 1993) \\
+\texttt{photo.max\_PAR} & 300 & 2000 & linear & environment & Shade canopy (300) to full sun (2000 $\mu$mol m⁻² s⁻¹) (McCree 1972) \\
+\texttt{carbohydrates.sucrose} & 0.8 & 3 & linear & initial condition & Observed range in spinach seedlings (\% DW; Geiger \& Servaites 1994) \\
+\texttt{growth.total\_biomass} & 0.01 & 0.12 & linear & initial condition & Seedling (0.01 g FW) to established juvenile plant (0.12 g FW) \\
+\texttt{carbohydrates.k\_vacuole\_in} & 0.005 & 0.4 & linear & model parameter & Cytosol→vacuole exchange rate; covers calibrated per-PP range 0.011-0.230 h-1 (Lohaus 2007) \\
+\midrule
+\multicolumn{6}{@{}l}{\textit{Disabled}} \\
+\texttt{carbohydrates.lambda\_sni} & 0.04 & 0.18 & linear & model parameter & Disabled: mu*$\approx$0 everywhere; excluded to keep d$\le$16 (solver limit) \\
+\texttt{photo.feedback\_on\_photosynthesis} & 0.5 & 0.9 & linear & model parameter & Disabled: inactive in Farquhar path (light\_PAR>20 ⟹ simple model never called) \\
+\texttt{gas\_exchange.oxygen\_concentration} & 210 & 210 & fixed & physical constant & Fixed atmospheric O2; excluded as non-varying \\
+\texttt{carbohydrates.starch} & 0.05 & 1 & linear & initial condition & Observed range in spinach seedlings (\% DW; Geiger \& Servaites 1994) \\
+\bottomrule
+\end{tabular}
+\end{table*}

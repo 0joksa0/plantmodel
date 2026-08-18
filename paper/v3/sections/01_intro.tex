@@ -1,0 +1,329 @@
+\section{Introduction}
+\label{sec:intro}
+
+\textit{Arabidopsis thaliana} grows in a light environment that switches off
+every day. During the light phase the plant assimilates carbon and stores part
+of it as transient leaf starch. During the night this reserve is the only carbon
+source for respiration, maintenance and growth. Measurements show that the
+reserve is degraded at an almost constant rate and is nearly exhausted at dawn
+\cite{Graf2010,Smith2007}. The plant therefore behaves as if it rations a known
+amount of carbon over a night of known length \cite{Scialdone2013}. When the
+photoperiod changes, both the amount and the length change together, and the
+rationing problem changes with them \cite{Sulpice2014,Stitt2012}. This makes
+photoperiod a useful test case for a simulation model, because a single
+environmental variable moves the light-phase carbon gain and the dark-phase
+reserve use at the same time.
+
+The problem is difficult to simulate because it couples processes on very
+different time scales. Stomatal opening and leaf assimilation respond within
+minutes to light, temperature and humidity. Starch and sucrose pools turn over
+within hours. Nutrient status changes over days and biomass accumulates over
+weeks. The carbon available for growth at any instant is not a property of any
+single equation. It is the result of the environment, the gas-exchange
+machinery and the internal carbohydrate and nutrient state acting together
+\cite{Farquhar1980,ThornleyJohnson1990}. A model that describes only
+photosynthesis, or only biomass accumulation, cannot represent this. For a
+simulation study the main task is therefore to build a stable numerical
+workflow in which these subsystems exchange fluxes consistently over the
+day--night cycle.
+
+Existing models resolve parts of this chain, but usually not the whole chain at
+the resolution the problem needs. Crop and field-scale simulators such as
+WOFOST, APSIM and DSSAT integrate growth, water and nitrogen over seasons
+\cite{deWit2019,Holzworth2014,Jones2003}. Their standard configurations obtain
+the carbon input from a light-use-efficiency term or a radiation-use
+coefficient and advance the state on a daily step, although several offer
+finer-resolution and more mechanistic options. Soil--plant transport models and functional--structural plant models add
+detail in other directions, in water transport and in architecture
+respectively \cite{Janott2011,DeReffye2020,Louarn2020}. At the other end of
+the scale range, leaf gas-exchange models resolve the process that a prescribed
+carbon input replaces. The Farquhar--von Caemmerer--Berry biochemical model and
+Jarvis-type or optimality-based stomatal formulations describe assimilation and
+conductance in detail \cite{Farquhar1980,Jarvis1976,Ball1987,Medlyn2011}, and
+the coupling between them has been studied extensively
+\cite{Damour2010,Buckley2017}. These models are formulated and tested as
+steady-state algebraic systems at a fixed carbohydrate status, so they stop at
+the leaf. Few published models compute the supply--demand operating point at
+every step and then carry that carbon input through a diel starch and sucrose
+economy into biomass.
+
+This paper presents such a model and reports its evaluation. The model is a
+whole-plant dynamic simulator with eleven state variables, organised as six
+submodels with declared inputs, outputs and parameters
+(Figure~\ref{fig:overview}). S1 maps clock time to
+the environmental drivers. S2 computes stomatal conductance from a
+multiplicative Jarvis formulation, which acts as the supply side of gas
+exchange. S3 computes net assimilation as a function of intercellular CO$_2$
+from the Farquhar C3 biochemistry, which acts as the demand side. S4 closes
+supply against demand. S5 holds the diel carbohydrate economy, the starch and
+sucrose pools and the nitrogen and phosphorus uptake and costs. S6 converts
+sucrose into leaf and root biomass. Submodels S2--S4 form a fast algebraic
+subsystem, and S5--S6 form the slow differential subsystem that is integrated
+in time.
+
+The methodological content of the work sits in four places, and this is what we
+expect to transfer to other coupled biophysical simulators. First, the
+gas-exchange operating point is solved algebraically at runtime. Substituting
+Fick's law into the branch-wise Farquhar expression gives a quadratic equation
+in the intercellular CO$_2$ concentration. This quadratic is solved branch by
+branch, with an explicit admissibility rule for the roots. No inner iteration
+is then required inside the derivative evaluation. Second, the fast/slow decomposition
+is explicit: the algebraic subsystem is eliminated exactly inside each
+derivative call, so the remaining differential system is integrated with an
+explicit adaptive method. Third, the implementation is verified before it is
+compared with data. The checks are the residual of the algebraic closure, an
+integration refinement study, and a bookkeeping check on the starch and sucrose
+subsystem.
+Fourth, model behaviour is analysed with a screening step followed by a
+variance-based global sensitivity analysis over declared parameter ranges.
+
+The evaluation design is chosen so that calibration and prediction stay
+separate. Four coefficients are fitted and shared across all photoperiods,
+where the earlier version of the present implementation fitted eight
+coefficients separately for each photoperiod by nested bisection against the
+same eight observations, leaving no degrees of freedom. That baseline is a
+property of this codebase rather than of the published formulation it derives
+from, so it carries no citation; Section~\ref{sec:protocol} states how it was
+run and what its reported agreement therefore measures. Predictive accuracy is then measured by
+holding out whole photoperiods, that is, by fitting on three light regimes and
+predicting the fourth. Under this design the model reaches a held-out mean
+absolute percentage error of 4.36\,\% in relative growth rate
+(Figure~\ref{fig:crossval}). This value applies when one growth coefficient is
+allowed to depend linearly on photoperiod. We also measure the
+range of photoperiods over which the model remains usable, and we report the
+boundary of that range together with the mechanism that breaks first.
+
+The contributions of the paper are the following.
+\begin{enumerate}
+\item A coupled whole-plant simulation model in which Jarvis stomatal
+  conductance and Farquhar C3 photosynthesis produce the carbon input at every
+  step, and that input is propagated through diel starch and sucrose dynamics,
+  nutrient uptake and costs, and biomass growth (Section~\ref{sec:model}).
+\item An analytic runtime solution of the supply--demand closure as a quadratic
+  in the intercellular CO$_2$ concentration, embedded in a fast/slow numerical
+  workflow (Sections~\ref{sec:model} and~\ref{sec:implementation}).
+\item A verification protocol for the implementation that is independent of any
+  comparison with data, covering the algebraic closure, the time integration
+  and the carbohydrate bookkeeping (Section~\ref{sec:implementation}).
+\item An evaluation with four shared fitted parameters instead of a
+  per-photoperiod calibration. The design uses leave-one-photoperiod-out
+  cross-validation, an ablation of the carbon-input pathway, and a global
+  sensitivity analysis over declared ranges
+  (Sections~\ref{sec:protocol} and~\ref{sec:results}).
+\item A measured validity envelope. We report the photoperiod range in which
+  the diel starch balance closes, the photoperiod at which it stops closing,
+  and the bound on the simulated growth response to day length
+  (Sections~\ref{sec:results} and~\ref{sec:limitations}).
+\end{enumerate}
+
+The rest of the paper is organised as follows.
+Section~\ref{sec:related} reviews mechanistic growth models, gas-exchange
+formulations, diel carbohydrate modelling and simulation evaluation practice,
+and states the gap that this work addresses. Section~\ref{sec:model} gives the
+model formulation as six submodels with their states, inputs and parameters.
+Section~\ref{sec:implementation} describes the numerical implementation and the
+verification results. Section~\ref{sec:protocol} defines the photoperiod
+scenarios, the calibration and cross-validation design, the ablation variants
+and the sensitivity protocol. Section~\ref{sec:results} reports the results,
+Section~\ref{sec:discussion} interprets them, Section~\ref{sec:limitations}
+states what cannot be concluded, and Section~\ref{sec:conclusion} concludes.
+
+% ============================================================
+\section{Related Work}
+\label{sec:related}
+
+This section positions the model against four bodies of work. These are
+mechanistic whole-plant and crop simulation, leaf gas-exchange modelling, diel
+carbohydrate turnover in \textit{Arabidopsis thaliana}, and evaluation practice
+in simulation studies. The aim is to locate the contribution, not to survey
+each field completely.
+
+\subsection{Mechanistic plant growth simulation models}
+
+Mechanistic growth models link physiological processes, microclimate and
+biomass change over time. The spatial and temporal scale of a model decides
+where it can be applied. Spatially, models cover the leaf, the organ, the whole
+plant, the canopy or the field. Temporally, they range from minutes, for
+gas exchange, through hours and days, for carbon allocation, to whole seasons,
+for yield. Crop simulation platforms such as APSIM, DSSAT and WOFOST are mature
+tools for growth, water and nitrogen dynamics at field scale
+\cite{Holzworth2014,Jones2003,deWit2019}. Recent process-based systems extend
+this to detailed agronomic management and are validated against field data
+\cite{BuckleyPaules2025}. Comparative studies indicate that process-based
+formulations follow seasonal variation in climate better than purely empirical
+ones \cite{Mamassi2024}.
+
+Several other model families address different aspects of the same problem.
+Functional--structural plant models combine architecture with physiological
+modules, and they show how spatial structure and dynamic growth can be
+integrated \cite{Louarn2020,Sievnen2014,DeReffye2020}. Soil--plant water
+transport models describe flow from the soil through the xylem, and a
+one-dimensional formulation can be as effective as a three-dimensional one at
+much lower computational cost \cite{Janott2011}. Discrete approaches based on
+the discrete element method are used for root--soil contact problems
+\cite{Tian2024}. Optimality and energy-budget models assume that allocation
+maximises a criterion such as growth or resource-use efficiency
+\cite{Russo2022}. Continuous formulations describe biomass, water or vegetation
+dynamics as systems of differential equations and allow formal analysis
+\cite{Meron2019,ThornleyJohnson1990}. Source--sink descriptions of carbon
+partitioning between shoot and root belong to the same tradition
+\cite{Marcelis1996,Feller2015,Thornley1972}.
+
+Two properties of this literature matter here. Modular organisation is common
+and useful, because it lets each component be tested on its own
+\cite{Sievnen2014,Zeigler2000}. In the configurations most often used at field
+scale, the carbon input is prescribed rather than computed: light-use-efficiency
+terms and radiation-use coefficients with a daily step are the common default
+\cite{Jones2003,deWit2019,Holzworth2014}. Where that default is used it
+separates the carbon source from the environment and from the internal state of
+the plant, and the model then cannot represent the feedback between stomatal
+behaviour, intercellular CO$_2$, carbohydrate status and growth. This is a
+statement about the usual configuration and not about what these platforms are
+capable of.
+
+\subsection{Photosynthesis and stomatal conductance modelling}
+
+Photosynthesis sets the primary carbon input, so its description controls
+everything downstream. For C3 plants the standard biochemical model is the
+Farquhar--von Caemmerer--Berry formulation, which relates net assimilation to
+intercellular CO$_2$ through Rubisco-limited carboxylation and RuBP
+regeneration \cite{Farquhar1980,vonCaemmerer2000}. Its parameters, mainly
+$V_{cmax}$, $J$, $\Gamma^*$, $K_c$, $K_o$ and $R_d$, and their temperature
+dependence are well documented \cite{Sharkey2007,Bernacchi2001,Dubois2007}.
+
+Assimilation also depends on the diffusive supply of CO$_2$, which stomatal
+conductance controls \cite{Lawson2014}. Stomatal models therefore connect
+microclimate to carbon gain. The main formulations are the empirical
+multiplicative Jarvis model, the Ball--Berry family and the Medlyn optimality
+model \cite{Jarvis1976,Ball1987,Medlyn2011}. The Jarvis form expresses
+conductance as a product of response functions to irradiance, vapour-pressure
+deficit, temperature, CO$_2$ and plant water status \cite{Jarvis1976,YU2017,Yu2021}.
+It is convenient in a simulation setting because time-varying drivers from a
+scenario or from measurements enter it directly. Reviews of coupled
+formulations compare these alternatives and discuss where each is appropriate
+\cite{Damour2010,Buckley2017}.
+
+Coupling the two sides introduces a feedback. Intercellular CO$_2$ sets the
+assimilation rate in the biochemical model, while conductance sets how much
+CO$_2$ can diffuse into the leaf. The operating point is therefore defined
+implicitly and must be found at every evaluation of the model
+\cite{Damour2010}. Iterative solutions are widely used, and analytic solutions
+of the coupled system for particular stomatal formulations are also known
+\cite{Buckley2017,Kim2003}. The Farquhar and Jarvis equations used here are
+inherited physiological components, not a contribution of this paper. The
+contribution is the way they are solved at runtime and coupled to the
+carbohydrate, nutrient and biomass states.
+
+\subsection{Diel carbohydrate turnover and photoperiod}
+
+Carbohydrate dynamics are the link between assimilation and growth. In the
+light phase, assimilated carbon is partitioned between mobile sugars, mainly
+sucrose, and transient reserves, mainly leaf starch. In the dark phase, starch
+degradation supplies carbon for respiration, maintenance and growth
+\cite{Stitt2012,Smith2007}. In \textit{Arabidopsis thaliana} this degradation
+is closely regulated, and the reserve is almost completely used by dawn
+\cite{Graf2010,Scialdone2013,Webb2015}. Mathematical models of the process
+connect circadian regulation, sucrose availability and sugar signalling to
+carbon partitioning and growth \cite{Feugier2013,Seki2017}. Sucrose transport
+and the separation between cytosolic and vacuolar sucrose have also been
+described in detail \cite{Lohaus2000,Nadwodnik2008}.
+
+Photoperiod changes the balance between daytime accumulation and nocturnal
+consumption. A short day limits the time available for assimilation and
+lengthens the interval in which growth depends on stored starch. A long day
+extends direct carbon input and shortens the interval of reserve use.
+Experiments over contrasting short and long photoperiods show that
+\textit{Arabidopsis thaliana} adjusts partitioning and growth to day length
+\cite{Sulpice2014,Mengin2017,Annunziata2017}. This makes photoperiod scenarios
+a suitable evaluation setting: they perturb both phases of the diel carbon
+economy through one variable, and they have documented growth and carbohydrate
+responses.
+
+Growth also depends on nutrient status. Nitrogen and phosphorus affect
+photosynthetic capacity, metabolism and allocation, and mechanistic models
+introduce them as internal states or as limiting factors
+\cite{Gastal2002,Xu2012,Barber1995,Shen2011,Carstensen2018}. Models that
+resolve the diel cycle in detail, however, usually treat assimilation as given
+\cite{Scialdone2013,Graf2010,Feugier2013}. The day--night carbohydrate balance
+and the gas exchange that produces it are then not solved as one system.
+
+\subsection{Verification, validation and sensitivity practice in simulation}
+
+Evaluation of plant models normally compares simulated and reference values for
+biomass, relative growth rate, and water or nutrient fluxes
+\cite{Wallach2018,Holzworth2014,Jones2003}. Two distinctions from simulation
+methodology are relevant here. The first is between verification and
+validation: agreement with measurements does not show that the numerical
+procedures inside the simulator are correct \cite{Zeigler2000,Cellier1991}.
+Residual checks against analytic solutions, integration refinement studies and
+conservation or bookkeeping checks address a different question from data
+agreement. The second is between calibration residual and predictive error.
+When a model is fitted and evaluated against the same small set of aggregate
+observations, the reported error is a calibration residual. Multi-model studies
+of crop simulators show how strongly reported accuracy depends on the
+calibration protocol \cite{Maiorano2017,Wallach2018}.
+
+Ablation is a further tool for attributing behaviour to model structure. It
+compares variants in which a component is removed, simplified or replaced.
+For a coupled model of the kind studied here, three variants are informative.
+The first uses a prescribed carbon input. The second computes assimilation at
+fixed conductance. The third is the full variant with environment-responsive
+conductance. Such a comparison separates the effect of the coupling from the
+effect of the individual equations.
+
+Sensitivity analysis identifies which parameters control model outputs.
+Variance-based methods give first-order and total-order indices and quantify
+interaction structure \cite{Sobol2001,Saltelli2010}. Screening methods of the
+Morris type are cheaper and indicate nonlinearity and interaction before the
+full analysis \cite{Morris1991,Campolongo2007}, and Latin hypercube designs are
+standard for the sampling step \cite{McKay1979}. Because these indices are
+themselves Monte Carlo estimates, testing the estimator against a function with
+closed-form indices is good practice \cite{Ishigami1990}. Two limits should be
+stated explicitly. Indices describe model behaviour over the declared parameter
+domain, and they do not establish physiological importance. Screening measures
+indicate interaction, and they are not an exact variance decomposition.
+
+\subsection{Open problems addressed here}
+
+Read together, this literature leaves a specific gap. Leaf-level gas-exchange
+models solve the supply--demand operating point accurately, but at a fixed
+carbohydrate status and without downstream dynamics
+\cite{Farquhar1980,Jarvis1976,vonCaemmerer2000}. Whole-plant and crop
+simulators carry growth over days to seasons, but they prescribe or simplify
+the carbon input and rarely resolve the diel cycle
+\cite{Jones2003,deWit2019,Holzworth2014}. Dedicated diel carbohydrate models
+resolve the day--night starch balance, but they take assimilation as an input
+\cite{Scialdone2013,Graf2010}. Models that do compute assimilation
+biochemically and carry it into leaf-area growth exist
+\cite{Weraduwage2015}, and they are the closest published relatives of the
+formulation used here; they do not carry the diel starch and sucrose pools as
+integrated states. The feedback loop that connects conductance,
+intercellular CO$_2$, carbohydrate status and growth is therefore opened
+somewhere in each family. Two further problems are methodological. The
+algebraic constraint created by the coupling has to be solved at every step,
+yet the solver and its behaviour outside the calibrated range are often left
+unstated. And calibration is frequently performed against the same aggregate
+observations used for evaluation, so a predictive error cannot be separated
+from a calibration residual.
+
+This paper closes part of that gap. We do not propose new process equations for
+photosynthesis, stomatal conductance or starch turnover; those are taken from
+the literature. What we add is the coupled formulation with a computed carbon
+input, together with its analytic runtime closure and fast/slow numerical
+treatment. We also add a verification protocol that is independent of data
+agreement. And we add an evaluation design in which whole photoperiods are held
+out and the fitted parameter set is shared across conditions. The aim is not to replace crop simulators or
+functional--structural models. It is to provide a compact and reproducible core
+in which gas exchange is propagated explicitly into downstream states.
+
+The paper does not close the rest of the gap, and we say so with numbers in
+Section~\ref{sec:results}. The model does not generate the full observed
+photoperiod dependence of growth from its shared dynamics; part of that
+dependence remains localised in one growth-conversion coefficient. The diel
+starch balance closes only up to an upper photoperiod, and above that boundary
+the reserve accumulates from day to day instead of being consumed
+(Figure~\ref{fig:envelope}). Canopy geometry, water transport, temperature
+acclimation and multi-species parameterisation are outside the present scope.
+These points are stated as named structural limitations in
+Section~\ref{sec:limitations} rather than left for the reader to find.
+
