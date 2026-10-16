@@ -22,23 +22,48 @@ typedef struct {
     real_t lambda_sni;             /* night starch partition (Table A.1) */
     /*
      * Per-model canonical lambda_sb values:
-     *   basic          — Table A.1 (Annunziata et al.), the reference model
+     *   basic          — Table A.1 of the manuscript, the reference model
      *   farquhar        — calibrated for corrected Farquhar C3 (gc=gs/1.6, J(PAR))
      *   farquhar_jarvis — calibrated for corrected Farquhar+Jarvis
      */
     real_t lambda_sb_basic;
     real_t lambda_sb_farquhar;
     real_t lambda_sb_farquhar_jarvis;
-    real_t eod_starch_ref;  /* Annunziata [138]: starch at ZT=photoperiod (µmol/gFW) */
+    real_t eod_starch_ref;  /* starch at ZT=photoperiod (µmol/gFW) */
 } Scenario;
 
-static const Scenario SCENARIOS[] = {
+/*
+ * Provenance of lit_rgr and eod_starch_ref: Sulpice et al. (2014),
+ * "Arabidopsis coordinates the diurnal regulation of carbon allocation and
+ * growth across a wide range of photoperiods", Mol Plant 7(1):137-155,
+ * doi:10.1093/mp/sst127 -- the only source in the reference list that reports
+ * all four photoperiods (4, 6, 8, 12 h).  The same four pairs appear in
+ * tools/crossval_runner.c OBS[]; see the long note there for why the earlier
+ * attribution to Annunziata et al. (2017) and Mengin et al. (2017) was wrong
+ * and must not be reinstated.
+ */
+static const Scenario SCENARIOS_PERPP[] = {
 /*  PP   lit_rgr   lc     lsni   lsb_basic  lsb_farq   lsb_fj     eod_starch */
     {  4, REAL(0.0680), REAL(0.82), REAL(0.16), REAL(0.00344), REAL(0.004264), REAL(0.003843), REAL(29.67) },
     {  6, REAL(0.1135), REAL(0.79), REAL(0.15), REAL(0.00413), REAL(0.004852), REAL(0.004433), REAL(54.24) },
     {  8, REAL(0.1708), REAL(0.67), REAL(0.13), REAL(0.00515), REAL(0.005648), REAL(0.005246), REAL(56.88) },
     { 12, REAL(0.2600), REAL(0.62), REAL(0.08), REAL(0.00578), REAL(0.006112), REAL(0.005850), REAL(58.73) },
 };
+
+/* The revised parameterisation: one value of each parameter for every
+ * photoperiod, so an ablation measures what removing a mechanism costs rather
+ * than what re-fitting it per photoperiod can hide.  lambda_c = 1 leaves the
+ * starch feedback inert, and lambda_sb is the single fitted growth coefficient.
+ * Selected with --shared (default); --per-photoperiod restores the published
+ * table above. */
+static const Scenario SCENARIOS_SHARED[] = {
+    {  4, REAL(0.0680), REAL(1.00), REAL(0.12), REAL(0.00295), REAL(0.00295), REAL(0.00295), REAL(29.67) },
+    {  6, REAL(0.1135), REAL(1.00), REAL(0.12), REAL(0.00295), REAL(0.00295), REAL(0.00295), REAL(54.24) },
+    {  8, REAL(0.1708), REAL(1.00), REAL(0.12), REAL(0.00295), REAL(0.00295), REAL(0.00295), REAL(56.88) },
+    { 12, REAL(0.2600), REAL(1.00), REAL(0.12), REAL(0.00295), REAL(0.00295), REAL(0.00295), REAL(58.73) },
+};
+
+static const Scenario* SCENARIOS = SCENARIOS_SHARED;
 
 typedef struct {
     PhotosynthesisMode mode;
@@ -93,7 +118,10 @@ static real_t eval_rgr(const SimulationConfig* cfg, Input* in, int days)
     memset(&result, 0, sizeof(result));
     simulate_days(cfg, in, &result);
     simulation_result_free(&result);
-    return compute_rgr(fw_start, in->growth.total_biomass, (real_t)(days - 1));
+    /* Divisor is the elapsed time in days, not days-1; see the note in
+     * validation_runner.c. The earlier form inflated every rate by
+     * days/(days-1) = 1.0345 at days = 30. */
+    return compute_rgr(fw_start, in->growth.total_biomass, (real_t)days);
 }
 
 /* ------------------------------------------------------------------ calibration */
@@ -288,7 +316,8 @@ static void run_scenario(
     simulate_days(cfg, input, &result);
 
     real_t fw_start      = REAL(0.04);
-    out->model_rgr       = compute_rgr(fw_start, input->growth.total_biomass, (real_t)(days - 1));
+    /* Elapsed time in days; see the note at the other call site. */
+    out->model_rgr       = compute_rgr(fw_start, input->growth.total_biomass, (real_t)days);
     out->rel_err_pct     = lit_rgr > REAL(0.0)
                            ? RABS(out->model_rgr - lit_rgr) / lit_rgr * REAL(100.0)
                            : REAL(0.0);
@@ -396,7 +425,7 @@ static void write_ablation_config(
         "# Ablation config: %s model, photoperiod=%dh\n"
         "# Base config: %s\n"
         "#\n"
-        "# Per-photoperiod parameters (Table A.1, Annunziata et al.):\n"
+        "# Per-photoperiod parameters (Table A.1 of the manuscript):\n"
         "#   lambda_c   (feedback_on_photosynthesis) = %.4f  [fixed]\n"
         "#   lambda_sni (night starch partition)     = %.4f  [fixed]\n"
         "#   lambda_sb  (growth rate)                = %.8f  [calibrated: RGR=%.4f]\n",
@@ -451,12 +480,16 @@ int main(int argc, char** argv)
     const char* out_path     = "results/ablation/ablation_results.csv";
     int         days         = 30;
     int         do_calibrate = 1;
+    int         chamber      = 0;
 
     for (int i = 1; i < argc; ++i) {
         if      (strcmp(argv[i], "--config")       == 0 && i + 1 < argc) config_path = argv[++i];
         else if (strcmp(argv[i], "--days")         == 0 && i + 1 < argc) days = atoi(argv[++i]);
         else if (strcmp(argv[i], "--out")          == 0 && i + 1 < argc) out_path = argv[++i];
         else if (strcmp(argv[i], "--no-calibrate") == 0) do_calibrate = 0;
+        else if (strcmp(argv[i], "--shared") == 0) SCENARIOS = SCENARIOS_SHARED;
+        else if (strcmp(argv[i], "--per-photoperiod") == 0) SCENARIOS = SCENARIOS_PERPP;
+        else if (strcmp(argv[i], "--chamber") == 0) chamber = 1;
         else if (strcmp(argv[i], "--help")         == 0 || strcmp(argv[i], "-h") == 0) {
             usage(argv[0]);
             return 0;
@@ -479,6 +512,25 @@ int main(int argc, char** argv)
     base_cfg.gui_enabled = 0;
     base_cfg.write_csv   = 0;
 
+    if (chamber) {
+        /* Reference growth conditions: 160 umol m-2 s-1 square wave at 21/19 C.
+         * Same block as model_report --chamber and validation_runner --chamber. */
+        base_input.photo.max_PAR                 = REAL(160.0);
+        base_input.gas_exchange.leaf_temperature = REAL(21.0);
+#ifdef PLANTMODEL_HAS_DAYNIGHT_TEMP
+        base_input.gas_exchange.leaf_temperature_day   = REAL(21.0);
+        base_input.gas_exchange.leaf_temperature_night = REAL(19.0);
+#endif
+#ifdef PLANTMODEL_HAS_LIGHT_PROFILE
+        base_input.photo.light_profile = REAL(1.0);
+#endif
+    }
+
+    printf("Parameterisation: %s; conditions: %s; calibration: %s\n",
+           SCENARIOS == SCENARIOS_SHARED ? "shared" : "per photoperiod",
+           chamber ? "chamber 160 PAR 21/19 C" : "config as shipped",
+           do_calibrate ? "lambda_sb re-fitted per cell" : "frozen");
+
     FILE* out = fopen(out_path, "w");
     if (!out) { fprintf(stderr, "Failed to open output: %s\n", out_path); return 1; }
 
@@ -489,7 +541,9 @@ int main(int argc, char** argv)
         "min_sucrose,min_starch,final_total_biomass,nonfinite_samples\n");
 
     int n_modes    = (int)(sizeof(MODES)     / sizeof(MODES[0]));
-    int n_scenario = (int)(sizeof(SCENARIOS) / sizeof(SCENARIOS[0]));
+    /* SCENARIOS points at one of the two tables, so sizeof() on it would measure
+     * the pointer; both tables carry one row per photoperiod. */
+    int n_scenario = (int)(sizeof(SCENARIOS_SHARED) / sizeof(SCENARIOS_SHARED[0]));
     int n_work     = n_modes * n_scenario;
 
     /* Per-work-item results, written in parallel then printed in order */

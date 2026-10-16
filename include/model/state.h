@@ -15,6 +15,7 @@ typedef enum {
     X_SUCROSE_ROOT_ALLOC,
     X_LEAF_BIOMASS,
     X_ROOT_BIOMASS,
+    X_SUCROSE_VAC,   /* vacuolar sucrose pool [umol/gFW] */
     X_DIM
 } PlantStateIndex;
 
@@ -22,6 +23,7 @@ typedef struct PlantState {
     real_t starch_partition_coeff;
     real_t starch;
     real_t sucrose;
+    real_t sucrose_vacuole;  /* vacuolar sucrose pool [umol/gFW] */
     real_t nitrogen_affinity;
     real_t phosphorus_affinity;
     real_t nitrogen;

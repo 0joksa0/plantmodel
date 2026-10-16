@@ -19,6 +19,7 @@ typedef struct PlantOutputs {
     real_t starch_degradation_rate;
     real_t uptake_cost;
     real_t transport_cost;
+    real_t maintenance_respiration;
     real_t nitrogen_cost;
     real_t phosphorus_cost;
     real_t nitrogen_nutrient_uptake;

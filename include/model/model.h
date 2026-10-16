@@ -251,7 +251,13 @@ real_t sucrose_production(
     real_t respiration_frequency,
     real_t sucrose,
     real_t sucrose_loading_frequency,
-    real_t night_efficiency_starch);
+    real_t night_efficiency_starch,
+    real_t light);
+
+real_t maintenance_respiration_share(
+    real_t respiration_frequency,
+    real_t sucrose,
+    real_t light);
 
 real_t sucrose_production_f(
     real_t t,
@@ -263,13 +269,20 @@ real_t night_efficiency_starch(
     real_t max_sucrose,
     real_t lambda_g,
     real_t light,
-    real_t starch_partition_coeff);
+    real_t starch_partition_coeff,
+    real_t sink_activation_half,
+    real_t sink_activation_hill);
 
 real_t uptake_cost(
     real_t nitrogen_uptake_sucrose_consumption,
     real_t nitrogen_uptake,
     real_t phosphorus_uptake_sucrose_consumption,
     real_t phosphorus_uptake);
+
+real_t growth_cost(
+    real_t growth_stoichiometry,
+    real_t leaf_growth_rate,
+    real_t root_growth_rate);
 
 real_t transport_cost(
     real_t sucrose_consumption_transport,
@@ -426,5 +439,44 @@ real_t calculate_stomatal_conductance_jarvis(
 real_t calculate_vapor_pressure_deficit(real_t temperature_celsius, real_t relative_humidity_percent);
 
 void update_light_conditions(Input *input, real_t current_hour);
+
+/* ---------------------------------------------------------------------------
+ * Intercellular CO2 solver.
+ *
+ * The historical fixed-point iteration iterate_ci() is not a contraction under
+ * water stress: below roughly psi_leaf = -1.15 MPa it acquires a stable
+ * period-two orbit and returns one of two alternating values, selected by the
+ * parity of the iteration cap.  solve_ci_analytic() substitutes
+ * Ci = Ca - An/gc into the FvCB demand function and solves the resulting
+ * quadratic exactly, and is the default.  The iteration is retained behind
+ * ci_solver_set_mode() so the convergence study can exercise both.
+ * ci_solver_reset_diagnostics()/ci_solver_get_diagnostics() expose call and
+ * non-convergence counts. */
+typedef struct {
+    long calls;             /* solver invocations */
+    long nonconvergent;     /* iterations that hit the cap without meeting eps */
+    long clamped_ci;        /* results clamped back into [0, 2*Ca] */
+    long closed_stomata;    /* gc -> 0, so An = -Rd is returned */
+    long iterations_total;  /* summed fixed-point iterations, for a mean */
+} CiSolverDiagnostics;
+
+typedef enum {
+    CI_SOLVER_ANALYTIC = 0,
+    CI_SOLVER_FIXED_POINT = 1
+} CiSolverMode;
+
+real_t compute_J(real_t PAR, real_t Jmax);
+real_t solve_ci_analytic(Input *input);
+real_t iterate_ci_tol(Input *input, int max_iter, real_t eps_ci, real_t eps_an);
+void ci_solver_reset_diagnostics(void);
+CiSolverDiagnostics ci_solver_get_diagnostics(void);
+void ci_solver_set_mode(CiSolverMode mode);
+CiSolverMode ci_solver_get_mode(void);
+/* Separate tolerances for the Ci and An convergence criteria; one epsilon
+ * previously served both.  Defaults reproduce the historical behaviour. */
+void ci_solver_set_tolerances(real_t eps_ci, real_t eps_an);
+void ci_solver_get_tolerances(real_t *eps_ci, real_t *eps_an);
+void ci_solver_set_max_iter(int max_iter);
+int  ci_solver_get_max_iter(void);
 
 #endif

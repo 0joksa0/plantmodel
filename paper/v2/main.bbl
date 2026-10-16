@@ -1,0 +1,730 @@
+\begin{thebibliography}{67}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\href}[2]{#2}
+\providecommand{\path}[1]{#1}
+\providecommand{\DOIprefix}{doi:}
+\providecommand{\ArXivprefix}{arXiv:}
+\providecommand{\URLprefix}{URL: }
+\providecommand{\Pubmedprefix}{pmid:}
+\providecommand{\doi}[1]{\href{http://dx.doi.org/#1}{\path{#1}}}
+\providecommand{\Pubmed}[1]{\href{pmid:#1}{\path{#1}}}
+\providecommand{\bibinfo}[2]{#2}
+\ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
+%Type = Article
+\bibitem[{Annunziata et~al.(2017)Annunziata, Apelt, Carillo, Krause, Feil,
+  Mengin, Lauxmann, K{\"o}hl, Nikoloski, Stitt and Lunn}]{Annunziata2017}
+\bibinfo{author}{Annunziata, M.G.}, \bibinfo{author}{Apelt, F.},
+  \bibinfo{author}{Carillo, P.}, \bibinfo{author}{Krause, U.},
+  \bibinfo{author}{Feil, R.}, \bibinfo{author}{Mengin, V.},
+  \bibinfo{author}{Lauxmann, M.A.}, \bibinfo{author}{K{\"o}hl, K.},
+  \bibinfo{author}{Nikoloski, Z.}, \bibinfo{author}{Stitt, M.},
+  \bibinfo{author}{Lunn, J.E.}, \bibinfo{year}{2017}.
+\newblock \bibinfo{title}{Getting back to nature: a reality check for
+  experiments in controlled environments}.
+\newblock \bibinfo{journal}{Journal of Experimental Botany}
+  \bibinfo{volume}{68}, \bibinfo{pages}{4463--4477}.
+\newblock \DOIprefix\doi{10.1093/jxb/erx220}.
+%Type = Incollection
+\bibitem[{Ball et~al.(1987)Ball, Woodrow and Berry}]{Ball1987}
+\bibinfo{author}{Ball, J.T.}, \bibinfo{author}{Woodrow, I.E.},
+  \bibinfo{author}{Berry, J.A.}, \bibinfo{year}{1987}.
+\newblock \bibinfo{title}{A model predicting stomatal conductance and its
+  contribution to the control of photosynthesis under different environmental
+  conditions}, in: \bibinfo{editor}{Biggins, J.} (Ed.),
+  \bibinfo{booktitle}{Progress in Photosynthesis Research}.
+  \bibinfo{publisher}{Springer}, \bibinfo{address}{Dordrecht}, pp.
+  \bibinfo{pages}{221--224}.
+\newblock \DOIprefix\doi{10.1007/978-94-017-0519-6_48}.
+%Type = Book
+\bibitem[{Barber(1995)}]{Barber1995}
+\bibinfo{author}{Barber, S.A.}, \bibinfo{year}{1995}.
+\newblock \bibinfo{title}{Soil nutrient bioavailability : a mechanistic
+  approach}.
+\newblock \bibinfo{edition}{2nd} ed., \bibinfo{publisher}{Wiley}.
+%Type = Article
+\bibitem[{Bernacchi et~al.(2001)Bernacchi, Singsaas, Pimentel, Portis and
+  Long}]{Bernacchi2001}
+\bibinfo{author}{Bernacchi, C.J.}, \bibinfo{author}{Singsaas, E.L.},
+  \bibinfo{author}{Pimentel, C.}, \bibinfo{author}{Portis, A.R.},
+  \bibinfo{author}{Long, S.P.}, \bibinfo{year}{2001}.
+\newblock \bibinfo{title}{Improved temperature response functions for models of
+  {Rubisco}-limited photosynthesis}.
+\newblock \bibinfo{journal}{Plant, Cell \& Environment} \bibinfo{volume}{24},
+  \bibinfo{pages}{253--259}.
+\newblock \DOIprefix\doi{10.1111/j.1365-3040.2001.00668.x}.
+%Type = Article
+\bibitem[{Buckley(2017)}]{Buckley2017}
+\bibinfo{author}{Buckley, T.N.}, \bibinfo{year}{2017}.
+\newblock \bibinfo{title}{Modeling stomatal conductance}.
+\newblock \bibinfo{journal}{Plant Physiology} \bibinfo{volume}{174},
+  \bibinfo{pages}{572--582}.
+\newblock \DOIprefix\doi{10.1104/pp.16.01772}.
+%Type = Book
+\bibitem[{von Caemmerer(2000)}]{vonCaemmerer2000}
+\bibinfo{author}{von Caemmerer, S.}, \bibinfo{year}{2000}.
+\newblock \bibinfo{title}{Biochemical Models of Leaf Photosynthesis}.
+\newblock Number~\bibinfo{number}{2} in \bibinfo{series}{Techniques in Plant
+  Sciences}, \bibinfo{publisher}{CSIRO Publishing},
+  \bibinfo{address}{Collingwood, Australia}.
+\newblock \DOIprefix\doi{10.1071/9780643103405}.
+%Type = Article
+\bibitem[{von Caemmerer and Farquhar(1981)}]{vonCaemmerer1981}
+\bibinfo{author}{von Caemmerer, S.}, \bibinfo{author}{Farquhar, G.D.},
+  \bibinfo{year}{1981}.
+\newblock \bibinfo{title}{Some relationships between the biochemistry of
+  photosynthesis and the gas exchange of leaves}.
+\newblock \bibinfo{journal}{Planta} \bibinfo{volume}{153},
+  \bibinfo{pages}{376--387}.
+\newblock \DOIprefix\doi{10.1007/bf00384257}.
+%Type = Article
+\bibitem[{Campolongo et~al.(2007)Campolongo, Cariboni and
+  Saltelli}]{Campolongo2007}
+\bibinfo{author}{Campolongo, F.}, \bibinfo{author}{Cariboni, J.},
+  \bibinfo{author}{Saltelli, A.}, \bibinfo{year}{2007}.
+\newblock \bibinfo{title}{An effective screening design for sensitivity
+  analysis of large models}.
+\newblock \bibinfo{journal}{Environmental Modelling \& Software}
+  \bibinfo{volume}{22}, \bibinfo{pages}{1509--1518}.
+\newblock \DOIprefix\doi{10.1016/j.envsoft.2006.10.004}.
+%Type = Article
+\bibitem[{Carstensen et~al.(2018)Carstensen, Herdean, Schmidt, Sharma, Spetea,
+  Pribil and Husted}]{Carstensen2018}
+\bibinfo{author}{Carstensen, A.}, \bibinfo{author}{Herdean, A.},
+  \bibinfo{author}{Schmidt, S.B.}, \bibinfo{author}{Sharma, A.},
+  \bibinfo{author}{Spetea, C.}, \bibinfo{author}{Pribil, M.},
+  \bibinfo{author}{Husted, S.}, \bibinfo{year}{2018}.
+\newblock \bibinfo{title}{The impacts of phosphorus deficiency on the
+  photosynthetic electron transport chain}.
+\newblock \bibinfo{journal}{Plant physiology} \bibinfo{volume}{177},
+  \bibinfo{pages}{271--284}.
+\newblock \DOIprefix\doi{10.1104/pp.17.01624}.
+%Type = Book
+\bibitem[{Cellier(1991)}]{Cellier1991}
+\bibinfo{author}{Cellier, F.E.}, \bibinfo{year}{1991}.
+\newblock \bibinfo{title}{Continuous System Modeling}.
+\newblock \bibinfo{publisher}{Springer-Verlag}, \bibinfo{address}{New York}.
+%Type = Article
+\bibitem[{Damour et~al.(2010)Damour, Simonneau, Cochard and Urban}]{Damour2010}
+\bibinfo{author}{Damour, G.}, \bibinfo{author}{Simonneau, T.},
+  \bibinfo{author}{Cochard, H.}, \bibinfo{author}{Urban, L.},
+  \bibinfo{year}{2010}.
+\newblock \bibinfo{title}{An overview of models of stomatal conductance at the
+  leaf level}.
+\newblock \bibinfo{journal}{Plant, Cell \& Environment} \bibinfo{volume}{33},
+  \bibinfo{pages}{1419--1438}.
+\newblock \DOIprefix\doi{10.1111/j.1365-3040.2010.02181.x}.
+%Type = Article
+\bibitem[{{de Reffye} et~al.(2020){de Reffye}, Hu, Kang, Letort and
+  Jaeger}]{DeReffye2020}
+\bibinfo{author}{{de Reffye}, P.}, \bibinfo{author}{Hu, B.},
+  \bibinfo{author}{Kang, M.}, \bibinfo{author}{Letort, V.},
+  \bibinfo{author}{Jaeger, M.}, \bibinfo{year}{2020}.
+\newblock \bibinfo{title}{Two decades of research with the greenlab model in
+  agronomy}.
+\newblock \bibinfo{journal}{Annals of Botany} \bibinfo{volume}{127},
+  \bibinfo{pages}{281--295}.
+\newblock \DOIprefix\doi{10.1093/aob/mcaa172}.
+%Type = Article
+\bibitem[{Dubois et~al.(2007)Dubois, Fiscus, Booker, Flowers and
+  Reid}]{Dubois2007}
+\bibinfo{author}{Dubois, J.J.B.}, \bibinfo{author}{Fiscus, E.L.},
+  \bibinfo{author}{Booker, F.L.}, \bibinfo{author}{Flowers, M.D.},
+  \bibinfo{author}{Reid, C.D.}, \bibinfo{year}{2007}.
+\newblock \bibinfo{title}{Optimizing the statistical estimation of the
+  parameters of the {Farquhar}--von caemmerer--berry model of photosynthesis}.
+\newblock \bibinfo{journal}{New Phytologist} \bibinfo{volume}{176},
+  \bibinfo{pages}{402--414}.
+\newblock \DOIprefix\doi{10.1111/j.1469-8137.2007.02182.x}.
+%Type = Article
+\bibitem[{Epstein and Hagen(1952)}]{Epstein1952}
+\bibinfo{author}{Epstein, E.}, \bibinfo{author}{Hagen, C.E.},
+  \bibinfo{year}{1952}.
+\newblock \bibinfo{title}{A kinetic study of the absorption of alkali cations
+  by barley roots}.
+\newblock \bibinfo{journal}{Plant Physiology} \bibinfo{volume}{27},
+  \bibinfo{pages}{457--474}.
+\newblock \DOIprefix\doi{10.1104/pp.27.3.457}.
+%Type = Article
+\bibitem[{Farquhar et~al.(1980)Farquhar, von Caemmerer and
+  Berry}]{Farquhar1980}
+\bibinfo{author}{Farquhar, G.D.}, \bibinfo{author}{von Caemmerer, S.},
+  \bibinfo{author}{Berry, J.A.}, \bibinfo{year}{1980}.
+\newblock \bibinfo{title}{A biochemical model of photosynthetic {CO2}
+  assimilation in leaves of {C3} species}.
+\newblock \bibinfo{journal}{Planta} \bibinfo{volume}{149},
+  \bibinfo{pages}{78--90}.
+\newblock \DOIprefix\doi{10.1007/BF00386231}.
+%Type = Article
+\bibitem[{Farquhar and Wong(1984)}]{Farquhar1984}
+\bibinfo{author}{Farquhar, G.D.}, \bibinfo{author}{Wong, S.C.},
+  \bibinfo{year}{1984}.
+\newblock \bibinfo{title}{An empirical model of stomatal conductance}.
+\newblock \bibinfo{journal}{Australian Journal of Plant Physiology}
+  \bibinfo{volume}{11}, \bibinfo{pages}{191--210}.
+\newblock \DOIprefix\doi{10.1071/pp9840191}.
+%Type = Article
+\bibitem[{Feller et~al.(2015)Feller, Favre, Janka, Zeeman, Gabriel and
+  Reinhardt}]{Feller2015}
+\bibinfo{author}{Feller, C.}, \bibinfo{author}{Favre, P.},
+  \bibinfo{author}{Janka, A.}, \bibinfo{author}{Zeeman, S.C.},
+  \bibinfo{author}{Gabriel, J.P.}, \bibinfo{author}{Reinhardt, D.},
+  \bibinfo{year}{2015}.
+\newblock \bibinfo{title}{Mathematical modeling of the dynamics of shoot-root
+  interactions and resource partitioning in plant growth}.
+\newblock \bibinfo{journal}{PLOS ONE} \bibinfo{volume}{10},
+  \bibinfo{pages}{e0127905}.
+\newblock \DOIprefix\doi{10.1371/journal.pone.0127905}.
+%Type = Article
+\bibitem[{Feugier and Satake(2013)}]{Feugier2013}
+\bibinfo{author}{Feugier, F.G.}, \bibinfo{author}{Satake, A.},
+  \bibinfo{year}{2013}.
+\newblock \bibinfo{title}{Dynamical feedback between circadian clock and
+  sucrose availability explains adaptive response of starch metabolism to
+  various photoperiods}.
+\newblock \bibinfo{journal}{Frontiers in Plant Science} \bibinfo{volume}{3},
+  \bibinfo{pages}{305}.
+\newblock \DOIprefix\doi{10.3389/fpls.2012.00305}.
+%Type = Article
+\bibitem[{Gastal and Lemaire(2002)}]{Gastal2002}
+\bibinfo{author}{Gastal, F.}, \bibinfo{author}{Lemaire, G.},
+  \bibinfo{year}{2002}.
+\newblock \bibinfo{title}{N uptake and distribution in crops: an agronomical
+  and ecophysiological perspective}.
+\newblock \bibinfo{journal}{Journal of Experimental Botany}
+  \bibinfo{volume}{53}, \bibinfo{pages}{789--799}.
+\newblock \DOIprefix\doi{10.1093/jexbot/53.370.789}.
+%Type = Article
+\bibitem[{Graf et~al.(2010)Graf, Schlereth, Stitt and Smith}]{Graf2010}
+\bibinfo{author}{Graf, A.}, \bibinfo{author}{Schlereth, A.},
+  \bibinfo{author}{Stitt, M.}, \bibinfo{author}{Smith, A.M.},
+  \bibinfo{year}{2010}.
+\newblock \bibinfo{title}{Circadian control of carbohydrate availability for
+  growth in {Arabidopsis} plants at night}.
+\newblock \bibinfo{journal}{Proceedings of the National Academy of Sciences}
+  \bibinfo{volume}{107}, \bibinfo{pages}{9458--9463}.
+\newblock \DOIprefix\doi{10.1073/pnas.0914299107}.
+%Type = Book
+\bibitem[{Hairer et~al.(1993)Hairer, N{\o}rsett and
+  Wanner}]{HairerNorsettWanner1993}
+\bibinfo{author}{Hairer, E.}, \bibinfo{author}{N{\o}rsett, S.P.},
+  \bibinfo{author}{Wanner, G.}, \bibinfo{year}{1993}.
+\newblock \bibinfo{title}{Solving Ordinary Differential Equations I: Nonstiff
+  Problems}.
+\newblock \bibinfo{edition}{2nd} ed., \bibinfo{publisher}{Springer-Verlag},
+  \bibinfo{address}{Berlin}.
+%Type = Article
+\bibitem[{Holzworth et~al.(2014)Holzworth, Huth, deVoil, Zurcher, Herrmann,
+  McLean, Chenu, van Oosterom, Snow, Murphy, Moore, Brown, Whish, Verrall,
+  Fainges, Bell, Peake, Poulton, Hochman, Thorburn, Gaydon, Dalgliesh,
+  Rodriguez, Cox, Chapman, Doherty, Teixeira, Sharp, Cichota, Vogeler, Li,
+  Wang, Hammer, Robertson, Dimes, Whitbread, Hunt, van Rees, McClelland,
+  Carberry, Hargreaves, MacLeod, McDonald, Harsdorf, Wedgwood and
+  Keating}]{Holzworth2014}
+\bibinfo{author}{Holzworth, D.P.}, \bibinfo{author}{Huth, N.I.},
+  \bibinfo{author}{deVoil, P.G.}, \bibinfo{author}{Zurcher, E.J.},
+  \bibinfo{author}{Herrmann, N.I.}, \bibinfo{author}{McLean, G.},
+  \bibinfo{author}{Chenu, K.}, \bibinfo{author}{van Oosterom, E.J.},
+  \bibinfo{author}{Snow, V.}, \bibinfo{author}{Murphy, C.},
+  \bibinfo{author}{Moore, A.D.}, \bibinfo{author}{Brown, H.},
+  \bibinfo{author}{Whish, J.P.}, \bibinfo{author}{Verrall, S.},
+  \bibinfo{author}{Fainges, J.}, \bibinfo{author}{Bell, L.W.},
+  \bibinfo{author}{Peake, A.S.}, \bibinfo{author}{Poulton, P.L.},
+  \bibinfo{author}{Hochman, Z.}, \bibinfo{author}{Thorburn, P.J.},
+  \bibinfo{author}{Gaydon, D.S.}, \bibinfo{author}{Dalgliesh, N.P.},
+  \bibinfo{author}{Rodriguez, D.}, \bibinfo{author}{Cox, H.},
+  \bibinfo{author}{Chapman, S.}, \bibinfo{author}{Doherty, A.},
+  \bibinfo{author}{Teixeira, E.}, \bibinfo{author}{Sharp, J.},
+  \bibinfo{author}{Cichota, R.}, \bibinfo{author}{Vogeler, I.},
+  \bibinfo{author}{Li, F.Y.}, \bibinfo{author}{Wang, E.},
+  \bibinfo{author}{Hammer, G.L.}, \bibinfo{author}{Robertson, M.J.},
+  \bibinfo{author}{Dimes, J.P.}, \bibinfo{author}{Whitbread, A.M.},
+  \bibinfo{author}{Hunt, J.}, \bibinfo{author}{van Rees, H.},
+  \bibinfo{author}{McClelland, T.}, \bibinfo{author}{Carberry, P.S.},
+  \bibinfo{author}{Hargreaves, J.N.}, \bibinfo{author}{MacLeod, N.},
+  \bibinfo{author}{McDonald, C.}, \bibinfo{author}{Harsdorf, J.},
+  \bibinfo{author}{Wedgwood, S.}, \bibinfo{author}{Keating, B.A.},
+  \bibinfo{year}{2014}.
+\newblock \bibinfo{title}{Apsim -- evolution towards a new generation of
+  agricultural systems simulation}.
+\newblock \bibinfo{journal}{Environmental Modelling \& Software}
+  \bibinfo{volume}{62}, \bibinfo{pages}{327--350}.
+\newblock \DOIprefix\doi{10.1016/j.envsoft.2014.07.009}.
+%Type = Inproceedings
+\bibitem[{Ishigami and Homma(1990)}]{Ishigami1990}
+\bibinfo{author}{Ishigami, T.}, \bibinfo{author}{Homma, T.},
+  \bibinfo{year}{1990}.
+\newblock \bibinfo{title}{An importance quantification technique in uncertainty
+  analysis for computer models}, in: \bibinfo{booktitle}{Proceedings of the
+  First International Symposium on Uncertainty Modeling and Analysis (ISUMA
+  1990)}, \bibinfo{publisher}{IEEE}, \bibinfo{address}{College Park, MD, USA}.
+  pp. \bibinfo{pages}{398--403}.
+\newblock \DOIprefix\doi{10.1109/ISUMA.1990.151285}.
+%Type = Article
+\bibitem[{Janott et~al.(2011)Janott, Gayler, Gessler, Javaux, Klier and
+  Priesack}]{Janott2011}
+\bibinfo{author}{Janott, M.}, \bibinfo{author}{Gayler, S.},
+  \bibinfo{author}{Gessler, A.}, \bibinfo{author}{Javaux, M.},
+  \bibinfo{author}{Klier, C.}, \bibinfo{author}{Priesack, E.},
+  \bibinfo{year}{2011}.
+\newblock \bibinfo{title}{A one-dimensional model of water flow in soil-plant
+  systems based on plant architecture}.
+\newblock \bibinfo{journal}{Plant and Soil} \bibinfo{volume}{341},
+  \bibinfo{pages}{233--256}.
+\newblock \DOIprefix\doi{10.1007/s11104-010-0639-0}.
+%Type = Article
+\bibitem[{Jarvis(1976)}]{Jarvis1976}
+\bibinfo{author}{Jarvis, P.G.}, \bibinfo{year}{1976}.
+\newblock \bibinfo{title}{The interpretation of the variations in leaf water
+  potential and stomatal conductance found in canopies in the field}.
+\newblock \bibinfo{journal}{Philosophical Transactions of the Royal Society of
+  London. Series B, Biological Sciences} \bibinfo{volume}{273},
+  \bibinfo{pages}{593--610}.
+\newblock \DOIprefix\doi{10.1098/rstb.1976.0035}.
+%Type = Article
+\bibitem[{Jones et~al.(2003)Jones, Hoogenboom, Porter, Boote, Batchelor, Hunt,
+  Wilkens, Singh, Gijsman and Ritchie}]{Jones2003}
+\bibinfo{author}{Jones, J.W.}, \bibinfo{author}{Hoogenboom, G.},
+  \bibinfo{author}{Porter, C.H.}, \bibinfo{author}{Boote, K.J.},
+  \bibinfo{author}{Batchelor, W.D.}, \bibinfo{author}{Hunt, L.A.},
+  \bibinfo{author}{Wilkens, P.W.}, \bibinfo{author}{Singh, U.},
+  \bibinfo{author}{Gijsman, A.J.}, \bibinfo{author}{Ritchie, J.T.},
+  \bibinfo{year}{2003}.
+\newblock \bibinfo{title}{The {DSSAT} cropping system model}.
+\newblock \bibinfo{journal}{European Journal of Agronomy} \bibinfo{volume}{18},
+  \bibinfo{pages}{235--265}.
+\newblock \DOIprefix\doi{10.1016/s1161-0301(02)00107-7}.
+%Type = Article
+\bibitem[{Kim and Lieth(2003)}]{Kim2003}
+\bibinfo{author}{Kim, S.H.}, \bibinfo{author}{Lieth, J.H.},
+  \bibinfo{year}{2003}.
+\newblock \bibinfo{title}{A coupled model of photosynthesis, stomatal
+  conductance and transpiration for a rose leaf (rosa hybrida l.)}.
+\newblock \bibinfo{journal}{Annals of botany} \bibinfo{volume}{91},
+  \bibinfo{pages}{771--781}.
+\newblock \DOIprefix\doi{10.1093/aob/mcg080}.
+%Type = Article
+\bibitem[{Lawson and Blatt(2014)}]{Lawson2014}
+\bibinfo{author}{Lawson, T.}, \bibinfo{author}{Blatt, M.R.},
+  \bibinfo{year}{2014}.
+\newblock \bibinfo{title}{Stomatal size, speed, and responsiveness impact on
+  photosynthesis and water use efficiency}.
+\newblock \bibinfo{journal}{Plant Physiology} \bibinfo{volume}{164},
+  \bibinfo{pages}{1556--1570}.
+\newblock \URLprefix \url{https://dx.doi.org/10.1104/pp.114.237107},
+  \DOIprefix\doi{10.1104/PP.114.237107}.
+%Type = Article
+\bibitem[{Lohaus et~al.(2000)Lohaus, Hussmann, Pennewiss, Schneider, Zhu and
+  Sattelmacher}]{Lohaus2000}
+\bibinfo{author}{Lohaus, G.}, \bibinfo{author}{Hussmann, M.},
+  \bibinfo{author}{Pennewiss, K.}, \bibinfo{author}{Schneider, H.},
+  \bibinfo{author}{Zhu, J.J.}, \bibinfo{author}{Sattelmacher, B.},
+  \bibinfo{year}{2000}.
+\newblock \bibinfo{title}{Solute balance of a maize ({Zea mays L.}) source leaf
+  as affected by salt treatment with special emphasis on phloem retranslocation
+  and ion leaching}.
+\newblock \bibinfo{journal}{Journal of Experimental Botany}
+  \bibinfo{volume}{51}, \bibinfo{pages}{1721--1732}.
+\newblock \DOIprefix\doi{10.1093/jexbot/51.351.1721}.
+%Type = Article
+\bibitem[{Louarn and Song(2020)}]{Louarn2020}
+\bibinfo{author}{Louarn, G.}, \bibinfo{author}{Song, Y.}, \bibinfo{year}{2020}.
+\newblock \bibinfo{title}{Two decades of functional--structural plant
+  modelling: now addressing fundamental questions in systems biology and
+  predictive ecology}.
+\newblock \bibinfo{journal}{Annals of Botany} \bibinfo{volume}{126},
+  \bibinfo{pages}{501--509}.
+\newblock \DOIprefix\doi{10.1093/aob/mcaa143}.
+%Type = Article
+\bibitem[{Maiorano et~al.(2017)Maiorano, Martre, Asseng, Ewert, Müller,
+  Rötter, Ruane, Semenov, Wallach, Wang, Alderman, Kassie, Biernath, Basso,
+  Cammarano, Challinor, Doltra, Dumont, Rezaei, Gayler, Kersebaum, Kimball,
+  Koehler, Liu, O'Leary, Olesen, Ottman, Priesack, Reynolds, Stratonovitch,
+  Streck, Thorburn, Waha, Wall, White, Zhao and Zhu}]{Maiorano2017}
+\bibinfo{author}{Maiorano, A.}, \bibinfo{author}{Martre, P.},
+  \bibinfo{author}{Asseng, S.}, \bibinfo{author}{Ewert, F.},
+  \bibinfo{author}{Müller, C.}, \bibinfo{author}{Rötter, R.P.},
+  \bibinfo{author}{Ruane, A.C.}, \bibinfo{author}{Semenov, M.A.},
+  \bibinfo{author}{Wallach, D.}, \bibinfo{author}{Wang, E.},
+  \bibinfo{author}{Alderman, P.D.}, \bibinfo{author}{Kassie, B.T.},
+  \bibinfo{author}{Biernath, C.}, \bibinfo{author}{Basso, B.},
+  \bibinfo{author}{Cammarano, D.}, \bibinfo{author}{Challinor, A.J.},
+  \bibinfo{author}{Doltra, J.}, \bibinfo{author}{Dumont, B.},
+  \bibinfo{author}{Rezaei, E.E.}, \bibinfo{author}{Gayler, S.},
+  \bibinfo{author}{Kersebaum, K.C.}, \bibinfo{author}{Kimball, B.A.},
+  \bibinfo{author}{Koehler, A.K.}, \bibinfo{author}{Liu, B.},
+  \bibinfo{author}{O'Leary, G.J.}, \bibinfo{author}{Olesen, J.E.},
+  \bibinfo{author}{Ottman, M.J.}, \bibinfo{author}{Priesack, E.},
+  \bibinfo{author}{Reynolds, M.}, \bibinfo{author}{Stratonovitch, P.},
+  \bibinfo{author}{Streck, T.}, \bibinfo{author}{Thorburn, P.J.},
+  \bibinfo{author}{Waha, K.}, \bibinfo{author}{Wall, G.W.},
+  \bibinfo{author}{White, J.W.}, \bibinfo{author}{Zhao, Z.},
+  \bibinfo{author}{Zhu, Y.}, \bibinfo{year}{2017}.
+\newblock \bibinfo{title}{Crop model improvement reduces the uncertainty of the
+  response to temperature of multi-model ensembles}.
+\newblock \bibinfo{journal}{Field Crops Research} \bibinfo{volume}{202},
+  \bibinfo{pages}{5--20}.
+\newblock \DOIprefix\doi{10.1016/J.FCR.2016.05.001}.
+%Type = Article
+\bibitem[{Mamassi et~al.(2024)Mamassi, Lang, Tychon, Lahlou, Wellens, {El
+  Gharous} and Marrou}]{Mamassi2024}
+\bibinfo{author}{Mamassi, A.}, \bibinfo{author}{Lang, M.},
+  \bibinfo{author}{Tychon, B.}, \bibinfo{author}{Lahlou, M.},
+  \bibinfo{author}{Wellens, J.}, \bibinfo{author}{{El Gharous}, M.},
+  \bibinfo{author}{Marrou, H.}, \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{A comparison of empirical and mechanistic models for
+  wheat yield prediction at field level in moroccan rainfed areas}.
+\newblock \bibinfo{journal}{in silico Plants} \bibinfo{volume}{6},
+  \bibinfo{pages}{diad020}.
+\newblock \DOIprefix\doi{10.1093/insilicoplants/diad020}.
+%Type = Article
+\bibitem[{Marcelis(1996)}]{Marcelis1996}
+\bibinfo{author}{Marcelis, L.F.}, \bibinfo{year}{1996}.
+\newblock \bibinfo{title}{Sink strength as a determinant of dry matter
+  partitioning in the whole plant}.
+\newblock \bibinfo{journal}{Journal of Experimental Botany}
+  \bibinfo{volume}{47}, \bibinfo{pages}{1281--1291}.
+\newblock \DOIprefix\doi{10.1093/jxb/47.special_issue.1281}.
+%Type = Article
+\bibitem[{McKay et~al.(1979)McKay, Beckman and Conover}]{McKay1979}
+\bibinfo{author}{McKay, M.D.}, \bibinfo{author}{Beckman, R.J.},
+  \bibinfo{author}{Conover, W.J.}, \bibinfo{year}{1979}.
+\newblock \bibinfo{title}{A comparison of three methods for selecting values of
+  input variables in the analysis of output from a computer code}.
+\newblock \bibinfo{journal}{Technometrics} \bibinfo{volume}{21},
+  \bibinfo{pages}{239--245}.
+\newblock \DOIprefix\doi{10.1080/00401706.1979.10489755}.
+%Type = Article
+\bibitem[{Medlyn et~al.(2011)Medlyn, Duursma, Eamus, Ellsworth, Prentice,
+  Barton, Crous, Angelis, Freeman and Wingate}]{Medlyn2011}
+\bibinfo{author}{Medlyn, B.E.}, \bibinfo{author}{Duursma, R.A.},
+  \bibinfo{author}{Eamus, D.}, \bibinfo{author}{Ellsworth, D.S.},
+  \bibinfo{author}{Prentice, I.C.}, \bibinfo{author}{Barton, C.V.},
+  \bibinfo{author}{Crous, K.Y.}, \bibinfo{author}{Angelis, P.D.},
+  \bibinfo{author}{Freeman, M.}, \bibinfo{author}{Wingate, L.},
+  \bibinfo{year}{2011}.
+\newblock \bibinfo{title}{Reconciling the optimal and empirical approaches to
+  modelling stomatal conductance}.
+\newblock \bibinfo{journal}{Global Change Biology} \bibinfo{volume}{17},
+  \bibinfo{pages}{2134--2144}.
+\newblock \DOIprefix\doi{10.1111/j.1365-2486.2010.02375.x}.
+%Type = Article
+\bibitem[{Mengin et~al.(2017)Mengin, Pyl, Alexandre~Moraes, Sulpice, Krohn,
+  Encke and Stitt}]{Mengin2017}
+\bibinfo{author}{Mengin, V.}, \bibinfo{author}{Pyl, E.T.},
+  \bibinfo{author}{Alexandre~Moraes, T.}, \bibinfo{author}{Sulpice, R.},
+  \bibinfo{author}{Krohn, N.}, \bibinfo{author}{Encke, B.},
+  \bibinfo{author}{Stitt, M.}, \bibinfo{year}{2017}.
+\newblock \bibinfo{title}{Photosynthate partitioning to starch in {A}rabidopsis
+  thaliana is insensitive to light intensity but sensitive to photoperiod due
+  to a restriction on growth in the light in short photoperiods}.
+\newblock \bibinfo{journal}{Plant, Cell \& Environment} \bibinfo{volume}{40},
+  \bibinfo{pages}{2608--2627}.
+\newblock \DOIprefix\doi{10.1111/pce.13000}.
+%Type = Article
+\bibitem[{Meron et~al.(2019)Meron, Bennett, Fernandez-Oto, Tzuk, Zelnik and
+  Grafi}]{Meron2019}
+\bibinfo{author}{Meron, E.}, \bibinfo{author}{Bennett, J.J.},
+  \bibinfo{author}{Fernandez-Oto, C.}, \bibinfo{author}{Tzuk, O.},
+  \bibinfo{author}{Zelnik, Y.R.}, \bibinfo{author}{Grafi, G.},
+  \bibinfo{year}{2019}.
+\newblock \bibinfo{title}{Continuum modeling of discrete plant communities: Why
+  does it work and why is it advantageous?}
+\newblock \bibinfo{journal}{Mathematics 2019, Vol. 7, Page 987}
+  \bibinfo{volume}{7}, \bibinfo{pages}{987}.
+\newblock \DOIprefix\doi{10.3390/math7100987}.
+%Type = Article
+\bibitem[{Monteith(1965)}]{Monteith1965}
+\bibinfo{author}{Monteith, J.L.}, \bibinfo{year}{1965}.
+\newblock \bibinfo{title}{Evaporation and environment}.
+\newblock \bibinfo{journal}{Symposia of the Society for Experimental Biology}
+  \bibinfo{volume}{19}, \bibinfo{pages}{205--234}.
+%Type = Article
+\bibitem[{Morris(1991)}]{Morris1991}
+\bibinfo{author}{Morris, M.D.}, \bibinfo{year}{1991}.
+\newblock \bibinfo{title}{Factorial sampling plans for preliminary
+  computational experiments}.
+\newblock \bibinfo{journal}{Technometrics} \bibinfo{volume}{33},
+  \bibinfo{pages}{161--174}.
+\newblock \DOIprefix\doi{10.1080/00401706.1991.10484804}.
+%Type = Article
+\bibitem[{Nadwodnik and Lohaus(2008)}]{Nadwodnik2008}
+\bibinfo{author}{Nadwodnik, J.}, \bibinfo{author}{Lohaus, G.},
+  \bibinfo{year}{2008}.
+\newblock \bibinfo{title}{Subcellular concentrations of sugar alcohols and
+  sugars in relation to phloem translocation in {Plantago major}, {Plantago
+  maritima}, {Prunus persica}, and {Apium graveolens}}.
+\newblock \bibinfo{journal}{Planta} \bibinfo{volume}{227},
+  \bibinfo{pages}{1079--1089}.
+\newblock \DOIprefix\doi{10.1007/s00425-007-0682-0}.
+%Type = Book
+\bibitem[{Nobel(2009)}]{Nobel2009}
+\bibinfo{author}{Nobel, P.S.}, \bibinfo{year}{2009}.
+\newblock \bibinfo{title}{Physicochemical and Environmental Plant Physiology}.
+\newblock \bibinfo{edition}{4th} ed., \bibinfo{publisher}{Academic Press},
+  \bibinfo{address}{Amsterdam}.
+%Type = Article
+\bibitem[{Paules et~al.(2025)Paules, Fatichi, Warring and
+  Paschalis}]{BuckleyPaules2025}
+\bibinfo{author}{Paules, J.B.}, \bibinfo{author}{Fatichi, S.},
+  \bibinfo{author}{Warring, B.}, \bibinfo{author}{Paschalis, A.},
+  \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{T\&c-crop: Representing mechanistic crop growth with
+  a terrestrial biosphere model (t\&c, v1.5) - model formulation and
+  validation}.
+\newblock \bibinfo{journal}{Geoscientific Model Development}
+  \bibinfo{volume}{18}, \bibinfo{pages}{1287--1305}.
+\newblock \DOIprefix\doi{10.5194/gmd-18-1287-2025}.
+%Type = Book
+\bibitem[{Press et~al.(2007)Press, Teukolsky, Vetterling and
+  Flannery}]{Press2007}
+\bibinfo{author}{Press, W.H.}, \bibinfo{author}{Teukolsky, S.A.},
+  \bibinfo{author}{Vetterling, W.T.}, \bibinfo{author}{Flannery, B.P.},
+  \bibinfo{year}{2007}.
+\newblock \bibinfo{title}{Numerical Recipes: The Art of Scientific Computing}.
+\newblock \bibinfo{edition}{3rd} ed., \bibinfo{publisher}{Cambridge University
+  Press}, \bibinfo{address}{Cambridge}.
+%Type = Article
+\bibitem[{Russo et~al.(2022)Russo, Ledder, Muller and Nisbet}]{Russo2022}
+\bibinfo{author}{Russo, S.E.}, \bibinfo{author}{Ledder, G.},
+  \bibinfo{author}{Muller, E.B.}, \bibinfo{author}{Nisbet, R.M.},
+  \bibinfo{year}{2022}.
+\newblock \bibinfo{title}{Dynamic energy budget models: fertile ground for
+  understanding resource allocation in plants in a changing world}.
+\newblock \bibinfo{journal}{Conservation Physiology} \bibinfo{volume}{10},
+  \bibinfo{pages}{coac061}.
+\newblock \DOIprefix\doi{10.1093/conphys/coac061}.
+%Type = Article
+\bibitem[{Saltelli et~al.(2010)Saltelli, Annoni, Azzini, Campolongo, Ratto and
+  Tarantola}]{Saltelli2010}
+\bibinfo{author}{Saltelli, A.}, \bibinfo{author}{Annoni, P.},
+  \bibinfo{author}{Azzini, I.}, \bibinfo{author}{Campolongo, F.},
+  \bibinfo{author}{Ratto, M.}, \bibinfo{author}{Tarantola, S.},
+  \bibinfo{year}{2010}.
+\newblock \bibinfo{title}{Variance based sensitivity analysis of model output.
+  design and estimator for the total sensitivity index}.
+\newblock \bibinfo{journal}{Computer Physics Communications}
+  \bibinfo{volume}{181}, \bibinfo{pages}{259--270}.
+\newblock \DOIprefix\doi{10.1016/j.cpc.2009.09.018}.
+%Type = Article
+\bibitem[{Scialdone et~al.(2013)Scialdone, Mugford, Feike, Skeffington,
+  Borrill, Graf, Smith and Howard}]{Scialdone2013}
+\bibinfo{author}{Scialdone, A.}, \bibinfo{author}{Mugford, S.T.},
+  \bibinfo{author}{Feike, D.}, \bibinfo{author}{Skeffington, A.},
+  \bibinfo{author}{Borrill, P.}, \bibinfo{author}{Graf, A.},
+  \bibinfo{author}{Smith, A.M.}, \bibinfo{author}{Howard, M.},
+  \bibinfo{year}{2013}.
+\newblock \bibinfo{title}{Arabidopsis plants perform arithmetic division to
+  prevent starvation at night}.
+\newblock \bibinfo{journal}{eLife} ,
+  \bibinfo{pages}{e00669}\DOIprefix\doi{10.7554/elife.00669}.
+%Type = Article
+\bibitem[{Seki et~al.(2017)Seki, Ohara, Hearn, Frank, Silva, Caldana, Webb and
+  Satake}]{Seki2017}
+\bibinfo{author}{Seki, M.}, \bibinfo{author}{Ohara, T.},
+  \bibinfo{author}{Hearn, T.J.}, \bibinfo{author}{Frank, A.},
+  \bibinfo{author}{Silva, V.C.D.}, \bibinfo{author}{Caldana, C.},
+  \bibinfo{author}{Webb, A.A.}, \bibinfo{author}{Satake, A.},
+  \bibinfo{year}{2017}.
+\newblock \bibinfo{title}{Adjustment of the {Arabidopsis} circadian oscillator
+  by sugar signalling dictates the regulation of starch metabolism}.
+\newblock \bibinfo{journal}{Scientific Reports} \bibinfo{volume}{7},
+  \bibinfo{pages}{8305}.
+\newblock \DOIprefix\doi{10.1038/s41598-017-08325-y}.
+%Type = Article
+\bibitem[{Sharkey et~al.(2007)Sharkey, Bernacchi, Farquhar and
+  Singsaas}]{Sharkey2007}
+\bibinfo{author}{Sharkey, T.D.}, \bibinfo{author}{Bernacchi, C.J.},
+  \bibinfo{author}{Farquhar, G.D.}, \bibinfo{author}{Singsaas, E.L.},
+  \bibinfo{year}{2007}.
+\newblock \bibinfo{title}{Fitting photosynthetic carbon dioxide response curves
+  for {C3} leaves}.
+\newblock \bibinfo{journal}{Plant, Cell and Environment} \bibinfo{volume}{30},
+  \bibinfo{pages}{1035--1040}.
+\newblock \DOIprefix\doi{10.1111/j.1365-3040.2007.01710.x}.
+%Type = Article
+\bibitem[{Shen et~al.(2011)Shen, Yuan, Zhang, Li, Bai, Chen, Zhang and
+  Zhang}]{Shen2011}
+\bibinfo{author}{Shen, J.}, \bibinfo{author}{Yuan, L.}, \bibinfo{author}{Zhang,
+  J.}, \bibinfo{author}{Li, H.}, \bibinfo{author}{Bai, Z.},
+  \bibinfo{author}{Chen, X.}, \bibinfo{author}{Zhang, W.},
+  \bibinfo{author}{Zhang, F.}, \bibinfo{year}{2011}.
+\newblock \bibinfo{title}{Phosphorus dynamics: From soil to plant}.
+\newblock \bibinfo{journal}{Plant Physiology} \bibinfo{volume}{156},
+  \bibinfo{pages}{997--1005}.
+\newblock \DOIprefix\doi{10.1104/pp.111.175232}.
+%Type = Article
+\bibitem[{Siev{\"a}nen et~al.(2014)Siev{\"a}nen, Godin, {De Jong} and
+  Nikinmaa}]{Sievnen2014}
+\bibinfo{author}{Siev{\"a}nen, R.}, \bibinfo{author}{Godin, C.},
+  \bibinfo{author}{{De Jong}, T.M.}, \bibinfo{author}{Nikinmaa, E.},
+  \bibinfo{year}{2014}.
+\newblock \bibinfo{title}{Functional--structural plant models: a growing
+  paradigm for plant studies}.
+\newblock \bibinfo{journal}{Annals of Botany} \bibinfo{volume}{114},
+  \bibinfo{pages}{599--603}.
+\newblock \DOIprefix\doi{10.1093/aob/mcu175}.
+%Type = Article
+\bibitem[{Smith and Stitt(2007)}]{Smith2007}
+\bibinfo{author}{Smith, A.M.}, \bibinfo{author}{Stitt, M.},
+  \bibinfo{year}{2007}.
+\newblock \bibinfo{title}{Coordination of carbon supply and plant growth}.
+\newblock \bibinfo{journal}{Plant, Cell \& Environment} \bibinfo{volume}{30},
+  \bibinfo{pages}{1126--1149}.
+\newblock \DOIprefix\doi{10.1111/j.1365-3040.2007.01708.x}.
+%Type = Article
+\bibitem[{Sobol'(2001)}]{Sobol2001}
+\bibinfo{author}{Sobol', I.M.}, \bibinfo{year}{2001}.
+\newblock \bibinfo{title}{Global sensitivity indices for nonlinear mathematical
+  models and their {Monte Carlo} estimates}.
+\newblock \bibinfo{journal}{Mathematics and Computers in Simulation}
+  \bibinfo{volume}{55}, \bibinfo{pages}{271--280}.
+\newblock \DOIprefix\doi{10.1016/S0378-4754(00)00270-6}.
+%Type = Article
+\bibitem[{Stitt and Zeeman(2012)}]{Stitt2012}
+\bibinfo{author}{Stitt, M.}, \bibinfo{author}{Zeeman, S.C.},
+  \bibinfo{year}{2012}.
+\newblock \bibinfo{title}{Starch turnover: pathways, regulation and role in
+  growth}.
+\newblock \bibinfo{journal}{Current Opinion in Plant Biology}
+  \bibinfo{volume}{15}, \bibinfo{pages}{282--292}.
+\newblock \DOIprefix\doi{10.1016/j.pbi.2012.03.016}.
+%Type = Article
+\bibitem[{Sulpice et~al.(2014)Sulpice, Flis, Ivakov, Apelt, Krohn, Encke, Abel,
+  Feil, Lunn and Stitt}]{Sulpice2014}
+\bibinfo{author}{Sulpice, R.}, \bibinfo{author}{Flis, A.},
+  \bibinfo{author}{Ivakov, A.A.}, \bibinfo{author}{Apelt, F.},
+  \bibinfo{author}{Krohn, N.}, \bibinfo{author}{Encke, B.},
+  \bibinfo{author}{Abel, C.}, \bibinfo{author}{Feil, R.},
+  \bibinfo{author}{Lunn, J.E.}, \bibinfo{author}{Stitt, M.},
+  \bibinfo{year}{2014}.
+\newblock \bibinfo{title}{Arabidopsis coordinates the diurnal regulation of
+  carbon allocation and growth across a wide range of photoperiods}.
+\newblock \bibinfo{journal}{Molecular Plant} \bibinfo{volume}{7},
+  \bibinfo{pages}{137--155}.
+\newblock \DOIprefix\doi{10.1093/mp/sst127}.
+%Type = Phdthesis
+\bibitem[{Tedone(2020)}]{Tedone2020}
+\bibinfo{author}{Tedone, F.}, \bibinfo{year}{2020}.
+\newblock \bibinfo{title}{The mathematical modeling of plant growth and
+  applications to robotics}.
+\newblock Ph.D. thesis. Gran Sasso Science Institute.
+  \bibinfo{address}{L'Aquila, Italy}.
+\newblock \URLprefix \url{https://hdl.handle.net/20.500.12571/14997}.
+  \bibinfo{note}{{Doctoral} thesis, defended 2 February 2020. {GSSI}
+  institutional repository ({IRIS}) record 20.500.12571/14997}.
+%Type = Article
+\bibitem[{Thornley(1972)}]{Thornley1972}
+\bibinfo{author}{Thornley, J.H.M.}, \bibinfo{year}{1972}.
+\newblock \bibinfo{title}{A balanced quantitative model for root:shoot ratios
+  in vegetative plants}.
+\newblock \bibinfo{journal}{Annals of Botany} \bibinfo{volume}{36},
+  \bibinfo{pages}{431--441}.
+\newblock \DOIprefix\doi{10.1093/oxfordjournals.aob.a084602}.
+%Type = Book
+\bibitem[{Thornley and Johnson(1990)}]{ThornleyJohnson1990}
+\bibinfo{author}{Thornley, J.H.M.}, \bibinfo{author}{Johnson, I.R.},
+  \bibinfo{year}{1990}.
+\newblock \bibinfo{title}{Plant and Crop Modelling: A Mathematical Approach to
+  Plant and Crop Physiology}.
+\newblock \bibinfo{publisher}{Clarendon Press}, \bibinfo{address}{Oxford}.
+%Type = Article
+\bibitem[{Tian et~al.(2024)Tian, Zeng and Xing}]{Tian2024}
+\bibinfo{author}{Tian, Y.}, \bibinfo{author}{Zeng, Z.}, \bibinfo{author}{Xing,
+  Y.}, \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{A review of discrete element method applications in
+  soil--plant interactions: Challenges and opportunities}.
+\newblock \bibinfo{journal}{Agriculture 2024, Vol. 14, Page 1486}
+  \bibinfo{volume}{14}, \bibinfo{pages}{1486}.
+\newblock \DOIprefix\doi{10.3390/agriculture14091486}.
+%Type = Book
+\bibitem[{Tinker and Nye(2000)}]{Tinker2000}
+\bibinfo{author}{Tinker, P.B.}, \bibinfo{author}{Nye, P.H.},
+  \bibinfo{year}{2000}.
+\newblock \bibinfo{title}{Solute Movement in the Rhizosphere}.
+\newblock \bibinfo{edition}{2nd} ed., \bibinfo{publisher}{Oxford University
+  Press}, \bibinfo{address}{New York}.
+%Type = Book
+\bibitem[{Wallach et~al.(2018)Wallach, Makowski, Jones and Brun}]{Wallach2018}
+\bibinfo{author}{Wallach, D.}, \bibinfo{author}{Makowski, D.},
+  \bibinfo{author}{Jones, J.W.}, \bibinfo{author}{Brun, F.},
+  \bibinfo{year}{2018}.
+\newblock \bibinfo{title}{Working with Dynamic Crop Models: Methods, Tools and
+  Examples for Agriculture and Environment}.
+\newblock \bibinfo{edition}{3rd} ed., \bibinfo{publisher}{Academic Press}.
+\newblock \DOIprefix\doi{10.1016/C2016-0-01552-8}.
+%Type = Article
+\bibitem[{Webb and Satake(2015)}]{Webb2015}
+\bibinfo{author}{Webb, A.A.}, \bibinfo{author}{Satake, A.},
+  \bibinfo{year}{2015}.
+\newblock \bibinfo{title}{Understanding circadian regulation of carbohydrate
+  metabolism in {Arabidopsis} using mathematical models}.
+\newblock \bibinfo{journal}{Plant \& cell physiology} \bibinfo{volume}{56},
+  \bibinfo{pages}{586--593}.
+\newblock \DOIprefix\doi{10.1093/pcp/pcv033}.
+%Type = Article
+\bibitem[{Weraduwage et~al.(2015)Weraduwage, Chen, Anozie, Morales, Weise and
+  Sharkey}]{Weraduwage2015}
+\bibinfo{author}{Weraduwage, S.M.}, \bibinfo{author}{Chen, J.},
+  \bibinfo{author}{Anozie, F.C.}, \bibinfo{author}{Morales, A.},
+  \bibinfo{author}{Weise, S.E.}, \bibinfo{author}{Sharkey, T.D.},
+  \bibinfo{year}{2015}.
+\newblock \bibinfo{title}{The relationship between leaf area growth and biomass
+  accumulation in {Arabidopsis} thaliana}.
+\newblock \bibinfo{journal}{Frontiers in Plant Science} \bibinfo{volume}{6},
+  \bibinfo{pages}{167}.
+\newblock \DOIprefix\doi{10.3389/fpls.2015.00167}.
+%Type = Article
+\bibitem[{de~Wit et~al.(2019)de~Wit, Boogaard, Fumagalli, Janssen, Knapen, van
+  Kraalingen, Supit, van~der Wijngaart and van Diepen}]{deWit2019}
+\bibinfo{author}{de~Wit, A.}, \bibinfo{author}{Boogaard, H.},
+  \bibinfo{author}{Fumagalli, D.}, \bibinfo{author}{Janssen, S.},
+  \bibinfo{author}{Knapen, R.}, \bibinfo{author}{van Kraalingen, D.},
+  \bibinfo{author}{Supit, I.}, \bibinfo{author}{van~der Wijngaart, R.},
+  \bibinfo{author}{van Diepen, K.}, \bibinfo{year}{2019}.
+\newblock \bibinfo{title}{25 years of the {WOFOST} cropping systems model}.
+\newblock \bibinfo{journal}{Agricultural Systems} \bibinfo{volume}{168},
+  \bibinfo{pages}{154--167}.
+\newblock \DOIprefix\doi{10.1016/j.agsy.2018.06.018}.
+%Type = Article
+\bibitem[{Xu et~al.(2012)Xu, Fisher, Wullschleger, Wilson, Cai and
+  McDowell}]{Xu2012}
+\bibinfo{author}{Xu, C.}, \bibinfo{author}{Fisher, R.},
+  \bibinfo{author}{Wullschleger, S.D.}, \bibinfo{author}{Wilson, C.J.},
+  \bibinfo{author}{Cai, M.}, \bibinfo{author}{McDowell, N.G.},
+  \bibinfo{year}{2012}.
+\newblock \bibinfo{title}{Toward a mechanistic modeling of nitrogen limitation
+  on vegetation dynamics}.
+\newblock \bibinfo{journal}{PLOS ONE} \bibinfo{volume}{7},
+  \bibinfo{pages}{e37914}.
+\newblock \DOIprefix\doi{10.1371/journal.pone.0037914}.
+%Type = Article
+\bibitem[{Yu et~al.(2017)Yu, Cai, Zheng, Li and Wang}]{YU2017}
+\bibinfo{author}{Yu, L.y.}, \bibinfo{author}{Cai, H.j.},
+  \bibinfo{author}{Zheng, Z.}, \bibinfo{author}{Li, Z.j.},
+  \bibinfo{author}{Wang, J.}, \bibinfo{year}{2017}.
+\newblock \bibinfo{title}{Towards a more flexible representation of water
+  stress effects in the nonlinear {Jarvis} model}.
+\newblock \bibinfo{journal}{Journal of Integrative Agriculture}
+  \bibinfo{volume}{16}, \bibinfo{pages}{210--220}.
+\newblock \DOIprefix\doi{10.1016/S2095-3119(15)61307-7}.
+%Type = Article
+\bibitem[{Yu et~al.(2021)Yu, Guo, Liu, Wang, Ma, Li and Liu}]{Yu2021}
+\bibinfo{author}{Yu, S.}, \bibinfo{author}{Guo, J.}, \bibinfo{author}{Liu, Z.},
+  \bibinfo{author}{Wang, Y.}, \bibinfo{author}{Ma, J.}, \bibinfo{author}{Li,
+  J.}, \bibinfo{author}{Liu, F.}, \bibinfo{year}{2021}.
+\newblock \bibinfo{title}{Assessing the impact of soil moisture on canopy
+  transpiration using a modified jarvis-stewart model}.
+\newblock \bibinfo{journal}{Water (Switzerland)} \bibinfo{volume}{13},
+  \bibinfo{pages}{2720}.
+\newblock \DOIprefix\doi{10.3390/w13192720}.
+%Type = Book
+\bibitem[{Zeigler et~al.(2000)Zeigler, Praehofer and Kim}]{Zeigler2000}
+\bibinfo{author}{Zeigler, B.P.}, \bibinfo{author}{Praehofer, H.},
+  \bibinfo{author}{Kim, T.G.}, \bibinfo{year}{2000}.
+\newblock \bibinfo{title}{Theory of Modeling and Simulation: Integrating
+  Discrete Event and Continuous Complex Dynamic Systems}.
+\newblock \bibinfo{edition}{2nd} ed., \bibinfo{publisher}{Academic Press},
+  \bibinfo{address}{San Diego}.
+
+\end{thebibliography}

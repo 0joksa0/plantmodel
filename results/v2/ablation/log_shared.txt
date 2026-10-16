@@ -1,0 +1,24 @@
+Parameterisation: shared; conditions: chamber 160 PAR 21/19 C; calibration: frozen
+Running 12 calibrations on 16 thread(s)...
+
+=== Mode: basic ===
+  PP_h   lit_rgr   model_rgr   err%       lc      lsni    lambda_sb             final_BM  
+  4      0.0680    0.0397      41.59      1.00    0.12    0.002950    -         0.1266    
+  6      0.1135    0.0679      40.19      1.00    0.12    0.002950    -         0.2865    
+  8      0.1708    0.0972      43.08      1.00    0.12    0.002950    -         0.6708    
+  12     0.2600    0.1581      39.20      1.00    0.12    0.002950    -         3.9184    
+
+=== Mode: farquhar ===
+  PP_h   lit_rgr   model_rgr   err%       lc      lsni    lambda_sb             final_BM  
+  4      0.0680    0.0808      18.82      1.00    0.12    0.002950    -         0.4165    
+  6      0.1135    0.1223      7.77       1.00    0.12    0.002950    -         1.3888    
+  8      0.1708    0.1630      4.54       1.00    0.12    0.002950    -         4.5231    
+  12     0.2600    0.2428      6.60       1.00    0.12    0.002950    -         45.7656   
+
+=== Mode: farquhar_jarvis ===
+  PP_h   lit_rgr   model_rgr   err%       lc      lsni    lambda_sb   lsdi      final_BM  
+  4      0.0680    0.0782      15.04      1.00    0.12    0.002950    0.1000    0.3866    
+  6      0.1135    0.1189      4.77       1.00    0.12    0.002950    0.1000    1.2581    
+  8      0.1708    0.1588      7.00       1.00    0.12    0.002950    0.1000    4.0055    
+  12     0.2600    0.2374      8.71       1.00    0.12    0.002950    0.1000    39.0282   
+Ablation results written to results/v2/ablation/ablation_shared.csv

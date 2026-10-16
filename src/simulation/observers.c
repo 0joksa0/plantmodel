@@ -1,5 +1,7 @@
 #include "simulation/observers.h"
 #include "model/model.h"
+#include "model/state.h"   /* PlantStateIndex: X_N, X_P for the domain guard */
+#include "util/fpclass.h"
 
 #include <math.h>
 #include <stdbool.h>
@@ -32,10 +34,13 @@ void sim_sampling_observer(real_t t, const real_t* x, size_t n, void* vctx)
 
         o->compute_algebraic(&tmp, fmod(o->next_t, REAL(24.0)), o->rhs_ctx->starch_night_start);
 
-        o->result->sucrose[o->step] = tmp.carbohydrates.sucrose;
-        o->result->starch[o->step] = tmp.carbohydrates.starch;
-        o->result->ph[o->step] = tmp.photo.photosynthesis;
-        o->result->partition[o->step] = tmp.growth.total_biomass;
+        o->result->sucrose[o->step]         = tmp.carbohydrates.sucrose;
+        o->result->starch[o->step]          = tmp.carbohydrates.starch;
+        o->result->ph[o->step]              = tmp.photo.photosynthesis;
+        o->result->total_biomass[o->step]       = tmp.growth.total_biomass;
+        o->result->sucrose_vacuole[o->step] = tmp.carbohydrates.sucrose_vacuole;
+        o->result->sucrose_total[o->step]   = tmp.carbohydrates.sucrose
+                                            + tmp.carbohydrates.sucrose_vacuole;
 
         o->step++;
         o->result->filled_steps = o->step;
@@ -83,15 +88,75 @@ void csv_observer(real_t t, const real_t* x, size_t n, void* ctx)
         (double)tmp.carbohydrates.night_efficiency_starch);
 }
 
+/*
+ * Records excursions of the nutrient pools out of the admissible quadrant.
+ *
+ * Purely diagnostic: it observes, never modifies the state, and never stops
+ * the run.  It exists because "finite" and "meaningful" are not the same
+ * condition for this model, and until now only the first was being checked.
+ * See DomainGuardCtx in include/simulation/observers.h for why the
+ * distinction matters to the callers that classify parameter sets.
+ */
+void domain_guard_observer(real_t t, const real_t* x, size_t n, void* ctx)
+{
+    DomainGuardCtx* g = (DomainGuardCtx*)ctx;
+    if (!g)
+        return;
+
+    static const size_t guarded[] = { X_N, X_P };
+    int any = 0;
+
+    for (size_t k = 0; k < sizeof(guarded) / sizeof(guarded[0]); ++k) {
+        const size_t i = guarded[k];
+        if (i >= n)
+            continue;
+        const double v = (double)x[i];
+        if (v < 0.0) {
+            any = 1;
+            if (!g->tripped) {
+                g->tripped     = 1;
+                g->t_first     = (double)t;
+                g->index_first = i;
+            }
+            if (v < g->min_value) {
+                g->min_value = v;
+                g->index_min = i;
+            }
+        }
+    }
+    if (any)
+        g->n_events++;
+}
+
 void nan_guard_observer(real_t t, const real_t* x, size_t n, void* ctx)
 {
-    (void)ctx;
+    NanGuardCtx* g = (NanGuardCtx*)ctx;
+
     for (size_t i = 0; i < n; ++i) {
-        if (!isfinite(x[i])) {
-            fprintf(stderr,
-                "NaN detected at t=%f in state[%zu]\n",
-                (double)t, i);
-            abort();
+        /* pm_isfinite, not isfinite: the project builds with -ffast-math,
+         * under which the library macro folds to a constant 1 and this
+         * entire guard is optimised away. See include/util/fpclass.h. */
+        if (pm_isnonfinite((double)x[i])) {
+            if (!g) {
+                /* No record attached: preserve the historical fail-fast. */
+                fprintf(stderr, "non-finite state at t=%f in state[%zu]\n",
+                        (double)t, i);
+                abort();
+            }
+            g->n_events++;
+            if (!g->tripped) {
+                g->tripped     = 1;
+                g->t_first     = (double)t;
+                g->index_first = i;
+            }
+            if (!g->warned) {
+                g->warned = 1;
+                fprintf(stderr,
+                    "warning: trajectory diverged — non-finite state[%zu] "
+                    "at t=%.3f h; integration continues, caller must classify "
+                    "this run as invalid\n", i, (double)t);
+            }
+            return;  /* one report per sample is enough */
         }
     }
 }

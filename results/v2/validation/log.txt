@@ -1,0 +1,10 @@
+warning: solver step budget (400000) exhausted at t=139.254724 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: solver step budget (400000) exhausted at t=139.419055 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: solver step budget (400000) exhausted at t=93.681753 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: solver step budget (400000) exhausted at t=93.689938 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: solver step budget (400000) exhausted at t=109.775009 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: solver step budget (400000) exhausted at t=116.577271 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+Loaded sugar/starch reference data: 65 rows from data/paper/sugars_starch_reference.csv
+Validation written to results/v2/validation/validation.csv
+Overall metrics written to results/v2/validation/validation_overall.csv
+MAE=0.097559 RMSE=0.107912 MAPE=63.010% pass=0/4 (RGR threshold=10.000%, dt RGR threshold=2.000%, dt biomass threshold=3.000%, sucrose nRMSE threshold=0.500, starch nRMSE threshold=0.250)

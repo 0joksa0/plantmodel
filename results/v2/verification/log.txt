@@ -1,0 +1,5 @@
+wrote results/verification/solver_residual.csv
+wrote results/verification/solver_parity.csv
+wrote results/verification/solver_montecarlo.csv
+wrote results/verification/solver_water_stress.csv
+wrote results/verification/jarvis_temperature.csv

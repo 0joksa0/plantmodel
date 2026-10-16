@@ -1,0 +1,2298 @@
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     512 samples × 16 workers  (total evals: 9216)
+  Bootstrap: 1000 replicates  (95% percentile intervals)
+  Seed:      20240513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=4h] ===
+  samples=512  workers=16  total_evaluations=9216
+  sampler=sobol  seed=20240513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  carbohydrates.respiration_frequency               0.1069  [ 0.0185,  0.2018]      0.4414  [ 0.3657,  0.5252]      0.3345
+  nutrients.max_nitrogen_uptake                     0.0364  [ 0.0000,  0.1312]      0.4240  [ 0.3474,  0.5038]      0.3876
+  nutrients.max_phosphorus_uptake                   0.0871  [ 0.0000,  0.1766]      0.4020  [ 0.3293,  0.4795]      0.3149
+  gas_exchange.max_rubisco_carboxylation_rate       0.0000  [ 0.0000,  0.0413]      0.2080  [ 0.1533,  0.2680]      0.2080
+  gas_exchange.ambient_CO2_concentration            0.0000  [ 0.0000,  0.0420]      0.1936  [ 0.1412,  0.2532]      0.1936
+  gas_exchange.electron_transport_rate              0.0000  [ 0.0000,  0.0469]      0.1883  [ 0.1337,  0.2458]      0.1883
+  photo.max_PAR                                     0.0303  [ 0.0000,  0.0832]      0.1460  [ 0.1003,  0.1943]      0.1157
+  gas_exchange.leaf_water_potential                 0.0044  [ 0.0000,  0.0616]      0.1443  [ 0.0962,  0.1943]      0.1400
+  nutrients.phosphorus_soil_content                 0.0007  [ 0.0000,  0.0516]      0.0673  [ 0.0375,  0.1027]      0.0667
+  nutrients.nitrogen_soil_content                   0.0062  [ 0.0000,  0.0479]      0.0661  [ 0.0368,  0.0990]      0.0599
+  gas_exchange.leaf_temperature                     0.0000  [ 0.0000,  0.0271]      0.0563  [ 0.0273,  0.0872]      0.0563
+  gas_exchange.relative_humidity                    0.0000  [ 0.0000,  0.0335]      0.0448  [ 0.0188,  0.0750]      0.0448
+  growth.lambda_sb                                  0.0102  [ 0.0000,  0.0436]      0.0379  [ 0.0145,  0.0640]      0.0277
+  carbohydrates.k_vacuole_in                        0.0083  [ 0.0000,  0.0260]      0.0041  [ 0.0000,  0.0129]      0.0000
+  carbohydrates.sucrose                             0.0083  [ 0.0000,  0.0261]      0.0041  [ 0.0000,  0.0130]      0.0000
+  growth.total_biomass                              0.0042  [ 0.0000,  0.0094]      0.0014  [ 0.0012,  0.0016]      0.0000
+
+  Completed in 6s
+  → results/sensitivity/sobol/sobol_rgr_4h.csv
+
+=== Sobol variance decomposition [photoperiod=6h] ===
+  samples=512  workers=16  total_evaluations=9216
+  sampler=sobol  seed=20240513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_nitrogen_uptake                     0.0239  [ 0.0000,  0.1202]      0.4461  [ 0.3714,  0.5188]      0.4222
+  nutrients.max_phosphorus_uptake                   0.1500  [ 0.0514,  0.2520]      0.4439  [ 0.3687,  0.5264]      0.2939
+  carbohydrates.respiration_frequency               0.0851  [ 0.0000,  0.1836]      0.3686  [ 0.2986,  0.4449]      0.2835
+  gas_exchange.max_rubisco_carboxylation_rate       0.0012  [ 0.0000,  0.0515]      0.1902  [ 0.1412,  0.2433]      0.1890
+  gas_exchange.leaf_water_potential                 0.0212  [ 0.0000,  0.0784]      0.1487  [ 0.1016,  0.1968]      0.1275
+  gas_exchange.ambient_CO2_concentration            0.0000  [ 0.0000,  0.0513]      0.1457  [ 0.1023,  0.1938]      0.1457
+  gas_exchange.electron_transport_rate              0.0000  [ 0.0000,  0.0493]      0.1204  [ 0.0779,  0.1670]      0.1204
+  photo.max_PAR                                     0.0227  [ 0.0000,  0.0651]      0.0942  [ 0.0614,  0.1332]      0.0715
+  gas_exchange.leaf_temperature                     0.0000  [ 0.0000,  0.0272]      0.0567  [ 0.0290,  0.0881]      0.0567
+  gas_exchange.relative_humidity                    0.0000  [ 0.0000,  0.0137]      0.0371  [ 0.0157,  0.0635]      0.0371
+  nutrients.phosphorus_soil_content                 0.0124  [ 0.0000,  0.0470]      0.0358  [ 0.0169,  0.0594]      0.0234
+  nutrients.nitrogen_soil_content                   0.0000  [ 0.0000,  0.0069]      0.0230  [ 0.0075,  0.0401]      0.0230
+  growth.lambda_sb                                  0.0039  [ 0.0000,  0.0112]      0.0150  [ 0.0028,  0.0299]      0.0111
+  carbohydrates.k_vacuole_in                        0.0000  [ 0.0000,  0.0001]      0.0084  [ 0.0000,  0.0237]      0.0084
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0084  [ 0.0000,  0.0225]      0.0084
+  growth.total_biomass                              0.0045  [ 0.0000,  0.0090]      0.0012  [ 0.0011,  0.0014]      0.0000
+
+  Completed in 6s
+  → results/sensitivity/sobol/sobol_rgr_6h.csv
+
+=== Sobol variance decomposition [photoperiod=8h] ===
+  samples=512  workers=16  total_evaluations=9216
+  sampler=sobol  seed=20240513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.1761  [ 0.0808,  0.2757]      0.4645  [ 0.3923,  0.5412]      0.2884
+  nutrients.max_nitrogen_uptake                     0.0426  [ 0.0000,  0.1346]      0.3947  [ 0.3296,  0.4671]      0.3521
+  carbohydrates.respiration_frequency               0.0657  [ 0.0000,  0.1507]      0.3335  [ 0.2687,  0.4078]      0.2678
+  gas_exchange.max_rubisco_carboxylation_rate       0.0168  [ 0.0000,  0.0784]      0.2040  [ 0.1542,  0.2596]      0.1872
+  gas_exchange.leaf_water_potential                 0.0000  [ 0.0000,  0.0415]      0.1887  [ 0.1379,  0.2432]      0.1887
+  gas_exchange.electron_transport_rate              0.0000  [ 0.0000,  0.0352]      0.1518  [ 0.1027,  0.1986]      0.1518
+  gas_exchange.ambient_CO2_concentration            0.0123  [ 0.0000,  0.0624]      0.1251  [ 0.0866,  0.1702]      0.1128
+  photo.max_PAR                                     0.0306  [ 0.0000,  0.0770]      0.1025  [ 0.0668,  0.1429]      0.0719
+  gas_exchange.leaf_temperature                     0.0000  [ 0.0000,  0.0396]      0.0736  [ 0.0424,  0.1064]      0.0736
+  nutrients.phosphorus_soil_content                 0.0000  [ 0.0000,  0.0174]      0.0381  [ 0.0189,  0.0613]      0.0381
+  gas_exchange.relative_humidity                    0.0000  [ 0.0000,  0.0000]      0.0330  [ 0.0141,  0.0548]      0.0330
+  nutrients.nitrogen_soil_content                   0.0000  [ 0.0000,  0.0099]      0.0124  [ 0.0046,  0.0237]      0.0124
+  growth.lambda_sb                                  0.0077  [ 0.0000,  0.0164]      0.0113  [ 0.0036,  0.0229]      0.0037
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0033  [ 0.0000,  0.0102]      0.0033
+  growth.total_biomass                              0.0036  [ 0.0000,  0.0081]      0.0011  [ 0.0010,  0.0013]      0.0000
+  carbohydrates.k_vacuole_in                        0.0000  [ 0.0000,  0.0001]      0.0000  [ 0.0000,  0.0000]      0.0000
+
+  Completed in 6s
+  → results/sensitivity/sobol/sobol_rgr_8h.csv
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=512  workers=16  total_evaluations=9216
+  sampler=sobol  seed=20240513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.1337  [ 0.0318,  0.2438]      0.4361  [ 0.3718,  0.5090]      0.3024
+  nutrients.max_nitrogen_uptake                     0.0000  [ 0.0000,  0.0758]      0.3320  [ 0.2666,  0.4007]      0.3320
+  carbohydrates.respiration_frequency               0.0371  [ 0.0000,  0.1121]      0.2409  [ 0.1893,  0.3045]      0.2038
+  gas_exchange.electron_transport_rate              0.0895  [ 0.0130,  0.1608]      0.2211  [ 0.1653,  0.2767]      0.1316
+  gas_exchange.max_rubisco_carboxylation_rate       0.0410  [ 0.0000,  0.1159]      0.2140  [ 0.1655,  0.2742]      0.1730
+  photo.max_PAR                                     0.0495  [ 0.0000,  0.1183]      0.2014  [ 0.1539,  0.2586]      0.1519
+  gas_exchange.ambient_CO2_concentration            0.0477  [ 0.0000,  0.1062]      0.1966  [ 0.1468,  0.2480]      0.1489
+  gas_exchange.leaf_water_potential                 0.0083  [ 0.0000,  0.0715]      0.1907  [ 0.1417,  0.2414]      0.1824
+  gas_exchange.leaf_temperature                     0.0000  [ 0.0000,  0.0189]      0.0965  [ 0.0601,  0.1388]      0.0965
+  nutrients.phosphorus_soil_content                 0.0019  [ 0.0000,  0.0356]      0.0682  [ 0.0377,  0.1022]      0.0663
+  gas_exchange.relative_humidity                    0.0000  [ 0.0000,  0.0000]      0.0617  [ 0.0331,  0.0942]      0.0617
+  growth.lambda_sb                                  0.0000  [ 0.0000,  0.0030]      0.0453  [ 0.0229,  0.0706]      0.0453
+  nutrients.nitrogen_soil_content                   0.0017  [ 0.0000,  0.0147]      0.0444  [ 0.0215,  0.0714]      0.0427
+  carbohydrates.k_vacuole_in                        0.0000  [ 0.0000,  0.0018]      0.0062  [ 0.0000,  0.0155]      0.0062
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0030  [ 0.0000,  0.0090]      0.0030
+  growth.total_biomass                              0.0036  [ 0.0000,  0.0080]      0.0010  [ 0.0009,  0.0011]      0.0000
+
+  Completed in 6s
+  → results/sensitivity/sobol/sobol_rgr_12h.csv
+
+=== Done ===
+prod rgr exit=0
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    J_carb = 0.5*(sucrose/max_sucrose + starch/max_starch)
+  Days:      35
+  Analysis:  sobol
+  Sobol:     512 samples × 16 workers  (total evals: 9216)
+  Bootstrap: 1000 replicates  (95% percentile intervals)
+  Seed:      20240513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=4h] ===
+  samples=512  workers=16  total_evaluations=9216
+  sampler=sobol  seed=20240513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  carbohydrates.respiration_frequency               0.1525  [ 0.0411,  0.2602]      0.4734  [ 0.3402,  0.6265]      0.3209
+  nutrients.max_phosphorus_uptake                   0.0862  [ 0.0000,  0.1863]      0.4261  [ 0.3083,  0.5645]      0.3399
+  nutrients.max_nitrogen_uptake                     0.0712  [ 0.0000,  0.1683]      0.3171  [ 0.2288,  0.4301]      0.2459
+  gas_exchange.max_rubisco_carboxylation_rate       0.0881  [ 0.0000,  0.2198]      0.2658  [ 0.1920,  0.3645]      0.1777
+  gas_exchange.electron_transport_rate              0.0204  [ 0.0000,  0.0953]      0.2424  [ 0.1794,  0.3158]      0.2220
+  gas_exchange.leaf_water_potential                 0.1182  [ 0.0348,  0.1984]      0.1860  [ 0.1248,  0.2575]      0.0678
+  gas_exchange.ambient_CO2_concentration            0.0405  [ 0.0000,  0.1091]      0.1736  [ 0.1301,  0.2220]      0.1331
+  photo.max_PAR                                     0.0399  [ 0.0000,  0.1117]      0.1526  [ 0.1026,  0.2102]      0.1127
+  gas_exchange.leaf_temperature                     0.0078  [ 0.0000,  0.0503]      0.0581  [ 0.0256,  0.1000]      0.0503
+  nutrients.nitrogen_soil_content                   0.0073  [ 0.0000,  0.0414]      0.0565  [ 0.0193,  0.1064]      0.0492
+  nutrients.phosphorus_soil_content                 0.0000  [ 0.0000,  0.0055]      0.0539  [ 0.0173,  0.1085]      0.0539
+  gas_exchange.relative_humidity                    0.0000  [ 0.0000,  0.0000]      0.0347  [ 0.0164,  0.0590]      0.0347
+  growth.lambda_sb                                  0.0000  [ 0.0000,  0.0024]      0.0280  [ 0.0064,  0.0566]      0.0280
+  carbohydrates.k_vacuole_in                        0.0000  [ 0.0000,  0.0005]      0.0000  [ 0.0000,  0.0000]      0.0000
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  growth.total_biomass                              0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+
+  Completed in 7s
+  → results/sensitivity/sobol/sobol_carb_4h.csv
+
+=== Sobol variance decomposition [photoperiod=6h] ===
+  samples=512  workers=16  total_evaluations=9216
+  sampler=sobol  seed=20240513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.1377  [ 0.0566,  0.2347]      0.4558  [ 0.3290,  0.6143]      0.3181
+  carbohydrates.respiration_frequency               0.1211  [ 0.0291,  0.2141]      0.3830  [ 0.2434,  0.5568]      0.2618
+  nutrients.max_nitrogen_uptake                     0.0344  [ 0.0000,  0.1259]      0.3592  [ 0.2473,  0.4825]      0.3249
+  gas_exchange.max_rubisco_carboxylation_rate       0.0558  [ 0.0000,  0.1784]      0.2519  [ 0.1637,  0.3648]      0.1961
+  gas_exchange.electron_transport_rate              0.0000  [ 0.0000,  0.0834]      0.2239  [ 0.1533,  0.3162]      0.2239
+  gas_exchange.ambient_CO2_concentration            0.0431  [ 0.0000,  0.1091]      0.1600  [ 0.1159,  0.2068]      0.1169
+  gas_exchange.leaf_water_potential                 0.0727  [ 0.0000,  0.1517]      0.1459  [ 0.1028,  0.2001]      0.0732
+  photo.max_PAR                                     0.0164  [ 0.0000,  0.0981]      0.1144  [ 0.0820,  0.1515]      0.0980
+  gas_exchange.leaf_temperature                     0.0275  [ 0.0000,  0.0631]      0.0493  [ 0.0233,  0.0904]      0.0218
+  gas_exchange.relative_humidity                    0.0000  [ 0.0000,  0.0015]      0.0365  [ 0.0164,  0.0636]      0.0365
+  nutrients.phosphorus_soil_content                 0.0000  [ 0.0000,  0.0265]      0.0175  [ 0.0048,  0.0355]      0.0175
+  growth.lambda_sb                                  0.0000  [ 0.0000,  0.0073]      0.0068  [ 0.0000,  0.0213]      0.0068
+  nutrients.nitrogen_soil_content                   0.0000  [ 0.0000,  0.0003]      0.0064  [ 0.0000,  0.0202]      0.0064
+  carbohydrates.k_vacuole_in                        0.0000  [ 0.0000,  0.0002]      0.0059  [ 0.0000,  0.0216]      0.0059
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  growth.total_biomass                              0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+
+  Completed in 6s
+  → results/sensitivity/sobol/sobol_carb_6h.csv
+
+=== Sobol variance decomposition [photoperiod=8h] ===
+  samples=512  workers=16  total_evaluations=9216
+  sampler=sobol  seed=20240513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  gas_exchange.max_rubisco_carboxylation_rate       0.0000  [ 0.0000,  0.0956]      0.5329  [ 0.1467,  1.0000]      0.5329
+  nutrients.max_nitrogen_uptake                     0.0377  [ 0.0000,  0.1315]      0.5039  [ 0.3105,  0.7190]      0.4663
+  nutrients.max_phosphorus_uptake                   0.1638  [ 0.0483,  0.2949]      0.4388  [ 0.3089,  0.6295]      0.2750
+  gas_exchange.ambient_CO2_concentration            0.0504  [ 0.0000,  0.1157]      0.4348  [ 0.1365,  0.8822]      0.3844
+  carbohydrates.respiration_frequency               0.1039  [ 0.0025,  0.2190]      0.3175  [ 0.2205,  0.4474]      0.2136
+  gas_exchange.leaf_temperature                     0.0000  [ 0.0000,  0.0249]      0.3068  [ 0.0470,  0.6934]      0.3068
+  gas_exchange.electron_transport_rate              0.0140  [ 0.0000,  0.0894]      0.2665  [ 0.1716,  0.3609]      0.2524
+  photo.max_PAR                                     0.0610  [ 0.0000,  0.1559]      0.2242  [ 0.0986,  0.3996]      0.1632
+  gas_exchange.leaf_water_potential                 0.0064  [ 0.0000,  0.0733]      0.1418  [ 0.0985,  0.1966]      0.1354
+  gas_exchange.relative_humidity                    0.0000  [ 0.0000,  0.0094]      0.0404  [ 0.0155,  0.0706]      0.0404
+  nutrients.phosphorus_soil_content                 0.0042  [ 0.0000,  0.0190]      0.0282  [ 0.0039,  0.0726]      0.0240
+  carbohydrates.sucrose                             0.0009  [ 0.0000,  0.0033]      0.0040  [ 0.0000,  0.0142]      0.0031
+  growth.lambda_sb                                  0.0051  [ 0.0000,  0.0136]      0.0020  [ 0.0000,  0.0053]      0.0000
+  nutrients.nitrogen_soil_content                   0.0000  [ 0.0000,  0.0056]      0.0016  [ 0.0000,  0.0045]      0.0016
+  carbohydrates.k_vacuole_in                        0.0000  [ 0.0000,  0.0003]      0.0000  [ 0.0000,  0.0000]      0.0000
+  growth.total_biomass                              0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+
+  Completed in 6s
+  → results/sensitivity/sobol/sobol_carb_8h.csv
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=512  workers=16  total_evaluations=9216
+  sampler=sobol  seed=20240513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  gas_exchange.max_rubisco_carboxylation_rate       0.0107  [ 0.0000,  1.2201]      0.6775  [ 0.0123,  1.0000]      0.6669
+  photo.max_PAR                                     0.0034  [ 0.0009,  0.0962]      0.1480  [ 0.0075,  1.0000]      0.1446
+  gas_exchange.electron_transport_rate              0.0000  [ 0.0000,  0.0356]      0.1137  [ 0.0070,  1.0000]      0.1137
+  gas_exchange.leaf_water_potential                 0.0020  [ 0.0000,  0.0379]      0.0917  [ 0.0058,  1.0000]      0.0897
+  gas_exchange.ambient_CO2_concentration            0.0033  [ 0.0000,  0.0538]      0.0798  [ 0.0073,  1.0000]      0.0765
+  gas_exchange.leaf_temperature                     0.0022  [ 0.0000,  0.0503]      0.0441  [ 0.0030,  1.0000]      0.0419
+  nutrients.max_nitrogen_uptake                     0.0042  [ 0.0008,  0.1393]      0.0429  [ 0.0047,  1.0000]      0.0387
+  gas_exchange.relative_humidity                    0.0010  [ 0.0000,  0.0239]      0.0412  [ 0.0041,  1.0000]      0.0402
+  nutrients.max_phosphorus_uptake                   0.0043  [ 0.0011,  0.1291]      0.0323  [ 0.0077,  0.9746]      0.0280
+  carbohydrates.respiration_frequency               0.0065  [ 0.0007,  0.2228]      0.0212  [ 0.0056,  0.6867]      0.0147
+  nutrients.phosphorus_soil_content                 0.0017  [ 0.0000,  0.0745]      0.0084  [ 0.0010,  0.3210]      0.0068
+  nutrients.nitrogen_soil_content                   0.0021  [ 0.0001,  0.0890]      0.0065  [ 0.0002,  0.2678]      0.0044
+  carbohydrates.k_vacuole_in                        0.0002  [ 0.0000,  0.0118]      0.0019  [ 0.0000,  0.0843]      0.0016
+  growth.lambda_sb                                  0.0000  [ 0.0000,  0.0044]      0.0006  [ 0.0001,  0.0206]      0.0006
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  growth.total_biomass                              0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+
+  Completed in 6s
+  → results/sensitivity/sobol/sobol_carb_12h.csv
+
+=== Done ===
+prod carb exit=0
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     128 samples × 16 workers  (total evals: 2304)
+  Bootstrap: 1000 replicates  (95% percentile intervals)
+  Seed:      20240513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=128  workers=16  total_evaluations=2304
+  sampler=sobol  seed=20240513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.2113  [ 0.0126,  0.4088]      0.4821  [ 0.3343,  0.6245]      0.2708
+  nutrients.max_nitrogen_uptake                     0.2620  [ 0.1004,  0.4474]      0.3767  [ 0.2552,  0.5259]      0.1147
+  gas_exchange.max_rubisco_carboxylation_rate       0.1218  [ 0.0000,  0.2765]      0.2993  [ 0.1814,  0.4310]      0.1775
+  gas_exchange.electron_transport_rate              0.0475  [ 0.0000,  0.1748]      0.2670  [ 0.1520,  0.3918]      0.2195
+  carbohydrates.respiration_frequency               0.0427  [ 0.0000,  0.1937]      0.2515  [ 0.1423,  0.3753]      0.2088
+  gas_exchange.ambient_CO2_concentration            0.0000  [ 0.0000,  0.1036]      0.2508  [ 0.1363,  0.3728]      0.2508
+  photo.max_PAR                                     0.0000  [ 0.0000,  0.0720]      0.1564  [ 0.0702,  0.2663]      0.1564
+  gas_exchange.leaf_water_potential                 0.0000  [ 0.0000,  0.0647]      0.1383  [ 0.0634,  0.2313]      0.1383
+  gas_exchange.leaf_temperature                     0.0278  [ 0.0000,  0.1369]      0.0773  [ 0.0165,  0.1472]      0.0494
+  growth.lambda_sb                                  0.0000  [ 0.0000,  0.0268]      0.0696  [ 0.0159,  0.1441]      0.0696
+  nutrients.phosphorus_soil_content                 0.0000  [ 0.0000,  0.0353]      0.0495  [ 0.0043,  0.1051]      0.0495
+  nutrients.nitrogen_soil_content                   0.0000  [ 0.0000,  0.0275]      0.0392  [ 0.0036,  0.0929]      0.0392
+  carbohydrates.k_vacuole_in                        0.0003  [ 0.0000,  0.0010]      0.0164  [ 0.0000,  0.0507]      0.0161
+  gas_exchange.relative_humidity                    0.0033  [ 0.0000,  0.0140]      0.0157  [ 0.0000,  0.0480]      0.0123
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0117  [ 0.0000,  0.0360]      0.0117
+  growth.total_biomass                              0.0000  [ 0.0000,  0.0063]      0.0009  [ 0.0007,  0.0012]      0.0009
+
+  Completed in 2s
+  → results/sensitivity/convergence/sobol_n128_12h.csv
+
+=== Done ===
+conv N=128 exit=0
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     256 samples × 16 workers  (total evals: 4608)
+  Bootstrap: 1000 replicates  (95% percentile intervals)
+  Seed:      20240513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=256  workers=16  total_evaluations=4608
+  sampler=sobol  seed=20240513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.1925  [ 0.0586,  0.3249]      0.4514  [ 0.3478,  0.5614]      0.2589
+  nutrients.max_nitrogen_uptake                     0.0176  [ 0.0000,  0.1267]      0.3216  [ 0.2364,  0.4216]      0.3039
+  gas_exchange.max_rubisco_carboxylation_rate       0.0394  [ 0.0000,  0.1506]      0.3169  [ 0.2297,  0.4136]      0.2776
+  gas_exchange.ambient_CO2_concentration            0.0000  [ 0.0000,  0.1093]      0.3055  [ 0.2228,  0.4021]      0.3055
+  gas_exchange.electron_transport_rate              0.0321  [ 0.0000,  0.1423]      0.2723  [ 0.1890,  0.3618]      0.2402
+  carbohydrates.respiration_frequency               0.0000  [ 0.0000,  0.0776]      0.2184  [ 0.1489,  0.3021]      0.2184
+  gas_exchange.leaf_water_potential                 0.0322  [ 0.0000,  0.1048]      0.1890  [ 0.1235,  0.2659]      0.1568
+  photo.max_PAR                                     0.0000  [ 0.0000,  0.0766]      0.1111  [ 0.0575,  0.1709]      0.1111
+  gas_exchange.leaf_temperature                     0.0000  [ 0.0000,  0.0217]      0.0764  [ 0.0353,  0.1314]      0.0764
+  gas_exchange.relative_humidity                    0.0000  [ 0.0000,  0.0006]      0.0428  [ 0.0135,  0.0824]      0.0428
+  growth.lambda_sb                                  0.0000  [ 0.0000,  0.0233]      0.0376  [ 0.0131,  0.0708]      0.0376
+  nutrients.phosphorus_soil_content                 0.0000  [ 0.0000,  0.0421]      0.0375  [ 0.0109,  0.0697]      0.0375
+  nutrients.nitrogen_soil_content                   0.0000  [ 0.0000,  0.0179]      0.0272  [ 0.0081,  0.0524]      0.0272
+  carbohydrates.k_vacuole_in                        0.0000  [ 0.0000,  0.0001]      0.0059  [ 0.0000,  0.0178]      0.0059
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0058  [ 0.0000,  0.0177]      0.0058
+  growth.total_biomass                              0.0000  [ 0.0000,  0.0029]      0.0010  [ 0.0008,  0.0012]      0.0010
+
+  Completed in 3s
+  → results/sensitivity/convergence/sobol_n256_12h.csv
+
+=== Done ===
+conv N=256 exit=0
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     512 samples × 16 workers  (total evals: 9216)
+  Bootstrap: 1000 replicates  (95% percentile intervals)
+  Seed:      20240513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=512  workers=16  total_evaluations=9216
+  sampler=sobol  seed=20240513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.1337  [ 0.0318,  0.2438]      0.4361  [ 0.3718,  0.5090]      0.3024
+  nutrients.max_nitrogen_uptake                     0.0000  [ 0.0000,  0.0758]      0.3320  [ 0.2666,  0.4007]      0.3320
+  carbohydrates.respiration_frequency               0.0371  [ 0.0000,  0.1121]      0.2409  [ 0.1893,  0.3045]      0.2038
+  gas_exchange.electron_transport_rate              0.0895  [ 0.0130,  0.1608]      0.2211  [ 0.1653,  0.2767]      0.1316
+  gas_exchange.max_rubisco_carboxylation_rate       0.0410  [ 0.0000,  0.1159]      0.2140  [ 0.1655,  0.2742]      0.1730
+  photo.max_PAR                                     0.0495  [ 0.0000,  0.1183]      0.2014  [ 0.1539,  0.2586]      0.1519
+  gas_exchange.ambient_CO2_concentration            0.0477  [ 0.0000,  0.1062]      0.1966  [ 0.1468,  0.2480]      0.1489
+  gas_exchange.leaf_water_potential                 0.0083  [ 0.0000,  0.0715]      0.1907  [ 0.1417,  0.2414]      0.1824
+  gas_exchange.leaf_temperature                     0.0000  [ 0.0000,  0.0189]      0.0965  [ 0.0601,  0.1388]      0.0965
+  nutrients.phosphorus_soil_content                 0.0019  [ 0.0000,  0.0356]      0.0682  [ 0.0377,  0.1022]      0.0663
+  gas_exchange.relative_humidity                    0.0000  [ 0.0000,  0.0000]      0.0617  [ 0.0331,  0.0942]      0.0617
+  growth.lambda_sb                                  0.0000  [ 0.0000,  0.0030]      0.0453  [ 0.0229,  0.0706]      0.0453
+  nutrients.nitrogen_soil_content                   0.0017  [ 0.0000,  0.0147]      0.0444  [ 0.0215,  0.0714]      0.0427
+  carbohydrates.k_vacuole_in                        0.0000  [ 0.0000,  0.0018]      0.0062  [ 0.0000,  0.0155]      0.0062
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0030  [ 0.0000,  0.0090]      0.0030
+  growth.total_biomass                              0.0036  [ 0.0000,  0.0080]      0.0010  [ 0.0009,  0.0011]      0.0000
+
+  Completed in 7s
+  → results/sensitivity/convergence/sobol_n512_12h.csv
+
+=== Done ===
+conv N=512 exit=0
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     1024 samples × 16 workers  (total evals: 18432)
+  Bootstrap: 1000 replicates  (95% percentile intervals)
+  Seed:      20240513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=1024  workers=16  total_evaluations=18432
+  sampler=sobol  seed=20240513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.1601  [ 0.0800,  0.2486]      0.4697  [ 0.4179,  0.5204]      0.3097
+  nutrients.max_nitrogen_uptake                     0.0268  [ 0.0000,  0.0864]      0.2996  [ 0.2579,  0.3472]      0.2728
+  gas_exchange.max_rubisco_carboxylation_rate       0.0534  [ 0.0000,  0.1137]      0.2627  [ 0.2234,  0.3102]      0.2092
+  gas_exchange.electron_transport_rate              0.0047  [ 0.0000,  0.0532]      0.2507  [ 0.2143,  0.2919]      0.2460
+  gas_exchange.leaf_water_potential                 0.0000  [ 0.0000,  0.0495]      0.2321  [ 0.1945,  0.2725]      0.2321
+  gas_exchange.ambient_CO2_concentration            0.0000  [ 0.0000,  0.0513]      0.2294  [ 0.1903,  0.2687]      0.2294
+  carbohydrates.respiration_frequency               0.0000  [ 0.0000,  0.0389]      0.2106  [ 0.1734,  0.2468]      0.2106
+  photo.max_PAR                                     0.0000  [ 0.0000,  0.0187]      0.1483  [ 0.1167,  0.1799]      0.1483
+  gas_exchange.leaf_temperature                     0.0049  [ 0.0000,  0.0344]      0.0734  [ 0.0497,  0.0969]      0.0686
+  gas_exchange.relative_humidity                    0.0000  [ 0.0000,  0.0251]      0.0720  [ 0.0515,  0.0940]      0.0720
+  nutrients.phosphorus_soil_content                 0.0000  [ 0.0000,  0.0102]      0.0570  [ 0.0389,  0.0779]      0.0570
+  nutrients.nitrogen_soil_content                   0.0000  [ 0.0000,  0.0073]      0.0378  [ 0.0235,  0.0543]      0.0378
+  growth.lambda_sb                                  0.0000  [ 0.0000,  0.0043]      0.0200  [ 0.0099,  0.0326]      0.0200
+  carbohydrates.k_vacuole_in                        0.0000  [ 0.0000,  0.0000]      0.0033  [ 0.0000,  0.0083]      0.0033
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0015  [ 0.0000,  0.0046]      0.0015
+  growth.total_biomass                              0.0016  [ 0.0000,  0.0052]      0.0011  [ 0.0010,  0.0012]      0.0000
+
+  Completed in 13s
+  → results/sensitivity/convergence/sobol_n1024_12h.csv
+
+=== Done ===
+conv N=1024 exit=0
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     2048 samples × 16 workers  (total evals: 36864)
+  Bootstrap: 1000 replicates  (95% percentile intervals)
+  Seed:      20240513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=2048  workers=16  total_evaluations=36864
+  sampler=sobol  seed=20240513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.1870  [ 0.1341,  0.2421]      0.4323  [ 0.3954,  0.4691]      0.2453
+  nutrients.max_nitrogen_uptake                     0.1202  [ 0.0728,  0.1701]      0.3344  [ 0.3031,  0.3666]      0.2142
+  gas_exchange.max_rubisco_carboxylation_rate       0.0652  [ 0.0280,  0.1024]      0.2902  [ 0.2585,  0.3212]      0.2250
+  gas_exchange.electron_transport_rate              0.0546  [ 0.0147,  0.0915]      0.2549  [ 0.2259,  0.2862]      0.2003
+  gas_exchange.ambient_CO2_concentration            0.0213  [ 0.0000,  0.0597]      0.2437  [ 0.2135,  0.2742]      0.2224
+  carbohydrates.respiration_frequency               0.0212  [ 0.0000,  0.0548]      0.2327  [ 0.2051,  0.2621]      0.2115
+  gas_exchange.leaf_water_potential                 0.0358  [ 0.0040,  0.0672]      0.2098  [ 0.1839,  0.2366]      0.1740
+  photo.max_PAR                                     0.0235  [ 0.0000,  0.0542]      0.1830  [ 0.1580,  0.2092]      0.1595
+  gas_exchange.leaf_temperature                     0.0000  [ 0.0000,  0.0218]      0.0973  [ 0.0779,  0.1152]      0.0973
+  gas_exchange.relative_humidity                    0.0000  [ 0.0000,  0.0094]      0.0637  [ 0.0485,  0.0780]      0.0637
+  nutrients.phosphorus_soil_content                 0.0000  [ 0.0000,  0.0125]      0.0552  [ 0.0422,  0.0683]      0.0552
+  nutrients.nitrogen_soil_content                   0.0000  [ 0.0000,  0.0117]      0.0426  [ 0.0323,  0.0541]      0.0426
+  growth.lambda_sb                                  0.0150  [ 0.0007,  0.0308]      0.0357  [ 0.0262,  0.0460]      0.0207
+  carbohydrates.k_vacuole_in                        0.0000  [ 0.0000,  0.0036]      0.0056  [ 0.0022,  0.0103]      0.0056
+  carbohydrates.sucrose                             0.0011  [ 0.0000,  0.0044]      0.0022  [ 0.0000,  0.0052]      0.0012
+  growth.total_biomass                              0.0009  [ 0.0000,  0.0034]      0.0011  [ 0.0010,  0.0012]      0.0002
+
+  Completed in 26s
+  → results/sensitivity/convergence/sobol_n2048_12h.csv
+
+=== Done ===
+conv N=2048 exit=0
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     4096 samples × 16 workers  (total evals: 73728)
+  Bootstrap: 1000 replicates  (95% percentile intervals)
+  Seed:      20240513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=4096  workers=16  total_evaluations=73728
+  sampler=sobol  seed=20240513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.1690  [ 0.1328,  0.2102]      0.4405  [ 0.4138,  0.4675]      0.2715
+  nutrients.max_nitrogen_uptake                     0.0631  [ 0.0324,  0.0938]      0.3256  [ 0.3010,  0.3484]      0.2626
+  gas_exchange.electron_transport_rate              0.0399  [ 0.0142,  0.0660]      0.2658  [ 0.2439,  0.2882]      0.2260
+  gas_exchange.max_rubisco_carboxylation_rate       0.0342  [ 0.0091,  0.0601]      0.2572  [ 0.2379,  0.2776]      0.2231
+  carbohydrates.respiration_frequency               0.0091  [ 0.0000,  0.0339]      0.2327  [ 0.2148,  0.2527]      0.2235
+  gas_exchange.ambient_CO2_concentration            0.0342  [ 0.0090,  0.0588]      0.2259  [ 0.2047,  0.2461]      0.1917
+  gas_exchange.leaf_water_potential                 0.0301  [ 0.0087,  0.0517]      0.1911  [ 0.1739,  0.2101]      0.1611
+  photo.max_PAR                                     0.0173  [ 0.0000,  0.0408]      0.1867  [ 0.1696,  0.2054]      0.1694
+  gas_exchange.leaf_temperature                     0.0000  [ 0.0000,  0.0048]      0.0818  [ 0.0697,  0.0942]      0.0818
+  gas_exchange.relative_humidity                    0.0061  [ 0.0000,  0.0205]      0.0637  [ 0.0531,  0.0740]      0.0575
+  nutrients.phosphorus_soil_content                 0.0000  [ 0.0000,  0.0104]      0.0552  [ 0.0461,  0.0648]      0.0552
+  nutrients.nitrogen_soil_content                   0.0000  [ 0.0000,  0.0089]      0.0480  [ 0.0392,  0.0576]      0.0480
+  growth.lambda_sb                                  0.0000  [ 0.0000,  0.0069]      0.0325  [ 0.0257,  0.0401]      0.0325
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0027]      0.0049  [ 0.0026,  0.0075]      0.0049
+  carbohydrates.k_vacuole_in                        0.0005  [ 0.0000,  0.0040]      0.0047  [ 0.0023,  0.0077]      0.0042
+  growth.total_biomass                              0.0001  [ 0.0000,  0.0019]      0.0011  [ 0.0011,  0.0011]      0.0010
+
+  Completed in 52s
+  → results/sensitivity/convergence/sobol_n4096_12h.csv
+
+=== Done ===
+conv N=4096 exit=0
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     128 samples × 16 workers  (total evals: 2304)
+  Bootstrap: 0 replicates  (95% percentile intervals)
+  Seed:      20241513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=128  workers=16  total_evaluations=2304
+  sampler=sobol  seed=20241513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.1997  [ 0.1997,  0.1997]      0.4954  [ 0.4954,  0.4954]      0.2958
+  gas_exchange.max_rubisco_carboxylation_rate       0.0000  [ 0.0000,  0.0000]      0.3013  [ 0.3013,  0.3013]      0.3013
+  carbohydrates.respiration_frequency               0.0000  [ 0.0000,  0.0000]      0.2684  [ 0.2684,  0.2684]      0.2684
+  nutrients.max_nitrogen_uptake                     0.0000  [ 0.0000,  0.0000]      0.2544  [ 0.2544,  0.2544]      0.2544
+  gas_exchange.electron_transport_rate              0.0907  [ 0.0907,  0.0907]      0.2502  [ 0.2502,  0.2502]      0.1595
+  gas_exchange.leaf_water_potential                 0.0441  [ 0.0441,  0.0441]      0.2368  [ 0.2368,  0.2368]      0.1927
+  gas_exchange.ambient_CO2_concentration            0.0267  [ 0.0267,  0.0267]      0.1789  [ 0.1789,  0.1789]      0.1522
+  photo.max_PAR                                     0.0618  [ 0.0618,  0.0618]      0.1341  [ 0.1341,  0.1341]      0.0722
+  gas_exchange.leaf_temperature                     0.0263  [ 0.0263,  0.0263]      0.1246  [ 0.1246,  0.1246]      0.0983
+  nutrients.phosphorus_soil_content                 0.0000  [ 0.0000,  0.0000]      0.0645  [ 0.0645,  0.0645]      0.0645
+  gas_exchange.relative_humidity                    0.0180  [ 0.0180,  0.0180]      0.0535  [ 0.0535,  0.0535]      0.0355
+  nutrients.nitrogen_soil_content                   0.0104  [ 0.0104,  0.0104]      0.0399  [ 0.0399,  0.0399]      0.0295
+  carbohydrates.k_vacuole_in                        0.0234  [ 0.0234,  0.0234]      0.0116  [ 0.0116,  0.0116]      0.0000
+  growth.lambda_sb                                  0.0202  [ 0.0202,  0.0202]      0.0061  [ 0.0061,  0.0061]      0.0000
+  growth.total_biomass                              0.0017  [ 0.0017,  0.0017]      0.0010  [ 0.0010,  0.0010]      0.0000
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+
+  Completed in 1s
+  → results/sensitivity/replicates/rep_n128_s1_12h.csv
+
+=== Done ===
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     128 samples × 16 workers  (total evals: 2304)
+  Bootstrap: 0 replicates  (95% percentile intervals)
+  Seed:      20242513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=128  workers=16  total_evaluations=2304
+  sampler=sobol  seed=20242513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.2223  [ 0.2223,  0.2223]      0.4363  [ 0.4363,  0.4363]      0.2140
+  nutrients.max_nitrogen_uptake                     0.0479  [ 0.0479,  0.0479]      0.3276  [ 0.3276,  0.3276]      0.2797
+  gas_exchange.leaf_water_potential                 0.0000  [ 0.0000,  0.0000]      0.2687  [ 0.2687,  0.2687]      0.2687
+  gas_exchange.electron_transport_rate              0.0000  [ 0.0000,  0.0000]      0.2577  [ 0.2577,  0.2577]      0.2577
+  gas_exchange.max_rubisco_carboxylation_rate       0.0000  [ 0.0000,  0.0000]      0.2536  [ 0.2536,  0.2536]      0.2536
+  gas_exchange.ambient_CO2_concentration            0.0000  [ 0.0000,  0.0000]      0.2128  [ 0.2128,  0.2128]      0.2128
+  carbohydrates.respiration_frequency               0.0000  [ 0.0000,  0.0000]      0.1854  [ 0.1854,  0.1854]      0.1854
+  photo.max_PAR                                     0.0000  [ 0.0000,  0.0000]      0.1332  [ 0.1332,  0.1332]      0.1332
+  gas_exchange.relative_humidity                    0.0000  [ 0.0000,  0.0000]      0.0882  [ 0.0882,  0.0882]      0.0882
+  gas_exchange.leaf_temperature                     0.0000  [ 0.0000,  0.0000]      0.0583  [ 0.0583,  0.0583]      0.0583
+  nutrients.phosphorus_soil_content                 0.0195  [ 0.0195,  0.0195]      0.0526  [ 0.0526,  0.0526]      0.0331
+  nutrients.nitrogen_soil_content                   0.0110  [ 0.0110,  0.0110]      0.0252  [ 0.0252,  0.0252]      0.0141
+  carbohydrates.k_vacuole_in                        0.0000  [ 0.0000,  0.0000]      0.0120  [ 0.0120,  0.0120]      0.0120
+  growth.lambda_sb                                  0.0000  [ 0.0000,  0.0000]      0.0040  [ 0.0040,  0.0040]      0.0040
+  growth.total_biomass                              0.0000  [ 0.0000,  0.0000]      0.0011  [ 0.0011,  0.0011]      0.0011
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+
+  Completed in 2s
+  → results/sensitivity/replicates/rep_n128_s2_12h.csv
+
+=== Done ===
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     128 samples × 16 workers  (total evals: 2304)
+  Bootstrap: 0 replicates  (95% percentile intervals)
+  Seed:      20243513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=128  workers=16  total_evaluations=2304
+  sampler=sobol  seed=20243513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.2017  [ 0.2017,  0.2017]      0.4398  [ 0.4398,  0.4398]      0.2380
+  gas_exchange.max_rubisco_carboxylation_rate       0.0000  [ 0.0000,  0.0000]      0.3479  [ 0.3479,  0.3479]      0.3479
+  gas_exchange.ambient_CO2_concentration            0.0000  [ 0.0000,  0.0000]      0.2809  [ 0.2809,  0.2809]      0.2809
+  nutrients.max_nitrogen_uptake                     0.1073  [ 0.1073,  0.1073]      0.2769  [ 0.2769,  0.2769]      0.1696
+  carbohydrates.respiration_frequency               0.0000  [ 0.0000,  0.0000]      0.2682  [ 0.2682,  0.2682]      0.2682
+  gas_exchange.electron_transport_rate              0.1129  [ 0.1129,  0.1129]      0.2396  [ 0.2396,  0.2396]      0.1267
+  gas_exchange.leaf_water_potential                 0.0079  [ 0.0079,  0.0079]      0.2264  [ 0.2264,  0.2264]      0.2185
+  photo.max_PAR                                     0.0000  [ 0.0000,  0.0000]      0.2161  [ 0.2161,  0.2161]      0.2161
+  gas_exchange.leaf_temperature                     0.0000  [ 0.0000,  0.0000]      0.1611  [ 0.1611,  0.1611]      0.1611
+  nutrients.phosphorus_soil_content                 0.0237  [ 0.0237,  0.0237]      0.1029  [ 0.1029,  0.1029]      0.0793
+  nutrients.nitrogen_soil_content                   0.0000  [ 0.0000,  0.0000]      0.0822  [ 0.0822,  0.0822]      0.0822
+  gas_exchange.relative_humidity                    0.0003  [ 0.0003,  0.0003]      0.0782  [ 0.0782,  0.0782]      0.0779
+  growth.lambda_sb                                  0.0133  [ 0.0133,  0.0133]      0.0576  [ 0.0576,  0.0576]      0.0443
+  growth.total_biomass                              0.0027  [ 0.0027,  0.0027]      0.0011  [ 0.0011,  0.0011]      0.0000
+  carbohydrates.k_vacuole_in                        0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+
+  Completed in 2s
+  → results/sensitivity/replicates/rep_n128_s3_12h.csv
+
+=== Done ===
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     128 samples × 16 workers  (total evals: 2304)
+  Bootstrap: 0 replicates  (95% percentile intervals)
+  Seed:      20244513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=128  workers=16  total_evaluations=2304
+  sampler=sobol  seed=20244513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.1031  [ 0.1031,  0.1031]      0.4657  [ 0.4657,  0.4657]      0.3625
+  gas_exchange.max_rubisco_carboxylation_rate       0.1705  [ 0.1705,  0.1705]      0.2895  [ 0.2895,  0.2895]      0.1190
+  gas_exchange.electron_transport_rate              0.0619  [ 0.0619,  0.0619]      0.2329  [ 0.2329,  0.2329]      0.1710
+  gas_exchange.ambient_CO2_concentration            0.0609  [ 0.0609,  0.0609]      0.2103  [ 0.2103,  0.2103]      0.1494
+  carbohydrates.respiration_frequency               0.0937  [ 0.0937,  0.0937]      0.1879  [ 0.1879,  0.1879]      0.0942
+  photo.max_PAR                                     0.0400  [ 0.0400,  0.0400]      0.1794  [ 0.1794,  0.1794]      0.1394
+  nutrients.max_nitrogen_uptake                     0.0618  [ 0.0618,  0.0618]      0.1646  [ 0.1646,  0.1646]      0.1029
+  gas_exchange.leaf_water_potential                 0.0000  [ 0.0000,  0.0000]      0.1422  [ 0.1422,  0.1422]      0.1422
+  gas_exchange.leaf_temperature                     0.1105  [ 0.1105,  0.1105]      0.0952  [ 0.0952,  0.0952]      0.0000
+  gas_exchange.relative_humidity                    0.0016  [ 0.0016,  0.0016]      0.0699  [ 0.0699,  0.0699]      0.0682
+  nutrients.phosphorus_soil_content                 0.0087  [ 0.0087,  0.0087]      0.0542  [ 0.0542,  0.0542]      0.0456
+  nutrients.nitrogen_soil_content                   0.0000  [ 0.0000,  0.0000]      0.0437  [ 0.0437,  0.0437]      0.0437
+  growth.lambda_sb                                  0.0001  [ 0.0001,  0.0001]      0.0220  [ 0.0220,  0.0220]      0.0218
+  growth.total_biomass                              0.0000  [ 0.0000,  0.0000]      0.0012  [ 0.0012,  0.0012]      0.0012
+  carbohydrates.k_vacuole_in                        0.0001  [ 0.0001,  0.0001]      0.0000  [ 0.0000,  0.0000]      0.0000
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+
+  Completed in 1s
+  → results/sensitivity/replicates/rep_n128_s4_12h.csv
+
+=== Done ===
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     128 samples × 16 workers  (total evals: 2304)
+  Bootstrap: 0 replicates  (95% percentile intervals)
+  Seed:      20245513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=128  workers=16  total_evaluations=2304
+  sampler=sobol  seed=20245513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.3922  [ 0.3922,  0.3922]      0.5678  [ 0.5678,  0.5678]      0.1756
+  gas_exchange.ambient_CO2_concentration            0.0157  [ 0.0157,  0.0157]      0.3404  [ 0.3404,  0.3404]      0.3247
+  gas_exchange.max_rubisco_carboxylation_rate       0.2130  [ 0.2130,  0.2130]      0.3388  [ 0.3388,  0.3388]      0.1258
+  nutrients.max_nitrogen_uptake                     0.1424  [ 0.1424,  0.1424]      0.3227  [ 0.3227,  0.3227]      0.1804
+  carbohydrates.respiration_frequency               0.1698  [ 0.1698,  0.1698]      0.2402  [ 0.2402,  0.2402]      0.0704
+  gas_exchange.electron_transport_rate              0.0490  [ 0.0490,  0.0490]      0.2311  [ 0.2311,  0.2311]      0.1821
+  photo.max_PAR                                     0.1041  [ 0.1041,  0.1041]      0.2032  [ 0.2032,  0.2032]      0.0992
+  gas_exchange.leaf_water_potential                 0.0815  [ 0.0815,  0.0815]      0.1849  [ 0.1849,  0.1849]      0.1034
+  gas_exchange.leaf_temperature                     0.0000  [ 0.0000,  0.0000]      0.1254  [ 0.1254,  0.1254]      0.1254
+  gas_exchange.relative_humidity                    0.0618  [ 0.0618,  0.0618]      0.1008  [ 0.1008,  0.1008]      0.0390
+  nutrients.phosphorus_soil_content                 0.0859  [ 0.0859,  0.0859]      0.0922  [ 0.0922,  0.0922]      0.0063
+  nutrients.nitrogen_soil_content                   0.0360  [ 0.0360,  0.0360]      0.0387  [ 0.0387,  0.0387]      0.0027
+  growth.lambda_sb                                  0.0270  [ 0.0270,  0.0270]      0.0377  [ 0.0377,  0.0377]      0.0107
+  carbohydrates.k_vacuole_in                        0.0075  [ 0.0075,  0.0075]      0.0299  [ 0.0299,  0.0299]      0.0223
+  growth.total_biomass                              0.0000  [ 0.0000,  0.0000]      0.0011  [ 0.0011,  0.0011]      0.0011
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+
+  Completed in 2s
+  → results/sensitivity/replicates/rep_n128_s5_12h.csv
+
+=== Done ===
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     128 samples × 16 workers  (total evals: 2304)
+  Bootstrap: 0 replicates  (95% percentile intervals)
+  Seed:      20246513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=128  workers=16  total_evaluations=2304
+  sampler=sobol  seed=20246513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.2711  [ 0.2711,  0.2711]      0.4130  [ 0.4130,  0.4130]      0.1419
+  gas_exchange.max_rubisco_carboxylation_rate       0.1144  [ 0.1144,  0.1144]      0.3471  [ 0.3471,  0.3471]      0.2328
+  nutrients.max_nitrogen_uptake                     0.1085  [ 0.1085,  0.1085]      0.3200  [ 0.3200,  0.3200]      0.2115
+  gas_exchange.ambient_CO2_concentration            0.0248  [ 0.0248,  0.0248]      0.3022  [ 0.3022,  0.3022]      0.2775
+  gas_exchange.electron_transport_rate              0.0103  [ 0.0103,  0.0103]      0.2729  [ 0.2729,  0.2729]      0.2626
+  photo.max_PAR                                     0.0000  [ 0.0000,  0.0000]      0.2497  [ 0.2497,  0.2497]      0.2497
+  carbohydrates.respiration_frequency               0.0000  [ 0.0000,  0.0000]      0.1852  [ 0.1852,  0.1852]      0.1852
+  gas_exchange.leaf_water_potential                 0.0361  [ 0.0361,  0.0361]      0.1773  [ 0.1773,  0.1773]      0.1412
+  gas_exchange.leaf_temperature                     0.0010  [ 0.0010,  0.0010]      0.1033  [ 0.1033,  0.1033]      0.1023
+  gas_exchange.relative_humidity                    0.0000  [ 0.0000,  0.0000]      0.0861  [ 0.0861,  0.0861]      0.0861
+  nutrients.phosphorus_soil_content                 0.0000  [ 0.0000,  0.0000]      0.0683  [ 0.0683,  0.0683]      0.0683
+  nutrients.nitrogen_soil_content                   0.0000  [ 0.0000,  0.0000]      0.0587  [ 0.0587,  0.0587]      0.0587
+  growth.lambda_sb                                  0.0279  [ 0.0279,  0.0279]      0.0584  [ 0.0584,  0.0584]      0.0305
+  growth.total_biomass                              0.0000  [ 0.0000,  0.0000]      0.0011  [ 0.0011,  0.0011]      0.0011
+  carbohydrates.k_vacuole_in                        0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+
+  Completed in 2s
+  → results/sensitivity/replicates/rep_n128_s6_12h.csv
+
+=== Done ===
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     128 samples × 16 workers  (total evals: 2304)
+  Bootstrap: 0 replicates  (95% percentile intervals)
+  Seed:      20247513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=128  workers=16  total_evaluations=2304
+  sampler=sobol  seed=20247513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.1857  [ 0.1857,  0.1857]      0.5181  [ 0.5181,  0.5181]      0.3325
+  nutrients.max_nitrogen_uptake                     0.1119  [ 0.1119,  0.1119]      0.3063  [ 0.3063,  0.3063]      0.1944
+  gas_exchange.max_rubisco_carboxylation_rate       0.0371  [ 0.0371,  0.0371]      0.2957  [ 0.2957,  0.2957]      0.2586
+  gas_exchange.electron_transport_rate              0.1052  [ 0.1052,  0.1052]      0.2181  [ 0.2181,  0.2181]      0.1129
+  gas_exchange.leaf_water_potential                 0.0733  [ 0.0733,  0.0733]      0.1971  [ 0.1971,  0.1971]      0.1238
+  photo.max_PAR                                     0.0000  [ 0.0000,  0.0000]      0.1873  [ 0.1873,  0.1873]      0.1873
+  carbohydrates.respiration_frequency               0.0752  [ 0.0752,  0.0752]      0.1810  [ 0.1810,  0.1810]      0.1058
+  gas_exchange.ambient_CO2_concentration            0.0852  [ 0.0852,  0.0852]      0.1737  [ 0.1737,  0.1737]      0.0885
+  nutrients.phosphorus_soil_content                 0.0270  [ 0.0270,  0.0270]      0.1359  [ 0.1359,  0.1359]      0.1089
+  growth.lambda_sb                                  0.0238  [ 0.0238,  0.0238]      0.0782  [ 0.0782,  0.0782]      0.0544
+  nutrients.nitrogen_soil_content                   0.0000  [ 0.0000,  0.0000]      0.0438  [ 0.0438,  0.0438]      0.0438
+  gas_exchange.leaf_temperature                     0.0308  [ 0.0308,  0.0308]      0.0262  [ 0.0262,  0.0262]      0.0000
+  gas_exchange.relative_humidity                    0.0057  [ 0.0057,  0.0057]      0.0120  [ 0.0120,  0.0120]      0.0063
+  growth.total_biomass                              0.0000  [ 0.0000,  0.0000]      0.0011  [ 0.0011,  0.0011]      0.0011
+  carbohydrates.k_vacuole_in                        0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+
+  Completed in 1s
+  → results/sensitivity/replicates/rep_n128_s7_12h.csv
+
+=== Done ===
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     128 samples × 16 workers  (total evals: 2304)
+  Bootstrap: 0 replicates  (95% percentile intervals)
+  Seed:      20248513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=128  workers=16  total_evaluations=2304
+  sampler=sobol  seed=20248513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.3202  [ 0.3202,  0.3202]      0.4906  [ 0.4906,  0.4906]      0.1704
+  nutrients.max_nitrogen_uptake                     0.1226  [ 0.1226,  0.1226]      0.3709  [ 0.3709,  0.3709]      0.2483
+  gas_exchange.max_rubisco_carboxylation_rate       0.1322  [ 0.1322,  0.1322]      0.3230  [ 0.3230,  0.3230]      0.1907
+  gas_exchange.electron_transport_rate              0.1487  [ 0.1487,  0.1487]      0.2342  [ 0.2342,  0.2342]      0.0855
+  gas_exchange.leaf_water_potential                 0.0822  [ 0.0822,  0.0822]      0.2103  [ 0.2103,  0.2103]      0.1281
+  gas_exchange.ambient_CO2_concentration            0.0131  [ 0.0131,  0.0131]      0.1951  [ 0.1951,  0.1951]      0.1820
+  carbohydrates.respiration_frequency               0.0921  [ 0.0921,  0.0921]      0.1547  [ 0.1547,  0.1547]      0.0626
+  photo.max_PAR                                     0.0000  [ 0.0000,  0.0000]      0.1181  [ 0.1181,  0.1181]      0.1181
+  gas_exchange.relative_humidity                    0.0350  [ 0.0350,  0.0350]      0.0302  [ 0.0302,  0.0302]      0.0000
+  gas_exchange.leaf_temperature                     0.0099  [ 0.0099,  0.0099]      0.0285  [ 0.0285,  0.0285]      0.0186
+  nutrients.nitrogen_soil_content                   0.0326  [ 0.0326,  0.0326]      0.0217  [ 0.0217,  0.0217]      0.0000
+  growth.lambda_sb                                  0.0000  [ 0.0000,  0.0000]      0.0199  [ 0.0199,  0.0199]      0.0199
+  nutrients.phosphorus_soil_content                 0.0086  [ 0.0086,  0.0086]      0.0078  [ 0.0078,  0.0078]      0.0000
+  growth.total_biomass                              0.0000  [ 0.0000,  0.0000]      0.0012  [ 0.0012,  0.0012]      0.0012
+  carbohydrates.k_vacuole_in                        0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+
+  Completed in 2s
+  → results/sensitivity/replicates/rep_n128_s8_12h.csv
+
+=== Done ===
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     128 samples × 16 workers  (total evals: 2304)
+  Bootstrap: 0 replicates  (95% percentile intervals)
+  Seed:      20249513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=128  workers=16  total_evaluations=2304
+  sampler=sobol  seed=20249513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.0735  [ 0.0735,  0.0735]      0.4285  [ 0.4285,  0.4285]      0.3549
+  gas_exchange.electron_transport_rate              0.0446  [ 0.0446,  0.0446]      0.3454  [ 0.3454,  0.3454]      0.3008
+  gas_exchange.ambient_CO2_concentration            0.0000  [ 0.0000,  0.0000]      0.2690  [ 0.2690,  0.2690]      0.2690
+  gas_exchange.max_rubisco_carboxylation_rate       0.0523  [ 0.0523,  0.0523]      0.2527  [ 0.2527,  0.2527]      0.2004
+  nutrients.max_nitrogen_uptake                     0.0000  [ 0.0000,  0.0000]      0.2481  [ 0.2481,  0.2481]      0.2481
+  carbohydrates.respiration_frequency               0.0000  [ 0.0000,  0.0000]      0.2423  [ 0.2423,  0.2423]      0.2423
+  gas_exchange.leaf_water_potential                 0.0266  [ 0.0266,  0.0266]      0.2316  [ 0.2316,  0.2316]      0.2050
+  photo.max_PAR                                     0.0000  [ 0.0000,  0.0000]      0.1694  [ 0.1694,  0.1694]      0.1694
+  gas_exchange.leaf_temperature                     0.0000  [ 0.0000,  0.0000]      0.1287  [ 0.1287,  0.1287]      0.1287
+  nutrients.phosphorus_soil_content                 0.0000  [ 0.0000,  0.0000]      0.1049  [ 0.1049,  0.1049]      0.1049
+  nutrients.nitrogen_soil_content                   0.0000  [ 0.0000,  0.0000]      0.0672  [ 0.0672,  0.0672]      0.0672
+  gas_exchange.relative_humidity                    0.0000  [ 0.0000,  0.0000]      0.0458  [ 0.0458,  0.0458]      0.0458
+  carbohydrates.k_vacuole_in                        0.0000  [ 0.0000,  0.0000]      0.0298  [ 0.0298,  0.0298]      0.0298
+  growth.lambda_sb                                  0.0000  [ 0.0000,  0.0000]      0.0214  [ 0.0214,  0.0214]      0.0214
+  growth.total_biomass                              0.0000  [ 0.0000,  0.0000]      0.0011  [ 0.0011,  0.0011]      0.0011
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+
+  Completed in 2s
+  → results/sensitivity/replicates/rep_n128_s9_12h.csv
+
+=== Done ===
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     128 samples × 16 workers  (total evals: 2304)
+  Bootstrap: 0 replicates  (95% percentile intervals)
+  Seed:      20250513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=128  workers=16  total_evaluations=2304
+  sampler=sobol  seed=20250513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.2438  [ 0.2438,  0.2438]      0.5712  [ 0.5712,  0.5712]      0.3274
+  gas_exchange.max_rubisco_carboxylation_rate       0.1170  [ 0.1170,  0.1170]      0.3948  [ 0.3948,  0.3948]      0.2777
+  gas_exchange.electron_transport_rate              0.0517  [ 0.0517,  0.0517]      0.3184  [ 0.3184,  0.3184]      0.2667
+  nutrients.max_nitrogen_uptake                     0.1483  [ 0.1483,  0.1483]      0.3044  [ 0.3044,  0.3044]      0.1562
+  gas_exchange.ambient_CO2_concentration            0.1839  [ 0.1839,  0.1839]      0.3009  [ 0.3009,  0.3009]      0.1170
+  gas_exchange.leaf_water_potential                 0.0387  [ 0.0387,  0.0387]      0.2783  [ 0.2783,  0.2783]      0.2396
+  photo.max_PAR                                     0.0000  [ 0.0000,  0.0000]      0.2280  [ 0.2280,  0.2280]      0.2280
+  carbohydrates.respiration_frequency               0.0376  [ 0.0376,  0.0376]      0.1360  [ 0.1360,  0.1360]      0.0984
+  gas_exchange.leaf_temperature                     0.0007  [ 0.0007,  0.0007]      0.1263  [ 0.1263,  0.1263]      0.1256
+  nutrients.phosphorus_soil_content                 0.0447  [ 0.0447,  0.0447]      0.0727  [ 0.0727,  0.0727]      0.0280
+  gas_exchange.relative_humidity                    0.0107  [ 0.0107,  0.0107]      0.0647  [ 0.0647,  0.0647]      0.0541
+  nutrients.nitrogen_soil_content                   0.0266  [ 0.0266,  0.0266]      0.0555  [ 0.0555,  0.0555]      0.0289
+  growth.lambda_sb                                  0.0000  [ 0.0000,  0.0000]      0.0410  [ 0.0410,  0.0410]      0.0410
+  carbohydrates.k_vacuole_in                        0.0000  [ 0.0000,  0.0000]      0.0162  [ 0.0162,  0.0162]      0.0162
+  growth.total_biomass                              0.0000  [ 0.0000,  0.0000]      0.0013  [ 0.0013,  0.0013]      0.0013
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+
+  Completed in 1s
+  → results/sensitivity/replicates/rep_n128_s10_12h.csv
+
+=== Done ===
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     512 samples × 16 workers  (total evals: 9216)
+  Bootstrap: 0 replicates  (95% percentile intervals)
+  Seed:      20241513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=512  workers=16  total_evaluations=9216
+  sampler=sobol  seed=20241513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.2102  [ 0.2102,  0.2102]      0.4727  [ 0.4727,  0.4727]      0.2625
+  gas_exchange.max_rubisco_carboxylation_rate       0.0916  [ 0.0916,  0.0916]      0.3165  [ 0.3165,  0.3165]      0.2249
+  nutrients.max_nitrogen_uptake                     0.0569  [ 0.0569,  0.0569]      0.2806  [ 0.2806,  0.2806]      0.2237
+  gas_exchange.electron_transport_rate              0.0778  [ 0.0778,  0.0778]      0.2540  [ 0.2540,  0.2540]      0.1762
+  gas_exchange.leaf_water_potential                 0.0755  [ 0.0755,  0.0755]      0.2382  [ 0.2382,  0.2382]      0.1627
+  gas_exchange.ambient_CO2_concentration            0.0323  [ 0.0323,  0.0323]      0.2166  [ 0.2166,  0.2166]      0.1843
+  carbohydrates.respiration_frequency               0.0360  [ 0.0360,  0.0360]      0.2148  [ 0.2148,  0.2148]      0.1788
+  photo.max_PAR                                     0.0310  [ 0.0310,  0.0310]      0.1345  [ 0.1345,  0.1345]      0.1035
+  gas_exchange.leaf_temperature                     0.0000  [ 0.0000,  0.0000]      0.0951  [ 0.0951,  0.0951]      0.0951
+  gas_exchange.relative_humidity                    0.0054  [ 0.0054,  0.0054]      0.0742  [ 0.0742,  0.0742]      0.0688
+  nutrients.nitrogen_soil_content                   0.0000  [ 0.0000,  0.0000]      0.0599  [ 0.0599,  0.0599]      0.0599
+  nutrients.phosphorus_soil_content                 0.0000  [ 0.0000,  0.0000]      0.0578  [ 0.0578,  0.0578]      0.0578
+  growth.lambda_sb                                  0.0203  [ 0.0203,  0.0203]      0.0297  [ 0.0297,  0.0297]      0.0094
+  carbohydrates.k_vacuole_in                        0.0058  [ 0.0058,  0.0058]      0.0030  [ 0.0030,  0.0030]      0.0000
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0029  [ 0.0029,  0.0029]      0.0029
+  growth.total_biomass                              0.0008  [ 0.0008,  0.0008]      0.0011  [ 0.0011,  0.0011]      0.0002
+
+  Completed in 7s
+  → results/sensitivity/replicates/rep_n512_s1_12h.csv
+
+=== Done ===
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     512 samples × 16 workers  (total evals: 9216)
+  Bootstrap: 0 replicates  (95% percentile intervals)
+  Seed:      20242513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=512  workers=16  total_evaluations=9216
+  sampler=sobol  seed=20242513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.1970  [ 0.1970,  0.1970]      0.4507  [ 0.4507,  0.4507]      0.2538
+  nutrients.max_nitrogen_uptake                     0.0779  [ 0.0779,  0.0779]      0.3166  [ 0.3166,  0.3166]      0.2388
+  gas_exchange.electron_transport_rate              0.0493  [ 0.0493,  0.0493]      0.3026  [ 0.3026,  0.3026]      0.2533
+  gas_exchange.ambient_CO2_concentration            0.0785  [ 0.0785,  0.0785]      0.2775  [ 0.2775,  0.2775]      0.1990
+  gas_exchange.max_rubisco_carboxylation_rate       0.0523  [ 0.0523,  0.0523]      0.2544  [ 0.2544,  0.2544]      0.2022
+  carbohydrates.respiration_frequency               0.0296  [ 0.0296,  0.0296]      0.2100  [ 0.2100,  0.2100]      0.1804
+  photo.max_PAR                                     0.0453  [ 0.0453,  0.0453]      0.1899  [ 0.1899,  0.1899]      0.1446
+  gas_exchange.leaf_water_potential                 0.0312  [ 0.0312,  0.0312]      0.1846  [ 0.1846,  0.1846]      0.1534
+  gas_exchange.leaf_temperature                     0.0393  [ 0.0393,  0.0393]      0.1017  [ 0.1017,  0.1017]      0.0624
+  gas_exchange.relative_humidity                    0.0267  [ 0.0267,  0.0267]      0.0833  [ 0.0833,  0.0833]      0.0566
+  nutrients.nitrogen_soil_content                   0.0152  [ 0.0152,  0.0152]      0.0587  [ 0.0587,  0.0587]      0.0434
+  nutrients.phosphorus_soil_content                 0.0184  [ 0.0184,  0.0184]      0.0503  [ 0.0503,  0.0503]      0.0319
+  growth.lambda_sb                                  0.0253  [ 0.0253,  0.0253]      0.0343  [ 0.0343,  0.0343]      0.0091
+  carbohydrates.k_vacuole_in                        0.0059  [ 0.0059,  0.0059]      0.0060  [ 0.0060,  0.0060]      0.0001
+  carbohydrates.sucrose                             0.0060  [ 0.0060,  0.0060]      0.0060  [ 0.0060,  0.0060]      0.0000
+  growth.total_biomass                              0.0008  [ 0.0008,  0.0008]      0.0011  [ 0.0011,  0.0011]      0.0003
+
+  Completed in 6s
+  → results/sensitivity/replicates/rep_n512_s2_12h.csv
+
+=== Done ===
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     512 samples × 16 workers  (total evals: 9216)
+  Bootstrap: 0 replicates  (95% percentile intervals)
+  Seed:      20243513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=512  workers=16  total_evaluations=9216
+  sampler=sobol  seed=20243513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.1971  [ 0.1971,  0.1971]      0.4352  [ 0.4352,  0.4352]      0.2381
+  nutrients.max_nitrogen_uptake                     0.0837  [ 0.0837,  0.0837]      0.2915  [ 0.2915,  0.2915]      0.2078
+  gas_exchange.max_rubisco_carboxylation_rate       0.0421  [ 0.0421,  0.0421]      0.2784  [ 0.2784,  0.2784]      0.2363
+  gas_exchange.ambient_CO2_concentration            0.0563  [ 0.0563,  0.0563]      0.2536  [ 0.2536,  0.2536]      0.1973
+  gas_exchange.electron_transport_rate              0.0325  [ 0.0325,  0.0325]      0.2482  [ 0.2482,  0.2482]      0.2157
+  gas_exchange.leaf_water_potential                 0.0608  [ 0.0608,  0.0608]      0.2301  [ 0.2301,  0.2301]      0.1693
+  carbohydrates.respiration_frequency               0.0989  [ 0.0989,  0.0989]      0.2264  [ 0.2264,  0.2264]      0.1276
+  photo.max_PAR                                     0.0000  [ 0.0000,  0.0000]      0.2006  [ 0.2006,  0.2006]      0.2006
+  gas_exchange.leaf_temperature                     0.0551  [ 0.0551,  0.0551]      0.1085  [ 0.1085,  0.1085]      0.0533
+  gas_exchange.relative_humidity                    0.0000  [ 0.0000,  0.0000]      0.0648  [ 0.0648,  0.0648]      0.0648
+  nutrients.nitrogen_soil_content                   0.0138  [ 0.0138,  0.0138]      0.0383  [ 0.0383,  0.0383]      0.0245
+  nutrients.phosphorus_soil_content                 0.0096  [ 0.0096,  0.0096]      0.0372  [ 0.0372,  0.0372]      0.0276
+  growth.lambda_sb                                  0.0025  [ 0.0025,  0.0025]      0.0363  [ 0.0363,  0.0363]      0.0337
+  carbohydrates.k_vacuole_in                        0.0003  [ 0.0003,  0.0003]      0.0030  [ 0.0030,  0.0030]      0.0027
+  growth.total_biomass                              0.0007  [ 0.0007,  0.0007]      0.0012  [ 0.0012,  0.0012]      0.0004
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+
+  Completed in 7s
+  → results/sensitivity/replicates/rep_n512_s3_12h.csv
+
+=== Done ===
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     512 samples × 16 workers  (total evals: 9216)
+  Bootstrap: 0 replicates  (95% percentile intervals)
+  Seed:      20244513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=512  workers=16  total_evaluations=9216
+  sampler=sobol  seed=20244513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.1678  [ 0.1678,  0.1678]      0.4512  [ 0.4512,  0.4512]      0.2833
+  gas_exchange.max_rubisco_carboxylation_rate       0.0567  [ 0.0567,  0.0567]      0.2767  [ 0.2767,  0.2767]      0.2200
+  nutrients.max_nitrogen_uptake                     0.0857  [ 0.0857,  0.0857]      0.2688  [ 0.2688,  0.2688]      0.1832
+  gas_exchange.electron_transport_rate              0.0584  [ 0.0584,  0.0584]      0.2641  [ 0.2641,  0.2641]      0.2057
+  gas_exchange.ambient_CO2_concentration            0.0472  [ 0.0472,  0.0472]      0.2624  [ 0.2624,  0.2624]      0.2152
+  carbohydrates.respiration_frequency               0.0128  [ 0.0128,  0.0128]      0.2056  [ 0.2056,  0.2056]      0.1928
+  gas_exchange.leaf_water_potential                 0.0254  [ 0.0254,  0.0254]      0.2018  [ 0.2018,  0.2018]      0.1765
+  photo.max_PAR                                     0.0000  [ 0.0000,  0.0000]      0.1577  [ 0.1577,  0.1577]      0.1577
+  gas_exchange.leaf_temperature                     0.0143  [ 0.0143,  0.0143]      0.0972  [ 0.0972,  0.0972]      0.0829
+  nutrients.phosphorus_soil_content                 0.0000  [ 0.0000,  0.0000]      0.0505  [ 0.0505,  0.0505]      0.0505
+  gas_exchange.relative_humidity                    0.0046  [ 0.0046,  0.0046]      0.0441  [ 0.0441,  0.0441]      0.0395
+  nutrients.nitrogen_soil_content                   0.0030  [ 0.0030,  0.0030]      0.0280  [ 0.0280,  0.0280]      0.0250
+  growth.lambda_sb                                  0.0000  [ 0.0000,  0.0000]      0.0139  [ 0.0139,  0.0139]      0.0139
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0035  [ 0.0035,  0.0035]      0.0035
+  growth.total_biomass                              0.0032  [ 0.0032,  0.0032]      0.0011  [ 0.0011,  0.0011]      0.0000
+  carbohydrates.k_vacuole_in                        0.0001  [ 0.0001,  0.0001]      0.0000  [ 0.0000,  0.0000]      0.0000
+
+  Completed in 6s
+  → results/sensitivity/replicates/rep_n512_s4_12h.csv
+
+=== Done ===
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     512 samples × 16 workers  (total evals: 9216)
+  Bootstrap: 0 replicates  (95% percentile intervals)
+  Seed:      20245513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=512  workers=16  total_evaluations=9216
+  sampler=sobol  seed=20245513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.2271  [ 0.2271,  0.2271]      0.3893  [ 0.3893,  0.3893]      0.1622
+  nutrients.max_nitrogen_uptake                     0.0531  [ 0.0531,  0.0531]      0.3324  [ 0.3324,  0.3324]      0.2793
+  gas_exchange.ambient_CO2_concentration            0.0862  [ 0.0862,  0.0862]      0.2772  [ 0.2772,  0.2772]      0.1910
+  gas_exchange.max_rubisco_carboxylation_rate       0.0859  [ 0.0859,  0.0859]      0.2496  [ 0.2496,  0.2496]      0.1637
+  gas_exchange.electron_transport_rate              0.0436  [ 0.0436,  0.0436]      0.2463  [ 0.2463,  0.2463]      0.2026
+  gas_exchange.leaf_water_potential                 0.0765  [ 0.0765,  0.0765]      0.1862  [ 0.1862,  0.1862]      0.1097
+  carbohydrates.respiration_frequency               0.0505  [ 0.0505,  0.0505]      0.1664  [ 0.1664,  0.1664]      0.1160
+  photo.max_PAR                                     0.0000  [ 0.0000,  0.0000]      0.1491  [ 0.1491,  0.1491]      0.1491
+  gas_exchange.leaf_temperature                     0.0113  [ 0.0113,  0.0113]      0.0954  [ 0.0954,  0.0954]      0.0841
+  gas_exchange.relative_humidity                    0.0000  [ 0.0000,  0.0000]      0.0741  [ 0.0741,  0.0741]      0.0741
+  nutrients.phosphorus_soil_content                 0.0000  [ 0.0000,  0.0000]      0.0458  [ 0.0458,  0.0458]      0.0458
+  growth.lambda_sb                                  0.0049  [ 0.0049,  0.0049]      0.0280  [ 0.0280,  0.0280]      0.0231
+  nutrients.nitrogen_soil_content                   0.0000  [ 0.0000,  0.0000]      0.0280  [ 0.0280,  0.0280]      0.0280
+  carbohydrates.sucrose                             0.0001  [ 0.0001,  0.0001]      0.0033  [ 0.0033,  0.0033]      0.0032
+  growth.total_biomass                              0.0000  [ 0.0000,  0.0000]      0.0011  [ 0.0011,  0.0011]      0.0011
+  carbohydrates.k_vacuole_in                        0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+
+  Completed in 7s
+  → results/sensitivity/replicates/rep_n512_s5_12h.csv
+
+=== Done ===
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     512 samples × 16 workers  (total evals: 9216)
+  Bootstrap: 0 replicates  (95% percentile intervals)
+  Seed:      20246513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=512  workers=16  total_evaluations=9216
+  sampler=sobol  seed=20246513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.2130  [ 0.2130,  0.2130]      0.4964  [ 0.4964,  0.4964]      0.2834
+  nutrients.max_nitrogen_uptake                     0.1107  [ 0.1107,  0.1107]      0.3241  [ 0.3241,  0.3241]      0.2134
+  gas_exchange.max_rubisco_carboxylation_rate       0.0844  [ 0.0844,  0.0844]      0.2745  [ 0.2745,  0.2745]      0.1901
+  gas_exchange.ambient_CO2_concentration            0.0528  [ 0.0528,  0.0528]      0.2421  [ 0.2421,  0.2421]      0.1892
+  gas_exchange.electron_transport_rate              0.0539  [ 0.0539,  0.0539]      0.2402  [ 0.2402,  0.2402]      0.1864
+  photo.max_PAR                                     0.0274  [ 0.0274,  0.0274]      0.2305  [ 0.2305,  0.2305]      0.2032
+  gas_exchange.leaf_water_potential                 0.0638  [ 0.0638,  0.0638]      0.2233  [ 0.2233,  0.2233]      0.1594
+  carbohydrates.respiration_frequency               0.0256  [ 0.0256,  0.0256]      0.1959  [ 0.1959,  0.1959]      0.1704
+  gas_exchange.leaf_temperature                     0.0120  [ 0.0120,  0.0120]      0.0867  [ 0.0867,  0.0867]      0.0747
+  nutrients.phosphorus_soil_content                 0.0000  [ 0.0000,  0.0000]      0.0770  [ 0.0770,  0.0770]      0.0770
+  nutrients.nitrogen_soil_content                   0.0000  [ 0.0000,  0.0000]      0.0682  [ 0.0682,  0.0682]      0.0682
+  gas_exchange.relative_humidity                    0.0000  [ 0.0000,  0.0000]      0.0538  [ 0.0538,  0.0538]      0.0538
+  growth.lambda_sb                                  0.0189  [ 0.0189,  0.0189]      0.0308  [ 0.0308,  0.0308]      0.0120
+  carbohydrates.k_vacuole_in                        0.0004  [ 0.0004,  0.0004]      0.0073  [ 0.0073,  0.0073]      0.0069
+  growth.total_biomass                              0.0000  [ 0.0000,  0.0000]      0.0011  [ 0.0011,  0.0011]      0.0011
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+
+  Completed in 6s
+  → results/sensitivity/replicates/rep_n512_s6_12h.csv
+
+=== Done ===
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     512 samples × 16 workers  (total evals: 9216)
+  Bootstrap: 0 replicates  (95% percentile intervals)
+  Seed:      20247513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=512  workers=16  total_evaluations=9216
+  sampler=sobol  seed=20247513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.0923  [ 0.0923,  0.0923]      0.4989  [ 0.4989,  0.4989]      0.4066
+  nutrients.max_nitrogen_uptake                     0.0801  [ 0.0801,  0.0801]      0.3726  [ 0.3726,  0.3726]      0.2925
+  gas_exchange.max_rubisco_carboxylation_rate       0.0413  [ 0.0413,  0.0413]      0.2603  [ 0.2603,  0.2603]      0.2190
+  gas_exchange.electron_transport_rate              0.0359  [ 0.0359,  0.0359]      0.2570  [ 0.2570,  0.2570]      0.2211
+  gas_exchange.ambient_CO2_concentration            0.0000  [ 0.0000,  0.0000]      0.2424  [ 0.2424,  0.2424]      0.2424
+  gas_exchange.leaf_water_potential                 0.0332  [ 0.0332,  0.0332]      0.2063  [ 0.2063,  0.2063]      0.1731
+  carbohydrates.respiration_frequency               0.0000  [ 0.0000,  0.0000]      0.1979  [ 0.1979,  0.1979]      0.1979
+  photo.max_PAR                                     0.0000  [ 0.0000,  0.0000]      0.1774  [ 0.1774,  0.1774]      0.1774
+  gas_exchange.leaf_temperature                     0.0000  [ 0.0000,  0.0000]      0.0769  [ 0.0769,  0.0769]      0.0769
+  gas_exchange.relative_humidity                    0.0000  [ 0.0000,  0.0000]      0.0655  [ 0.0655,  0.0655]      0.0655
+  nutrients.phosphorus_soil_content                 0.0066  [ 0.0066,  0.0066]      0.0390  [ 0.0390,  0.0390]      0.0324
+  nutrients.nitrogen_soil_content                   0.0098  [ 0.0098,  0.0098]      0.0342  [ 0.0342,  0.0342]      0.0244
+  growth.lambda_sb                                  0.0000  [ 0.0000,  0.0000]      0.0308  [ 0.0308,  0.0308]      0.0308
+  carbohydrates.k_vacuole_in                        0.0000  [ 0.0000,  0.0000]      0.0041  [ 0.0041,  0.0041]      0.0041
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0029  [ 0.0029,  0.0029]      0.0029
+  growth.total_biomass                              0.0014  [ 0.0014,  0.0014]      0.0010  [ 0.0010,  0.0010]      0.0000
+
+  Completed in 7s
+  → results/sensitivity/replicates/rep_n512_s7_12h.csv
+
+=== Done ===
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     512 samples × 16 workers  (total evals: 9216)
+  Bootstrap: 0 replicates  (95% percentile intervals)
+  Seed:      20248513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=512  workers=16  total_evaluations=9216
+  sampler=sobol  seed=20248513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.1712  [ 0.1712,  0.1712]      0.4241  [ 0.4241,  0.4241]      0.2529
+  nutrients.max_nitrogen_uptake                     0.0905  [ 0.0905,  0.0905]      0.3172  [ 0.3172,  0.3172]      0.2267
+  gas_exchange.max_rubisco_carboxylation_rate       0.0935  [ 0.0935,  0.0935]      0.2434  [ 0.2434,  0.2434]      0.1499
+  gas_exchange.ambient_CO2_concentration            0.0327  [ 0.0327,  0.0327]      0.2384  [ 0.2384,  0.2384]      0.2057
+  gas_exchange.leaf_water_potential                 0.0607  [ 0.0607,  0.0607]      0.2172  [ 0.2172,  0.2172]      0.1565
+  gas_exchange.electron_transport_rate              0.0000  [ 0.0000,  0.0000]      0.2091  [ 0.2091,  0.2091]      0.2091
+  carbohydrates.respiration_frequency               0.0074  [ 0.0074,  0.0074]      0.1963  [ 0.1963,  0.1963]      0.1889
+  photo.max_PAR                                     0.0273  [ 0.0273,  0.0273]      0.1621  [ 0.1621,  0.1621]      0.1348
+  gas_exchange.leaf_temperature                     0.0255  [ 0.0255,  0.0255]      0.1037  [ 0.1037,  0.1037]      0.0782
+  nutrients.nitrogen_soil_content                   0.0170  [ 0.0170,  0.0170]      0.0550  [ 0.0550,  0.0550]      0.0380
+  nutrients.phosphorus_soil_content                 0.0009  [ 0.0009,  0.0009]      0.0496  [ 0.0496,  0.0496]      0.0487
+  growth.lambda_sb                                  0.0000  [ 0.0000,  0.0000]      0.0421  [ 0.0421,  0.0421]      0.0421
+  gas_exchange.relative_humidity                    0.0084  [ 0.0084,  0.0084]      0.0277  [ 0.0277,  0.0277]      0.0193
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0068  [ 0.0068,  0.0068]      0.0068
+  carbohydrates.k_vacuole_in                        0.0060  [ 0.0060,  0.0060]      0.0030  [ 0.0030,  0.0030]      0.0000
+  growth.total_biomass                              0.0000  [ 0.0000,  0.0000]      0.0011  [ 0.0011,  0.0011]      0.0011
+
+  Completed in 6s
+  → results/sensitivity/replicates/rep_n512_s8_12h.csv
+
+=== Done ===
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     512 samples × 16 workers  (total evals: 9216)
+  Bootstrap: 0 replicates  (95% percentile intervals)
+  Seed:      20249513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=512  workers=16  total_evaluations=9216
+  sampler=sobol  seed=20249513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.0633  [ 0.0633,  0.0633]      0.3621  [ 0.3621,  0.3621]      0.2988
+  gas_exchange.max_rubisco_carboxylation_rate       0.0130  [ 0.0130,  0.0130]      0.3082  [ 0.3082,  0.3082]      0.2951
+  nutrients.max_nitrogen_uptake                     0.0158  [ 0.0158,  0.0158]      0.2999  [ 0.2999,  0.2999]      0.2841
+  gas_exchange.ambient_CO2_concentration            0.0474  [ 0.0474,  0.0474]      0.2726  [ 0.2726,  0.2726]      0.2253
+  gas_exchange.electron_transport_rate              0.0436  [ 0.0436,  0.0436]      0.2506  [ 0.2506,  0.2506]      0.2070
+  gas_exchange.leaf_water_potential                 0.0348  [ 0.0348,  0.0348]      0.2499  [ 0.2499,  0.2499]      0.2150
+  carbohydrates.respiration_frequency               0.0140  [ 0.0140,  0.0140]      0.2481  [ 0.2481,  0.2481]      0.2341
+  photo.max_PAR                                     0.0035  [ 0.0035,  0.0035]      0.1969  [ 0.1969,  0.1969]      0.1935
+  gas_exchange.leaf_temperature                     0.0258  [ 0.0258,  0.0258]      0.1088  [ 0.1088,  0.1088]      0.0830
+  gas_exchange.relative_humidity                    0.0000  [ 0.0000,  0.0000]      0.0726  [ 0.0726,  0.0726]      0.0726
+  nutrients.phosphorus_soil_content                 0.0000  [ 0.0000,  0.0000]      0.0693  [ 0.0693,  0.0693]      0.0693
+  growth.lambda_sb                                  0.0000  [ 0.0000,  0.0000]      0.0421  [ 0.0421,  0.0421]      0.0421
+  nutrients.nitrogen_soil_content                   0.0000  [ 0.0000,  0.0000]      0.0274  [ 0.0274,  0.0274]      0.0274
+  carbohydrates.k_vacuole_in                        0.0000  [ 0.0000,  0.0000]      0.0078  [ 0.0078,  0.0078]      0.0078
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0048  [ 0.0048,  0.0048]      0.0048
+  growth.total_biomass                              0.0021  [ 0.0021,  0.0021]      0.0012  [ 0.0012,  0.0012]      0.0000
+
+  Completed in 6s
+  → results/sensitivity/replicates/rep_n512_s9_12h.csv
+
+=== Done ===
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     512 samples × 16 workers  (total evals: 9216)
+  Bootstrap: 0 replicates  (95% percentile intervals)
+  Seed:      20250513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=512  workers=16  total_evaluations=9216
+  sampler=sobol  seed=20250513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.2022  [ 0.2022,  0.2022]      0.4635  [ 0.4635,  0.4635]      0.2612
+  nutrients.max_nitrogen_uptake                     0.1144  [ 0.1144,  0.1144]      0.3238  [ 0.3238,  0.3238]      0.2094
+  gas_exchange.ambient_CO2_concentration            0.0957  [ 0.0957,  0.0957]      0.2770  [ 0.2770,  0.2770]      0.1813
+  gas_exchange.electron_transport_rate              0.0229  [ 0.0229,  0.0229]      0.2597  [ 0.2597,  0.2597]      0.2368
+  gas_exchange.max_rubisco_carboxylation_rate       0.0566  [ 0.0566,  0.0566]      0.2523  [ 0.2523,  0.2523]      0.1957
+  carbohydrates.respiration_frequency               0.0016  [ 0.0016,  0.0016]      0.2160  [ 0.2160,  0.2160]      0.2144
+  gas_exchange.leaf_water_potential                 0.0621  [ 0.0621,  0.0621]      0.2132  [ 0.2132,  0.2132]      0.1512
+  photo.max_PAR                                     0.0000  [ 0.0000,  0.0000]      0.1833  [ 0.1833,  0.1833]      0.1833
+  gas_exchange.leaf_temperature                     0.0267  [ 0.0267,  0.0267]      0.0805  [ 0.0805,  0.0805]      0.0539
+  nutrients.phosphorus_soil_content                 0.0000  [ 0.0000,  0.0000]      0.0712  [ 0.0712,  0.0712]      0.0712
+  gas_exchange.relative_humidity                    0.0079  [ 0.0079,  0.0079]      0.0636  [ 0.0636,  0.0636]      0.0557
+  growth.lambda_sb                                  0.0133  [ 0.0133,  0.0133]      0.0448  [ 0.0448,  0.0448]      0.0314
+  nutrients.nitrogen_soil_content                   0.0030  [ 0.0030,  0.0030]      0.0381  [ 0.0381,  0.0381]      0.0350
+  carbohydrates.k_vacuole_in                        0.0000  [ 0.0000,  0.0000]      0.0070  [ 0.0070,  0.0070]      0.0070
+  growth.total_biomass                              0.0022  [ 0.0022,  0.0022]      0.0011  [ 0.0011,  0.0011]      0.0000
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+
+  Completed in 7s
+  → results/sensitivity/replicates/rep_n512_s10_12h.csv
+
+=== Done ===
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     2048 samples × 16 workers  (total evals: 36864)
+  Bootstrap: 0 replicates  (95% percentile intervals)
+  Seed:      20241513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=2048  workers=16  total_evaluations=36864
+  sampler=sobol  seed=20241513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.2188  [ 0.2188,  0.2188]      0.4646  [ 0.4646,  0.4646]      0.2457
+  nutrients.max_nitrogen_uptake                     0.0709  [ 0.0709,  0.0709]      0.3210  [ 0.3210,  0.3210]      0.2501
+  gas_exchange.electron_transport_rate              0.0600  [ 0.0600,  0.0600]      0.2882  [ 0.2882,  0.2882]      0.2282
+  gas_exchange.max_rubisco_carboxylation_rate       0.0464  [ 0.0464,  0.0464]      0.2565  [ 0.2565,  0.2565]      0.2101
+  gas_exchange.ambient_CO2_concentration            0.0421  [ 0.0421,  0.0421]      0.2345  [ 0.2345,  0.2345]      0.1925
+  carbohydrates.respiration_frequency               0.0468  [ 0.0468,  0.0468]      0.2285  [ 0.2285,  0.2285]      0.1817
+  gas_exchange.leaf_water_potential                 0.0333  [ 0.0333,  0.0333]      0.1963  [ 0.1963,  0.1963]      0.1630
+  photo.max_PAR                                     0.0000  [ 0.0000,  0.0000]      0.1673  [ 0.1673,  0.1673]      0.1673
+  gas_exchange.leaf_temperature                     0.0000  [ 0.0000,  0.0000]      0.0883  [ 0.0883,  0.0883]      0.0883
+  nutrients.phosphorus_soil_content                 0.0000  [ 0.0000,  0.0000]      0.0586  [ 0.0586,  0.0586]      0.0586
+  gas_exchange.relative_humidity                    0.0000  [ 0.0000,  0.0000]      0.0537  [ 0.0537,  0.0537]      0.0537
+  nutrients.nitrogen_soil_content                   0.0111  [ 0.0111,  0.0111]      0.0485  [ 0.0485,  0.0485]      0.0375
+  growth.lambda_sb                                  0.0034  [ 0.0034,  0.0034]      0.0391  [ 0.0391,  0.0391]      0.0357
+  carbohydrates.k_vacuole_in                        0.0004  [ 0.0004,  0.0004]      0.0043  [ 0.0043,  0.0043]      0.0040
+  carbohydrates.sucrose                             0.0015  [ 0.0015,  0.0015]      0.0023  [ 0.0023,  0.0023]      0.0008
+  growth.total_biomass                              0.0020  [ 0.0020,  0.0020]      0.0011  [ 0.0011,  0.0011]      0.0000
+
+  Completed in 26s
+  → results/sensitivity/replicates/rep_n2048_s1_12h.csv
+
+=== Done ===
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     2048 samples × 16 workers  (total evals: 36864)
+  Bootstrap: 0 replicates  (95% percentile intervals)
+  Seed:      20242513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=2048  workers=16  total_evaluations=36864
+  sampler=sobol  seed=20242513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.1859  [ 0.1859,  0.1859]      0.4443  [ 0.4443,  0.4443]      0.2584
+  nutrients.max_nitrogen_uptake                     0.1125  [ 0.1125,  0.1125]      0.2987  [ 0.2987,  0.2987]      0.1862
+  gas_exchange.max_rubisco_carboxylation_rate       0.0640  [ 0.0640,  0.0640]      0.2905  [ 0.2905,  0.2905]      0.2265
+  gas_exchange.electron_transport_rate              0.0461  [ 0.0461,  0.0461]      0.2668  [ 0.2668,  0.2668]      0.2207
+  gas_exchange.ambient_CO2_concentration            0.0565  [ 0.0565,  0.0565]      0.2349  [ 0.2349,  0.2349]      0.1784
+  carbohydrates.respiration_frequency               0.0644  [ 0.0644,  0.0644]      0.2281  [ 0.2281,  0.2281]      0.1636
+  gas_exchange.leaf_water_potential                 0.0792  [ 0.0792,  0.0792]      0.1965  [ 0.1965,  0.1965]      0.1173
+  photo.max_PAR                                     0.0669  [ 0.0669,  0.0669]      0.1748  [ 0.1748,  0.1748]      0.1079
+  gas_exchange.leaf_temperature                     0.0093  [ 0.0093,  0.0093]      0.0846  [ 0.0846,  0.0846]      0.0753
+  gas_exchange.relative_humidity                    0.0000  [ 0.0000,  0.0000]      0.0654  [ 0.0654,  0.0654]      0.0654
+  nutrients.phosphorus_soil_content                 0.0206  [ 0.0206,  0.0206]      0.0641  [ 0.0641,  0.0641]      0.0435
+  nutrients.nitrogen_soil_content                   0.0048  [ 0.0048,  0.0048]      0.0434  [ 0.0434,  0.0434]      0.0386
+  growth.lambda_sb                                  0.0025  [ 0.0025,  0.0025]      0.0320  [ 0.0320,  0.0320]      0.0294
+  carbohydrates.k_vacuole_in                        0.0035  [ 0.0035,  0.0035]      0.0062  [ 0.0062,  0.0062]      0.0027
+  carbohydrates.sucrose                             0.0030  [ 0.0030,  0.0030]      0.0061  [ 0.0061,  0.0061]      0.0032
+  growth.total_biomass                              0.0010  [ 0.0010,  0.0010]      0.0011  [ 0.0011,  0.0011]      0.0001
+
+  Completed in 26s
+  → results/sensitivity/replicates/rep_n2048_s2_12h.csv
+
+=== Done ===
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     2048 samples × 16 workers  (total evals: 36864)
+  Bootstrap: 0 replicates  (95% percentile intervals)
+  Seed:      20243513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=2048  workers=16  total_evaluations=36864
+  sampler=sobol  seed=20243513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.2072  [ 0.2072,  0.2072]      0.4305  [ 0.4305,  0.4305]      0.2233
+  nutrients.max_nitrogen_uptake                     0.0833  [ 0.0833,  0.0833]      0.2998  [ 0.2998,  0.2998]      0.2165
+  gas_exchange.electron_transport_rate              0.0680  [ 0.0680,  0.0680]      0.2621  [ 0.2621,  0.2621]      0.1941
+  gas_exchange.max_rubisco_carboxylation_rate       0.0413  [ 0.0413,  0.0413]      0.2391  [ 0.2391,  0.2391]      0.1979
+  gas_exchange.ambient_CO2_concentration            0.0700  [ 0.0700,  0.0700]      0.2335  [ 0.2335,  0.2335]      0.1635
+  carbohydrates.respiration_frequency               0.0417  [ 0.0417,  0.0417]      0.2149  [ 0.2149,  0.2149]      0.1732
+  gas_exchange.leaf_water_potential                 0.0569  [ 0.0569,  0.0569]      0.1991  [ 0.1991,  0.1991]      0.1422
+  photo.max_PAR                                     0.0189  [ 0.0189,  0.0189]      0.1772  [ 0.1772,  0.1772]      0.1583
+  gas_exchange.leaf_temperature                     0.0000  [ 0.0000,  0.0000]      0.0770  [ 0.0770,  0.0770]      0.0770
+  gas_exchange.relative_humidity                    0.0073  [ 0.0073,  0.0073]      0.0686  [ 0.0686,  0.0686]      0.0613
+  nutrients.phosphorus_soil_content                 0.0056  [ 0.0056,  0.0056]      0.0621  [ 0.0621,  0.0621]      0.0565
+  nutrients.nitrogen_soil_content                   0.0000  [ 0.0000,  0.0000]      0.0350  [ 0.0350,  0.0350]      0.0350
+  growth.lambda_sb                                  0.0000  [ 0.0000,  0.0000]      0.0315  [ 0.0315,  0.0315]      0.0315
+  carbohydrates.k_vacuole_in                        0.0000  [ 0.0000,  0.0000]      0.0040  [ 0.0040,  0.0040]      0.0040
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0040  [ 0.0040,  0.0040]      0.0040
+  growth.total_biomass                              0.0009  [ 0.0009,  0.0009]      0.0011  [ 0.0011,  0.0011]      0.0002
+
+  Completed in 26s
+  → results/sensitivity/replicates/rep_n2048_s3_12h.csv
+
+=== Done ===
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     2048 samples × 16 workers  (total evals: 36864)
+  Bootstrap: 0 replicates  (95% percentile intervals)
+  Seed:      20244513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=2048  workers=16  total_evaluations=36864
+  sampler=sobol  seed=20244513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.1474  [ 0.1474,  0.1474]      0.4379  [ 0.4379,  0.4379]      0.2905
+  nutrients.max_nitrogen_uptake                     0.0149  [ 0.0149,  0.0149]      0.2997  [ 0.2997,  0.2997]      0.2849
+  gas_exchange.max_rubisco_carboxylation_rate       0.0312  [ 0.0312,  0.0312]      0.2727  [ 0.2727,  0.2727]      0.2414
+  gas_exchange.electron_transport_rate              0.0000  [ 0.0000,  0.0000]      0.2514  [ 0.2514,  0.2514]      0.2514
+  gas_exchange.ambient_CO2_concentration            0.0133  [ 0.0133,  0.0133]      0.2317  [ 0.2317,  0.2317]      0.2185
+  gas_exchange.leaf_water_potential                 0.0451  [ 0.0451,  0.0451]      0.2258  [ 0.2258,  0.2258]      0.1807
+  carbohydrates.respiration_frequency               0.0000  [ 0.0000,  0.0000]      0.2179  [ 0.2179,  0.2179]      0.2179
+  photo.max_PAR                                     0.0076  [ 0.0076,  0.0076]      0.1755  [ 0.1755,  0.1755]      0.1678
+  gas_exchange.leaf_temperature                     0.0029  [ 0.0029,  0.0029]      0.0927  [ 0.0927,  0.0927]      0.0898
+  gas_exchange.relative_humidity                    0.0000  [ 0.0000,  0.0000]      0.0683  [ 0.0683,  0.0683]      0.0683
+  nutrients.phosphorus_soil_content                 0.0012  [ 0.0012,  0.0012]      0.0487  [ 0.0487,  0.0487]      0.0474
+  nutrients.nitrogen_soil_content                   0.0000  [ 0.0000,  0.0000]      0.0435  [ 0.0435,  0.0435]      0.0435
+  growth.lambda_sb                                  0.0037  [ 0.0037,  0.0037]      0.0367  [ 0.0367,  0.0367]      0.0330
+  carbohydrates.k_vacuole_in                        0.0007  [ 0.0007,  0.0007]      0.0046  [ 0.0046,  0.0046]      0.0039
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0030  [ 0.0030,  0.0030]      0.0030
+  growth.total_biomass                              0.0013  [ 0.0013,  0.0013]      0.0011  [ 0.0011,  0.0011]      0.0000
+
+  Completed in 26s
+  → results/sensitivity/replicates/rep_n2048_s4_12h.csv
+
+=== Done ===
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     2048 samples × 16 workers  (total evals: 36864)
+  Bootstrap: 0 replicates  (95% percentile intervals)
+  Seed:      20245513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=2048  workers=16  total_evaluations=36864
+  sampler=sobol  seed=20245513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.2675  [ 0.2675,  0.2675]      0.4495  [ 0.4495,  0.4495]      0.1819
+  nutrients.max_nitrogen_uptake                     0.1172  [ 0.1172,  0.1172]      0.3301  [ 0.3301,  0.3301]      0.2129
+  gas_exchange.max_rubisco_carboxylation_rate       0.0724  [ 0.0724,  0.0724]      0.2760  [ 0.2760,  0.2760]      0.2036
+  gas_exchange.electron_transport_rate              0.0701  [ 0.0701,  0.0701]      0.2673  [ 0.2673,  0.2673]      0.1973
+  gas_exchange.ambient_CO2_concentration            0.0669  [ 0.0669,  0.0669]      0.2460  [ 0.2460,  0.2460]      0.1792
+  gas_exchange.leaf_water_potential                 0.0444  [ 0.0444,  0.0444]      0.2130  [ 0.2130,  0.2130]      0.1686
+  carbohydrates.respiration_frequency               0.0289  [ 0.0289,  0.0289]      0.2031  [ 0.2031,  0.2031]      0.1742
+  photo.max_PAR                                     0.0000  [ 0.0000,  0.0000]      0.1912  [ 0.1912,  0.1912]      0.1912
+  gas_exchange.leaf_temperature                     0.0069  [ 0.0069,  0.0069]      0.0959  [ 0.0959,  0.0959]      0.0890
+  nutrients.phosphorus_soil_content                 0.0104  [ 0.0104,  0.0104]      0.0614  [ 0.0614,  0.0614]      0.0511
+  gas_exchange.relative_humidity                    0.0152  [ 0.0152,  0.0152]      0.0607  [ 0.0607,  0.0607]      0.0455
+  nutrients.nitrogen_soil_content                   0.0037  [ 0.0037,  0.0037]      0.0431  [ 0.0431,  0.0431]      0.0395
+  growth.lambda_sb                                  0.0008  [ 0.0008,  0.0008]      0.0330  [ 0.0330,  0.0330]      0.0322
+  carbohydrates.k_vacuole_in                        0.0000  [ 0.0000,  0.0000]      0.0061  [ 0.0061,  0.0061]      0.0061
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0052  [ 0.0052,  0.0052]      0.0052
+  growth.total_biomass                              0.0024  [ 0.0024,  0.0024]      0.0011  [ 0.0011,  0.0011]      0.0000
+
+  Completed in 26s
+  → results/sensitivity/replicates/rep_n2048_s5_12h.csv
+
+=== Done ===
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     2048 samples × 16 workers  (total evals: 36864)
+  Bootstrap: 0 replicates  (95% percentile intervals)
+  Seed:      20246513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=2048  workers=16  total_evaluations=36864
+  sampler=sobol  seed=20246513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.1530  [ 0.1530,  0.1530]      0.4286  [ 0.4286,  0.4286]      0.2756
+  nutrients.max_nitrogen_uptake                     0.0761  [ 0.0761,  0.0761]      0.2872  [ 0.2872,  0.2872]      0.2111
+  gas_exchange.max_rubisco_carboxylation_rate       0.0696  [ 0.0696,  0.0696]      0.2644  [ 0.2644,  0.2644]      0.1948
+  gas_exchange.electron_transport_rate              0.0660  [ 0.0660,  0.0660]      0.2568  [ 0.2568,  0.2568]      0.1908
+  gas_exchange.ambient_CO2_concentration            0.0109  [ 0.0109,  0.0109]      0.2369  [ 0.2369,  0.2369]      0.2260
+  carbohydrates.respiration_frequency               0.0061  [ 0.0061,  0.0061]      0.2163  [ 0.2163,  0.2163]      0.2102
+  gas_exchange.leaf_water_potential                 0.0253  [ 0.0253,  0.0253]      0.1949  [ 0.1949,  0.1949]      0.1696
+  photo.max_PAR                                     0.0055  [ 0.0055,  0.0055]      0.1763  [ 0.1763,  0.1763]      0.1708
+  gas_exchange.leaf_temperature                     0.0000  [ 0.0000,  0.0000]      0.0942  [ 0.0942,  0.0942]      0.0942
+  gas_exchange.relative_humidity                    0.0016  [ 0.0016,  0.0016]      0.0741  [ 0.0741,  0.0741]      0.0726
+  nutrients.phosphorus_soil_content                 0.0000  [ 0.0000,  0.0000]      0.0598  [ 0.0598,  0.0598]      0.0598
+  nutrients.nitrogen_soil_content                   0.0050  [ 0.0050,  0.0050]      0.0472  [ 0.0472,  0.0472]      0.0422
+  growth.lambda_sb                                  0.0000  [ 0.0000,  0.0000]      0.0384  [ 0.0384,  0.0384]      0.0384
+  carbohydrates.k_vacuole_in                        0.0007  [ 0.0007,  0.0007]      0.0076  [ 0.0076,  0.0076]      0.0070
+  carbohydrates.sucrose                             0.0003  [ 0.0003,  0.0003]      0.0041  [ 0.0041,  0.0041]      0.0038
+  growth.total_biomass                              0.0013  [ 0.0013,  0.0013]      0.0011  [ 0.0011,  0.0011]      0.0000
+
+  Completed in 26s
+  → results/sensitivity/replicates/rep_n2048_s6_12h.csv
+
+=== Done ===
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     2048 samples × 16 workers  (total evals: 36864)
+  Bootstrap: 0 replicates  (95% percentile intervals)
+  Seed:      20247513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=2048  workers=16  total_evaluations=36864
+  sampler=sobol  seed=20247513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.1727  [ 0.1727,  0.1727]      0.4389  [ 0.4389,  0.4389]      0.2662
+  nutrients.max_nitrogen_uptake                     0.0810  [ 0.0810,  0.0810]      0.3185  [ 0.3185,  0.3185]      0.2375
+  gas_exchange.electron_transport_rate              0.0506  [ 0.0506,  0.0506]      0.2816  [ 0.2816,  0.2816]      0.2310
+  gas_exchange.max_rubisco_carboxylation_rate       0.0296  [ 0.0296,  0.0296]      0.2652  [ 0.2652,  0.2652]      0.2356
+  gas_exchange.ambient_CO2_concentration            0.0459  [ 0.0459,  0.0459]      0.2425  [ 0.2425,  0.2425]      0.1966
+  carbohydrates.respiration_frequency               0.0045  [ 0.0045,  0.0045]      0.2136  [ 0.2136,  0.2136]      0.2091
+  gas_exchange.leaf_water_potential                 0.0500  [ 0.0500,  0.0500]      0.1989  [ 0.1989,  0.1989]      0.1489
+  photo.max_PAR                                     0.0278  [ 0.0278,  0.0278]      0.1917  [ 0.1917,  0.1917]      0.1639
+  gas_exchange.leaf_temperature                     0.0088  [ 0.0088,  0.0088]      0.0968  [ 0.0968,  0.0968]      0.0880
+  gas_exchange.relative_humidity                    0.0019  [ 0.0019,  0.0019]      0.0685  [ 0.0685,  0.0685]      0.0667
+  nutrients.phosphorus_soil_content                 0.0000  [ 0.0000,  0.0000]      0.0585  [ 0.0585,  0.0585]      0.0585
+  nutrients.nitrogen_soil_content                   0.0000  [ 0.0000,  0.0000]      0.0481  [ 0.0481,  0.0481]      0.0481
+  growth.lambda_sb                                  0.0097  [ 0.0097,  0.0097]      0.0447  [ 0.0447,  0.0447]      0.0350
+  carbohydrates.k_vacuole_in                        0.0000  [ 0.0000,  0.0000]      0.0060  [ 0.0060,  0.0060]      0.0060
+  carbohydrates.sucrose                             0.0004  [ 0.0004,  0.0004]      0.0030  [ 0.0030,  0.0030]      0.0026
+  growth.total_biomass                              0.0010  [ 0.0010,  0.0010]      0.0011  [ 0.0011,  0.0011]      0.0001
+
+  Completed in 26s
+  → results/sensitivity/replicates/rep_n2048_s7_12h.csv
+
+=== Done ===
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     2048 samples × 16 workers  (total evals: 36864)
+  Bootstrap: 0 replicates  (95% percentile intervals)
+  Seed:      20248513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=2048  workers=16  total_evaluations=36864
+  sampler=sobol  seed=20248513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.1967  [ 0.1967,  0.1967]      0.4595  [ 0.4595,  0.4595]      0.2628
+  nutrients.max_nitrogen_uptake                     0.0940  [ 0.0940,  0.0940]      0.3180  [ 0.3180,  0.3180]      0.2241
+  gas_exchange.electron_transport_rate              0.0701  [ 0.0701,  0.0701]      0.2614  [ 0.2614,  0.2614]      0.1913
+  gas_exchange.max_rubisco_carboxylation_rate       0.0258  [ 0.0258,  0.0258]      0.2504  [ 0.2504,  0.2504]      0.2246
+  gas_exchange.ambient_CO2_concentration            0.0209  [ 0.0209,  0.0209]      0.2272  [ 0.2272,  0.2272]      0.2063
+  carbohydrates.respiration_frequency               0.0394  [ 0.0394,  0.0394]      0.2239  [ 0.2239,  0.2239]      0.1845
+  gas_exchange.leaf_water_potential                 0.0502  [ 0.0502,  0.0502]      0.2236  [ 0.2236,  0.2236]      0.1735
+  photo.max_PAR                                     0.0147  [ 0.0147,  0.0147]      0.1736  [ 0.1736,  0.1736]      0.1589
+  gas_exchange.leaf_temperature                     0.0097  [ 0.0097,  0.0097]      0.0865  [ 0.0865,  0.0865]      0.0768
+  gas_exchange.relative_humidity                    0.0134  [ 0.0134,  0.0134]      0.0625  [ 0.0625,  0.0625]      0.0492
+  nutrients.phosphorus_soil_content                 0.0099  [ 0.0099,  0.0099]      0.0546  [ 0.0546,  0.0546]      0.0447
+  nutrients.nitrogen_soil_content                   0.0126  [ 0.0126,  0.0126]      0.0447  [ 0.0447,  0.0447]      0.0321
+  growth.lambda_sb                                  0.0153  [ 0.0153,  0.0153]      0.0390  [ 0.0390,  0.0390]      0.0238
+  carbohydrates.k_vacuole_in                        0.0054  [ 0.0054,  0.0054]      0.0090  [ 0.0090,  0.0090]      0.0036
+  carbohydrates.sucrose                             0.0014  [ 0.0014,  0.0014]      0.0045  [ 0.0045,  0.0045]      0.0031
+  growth.total_biomass                              0.0007  [ 0.0007,  0.0007]      0.0011  [ 0.0011,  0.0011]      0.0004
+
+  Completed in 27s
+  → results/sensitivity/replicates/rep_n2048_s8_12h.csv
+
+=== Done ===
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     2048 samples × 16 workers  (total evals: 36864)
+  Bootstrap: 0 replicates  (95% percentile intervals)
+  Seed:      20249513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=2048  workers=16  total_evaluations=36864
+  sampler=sobol  seed=20249513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.1963  [ 0.1963,  0.1963]      0.4405  [ 0.4405,  0.4405]      0.2443
+  nutrients.max_nitrogen_uptake                     0.1270  [ 0.1270,  0.1270]      0.3059  [ 0.3059,  0.3059]      0.1789
+  gas_exchange.max_rubisco_carboxylation_rate       0.0384  [ 0.0384,  0.0384]      0.2703  [ 0.2703,  0.2703]      0.2319
+  gas_exchange.electron_transport_rate              0.0615  [ 0.0615,  0.0615]      0.2683  [ 0.2683,  0.2683]      0.2067
+  gas_exchange.ambient_CO2_concentration            0.0470  [ 0.0470,  0.0470]      0.2192  [ 0.2192,  0.2192]      0.1721
+  gas_exchange.leaf_water_potential                 0.0535  [ 0.0535,  0.0535]      0.2084  [ 0.2084,  0.2084]      0.1548
+  carbohydrates.respiration_frequency               0.0299  [ 0.0299,  0.0299]      0.2057  [ 0.2057,  0.2057]      0.1758
+  photo.max_PAR                                     0.0347  [ 0.0347,  0.0347]      0.1816  [ 0.1816,  0.1816]      0.1469
+  gas_exchange.leaf_temperature                     0.0000  [ 0.0000,  0.0000]      0.0896  [ 0.0896,  0.0896]      0.0896
+  gas_exchange.relative_humidity                    0.0000  [ 0.0000,  0.0000]      0.0613  [ 0.0613,  0.0613]      0.0613
+  nutrients.phosphorus_soil_content                 0.0000  [ 0.0000,  0.0000]      0.0563  [ 0.0563,  0.0563]      0.0563
+  nutrients.nitrogen_soil_content                   0.0003  [ 0.0003,  0.0003]      0.0506  [ 0.0506,  0.0506]      0.0504
+  growth.lambda_sb                                  0.0000  [ 0.0000,  0.0000]      0.0341  [ 0.0341,  0.0341]      0.0341
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0054  [ 0.0054,  0.0054]      0.0054
+  carbohydrates.k_vacuole_in                        0.0005  [ 0.0005,  0.0005]      0.0023  [ 0.0023,  0.0023]      0.0017
+  growth.total_biomass                              0.0022  [ 0.0022,  0.0022]      0.0011  [ 0.0011,  0.0011]      0.0000
+
+  Completed in 26s
+  → results/sensitivity/replicates/rep_n2048_s9_12h.csv
+
+=== Done ===
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  sobol
+  Sobol:     2048 samples × 16 workers  (total evals: 36864)
+  Bootstrap: 0 replicates  (95% percentile intervals)
+  Seed:      20250513
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=2048  workers=16  total_evaluations=36864
+  sampler=sobol  seed=20250513
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  nutrients.max_phosphorus_uptake                   0.2032  [ 0.2032,  0.2032]      0.4545  [ 0.4545,  0.4545]      0.2513
+  nutrients.max_nitrogen_uptake                     0.0693  [ 0.0693,  0.0693]      0.3078  [ 0.3078,  0.3078]      0.2385
+  gas_exchange.max_rubisco_carboxylation_rate       0.0768  [ 0.0768,  0.0768]      0.2648  [ 0.2648,  0.2648]      0.1880
+  gas_exchange.electron_transport_rate              0.0529  [ 0.0529,  0.0529]      0.2555  [ 0.2555,  0.2555]      0.2026
+  gas_exchange.ambient_CO2_concentration            0.0366  [ 0.0366,  0.0366]      0.2485  [ 0.2485,  0.2485]      0.2118
+  carbohydrates.respiration_frequency               0.0128  [ 0.0128,  0.0128]      0.2133  [ 0.2133,  0.2133]      0.2005
+  gas_exchange.leaf_water_potential                 0.0316  [ 0.0316,  0.0316]      0.2010  [ 0.2010,  0.2010]      0.1694
+  photo.max_PAR                                     0.0290  [ 0.0290,  0.0290]      0.1801  [ 0.1801,  0.1801]      0.1512
+  gas_exchange.relative_humidity                    0.0211  [ 0.0211,  0.0211]      0.0884  [ 0.0884,  0.0884]      0.0673
+  gas_exchange.leaf_temperature                     0.0136  [ 0.0136,  0.0136]      0.0833  [ 0.0833,  0.0833]      0.0697
+  nutrients.phosphorus_soil_content                 0.0000  [ 0.0000,  0.0000]      0.0584  [ 0.0584,  0.0584]      0.0584
+  nutrients.nitrogen_soil_content                   0.0000  [ 0.0000,  0.0000]      0.0399  [ 0.0399,  0.0399]      0.0399
+  growth.lambda_sb                                  0.0084  [ 0.0084,  0.0084]      0.0380  [ 0.0380,  0.0380]      0.0296
+  carbohydrates.k_vacuole_in                        0.0000  [ 0.0000,  0.0000]      0.0082  [ 0.0082,  0.0082]      0.0082
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0052  [ 0.0052,  0.0052]      0.0052
+  growth.total_biomass                              0.0022  [ 0.0022,  0.0022]      0.0010  [ 0.0010,  0.0010]      0.0000
+
+  Completed in 26s
+  → results/sensitivity/replicates/rep_n2048_s10_12h.csv
+
+=== Done ===

@@ -29,13 +29,99 @@
 
 static const real_t DEFAULT_SIMULATION_DT = REAL(1);
 
+/*
+ * Step budget for the adaptive integrator.
+ *
+ * Failure mode this guards against: for some parameter combinations the
+ * adaptive step collapses without the state ever becoming non-finite, so the
+ * integrator neither advances nor reports an error and simulate_days() never
+ * returns.  Observed at the 12 h photoperiod for lambda_sdi above roughly
+ * 0.516 (threshold bisected to [0.5162, 0.5165] at lambda_sb = 6.66e-3): the
+ * run issues tens of millions of gas-exchange solves per wall-clock second,
+ * every one of them convergent, while t stands still.  The NaN guard cannot
+ * see this because nothing is NaN, and neither can a divergence test on the
+ * outputs, because no outputs are ever produced.
+ *
+ * A step budget converts the hang into a classified divergence: the plugin
+ * returns SOLVER_PLUGIN_STOP, the run unwinds normally, and the caller sees
+ * result->diverged, exactly as it would for a non-finite trajectory.  Batch
+ * callers (sensitivity, cross-validation, sweeps) can then record the
+ * parameter combination as inadmissible and carry on, which is what they
+ * already do for divergence.
+ *
+ * The budget is generous relative to legitimate work: production runs use
+ * dt = 0.1 h over at most 35 days, i.e. 8400 output samples, and the adaptive
+ * integrator takes a low multiple of that in internal steps.  Ten million
+ * steps is more than three orders of magnitude of headroom, so no admissible
+ * run can reach it, while a stalled run reaches it in seconds.
+ */
+#define SIMULATION_MAX_SOLVER_STEPS 10000000u
+
+/*
+ * Optional override, read from the environment as PLANTMODEL_MAX_SOLVER_STEPS.
+ *
+ * The default budget is sized so that no admissible run can reach it, which
+ * means a stalled run burns ten million steps before it is classified.  That
+ * is the right trade for a production run, where a false divergence would be
+ * far worse than a slow one, but it is the wrong trade inside a parameter
+ * search: a Nelder-Mead simplex that wanders into the stiff region spends
+ * minutes per stalled evaluation, and the fit becomes dominated by points it
+ * is going to reject anyway.
+ *
+ * The override lets a fitting harness lower the budget to something a few
+ * times the legitimate step count, so stalled candidates are rejected in
+ * milliseconds.  It cannot change the outcome for an admissible run, because
+ * an admissible run never approaches the budget -- it only changes how long
+ * the model takes to say no.  Default behaviour is unchanged when the variable
+ * is unset, so production and validation runs are unaffected.
+ */
+static unsigned long simulation_step_budget(void)
+{
+    const char* s = getenv("PLANTMODEL_MAX_SOLVER_STEPS");
+    if (s && *s) {
+        char* end = NULL;
+        unsigned long v = strtoul(s, &end, 10);
+        if (end != s && v > 0ul) return v;
+    }
+    return (unsigned long)SIMULATION_MAX_SOLVER_STEPS;
+}
+
+typedef struct {
+    unsigned long steps;
+    unsigned long budget;
+    int           exhausted;
+} StepBudgetCtx;
+
+static SolverPluginResult step_budget_on_attempt(void* vctx, const SolverEvent* event)
+{
+    (void)event;
+    StepBudgetCtx* b = (StepBudgetCtx*)vctx;
+    if (!b)
+        return SOLVER_PLUGIN_CONTINUE;
+    if (++b->steps >= b->budget) {
+        if (!b->exhausted) {
+            b->exhausted = 1;
+            fprintf(stderr,
+                "warning: solver step budget (%lu) exhausted at t=%.6f h; the "
+                "adaptive step has collapsed without the state becoming "
+                "non-finite. Stopping and classifying this run as divergent.\n",
+                b->budget, (double)event->t_start);
+        }
+        return SOLVER_PLUGIN_STOP;
+    }
+    return SOLVER_PLUGIN_CONTINUE;
+}
+
 typedef struct {
     char filename[64];
     CSVObserverCtx csv_ctx;
     SimObsCtx sample_ctx;
     NightStartObserverCtx night_ctx;
-    VectorObserver obs_list[4];
-    void* ctx_list[4];
+    NanGuardCtx nan_ctx;
+    DomainGuardCtx domain_ctx;
+    StepBudgetCtx budget_ctx;
+    VectorObserver obs_list[5];
+    void* ctx_list[5];
     ObserverChain chain;
     SolverStats stats;
     SolverPluginManager plugins;
@@ -69,14 +155,24 @@ static SimulationConfig simulation_normalize_config(const SimulationConfig* conf
 
 static void simulation_result_reset(SimulationResult* result)
 {
-    result->sucrose = NULL;
-    result->starch = NULL;
-    result->ph = NULL;
-    result->partition = NULL;
-    result->filled_steps = 0;
-    result->total_steps = 0;
-    result->photoperiod = REAL(0.0);
-    result->days = 0;
+    result->sucrose         = NULL;
+    result->starch          = NULL;
+    result->ph              = NULL;
+    result->total_biomass       = NULL;
+    result->sucrose_vacuole = NULL;
+    result->sucrose_total   = NULL;
+    result->filled_steps    = 0;
+    result->total_steps     = 0;
+    result->photoperiod     = REAL(0.0);
+    result->days            = 0;
+    result->diverged        = 0;
+    result->diverged_t      = 0.0;
+    result->diverged_index  = -1;
+    result->stalled           = 0;
+    result->left_domain       = 0;
+    result->domain_exit_t     = 0.0;
+    result->domain_exit_index = -1;
+    result->domain_min        = 0.0;
 }
 
 static void simulation_result_init(SimulationResult* result, int days, real_t photoperiod, real_t dt_hours)
@@ -85,10 +181,12 @@ static void simulation_result_init(SimulationResult* result, int days, real_t ph
     result->days = days;
     result->photoperiod = photoperiod;
     result->total_steps = (int)(days * REAL(24.0) / dt_hours);
-    result->sucrose = calloc((size_t)result->total_steps, sizeof(real_t));
-    result->starch = calloc((size_t)result->total_steps, sizeof(real_t));
-    result->ph = calloc((size_t)result->total_steps, sizeof(real_t));
-    result->partition = calloc((size_t)result->total_steps, sizeof(real_t));
+    result->sucrose         = calloc((size_t)result->total_steps, sizeof(real_t));
+    result->starch          = calloc((size_t)result->total_steps, sizeof(real_t));
+    result->ph              = calloc((size_t)result->total_steps, sizeof(real_t));
+    result->total_biomass       = calloc((size_t)result->total_steps, sizeof(real_t));
+    result->sucrose_vacuole = calloc((size_t)result->total_steps, sizeof(real_t));
+    result->sucrose_total   = calloc((size_t)result->total_steps, sizeof(real_t));
 }
 
 static void simulation_runtime_init_csv(SimulationRuntime* runtime, const SimulationConfig* cfg, real_t photoperiod)
@@ -133,6 +231,24 @@ static void simulation_runtime_init_logging(SimulationRuntime* runtime, const Si
         /* Fallback: run without runtime plugins if default runtime setup fails. */
         runtime->plugins.count = 0;
     }
+
+    /* Step budget: turns a collapsed adaptive step into a classified
+     * divergence instead of a hang.  Registered last so it runs after the
+     * default runtime's own hooks, and pointing at runtime-owned context so
+     * the counter is per-run rather than per-process. */
+    runtime->budget_ctx = (StepBudgetCtx){
+        .steps = 0, .budget = simulation_step_budget(), .exhausted = 0
+    };
+    SolverPlugin budget_plugin = {
+        .name             = "plantmodel_step_budget",
+        .plugin_ctx       = &runtime->budget_ctx,
+        .on_run_start     = NULL,
+        .on_step_attempt  = step_budget_on_attempt,
+        .on_step_accepted = NULL,
+        .on_step_rejected = NULL,
+        .on_run_finish    = NULL
+    };
+    solver_plugin_manager_add(&runtime->plugins, &budget_plugin);
 }
 
 static void simulation_runtime_init_gui(
@@ -144,7 +260,7 @@ static void simulation_runtime_init_gui(
         .sucrose = result->sucrose,
         .starch = result->starch,
         .photosynthesis = result->ph,
-        .total_biomass = result->partition,
+        .total_biomass = result->total_biomass,
         .filled_steps = &result->filled_steps,
         .total_steps = result->total_steps,
         .dt_hours = cfg->dt_hours,
@@ -207,18 +323,27 @@ static void simulation_prepare_runtime(
         .plant_ctx = rhs_ctx,
         .starch_index = X_STARCH
     };
+    runtime->nan_ctx = (NanGuardCtx){
+        .tripped = 0, .t_first = 0.0, .index_first = 0, .n_events = 0, .warned = 0
+    };
+    runtime->domain_ctx = (DomainGuardCtx){
+        .tripped = 0, .t_first = 0.0, .index_first = 0,
+        .min_value = 0.0, .index_min = 0, .n_events = 0
+    };
     runtime->obs_list[0] = nan_guard_observer;
-    runtime->obs_list[1] = night_start_observer;
-    runtime->obs_list[2] = sim_sampling_observer;
-    runtime->obs_list[3] = cfg->write_csv ? csv_observer : NULL;
-    runtime->ctx_list[0] = NULL;
-    runtime->ctx_list[1] = &runtime->night_ctx;
-    runtime->ctx_list[2] = &runtime->sample_ctx;
-    runtime->ctx_list[3] = cfg->write_csv ? (void*)&runtime->csv_ctx : NULL;
+    runtime->obs_list[1] = domain_guard_observer;
+    runtime->obs_list[2] = night_start_observer;
+    runtime->obs_list[3] = sim_sampling_observer;
+    runtime->obs_list[4] = cfg->write_csv ? csv_observer : NULL;
+    runtime->ctx_list[0] = &runtime->nan_ctx;
+    runtime->ctx_list[1] = &runtime->domain_ctx;
+    runtime->ctx_list[2] = &runtime->night_ctx;
+    runtime->ctx_list[3] = &runtime->sample_ctx;
+    runtime->ctx_list[4] = cfg->write_csv ? (void*)&runtime->csv_ctx : NULL;
     runtime->chain = (ObserverChain){
         .obs = runtime->obs_list,
         .ctx = runtime->ctx_list,
-        .count = 4
+        .count = 5
     };
 
     simulation_runtime_init_csv(runtime, cfg, input->photo.photoperiod);
@@ -369,6 +494,31 @@ void simulate_days(const SimulationConfig* config, Input* input, SimulationResul
     if (status != MODEL_STATUS_OK && buffers.state)
         model_buffers_free(&buffers);
 
+    /* Surface the divergence record so callers can classify the run.
+     * An exhausted step budget counts as divergence: the trajectory never
+     * reached t_end, so the result is not a solution of the system even though
+     * every sampled state stayed finite. */
+    result->diverged       = runtime.nan_ctx.tripped || runtime.budget_ctx.exhausted;
+    result->diverged_t     = runtime.nan_ctx.t_first;
+    result->diverged_index = runtime.nan_ctx.tripped
+                                 ? (int)runtime.nan_ctx.index_first
+                                 : -1;
+
+    /* Break `diverged` down into the reason, without changing what `diverged`
+     * itself means to existing callers.  `stalled` is the budget case with a
+     * finite state throughout: the partial trajectory is a valid solution and
+     * a caller that only needs behaviour before diverged_t may use it.
+     * `left_domain` is orthogonal and is reported even for runs that complete,
+     * because a completed run whose pools went negative is finite but outside
+     * the model's domain of validity. */
+    result->stalled           = runtime.budget_ctx.exhausted && !runtime.nan_ctx.tripped;
+    result->left_domain       = runtime.domain_ctx.tripped;
+    result->domain_exit_t     = runtime.domain_ctx.t_first;
+    result->domain_exit_index = runtime.domain_ctx.tripped
+                                    ? (int)runtime.domain_ctx.index_first
+                                    : -1;
+    result->domain_min        = runtime.domain_ctx.min_value;
+
     simulation_runtime_cleanup(&runtime);
 }
 
@@ -379,11 +529,15 @@ void simulation_result_free(SimulationResult* result)
     free(result->sucrose);
     free(result->starch);
     free(result->ph);
-    free(result->partition);
-    result->sucrose = NULL;
-    result->starch = NULL;
-    result->ph = NULL;
-    result->partition = NULL;
+    free(result->total_biomass);
+    free(result->sucrose_vacuole);
+    free(result->sucrose_total);
+    result->sucrose         = NULL;
+    result->starch          = NULL;
+    result->ph              = NULL;
+    result->total_biomass       = NULL;
+    result->sucrose_vacuole = NULL;
+    result->sucrose_total   = NULL;
 }
 
 real_t compute_rgr(real_t FW_start, real_t FW_end, real_t duration_hours)

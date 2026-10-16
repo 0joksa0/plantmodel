@@ -1,0 +1,190 @@
+warning: solver step budget (400000) exhausted at t=251.120892 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: ODE45 run classified DIVERGENT at 4 h, tol = 1e-06
+warning: solver step budget (400000) exhausted at t=139.254724 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: ODE45 run classified DIVERGENT at 4 h, tol = 1e-08
+warning: solver step budget (400000) exhausted at t=140.970646 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: ODE45 run classified DIVERGENT at 4 h, tol = 1e-10
+warning: solver step budget (400000) exhausted at t=141.089887 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: ODE45 run classified DIVERGENT at 4 h, tol = 1e-12
+warning: solver step budget (400000) exhausted at t=149.789671 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: ODE45 run classified DIVERGENT at 6 h, tol = 0.0001
+warning: solver step budget (400000) exhausted at t=206.988148 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: ODE45 run classified DIVERGENT at 6 h, tol = 1e-06
+warning: solver step budget (400000) exhausted at t=93.681753 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: ODE45 run classified DIVERGENT at 6 h, tol = 1e-08
+warning: solver step budget (400000) exhausted at t=94.726395 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: ODE45 run classified DIVERGENT at 6 h, tol = 1e-10
+warning: solver step budget (400000) exhausted at t=94.902821 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: ODE45 run classified DIVERGENT at 6 h, tol = 1e-12
+warning: solver step budget (400000) exhausted at t=109.775009 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: ODE45 run classified DIVERGENT at 8 h, tol = 1e-08
+warning: solver step budget (400000) exhausted at t=139.339590 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: ODE45 run classified DIVERGENT at 4 h, dt = 0.4
+warning: solver step budget (400000) exhausted at t=139.442770 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: ODE45 run classified DIVERGENT at 4 h, dt = 0.2
+warning: solver step budget (400000) exhausted at t=139.254724 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: ODE45 run classified DIVERGENT at 4 h, dt = 0.1
+warning: solver step budget (400000) exhausted at t=139.419055 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: ODE45 run classified DIVERGENT at 4 h, dt = 0.05
+warning: solver step budget (400000) exhausted at t=139.258794 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: ODE45 run classified DIVERGENT at 4 h, dt = 0.025
+warning: solver step budget (400000) exhausted at t=139.326351 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: ODE45 run classified DIVERGENT at 4 h, dt = 0.0125
+warning: solver step budget (400000) exhausted at t=139.340414 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: ODE45 run classified DIVERGENT at 4 h, dt = 0.00625
+warning: solver step budget (400000) exhausted at t=93.693906 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: ODE45 run classified DIVERGENT at 6 h, dt = 0.4
+warning: solver step budget (400000) exhausted at t=93.615619 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: ODE45 run classified DIVERGENT at 6 h, dt = 0.2
+warning: solver step budget (400000) exhausted at t=93.681753 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: ODE45 run classified DIVERGENT at 6 h, dt = 0.1
+warning: solver step budget (400000) exhausted at t=93.689938 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: ODE45 run classified DIVERGENT at 6 h, dt = 0.05
+warning: solver step budget (400000) exhausted at t=93.650519 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: ODE45 run classified DIVERGENT at 6 h, dt = 0.025
+warning: solver step budget (400000) exhausted at t=93.633751 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: ODE45 run classified DIVERGENT at 6 h, dt = 0.0125
+warning: solver step budget (400000) exhausted at t=93.680500 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: ODE45 run classified DIVERGENT at 6 h, dt = 0.00625
+warning: solver step budget (400000) exhausted at t=117.020847 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: ODE45 run classified DIVERGENT at 8 h, dt = 0.4
+warning: solver step budget (400000) exhausted at t=115.726455 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: ODE45 run classified DIVERGENT at 8 h, dt = 0.2
+warning: solver step budget (400000) exhausted at t=109.775009 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: ODE45 run classified DIVERGENT at 8 h, dt = 0.1
+warning: solver step budget (400000) exhausted at t=116.577271 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: ODE45 run classified DIVERGENT at 8 h, dt = 0.05
+warning: solver step budget (400000) exhausted at t=116.256343 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: ODE45 run classified DIVERGENT at 8 h, dt = 0.025
+warning: solver step budget (400000) exhausted at t=117.010942 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: ODE45 run classified DIVERGENT at 8 h, dt = 0.0125
+warning: solver step budget (400000) exhausted at t=116.973886 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: ODE45 run classified DIVERGENT at 8 h, dt = 0.00625
+=== Numerical convergence study (reviewer issue #15) ===
+
+Production settings read from config/default.config:
+  days                = 30
+  dt_hours            = 0.1  (240 steps/day)
+  solver_type         = ODE45
+  solver_tolerance    = 1e-08
+  Ci solver mode      = analytic (closed form)
+  Ci eps_ci / eps_an  = 0.0001 / -1  (eps_an < 0 => eps_ci applied to both)
+  leaf_water_potential= -0.6 MPa
+
+-- (a) PRODUCTION ODE45 solver-tolerance refinement (dt fixed at 0.1 h, analytic Ci) --
+     dt is h_init + the observer sampling interval, so the tolerance is the accuracy knob.
+   4h  RGR: 0.1449390665 0.0532282169 0.0304389162 0.0306674586 0.0306834326 
+       rel dev vs tightest (RGR): 3.724e+00 7.348e-01 7.969e-03 5.206e-04 0.000e+00 
+   6h  RGR: 0.0555233353 0.0718846342 0.0349665946 0.0351732395 0.0352082884 
+       rel dev vs tightest (RGR): 5.770e-01 1.042e+00 6.865e-03 9.955e-04 0.000e+00 
+   8h  RGR: 0.3438981893 0.3443223811 0.0604236800 0.3443347749 0.3443347771 
+       rel dev vs tightest (RGR): 1.268e-03 3.600e-05 8.245e-01 6.342e-09 0.000e+00 
+  12h  RGR: 0.4237075330 0.4237629773 0.4237636813 0.4237637029 0.4237637029 
+       rel dev vs tightest (RGR): 1.326e-04 1.712e-06 5.105e-08 1.407e-10 0.000e+00 
+  -> results/v2/convergence/convergence_solver_tol.csv
+
+-- (b) PRODUCTION ODE45 dt refinement (solver_tolerance fixed at 1e-08) --
+     dt here is h_init + sampling interval, NOT the integration step.
+   4h  RGR: 0.0304501654 0.0304638430 0.0304389162 0.0304606932 0.0304394548 0.0304484036 0.0304502573 
+       rel dev vs finest (RGR): 3.017e-06 4.462e-04 3.724e-04 3.427e-04 3.548e-04 6.088e-05 0.000e+00 
+   6h  RGR: 0.0349689680 0.0349535469 0.0349665946 0.0349682080 0.0349604366 0.0349571252 0.0349663215 
+       rel dev vs finest (RGR): 7.569e-05 3.653e-04 7.810e-06 5.395e-05 1.683e-04 2.630e-04 0.000e+00 
+   8h  RGR: 0.0621111767 0.0618027946 0.0604236800 0.0620052161 0.0619287121 0.0621088524 0.0620999934 
+       rel dev vs finest (RGR): 1.801e-04 4.786e-03 2.699e-02 1.526e-03 2.758e-03 1.427e-04 0.000e+00 
+  12h  RGR: 0.4237636835 0.4237636871 0.4237636813 0.4237636922 0.4237636972 0.4237636921 0.4237637029 
+       rel dev vs finest (RGR): 4.574e-08 3.719e-08 5.096e-08 2.529e-08 1.346e-08 2.549e-08 0.000e+00 
+  -> results/v2/convergence/convergence_dt_ode45.csv
+
+-- error-source separation at the production point --
+   4h  RGR: tolerance span 3.724e+00   dt span 3.017e-06   ratio 1.234e+06  -> TOLERANCE dominates
+   6h  RGR: tolerance span 5.770e-01   dt span 7.569e-05   ratio 7623  -> TOLERANCE dominates
+   8h  RGR: tolerance span 1.268e-03   dt span 1.801e-04   ratio 7.041  -> TOLERANCE dominates
+  12h  RGR: tolerance span 1.326e-04   dt span 4.574e-08   ratio 2898  -> TOLERANCE dominates
+  -> results/v2/convergence/convergence_error_separation.csv
+
+-- (c) FIXED-STEP RK4 step-size refinement (analytic Ci solver) --
+     BACKEND VERIFICATION ONLY. Production is ODE45; no number in
+     this sweep describes a published run. dt here IS the
+     integration step, which is why the observed order is
+     meaningful and the carbon balance is exact.
+   4h  RGR: -nan -nan -nan 0.145272169 0.145274864 0.145238645 0.145217176 
+       carbon residual (rel): -nan 1.10e+06 -nan -3.96e-15 4.37e-15 4.64e-15 -1.37e-16 
+   6h  RGR: 0.299538046 -nan -nan -nan 0.236135196 0.236104298 0.236074108 
+       carbon residual (rel): 6.35e+10 -nan -nan -nan -9.07e-15 -1.89e-16 1.44e-14 
+   8h  RGR: 0.333696762 0.409550896 -nan 0.344438146 0.344469330 0.344413139 0.344373505 
+       carbon residual (rel): 8.18e+10 5.61e+05 -nan 1.70e-15 5.87e-15 2.32e-15 -2.16e-14 
+  12h  RGR: 0.409891363 0.430039718 -nan 0.423790577 0.423774355 0.423767600 0.423764974 
+       carbon residual (rel): 6.30e+10 1.64e+06 6.71e-01 -3.30e-16 1.10e-15 7.81e-15 -7.92e-15 
+  -> results/v2/convergence/convergence_dt.csv
+
+-- (c) observed order of convergence, Richardson on successive triples --
+     RK4 fixed-step ONLY. This is the only sweep in which dt is the
+     integration step, so it is the only one whose order can be
+     compared against a formal method ordwarning: solver step budget (400000) exhausted at t=139.254724 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: solver step budget (400000) exhausted at t=139.254724 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: trajectory diverged — non-finite state[4] at t=88.500 h; integration continues, caller must classify this run as invalid
+warning: solver step budget (400000) exhausted at t=93.681753 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: solver step budget (400000) exhausted at t=93.681753 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: trajectory diverged — non-finite state[2] at t=29.700 h; integration continues, caller must classify this run as invalid
+warning: solver step budget (400000) exhausted at t=109.775009 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: solver step budget (400000) exhausted at t=109.775009 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: trajectory diverged — non-finite state[2] at t=14.800 h; integration continues, caller must classify this run as invalid
+er at all.
+   4h  rgr p=0.75  final_biomass p=0.76  eod_starch p=1.01  eod_sucrose p=1.00  eod_sucrose_total p=1.00  
+   6h  rgr p=0.03  final_biomass p=0.03  eod_starch p=1.07  eod_sucrose p=0.85  eod_sucrose_total p=0.84  
+   8h  rgr p=0.50  final_biomass p=0.51  eod_starch p=0.99  eod_sucrose p=1.02  eod_sucrose_total p=1.02  
+  12h  rgr p=1.36  final_biomass p=1.36  eod_starch p=0.98  eod_sucrose p=1.06  eod_sucrose_total p=1.06  
+  -> results/v2/convergence/convergence_dt_order.csv
+
+-- (d) Ci solver tolerance sweep (fixed-point mode, psi = -0.6 MPa) --
+   4h  RGR: -nan -nan -nan -nan -nan 
+       mean iters: 9.16 10.99 14.47 18.10 21.71 
+   6h  RGR: -nan -nan -nan -nan -nan 
+       mean iters: 9.23 11.04 14.58 18.20 21.74 
+   8h  RGR: -nan -nan -nan -nan -nan 
+       mean iters: 9.20 11.02 14.53 18.14 21.74 
+  12h  RGR: -nan -nan -nan -nan -nan 
+       mean iters: 9.57 11.47 15.23 19.02 22.77 
+  -> results/v2/convergence/convergence_tolerance.csv
+
+-- (e) analytic vs legacy fixed-point Ci solver --
+  psi = -0.60 MPa
+     4h  RGR analytic -nan  fixed-point -nan  rel dev nan   (nonconv 0.00 %)
+     6h  RGR analytic -nan  fixed-point -nan  rel dev nan   (nonconv 0.00 %)
+     8h  RGR analytic -nan  fixed-point -nan  rel dev nan   (nonconv 0.00 %)
+    12h  RGR analytic -nan  fixed-point -nan  rel dev nan   (nonconv 0.00 %)
+  psi = -1.40 MPa
+     4h  RGR analytic 0.1012102143  fixed-point -nan  rel dev nan   (nonconv 96.27 %)
+     6h  RGR analytic 0.1739637797  fixed-point 0.0001208127  rel dev 9.993e-01   (nonconv 97.50 %)
+     8h  RGR analytic 0.2663568502  fixed-point -nan  rel dev nan   (nonconv 96.83 %)
+    12h  RGR analytic 0.4056182237  fixed-point 0.0006237570  rel dev 9.985e-01   (nonconv 97.08 %)
+  -> results/v2/convergence/convergence_solver_mode.csv
+
+-- (f) integrator backend at production settings (dt = 0.1 h, tol = 1e-08) --
+     4h  ODE45  RGR 0.0304389162  rel dev vs config backend 0.000e+00
+     4h  RK4    RGR -nan  rel dev vs config backend nan
+     6h  ODE45  RGR 0.0349665946  rel dev vs config backend 0.000e+00
+     6h  RK4    RGR -nan  rel dev vs config backend nan
+     8h  ODE45  RGR 0.0604236800  rel dev vs config backend 0.000e+00
+     8h  RK4    RGR -nan  rel dev vs config backend nan
+    12h  ODE45  RGR 0.4237636813  rel dev vs config backend 0.000e+00
+    12h  RK4    RGR -nan  rel dev vs config backend nan
+  -> results/v2/convergence/convergence_integrator.csv
+
+-- (g) integrator verification against dy/dt = -y, y(0) = 1 --
+    RK4    tol 1e-04  y = 0.367879774412  exact 0.367879441171  abs err 3.332e-07  implied rate 0.999999094
+    RK4    tol 1e-06  y = 0.367879774412  exact 0.367879441171  abs err 3.332e-07  implied rate 0.999999094
+    RK4    tol 1e-08  y = 0.367879774412  exact 0.367879441171  abs err 3.332e-07  implied rate 0.999999094
+    ODE45  tol 1e-04  y = 0.367880360727  exact 0.367879441171  abs err 9.196e-07  implied rate 0.999997500
+    ODE45  tol 1e-06  y = 0.367879569002  exact 0.367879441171  abs err 1.278e-07  implied rate 0.999999653
+    ODE45  tol 1e-08  y = 0.367879442607  exact 0.367879441171  abs err 1.436e-09  implied rate 0.999999996
+    RKF78  tol 1e-04  y = 0.405623562147  exact 0.367879441171  abs err 3.774e-02  implied rate 0.902329736   <-- INCONSISTENT
+    RKF78  tol 1e-06  y = 0.405602994953  exact 0.367879441171  abs err 3.772e-02  implied rate 0.902380443   <-- INCONSISTENT
+    RKF78  tol 1e-08  DID NOT TERMINATE (step size -> 0)
+  -> results/v2/convergence/convergence_integrator_exact.csv
+
+  -> results/v2/convergence/convergence_richardson.csv
+
+Done. Nine CSVs written to results/v2/convergence/
+PRODUCTION-RELEVANT: convergence_solver_tol.csv (ODE45, tolerance).
+NOT production:      convergence_dt.csv (fixed-step RK4 verification).

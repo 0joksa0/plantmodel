@@ -8,16 +8,17 @@
 #include <math.h>
 
 static const ModelFieldDescriptor PLANT_STATE_FIELDS[] = {
-    { .name = "starch_partition_coeff", .kind = MODEL_FIELD_STATE, .index = X_STARCH_PART, .unit = NULL, .description = "Starch partition coefficient" },
-    { .name = "starch", .kind = MODEL_FIELD_STATE, .index = X_STARCH, .unit = NULL, .description = "Starch pool" },
-    { .name = "sucrose", .kind = MODEL_FIELD_STATE, .index = X_SUCROSE, .unit = NULL, .description = "Sucrose pool" },
-    { .name = "nitrogen_affinity", .kind = MODEL_FIELD_STATE, .index = X_N_AFF, .unit = NULL, .description = "Nitrogen affinity" },
-    { .name = "phosphorus_affinity", .kind = MODEL_FIELD_STATE, .index = X_P_AFF, .unit = NULL, .description = "Phosphorus affinity" },
-    { .name = "nitrogen", .kind = MODEL_FIELD_STATE, .index = X_N, .unit = NULL, .description = "Nitrogen content" },
-    { .name = "phosphorus", .kind = MODEL_FIELD_STATE, .index = X_P, .unit = NULL, .description = "Phosphorus content" },
-    { .name = "sucrose_root_allocation", .kind = MODEL_FIELD_STATE, .index = X_SUCROSE_ROOT_ALLOC, .unit = NULL, .description = "Sucrose root allocation" },
-    { .name = "leaf_biomass", .kind = MODEL_FIELD_STATE, .index = X_LEAF_BIOMASS, .unit = NULL, .description = "Leaf biomass" },
-    { .name = "root_biomass", .kind = MODEL_FIELD_STATE, .index = X_ROOT_BIOMASS, .unit = NULL, .description = "Root biomass" }
+    { .name = "starch_partition_coeff", .kind = MODEL_FIELD_STATE, .index = X_STARCH_PART,        .unit = NULL, .description = "Starch partition coefficient" },
+    { .name = "starch",                 .kind = MODEL_FIELD_STATE, .index = X_STARCH,             .unit = NULL, .description = "Starch pool" },
+    { .name = "sucrose",                .kind = MODEL_FIELD_STATE, .index = X_SUCROSE,            .unit = NULL, .description = "Cytosolic sucrose pool [umol/gFW]" },
+    { .name = "nitrogen_affinity",      .kind = MODEL_FIELD_STATE, .index = X_N_AFF,              .unit = NULL, .description = "Nitrogen affinity" },
+    { .name = "phosphorus_affinity",    .kind = MODEL_FIELD_STATE, .index = X_P_AFF,              .unit = NULL, .description = "Phosphorus affinity" },
+    { .name = "nitrogen",               .kind = MODEL_FIELD_STATE, .index = X_N,                  .unit = NULL, .description = "Nitrogen content" },
+    { .name = "phosphorus",             .kind = MODEL_FIELD_STATE, .index = X_P,                  .unit = NULL, .description = "Phosphorus content" },
+    { .name = "sucrose_root_allocation",.kind = MODEL_FIELD_STATE, .index = X_SUCROSE_ROOT_ALLOC, .unit = NULL, .description = "Sucrose root allocation" },
+    { .name = "leaf_biomass",           .kind = MODEL_FIELD_STATE, .index = X_LEAF_BIOMASS,       .unit = NULL, .description = "Leaf biomass" },
+    { .name = "root_biomass",           .kind = MODEL_FIELD_STATE, .index = X_ROOT_BIOMASS,       .unit = NULL, .description = "Root biomass" },
+    { .name = "sucrose_vacuole",        .kind = MODEL_FIELD_STATE, .index = X_SUCROSE_VAC,        .unit = NULL, .description = "Vacuolar sucrose pool [umol/gFW]" }
 };
 
 static const ModelDescriptor PLANT_MODEL_DESCRIPTOR = {
@@ -95,17 +96,36 @@ void simulation_plant_rhs(
 
     Input s = *(ctx->base);
 
+    /* Pool contents enter fifteen saturating ratios of the form
+     * pool/(pool + K).  Each has a pole at pool = -K, and the poles sit at
+     * small negative values: max_nitrogen, min_nitrogen, max_sucrose and so on
+     * are all O(1) to O(100) in these units.  A Runge-Kutta trial stage that
+     * takes a depleted pool slightly negative therefore does not merely give a
+     * slightly wrong rate -- it can land arbitrarily close to a pole and return
+     * a derivative many orders of magnitude too large.
+     *
+     * This is not hypothetical: with sucrose exhausted the nitrogen pool drains
+     * (uptake is gated on sucrose and goes to zero, while the respiratory debit
+     * keeps drawing on starch), crosses zero, meets the pole at N = -max_N in
+     * nitrogen_affinity, and the state reaches 1e203 within one step.
+     *
+     * Clamping the pool contents to their non-negative part as they enter the
+     * constitutive laws is the identity on the whole physically meaningful
+     * region -- a pool content is by definition non-negative -- so no valid
+     * trajectory is altered.  The state vector itself is left untouched, so
+     * conservation is unaffected and the solver still sees the true state. */
     s.carbohydrates.starch_partition_coeff = x[X_STARCH_PART];
-    s.carbohydrates.starch = x[X_STARCH];
-    s.carbohydrates.sucrose = x[X_SUCROSE];
+    s.carbohydrates.starch = RMAX(x[X_STARCH], REAL(0.0));
+    s.carbohydrates.sucrose = RMAX(x[X_SUCROSE], REAL(0.0));
     s.nutrients.nitrogen_affinity = x[X_N_AFF];
     s.nutrients.phosphorus_affinity = x[X_P_AFF];
-    s.nutrients.nitrogen = x[X_N];
-    s.nutrients.phosphorus = x[X_P];
+    s.nutrients.nitrogen = RMAX(x[X_N], REAL(0.0));
+    s.nutrients.phosphorus = RMAX(x[X_P], REAL(0.0));
     s.growth.sucrose_root_allocation = x[X_SUCROSE_ROOT_ALLOC];
-    s.growth.leaf_biomass = x[X_LEAF_BIOMASS];
-    s.growth.root_biomass = x[X_ROOT_BIOMASS];
+    s.growth.leaf_biomass = RMAX(x[X_LEAF_BIOMASS], REAL(0.0));
+    s.growth.root_biomass = RMAX(x[X_ROOT_BIOMASS], REAL(0.0));
     s.growth.total_biomass = s.growth.leaf_biomass + s.growth.root_biomass;
+    s.carbohydrates.sucrose_vacuole = RMAX(x[X_SUCROSE_VAC], REAL(0.0));
 
     real_t hour_of_day = fmod(t, REAL(24.0));
 
@@ -126,6 +146,10 @@ void simulation_plant_rhs(
         s.carbohydrates.starch_partition_coeff,
         s.carbohydrates.starch_degradation_rate);
 
+    /* Cytosolic sucrose: mass-conserving coupling with vacuolar pool.
+     * At equilibrium k_in*s_cyt = k_out*s_vac, so these terms cancel and
+     * the cytosolic steady-state is identical to the single-compartment model.
+     * Ref: Lohaus et al. (2007) Planta 227:143-156; Kaiser & Heber (1984) Planta 161:562 */
     dx[X_SUCROSE] = sucrose_production(
         s.carbohydrates.starch_partition_coeff,
         s.photo.photosynthesis,
@@ -135,7 +159,15 @@ void simulation_plant_rhs(
         s.carbohydrates.respiration_frequency,
         s.carbohydrates.sucrose,
         s.carbohydrates.sucrose_loading_frequency,
-        s.carbohydrates.night_efficiency_starch);
+        s.carbohydrates.night_efficiency_starch,
+        s.photo.light)
+        - s.carbohydrates.k_vacuole_in  * s.carbohydrates.sucrose
+        + s.carbohydrates.k_vacuole_out * s.carbohydrates.sucrose_vacuole;
+    /* The construction-cost debit is subtracted after the two biomass
+     * derivatives are assigned, at the end of this function. */
+
+    dx[X_SUCROSE_VAC] = s.carbohydrates.k_vacuole_in  * s.carbohydrates.sucrose
+                      - s.carbohydrates.k_vacuole_out * s.carbohydrates.sucrose_vacuole;
 
     dx[X_N_AFF] = nitrogen_affinity(
         s.nutrients.nitrogen_affinity,
@@ -229,6 +261,14 @@ void simulation_plant_rhs(
         s.growth.root_biomass,
         s.growth.root_deathrate,
         s.growth.root_competitive_rate);
+
+    /* Construction cost of the biomass credited just above.  Growth is driven
+     * by the phloem-load flux but, at HEAD, was never charged against it, so
+     * the carbon budget closed identically while biomass grew freely.  The
+     * stoichiometry is measured (growth respiration, Penning de Vries et al.),
+     * not fitted; see growth_cost() in src/model/carbohydrates.c. */
+    dx[X_SUCROSE] -= growth_cost(s.growth.growth_stoichiometry,
+                                 dx[X_LEAF_BIOMASS], dx[X_ROOT_BIOMASS]);
 }
 
 void simulation_plant_rhs_adapter(

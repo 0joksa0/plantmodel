@@ -12,7 +12,20 @@
 /build/
 /out/
 /cmake-build-*/
+/nanfix-build/
+/cbfix-build/
+/probe-build/
+/*-build/
+/*build*/
 /CMakeFiles/
+
+# Throwaway experiment code and rendered checks (keep out of the repo)
+/probe/
+/rerun/
+/.verify_pages/
+__pycache__/
+_view_*.png
+handoff_views.json
 /CMakeCache.txt
 /Makefile
 /install_manifest.txt
@@ -45,3 +58,16 @@ docs/
 Testing/
 
 perf.*
+.sandboxes/
+
+# revision-round scratch (measurement sandboxes, stray build dirs)
+/.sandboxes/
+/.worktrees/
+/pm-build/
+/valbuild/
+/mybuild-conv/
+/.freshbuild/
+tools/__pycache__/
+/_view_*.png
+/handoff_views.json
+/.snapshots/

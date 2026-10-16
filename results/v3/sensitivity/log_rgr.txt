@@ -1,0 +1,250 @@
+=== Plant Model Sensitivity Analysis ===
+  Config:    config/default.config
+  Params:    config/sensitivity_params.csv  (16 active)
+  Metric:    RGR [day^-1]
+  Days:      35
+  Analysis:  both
+  Morris:    30 trajectories × 6 levels
+  Sobol:     512 samples × 4 workers  (total evals: 9216)
+  Bootstrap: 1000 replicates  (95% percentile intervals)
+  Seed:      0
+
+  Parameters:
+    [ 1] growth.lambda_sb                              [0.002, 0.01]  linear  model_parameter
+    [ 2] carbohydrates.respiration_frequency           [0.4, 1.2]  linear  model_parameter
+    [ 3] nutrients.max_nitrogen_uptake                 [1, 15]  log  model_parameter
+    [ 4] nutrients.max_phosphorus_uptake               [0.05, 1.5]  log  model_parameter
+    [ 5] nutrients.nitrogen_soil_content               [3, 30]  linear  environment
+    [ 6] nutrients.phosphorus_soil_content             [0.03, 0.5]  log  environment
+    [ 7] gas_exchange.leaf_temperature                 [10, 35]  linear  environment
+    [ 8] gas_exchange.relative_humidity                [30, 90]  linear  environment
+    [ 9] gas_exchange.ambient_CO2_concentration        [280, 800]  linear  environment
+    [10] gas_exchange.leaf_water_potential             [-1.5, -0.1]  linear  environment
+    [11] gas_exchange.max_rubisco_carboxylation_rate   [20, 120]  log  model_parameter
+    [12] gas_exchange.electron_transport_rate          [50, 200]  log  model_parameter
+    [13] photo.max_PAR                                 [300, 2000]  linear  environment
+    [14] carbohydrates.sucrose                         [0.8, 3]  linear  initial_condition
+    [15] growth.total_biomass                          [0.01, 0.12]  linear  initial_condition
+    [16] carbohydrates.k_vacuole_in                    [0.005, 0.4]  linear  model_parameter
+
+=== Morris screening [photoperiod=4h] ===
+  trajectories=30  levels=6  evaluations=960
+
+  Parameter                                             mu         mu*       sigma             mu* 95% CI
+  -----------------------------------------------------------------------------------------------------------------
+  growth.lambda_sb                                    -nan         nan        -nan  [     nan,      nan]
+  carbohydrates.respiration_frequency                 -nan         nan        -nan  [     nan,      nan]
+  nutrients.max_nitrogen_uptake                       -nan         nan        -nan  [     nan,      nan]
+  nutrients.max_phosphorus_uptake                     -nan         nan        -nan  [     nan,      nan]
+  nutrients.nitrogen_soil_content                     -nan         nan        -nan  [     nan,      nan]
+  nutrients.phosphorus_soil_content                   -nan         nan        -nan  [     nan,      nan]
+  gas_exchange.leaf_temperature                       -nan         nan        -nan  [     nan,      nan]
+  gas_exchange.relative_humidity                      -nan         nan        -nan  [     nan,      nan]
+  gas_exchange.ambient_CO2_concentration              -nan         nan        -nan  [     nan,      nan]
+  gas_exchange.leaf_water_potential                   -nan         nan        -nan  [     nan,      nan]
+  gas_exchange.max_rubisco_carboxylation_rate         -nan         nan        -nan  [     nan,      nan]
+  gas_exchange.electron_transport_rate                -nan         nan        -nan  [     nan,      nan]
+  photo.max_PAR                                       -nan         nan        -nan  [     nan,      nan]
+  carbohydrates.sucrose                               -nan         nan        -nan  [     nan,      nan]
+  growth.total_biomass                                -nan         nan        -nan  [     nan,      nan]
+  carbohydrates.k_vacuole_in                          -nan         nan        -nan  [     nan,      nan]
+  diverged evaluations: 281 of 510 (55.10%); unusable endpoint: 4 (0.78%)
+
+  Completed in 1s
+  → results/v3/sensitivity/morris_rgr_4h.csv
+  → results/v3/sensitivity/morris_rgr_4h_effects.csv
+
+=== Sobol variance decomposition [photoperiod=4h] ===
+  samples=512  workers=4  total_evaluations=9216
+  sampler=sobol  seed=0
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  growth.lambda_sb                                  0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  carbohydrates.respiration_frequency               0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  nutrients.max_nitrogen_uptake                     0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  nutrients.max_phosphorus_uptake                   0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  nutrients.nitrogen_soil_content                   0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  nutrients.phosphorus_soil_content                 0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  gas_exchange.leaf_temperature                     0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  gas_exchange.relative_humidity                    0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  gas_exchange.ambient_CO2_concentration            0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  gas_exchange.leaf_water_potential                 0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  gas_exchange.max_rubisco_carboxylation_rate       0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  gas_exchange.electron_transport_rate              0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  photo.max_PAR                                     0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  growth.total_biomass                              0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  carbohydrates.k_vacuole_in                        0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  diverged evaluations: 5867 of 9216 (63.66%); unusable endpoint: 106 (1.15%)
+
+  Completed in 15s
+  → results/v3/sensitivity/sobol_rgr_4h.csv
+
+=== Morris screening [photoperiod=6h] ===
+  trajectories=30  levels=6  evaluations=960
+
+  Parameter                                             mu         mu*       sigma             mu* 95% CI
+  -----------------------------------------------------------------------------------------------------------------
+  growth.lambda_sb                                    -nan         nan        -nan  [     nan,      nan]
+  carbohydrates.respiration_frequency                 -nan         nan        -nan  [     nan,      nan]
+  nutrients.max_nitrogen_uptake                       -nan         nan        -nan  [     nan,      nan]
+  nutrients.max_phosphorus_uptake                     -nan         nan        -nan  [     nan,      nan]
+  nutrients.nitrogen_soil_content                     -nan         nan        -nan  [     nan,      nan]
+  nutrients.phosphorus_soil_content                   -nan         nan        -nan  [     nan,      nan]
+  gas_exchange.leaf_temperature                       -nan         nan        -nan  [     nan,      nan]
+  gas_exchange.relative_humidity                      -nan         nan        -nan  [     nan,      nan]
+  gas_exchange.ambient_CO2_concentration              -nan         nan        -nan  [     nan,      nan]
+  gas_exchange.leaf_water_potential                   -nan         nan        -nan  [     nan,      nan]
+  gas_exchange.max_rubisco_carboxylation_rate         -nan         nan        -nan  [     nan,      nan]
+  gas_exchange.electron_transport_rate                -nan         nan        -nan  [     nan,      nan]
+  photo.max_PAR                                       -nan         nan        -nan  [     nan,      nan]
+  carbohydrates.sucrose                               -nan         nan        -nan  [     nan,      nan]
+  growth.total_biomass                                -nan         nan        -nan  [     nan,      nan]
+  carbohydrates.k_vacuole_in                          -nan         nan        -nan  [     nan,      nan]
+  diverged evaluations: 294 of 510 (57.65%); unusable endpoint: 0 (0.00%)
+
+  Completed in 1s
+  → results/v3/sensitivity/morris_rgr_6h.csv
+  → results/v3/sensitivity/morris_rgr_6h_effects.csv
+
+=== Sobol variance decomposition [photoperiod=6h] ===
+  samples=512  workers=4  total_evaluations=9216
+  sampler=sobol  seed=0
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  growth.lambda_sb                                  0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  carbohydrates.respiration_frequency               0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  nutrients.max_nitrogen_uptake                     0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  nutrients.max_phosphorus_uptake                   0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  nutrients.nitrogen_soil_content                   0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  nutrients.phosphorus_soil_content                 0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  gas_exchange.leaf_temperature                     0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  gas_exchange.relative_humidity                    0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  gas_exchange.ambient_CO2_concentration            0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  gas_exchange.leaf_water_potential                 0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  gas_exchange.max_rubisco_carboxylation_rate       0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  gas_exchange.electron_transport_rate              0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  photo.max_PAR                                     0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  growth.total_biomass                              0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  carbohydrates.k_vacuole_in                        0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  diverged evaluations: 6147 of 9216 (66.70%); unusable endpoint: 131 (1.42%)
+
+  Completed in 15s
+  → results/v3/sensitivity/sobol_rgr_6h.csv
+
+=== Morris screening [photoperiod=8h] ===
+  trajectories=30  levels=6  evaluations=960
+
+  Parameter                                             mu         mu*       sigma             mu* 95% CI
+  -----------------------------------------------------------------------------------------------------------------
+  growth.lambda_sb                                    -nan         nan        -nan  [     nan,      nan]
+  carbohydrates.respiration_frequency                 -nan         nan        -nan  [     nan,      nan]
+  nutrients.max_nitrogen_uptake                       -nan         nan        -nan  [     nan,      nan]
+  nutrients.max_phosphorus_uptake                     -nan         nan        -nan  [     nan,      nan]
+  nutrients.nitrogen_soil_content                     -nan         nan        -nan  [     nan,      nan]
+  nutrients.phosphorus_soil_content                   -nan         nan        -nan  [     nan,      nan]
+  gas_exchange.leaf_temperature                       -nan         nan        -nan  [     nan,      nan]
+  gas_exchange.relative_humidity                      -nan         nan        -nan  [     nan,      nan]
+  gas_exchange.ambient_CO2_concentration              -nan         nan        -nan  [     nan,      nan]
+  gas_exchange.leaf_water_potential                   -nan         nan        -nan  [     nan,      nan]
+  gas_exchange.max_rubisco_carboxylation_rate         -nan         nan        -nan  [     nan,      nan]
+  gas_exchange.electron_transport_rate                -nan         nan        -nan  [     nan,      nan]
+  photo.max_PAR                                       -nan         nan        -nan  [     nan,      nan]
+  carbohydrates.sucrose                               -nan         nan        -nan  [     nan,      nan]
+  growth.total_biomass                                -nan         nan        -nan  [     nan,      nan]
+  carbohydrates.k_vacuole_in                          -nan         nan        -nan  [     nan,      nan]
+  diverged evaluations: 293 of 510 (57.45%); unusable endpoint: 1 (0.20%)
+
+  Completed in 1s
+  → results/v3/sensitivity/morris_rgr_8h.csv
+  → results/v3/sensitivity/morris_rgr_8h_effects.csv
+
+=== Sobol variance decomposition [photoperiod=8h] ===
+  samples=512  workers=4  total_evaluations=9216
+  sampler=sobol  seed=0
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  growth.lambda_sb                                  0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  carbohydrates.respiration_frequency               0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  nutrients.max_nitrogen_uptake                     0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  nutrients.max_phosphorus_uptake                   0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  nutrients.nitrogen_soil_content                   0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  nutrients.phosphorus_soil_content                 0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  gas_exchange.leaf_temperature                     0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  gas_exchange.relative_humidity                    0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  gas_exchange.ambient_CO2_concentration            0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  gas_exchange.leaf_water_potential                 0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  gas_exchange.max_rubisco_carboxylation_rate       0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  gas_exchange.electron_transport_rate              0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  photo.max_PAR                                     0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  growth.total_biomass                              0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  carbohydrates.k_vacuole_in                        0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  diverged evaluations: 6283 of 9216 (68.17%); unusable endpoint: 121 (1.31%)
+
+  Completed in 15s
+  → results/v3/sensitivity/sobol_rgr_8h.csv
+
+=== Morris screening [photoperiod=12h] ===
+  trajectories=30  levels=6  evaluations=960
+
+  Parameter                                             mu         mu*       sigma             mu* 95% CI
+  -----------------------------------------------------------------------------------------------------------------
+  growth.lambda_sb                                    -nan         nan        -nan  [     nan,      nan]
+  carbohydrates.respiration_frequency                 -nan         nan        -nan  [     nan,      nan]
+  nutrients.max_nitrogen_uptake                       -nan         nan        -nan  [     nan,      nan]
+  nutrients.max_phosphorus_uptake                     -nan         nan        -nan  [     nan,      nan]
+  nutrients.nitrogen_soil_content                     -nan         nan        -nan  [     nan,      nan]
+  nutrients.phosphorus_soil_content                   -nan         nan        -nan  [     nan,      nan]
+  gas_exchange.leaf_temperature                       -nan         nan        -nan  [     nan,      nan]
+  gas_exchange.relative_humidity                      -nan         nan        -nan  [     nan,      nan]
+  gas_exchange.ambient_CO2_concentration              -nan         nan        -nan  [     nan,      nan]
+  gas_exchange.leaf_water_potential                   -nan         nan        -nan  [     nan,      nan]
+  gas_exchange.max_rubisco_carboxylation_rate         -nan         nan        -nan  [     nan,      nan]
+  gas_exchange.electron_transport_rate                -nan         nan        -nan  [     nan,      nan]
+  photo.max_PAR                                       -nan         nan        -nan  [     nan,      nan]
+  carbohydrates.sucrose                               -nan         nan        -nan  [     nan,      nan]
+  growth.total_biomass                                -nan         nan        -nan  [     nan,      nan]
+  carbohydrates.k_vacuole_in                          -nan         nan        -nan  [     nan,      nan]
+  diverged evaluations: 305 of 510 (59.80%); unusable endpoint: 3 (0.59%)
+
+  Completed in 1s
+  → results/v3/sensitivity/morris_rgr_12h.csv
+  → results/v3/sensitivity/morris_rgr_12h_effects.csv
+
+=== Sobol variance decomposition [photoperiod=12h] ===
+  samples=512  workers=4  total_evaluations=9216
+  sampler=sobol  seed=0
+  base design: two independent Latin-hypercube samples (2d exceeds sampler dimension limit)
+
+  Parameter                                             S1            S1 95% CI          ST            ST 95% CI       ST-S1
+  --------------------------------------------------------------------------------------------------------------------------------
+  growth.lambda_sb                                  0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  carbohydrates.respiration_frequency               0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  nutrients.max_nitrogen_uptake                     0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  nutrients.max_phosphorus_uptake                   0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  nutrients.nitrogen_soil_content                   0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  nutrients.phosphorus_soil_content                 0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  gas_exchange.leaf_temperature                     0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  gas_exchange.relative_humidity                    0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  gas_exchange.ambient_CO2_concentration            0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  gas_exchange.leaf_water_potential                 0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  gas_exchange.max_rubisco_carboxylation_rate       0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  gas_exchange.electron_transport_rate              0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  photo.max_PAR                                     0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  carbohydrates.sucrose                             0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  growth.total_biomass                              0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  carbohydrates.k_vacuole_in                        0.0000  [ 0.0000,  0.0000]      0.0000  [ 0.0000,  0.0000]      0.0000
+  diverged evaluations: 6329 of 9216 (68.67%); unusable endpoint: 123 (1.33%)
+
+  Completed in 16s
+  → results/v3/sensitivity/sobol_rgr_12h.csv
+
+=== Done ===

@@ -350,10 +350,20 @@ real_t max_phosphorus(real_t max_nitrogen, real_t optimal_stoichiometric_ratio)
     return max_nitrogen / optimal_stoichiometric_ratio;
 }
 
+/* The saturating ratio has a pole on the ray N = -R*P, which passes through the
+ * origin of the admissible quadrant.  A Runge-Kutta trial stage that takes a
+ * near-empty pool slightly negative lands on it: the embedded error estimate
+ * cannot be met at any step size, the controller drives dt toward zero while t
+ * stands still, and every state remains finite so the non-finite guard never
+ * fires.  Taking the positive part of each pool inside the ratio is the
+ * identity wherever N >= 0 and P >= 0 -- the only region where a pool content
+ * is defined -- so this is an integrability guard, not a change to the physics. */
 real_t stoichiometric_signal(
     real_t optimal_stoichiometric_ratio,
     real_t nitrogen,
     real_t phosphorus)
 {
-    return optimal_stoichiometric_ratio / (optimal_stoichiometric_ratio + (nitrogen / (phosphorus + epsilon)));
+    real_t n = RMAX(nitrogen,   REAL(0.0));
+    real_t p = RMAX(phosphorus, REAL(0.0));
+    return optimal_stoichiometric_ratio / (optimal_stoichiometric_ratio + (n / (p + epsilon)));
 }

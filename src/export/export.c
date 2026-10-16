@@ -46,7 +46,7 @@ void log_simulation_step(int days,real_t t, Input* input)
             input->carbohydrates.sucrose, input->carbohydrates.starch,
             input->carbohydrates.starch_degradation_rate,
             starch_production(input->photo.photosynthesis, input->carbohydrates.starch_partition_coeff, input->carbohydrates.starch_degradation_rate),
-            sucrose_production(input->carbohydrates.starch_partition_coeff, input->photo.photosynthesis, input->carbohydrates.starch_degradation_rate, input->carbohydrates.uptake_cost, input->carbohydrates.transport_cost, input->carbohydrates.respiration_frequency, input->carbohydrates.sucrose, input->carbohydrates.sucrose_loading_frequency, input->carbohydrates.night_efficiency_starch),
+            sucrose_production(input->carbohydrates.starch_partition_coeff, input->photo.photosynthesis, input->carbohydrates.starch_degradation_rate, input->carbohydrates.uptake_cost, input->carbohydrates.transport_cost, input->carbohydrates.respiration_frequency, input->carbohydrates.sucrose, input->carbohydrates.sucrose_loading_frequency, input->carbohydrates.night_efficiency_starch, input->photo.light),
             input->nutrients.nitrogen, input->nutrients.phosphorus,
             input->nutrients.nitrogen_affinity, input->nutrients.phosphorus_affinity,
             input->carbohydrates.night_efficiency_starch, input->carbohydrates.uptake_cost, input->carbohydrates.transport_cost,

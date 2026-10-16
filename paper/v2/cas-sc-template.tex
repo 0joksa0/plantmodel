@@ -1,0 +1,224 @@
+%%
+%% Copyright 2019-2024 Elsevier Ltd
+%%
+%% This file is part of the 'CAS Bundle'.
+%% -------------------
+%%
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.3c of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.3c or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%%
+%% The list of all files belonging to the 'CAS Bundle' is
+%% given in the file `manifest.txt'.
+%%
+%% Template article for cas-sc documentclass for
+%% single column output.
+
+% =====================================================================
+%  VERSION 2 -- fresh manuscript.
+%
+%  The body of this file is deliberately EMPTY.  Version 1 of the paper is
+%  frozen, self-contained and reproducible in ../v1/ (59 pages, tectonic
+%  exit 0, figures pinned to ../v1/figures/); nothing is inherited from it
+%  except the LaTeX infrastructure and the two repaired bibliographies.
+%
+%  Carried over from v1 on purpose:
+%    * this preamble -- 12 packages, TikZ libraries, the float placement
+%      parameters and `array' (needed by the wide parameter tables).  These
+%      are typesetting decisions that were already paid for; they carry no
+%      scientific claim.
+%    * master_ref.bib and cas-refs.bib in their REPAIRED state: 21 cited
+%      entries corrected, 34 DOIs canonicalised, 31 issue->number renames
+%      (the .bst never read `issue'), BibTeX warnings down to zero.
+%    * the frontmatter field skeleton, so the author data has one place to go.
+%
+%  Deliberately NOT carried over: every equation, table, figure and sentence.
+%
+%  Provenance note for whoever writes the new text -- these were established
+%  against the production source during the v1 revision and are the facts the
+%  new manuscript has to stay consistent with:
+%    * production integrator is adaptive Dormand-Prince ODE45 at tol 1e-8;
+%      dt_hours = 0.1 h is the initial step AND the observer output sampling
+%      interval, NOT a fixed integration step.
+%    * V_cmax = 45.0, J_max = 90.0, R_d = 1.5 (src/model/input.c:104, :102, :99).
+%    * the analytic C_i quadratic has linear coefficient
+%      [alpha - R_d + g_c(beta - C_a)]; C_i > C_a is physical when A_n < 0.
+%    * there is no photosynthetic-capacity feedback in the production path;
+%      B_l acts only through the minimum-leaf-biomass viability gate.
+%    * the four photoperiod RGR targets 0.068/0.114/0.171/0.260 d^-1 come from
+%      Sulpice2014, NOT Annunziata2017 (12 h only) or Mengin2017 (6 and 12 h).
+%      Annunziata2017 remains the source of the diel reference curves.
+%    * carbohydrate validation nRMSE uses a least-squares fitted scale and is
+%      normalised by the reference mean (tools/validation_runner.c:192-224).
+%  Full detail: ../../docs/revision/math_audit.md and revision_response.md.
+% =====================================================================
+
+\documentclass[a4paper,fleqn]{cas-sc}
+
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usetikzlibrary{positioning,fit,backgrounds,arrows.meta}
+
+\usepackage{float}
+\usepackage[section]{placeins}
+\usepackage{flafter}
+
+\setcounter{topnumber}{5}
+\setcounter{bottomnumber}{5}
+\setcounter{totalnumber}{10}
+
+\renewcommand{\topfraction}{0.95}
+\renewcommand{\bottomfraction}{0.90}
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\floatpagefraction}{0.80}
+
+% ../../figures/ is where the analysis tools write their output, so it is
+% searched first and no figure has to be duplicated by hand.  figs/ is a
+% local override slot: drop a file there to pin it against a regeneration.
+% (v1 does the opposite -- it pins everything locally, on purpose.)
+\graphicspath{{../../figures/}{figs/}}
+
+% If the frontmatter runs over more than one page use the longmktitle option:
+%\documentclass[a4paper,fleqn,longmktitle]{cas-sc}
+
+%\usepackage[numbers]{natbib}
+%\usepackage[authoryear]{natbib}
+\usepackage[authoryear,longnamesfirst]{natbib}
+
+%%%Author macros
+\def\tsc#1{\csdef{#1}{\textsc{\lowercase{#1}}\xspace}}
+\tsc{WGM}
+\tsc{QE}
+%%%
+
+% Uncomment and use as if needed
+%\newtheorem{theorem}{Theorem}
+%\newtheorem{lemma}[theorem]{Lemma}
+%\newdefinition{rmk}{Remark}
+%\newproof{pf}{Proof}
+%\newproof{pot}{Proof of Theorem \ref{thm}}
+
+\begin{document}
+
+\let\WriteBookmarks\relax
+\def\floatpagepagefraction{1}
+\def\textpagefraction{.001}
+
+% >>> TODO(AUTHOR): running head, e.g. "F. Lastname et~al." <<<
+\shortauthors{}
+
+% >>> TODO(TITLE) <<<
+\title [mode = title]{}
+
+% >>> TODO(AUTHOR): author, affiliation, e-mail and ORCID fields.
+%     Do not invent names.  Delete the second author block if the paper is
+%     single-authored. <<<
+
+\author[1]{}%[orcid=0000-0000-0000-0000]
+\cormark[1]
+% >>> TODO(AUTHOR): institutional e-mail of the corresponding author <<<
+\ead{}
+% >>> TODO(AUTHOR): CRediT roles; \printcredits goes before the bibliography <<<
+\credit{}
+
+% >>> TODO(AUTHOR): fill affiliation 1 <<<
+\affiliation[1]{organization={},
+    addressline={},
+    city={},
+    postcode={},
+    country={}}
+
+\author[2]{}%[]
+% >>> TODO(AUTHOR): institutional e-mail of the second author <<<
+\ead{}
+% >>> TODO(AUTHOR): CRediT roles for the second author <<<
+\credit{}
+
+% >>> TODO(AUTHOR): fill affiliation 2 <<<
+\affiliation[2]{organization={},
+    addressline={},
+    city={},
+    postcode={},
+    country={}}
+
+\cortext[1]{Corresponding author}
+
+% The CAS class cannot typeset a genuinely empty abstract -- it fails with
+% "File ended while scanning use of \next".  Keep a sentence here at all
+% times; replace it, do not blank it.  The same applies to the highlights and
+% keywords blocks below.
+\begin{abstract}
+TODO(ABSTRACT)
+\end{abstract}
+
+% The CAS class builds highlights through \@Itemize, which fails on an \item
+% with no text -- so each placeholder below carries a word.  Replace, do not
+% empty.  Three to five items, each a single sentence.
+\begin{highlights}
+\item TODO(HIGHLIGHT~1)
+\item TODO(HIGHLIGHT~2)
+\item TODO(HIGHLIGHT~3)
+\end{highlights}
+
+% Items separated by \sep, no \sep after the last one.
+\begin{keywords}
+TODO(KEYWORD~1) \sep
+TODO(KEYWORD~2) \sep
+TODO(KEYWORD~3)
+\end{keywords}
+
+\maketitle
+
+% =====================================================================
+%  BODY
+%  Empty by design.  Add sections as the new narrative is decided; the
+%  structure below is a placeholder ordering, not a commitment.
+% =====================================================================
+
+\section{Introduction}
+\label{sec:intro}
+
+\section{Related work}
+\label{sec:related}
+
+\section{Model formulation}
+\label{sec:model}
+
+\section{Numerical implementation}
+\label{sec:numerics}
+
+\section{Verification}
+\label{sec:verification}
+
+\section{Results}
+\label{sec:results}
+
+\section{Discussion}
+\label{sec:discussion}
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+% CRediT author statement -- uncomment once \credit{} fields are filled.
+%\printcredits
+
+% Both bibliographies are the repaired versions carried over from the v1
+% revision.  master_ref.bib is the working library; cas-refs.bib holds the
+% entries added during that round.
+\bibliography{master_ref,cas-refs}
+
+% Biography
+%\bio{}
+% Here goes the biography details.
+%\endbio
+
+\end{document}

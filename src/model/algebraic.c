@@ -71,7 +71,9 @@ void plant_compute_outputs(
 
     s.carbohydrates.night_efficiency_starch = night_efficiency_starch(
         s.carbohydrates.sucrose, s.carbohydrates.max_sucrose, s.carbohydrates.lambda_g,
-        s.photo.light, s.carbohydrates.starch_partition_coeff);
+        s.photo.light, s.carbohydrates.starch_partition_coeff,
+        s.carbohydrates.sink_activation_half,
+        s.carbohydrates.sink_activation_hill);
 
     s.carbohydrates.starch_degradation_rate = starch_degradation(
         s.carbohydrates.max_starch_degradation_rate,
@@ -83,9 +85,10 @@ void plant_compute_outputs(
         environment->hour_of_day,
         s.photo.photoperiod);
 
-    s.carbohydrates.uptake_cost = uptake_cost(
-        s.nutrients.nitrogen_uptake_sucrose_consumption, s.nutrients.nitrogen_uptake,
-        s.nutrients.phosphorus_uptake_sucrose_consumption, s.nutrients.phosphorus_uptake);
+    /* uptake_cost is evaluated further down, immediately after
+     * nitrogen_uptake and phosphorus_uptake are assigned.  Evaluating it here
+     * read both fluxes one statement before they are computed, so the term was
+     * exactly zero in every trajectory row; see docs/revision/attribution.md. */
 
     s.carbohydrates.transport_cost = transport_cost(
         s.carbohydrates.sucrose_consumption_transport, s.carbohydrates.respiration_frequency,
@@ -131,6 +134,12 @@ void plant_compute_outputs(
     s.nutrients.phosphorus_uptake = phosphorus_uptake(
         s.nutrients.pot_phosphorus_uptake, s.carbohydrates.sucrose,
         s.nutrients.phosphorus_uptake_sucrose_consumption);
+
+    /* Both uptake fluxes are now assigned, so the carbon cost of acquiring
+     * them can be charged (Tedone 2020 §2.2.8). */
+    s.carbohydrates.uptake_cost = uptake_cost(
+        s.nutrients.nitrogen_uptake_sucrose_consumption, s.nutrients.nitrogen_uptake,
+        s.nutrients.phosphorus_uptake_sucrose_consumption, s.nutrients.phosphorus_uptake);
 
     s.nutrients.stoichiometric_signal = stoichiometric_signal(
         s.nutrients.optimal_stoichiometric_ratio, s.nutrients.nitrogen, s.nutrients.phosphorus);

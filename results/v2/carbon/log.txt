@@ -1,0 +1,22 @@
+=== Carbohydrate carbon-balance closure ===
+  config: config/default.config
+  days: 30
+  dt: 0.1 h  (240 steps/day)
+  scope: {starch, sucrose_cytosol, sucrose_vacuole}
+  biomass excluded by construction: lambda_sb has units gFW^-1
+
+   4h  INT A_n =    354.28293   residual =         nan   relative =         nan
+   6h  INT A_n =    314.09570   residual =         nan   relative =         nan
+   8h  INT A_n =    207.15098   residual =         nan   relative =         nan
+  12h  INT A_n =    210.14408   residual =         nan   relative =         nan
+
+  -> results/v2/carbon/carbon_balance.csv/carbon_balance.csv
+
+  Biomass-coupling scale check (why biomass is out of scope):
+  PP          lambda_sb       B_l(end)    lambda_sb*B_l
+  4             0.00295           -nan             -nan
+  6             0.00295           -nan             -nan
+  8             0.00295           -nan             -nan
+  12            0.00295           -nan             -nan
+
+  A stoichiometric budget would require this product to be 1.

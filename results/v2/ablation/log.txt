@@ -1,0 +1,30 @@
+Running 12 calibrations on 16 thread(s)...
+warning: solver step budget (400000) exhausted at t=47.093229 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: solver step budget (400000) exhausted at t=93.681753 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: solver step budget (400000) exhausted at t=109.775009 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: solver step budget (400000) exhausted at t=93.597102 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: solver step budget (400000) exhausted at t=93.116139 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: solver step budget (400000) exhausted at t=139.254724 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+warning: solver step budget (400000) exhausted at t=184.365853 h; the adaptive step has collapsed without the state becoming non-finite. Stopping and classifying this run as divergent.
+
+=== Mode: basic ===
+  PP_h   lit_rgr   model_rgr   err%       lc      lsni    lambda_sb             final_BM  
+  4      0.0680    0.0452      33.58      0.82    0.16    0.003440    -         0.1482    
+  6      0.1135    0.0917      19.19      0.79    0.15    0.004130    -         0.5718    
+  8      0.1708    0.1600      6.32       0.67    0.13    0.005150    -         4.1433    
+  12     0.2600    0.2935      12.87      0.62    0.08    0.005780    -         198.6905  
+
+=== Mode: farquhar ===
+  PP_h   lit_rgr   model_rgr   err%       lc      lsni    lambda_sb             final_BM  
+  4      0.0680    0.0422      37.97      0.82    0.16    0.004264    -         0.1359    
+  6      0.1135    0.0372      67.20      0.79    0.15    0.004852    -         0.1177    
+  8      0.1708    0.0574      66.40      0.67    0.13    0.005648    -         0.2113    
+  12     0.2600    0.0480      81.54      0.62    0.08    0.006112    -         0.1609    
+
+=== Mode: farquhar_jarvis ===
+  PP_h   lit_rgr   model_rgr   err%       lc      lsni    lambda_sb   lsdi      final_BM  
+  4      0.0680    0.0304      55.24      0.82    0.16    0.003843    0.1000    0.0967    
+  6      0.1135    0.0350      69.19      0.79    0.15    0.004433    0.1000    0.1103    
+  8      0.1708    0.0604      64.62      0.67    0.13    0.005246    0.1000    0.2307    
+  12     0.2600    0.4238      62.99      0.62    0.08    0.005850    0.1000    8692.9787 
+Ablation results written to results/v2/ablation/ablation_nocal.csv

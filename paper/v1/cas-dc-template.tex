@@ -1,0 +1,1037 @@
+%% 
+%% Copyright 2019-2024 Elsevier Ltd
+%% 
+%% This file is part of the 'CAS Bundle'.
+%% --------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.3c of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.3c or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'CAS Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+%% Template article for cas-dc documentclass for 
+%% double column output.
+
+\documentclass[a4paper,fleqn]{cas-dc}
+
+% If the frontmatter runs over more than one page
+% use the longmktitle option.
+
+%\documentclass[a4paper,fleqn,longmktitle]{cas-dc}
+
+%\usepackage[numbers]{natbib}
+%\usepackage[authoryear]{natbib}
+\usepackage[authoryear,longnamesfirst]{natbib}
+
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+
+
+%%%Author macros
+\def\tsc#1{\csdef{#1}{\textsc{\lowercase{#1}}\xspace}}
+\tsc{WGM}
+\tsc{QE}
+%%%
+
+% Uncomment and use as if needed
+%\newtheorem{theorem}{Theorem}
+%\newtheorem{lemma}[theorem]{Lemma}
+%\newdefinition{rmk}{Remark}
+%\newproof{pf}{Proof}
+%\newproof{pot}{Proof of Theorem \ref{thm}}
+
+\begin{document}
+\let\WriteBookmarks\relax
+\def\floatpagepagefraction{1}
+\def\textpagefraction{.001}
+
+% Short title
+\shorttitle{}    
+
+% Short author
+\shortauthors{}  
+
+% Main title of the paper
+\title [mode = title]{}  
+
+% Title footnote mark
+% eg: \tnotemark[1]
+\tnotemark[1] 
+
+% Title footnote 1.
+% eg: \tnotetext[1]{Title footnote text}
+\tnotetext[1]{} 
+
+% First author
+%
+% Options: Use if required
+% eg: \author[1,3]{Author Name}[type=editor,
+%       style=chinese,
+%       auid=000,
+%       bioid=1,
+%       prefix=Sir,
+%       orcid=0000-0000-0000-0000,
+%       facebook=<facebook id>,
+%       twitter=<twitter id>,
+%       linkedin=<linkedin id>,
+%       gplus=<gplus id>]
+
+\author[1]{}%[<options>]
+
+% Corresponding author indication
+\cormark[1]
+
+% Footnote of the first author
+\fnmark[1]
+
+% Email id of the first author
+\ead{}
+
+% URL of the first author
+\ead[url]{}
+
+% Credit authorship
+% eg: \credit{Conceptualization of this study, Methodology, Software}
+\credit{}
+
+% Address/affiliation
+\affiliation[1]{organization={},
+            addressline={}, 
+            city={},
+%          citysep={}, % Uncomment if no comma needed between city and postcode
+            postcode={}, 
+            state={},
+            country={}}
+
+\author[2]{}%[]
+
+% Footnote of the second author
+\fnmark[2]
+
+% Email id of the second author
+\ead{}
+
+% URL of the second author
+\ead[url]{}
+
+% Credit authorship
+\credit{}
+
+% Address/affiliation
+\affiliation[2]{organization={},
+            addressline={}, 
+            city={},
+%          citysep={}, % Uncomment if no comma needed between city and postcode
+            postcode={}, 
+            state={},
+            country={}}
+
+% Corresponding author text
+\cortext[1]{Corresponding author}
+
+% Footnote text
+\fntext[1]{}
+
+% For a title note without a number/mark
+%\nonumnote{}
+
+% Here goes the abstract
+\begin{abstract}
+Here goes the abstract \nocite{*}%% Remove this line from your manuscript.
+\end{abstract}
+
+% Use if graphical abstract is present
+%\begin{graphicalabstract}
+%\includegraphics{}
+%\end{graphicalabstract}
+
+% Research highlights
+\begin{highlights}
+\item 
+\item 
+\item 
+\end{highlights}
+
+
+%\nocite{*}
+
+% Keywords
+% Each keyword is seperated by \sep
+\begin{keywords}
+ \sep \sep \sep
+\end{keywords}
+
+\maketitle
+
+% Main text
+\section{Introduction}
+
+% Sta ovde mora da stoji:
+% - Ne pisati kao digital twin paper.
+% - Ne pisati kao plant biology experiment.
+% - Prvi pasus: modelling/simulation problem.
+% - Drugi pasus: zasto je relevantno za SMP&T.
+% - Treci pasus: sta fali u postojecoj literaturi.
+% - Cetvrti pasus: sta je novo u ovom radu.
+% - Na kraju eksplicitni contributions.
+
+\subsection{Motivation and modelling problem}
+% Treba reci:
+% - Simulacija rasta zahteva spajanje environment inputa,
+%   gas exchange, carbon allocation, nutrients, biomass.
+% - Photoperiod je dobar controlled scenario jer menja dan/noc dinamiku.
+
+\subsection{Research gap}
+% Treba reci:
+% - Postoje fizioloske jednacine i modeli.
+% - Problem je sto carbon input cesto ostaje prescribed/simplified.
+% - Nedostaje transparentan coupled simulation workflow.
+
+\subsection{Contribution of this work}
+% Ovde ide kontribuciona lista.
+
+\begin{enumerate}
+    \item Reformulation of a Tedone-based physiological framework as a coupled dynamic simulation model.
+    \item Integration of a Farquhar--Jarvis gas-exchange layer.
+    \item Propagation of computed assimilation into carbohydrate, nutrient, and biomass dynamics.
+    \item Reproducible numerical implementation with defined states, inputs, parameters, and outputs.
+    \item Literature-based validation under \textit{Arabidopsis thaliana} photoperiod scenarios.
+    \item Ablation and sensitivity analysis of the proposed coupling.
+\end{enumerate}
+
+% ============================================================
+\section{Related Work}
+\label{sec:related_work}
+Ovo poglavlje sumira ključne pravce istraživanja o simulacionim modelima biljaka i biofizičkim modulima koji su relevantni za predloženi pristup u ovom radu. Fokus je na mehanističkim modelima rasta, modelima fotosinteze i stomatalne provodljivosti, dinamici ugljenih hidrata, nutritivnim procesima i pristupima koji omogućavaju povezivanje ovih komponenti u jedinstven simulacioni okvir.
+% BITNO:
+% Kratko. Ne prepisivati dugacki master literature review.
+% Digital twin samo eventualno 1 kratak pasus kao future context.
+
+\subsection{Mechanistic plant growth simulation models}
+% Sta ide:
+% - Mechanistic/process-based models.
+% - ODE/PDE/dynamic-system framing.
+% - Carbon allocation, nutrient constraints, biomass growth.
+
+Simulacioni modeli biljaka predstavljaju osnovu za povezivanje fizioloških procesa, mikroklimatskih uslova i promena biomase kroz vreme. Prostorne i vremenske skale koje modeli pokrivaju određuju gde i kako se oni mogu primeniti. Prostorno, modeli mogu obuhvatiti nivo lista, organa, cele biljke, sklopa ili čitavog polja. Vremenski, oni pokrivaju strategije od minuta i sati, za mikroklimatske i fiziološke procese, preko dana, za rast i raspodelu ugljenika, do sezone, za procenu prinosa. Pregled funkcionalno-strukturnih modela biljaka ukazuje da modeli koji kombinuju arhitekturu biljke i fiziološke module omogućavaju povezivanje prostorne strukture, fenotipskih informacija i dinamičkih procesa rasta \cite{Louarn2020,Sievnen2014}. Arhitektura savremenih simulacionih modela biljaka obično je modularna. Fotosintetička komponenta može koristiti biohemijski Farquhar-ov model, stomatalna provodljivost može biti opisana preko Ball--Berry modela, Medlyn-ovog optimalističkog pristupa ili Jarvis-ovih funkcija, dok se vodni bilans često povezuje sa Penman--Monteith formulacijom. Takva struktura omogućava pojedinačnu validaciju modula i fleksibilno povezivanje fotosinteze, stomatalne provodljivosti, transpiracije, alokacije ugljenika i rasta \cite{Farquhar1980,Ball1987,Medlyn2011,Jarvis1976,Allen1998,Kim2003}. Modeli kao što su APSIM, DSSAT i WOFOST predstavljaju proverene platforme za simulaciju rasta useva, dinamike vode, azota i klimatskih scenarija \cite{Holzworth2014,Jones2003,deWit2019}. S druge strane, funkcionalno-strukturni modeli i pristupi kao što je GreenLab uvode dodatnu dimenziju povezivanja arhitekture biljke i fizioloških procesa \cite{DeReffye2020}. Ovakvi modeli pokazuju da modularna organizacija ima značajnu prednost kada je potrebno povezati više procesa koji deluju na različitim vremenskim i prostornim skalama. U okviru simulacionih modela biljaka mogu se razlikovati različiti pristupi. Mehanistički, odnosno proces-orijentisani modeli, oslanjaju se na biofizičke i biohemijske jednačine kako bi opisali fotosintezu, transpiraciju, rast i bilanse vode i azota kroz jasno definisane mehanizme. Nedavne studije pokazuju da ovakvi modeli, za razliku od isključivo empirijskih pristupa, bolje odgovaraju varijacijama klimatskih uslova tokom sezone \cite{Mamassi2024}. Noviji primeri uključuju modele kao što je T\&C-CROP, koji integrišu složene poljoprivredne mere, uključujući rotacije useva, navodnjavanje i đubrenje, i pokazuju visok nivo validacije sa realnim podacima \cite{BuckleyPaules2025}. Drugu grupu čine modeli kretanja vode kroz sistem zemljište--biljka. Jedan primer je jednodimenzionalni model koji povezuje ksilem unutar biljke sa zemljištem i pokazuje da ovakav pristup može biti efikasan u poređenju sa složenijim trodimenzionalnim modelima, uz značajno smanjenje računske složenosti \cite{Janott2011}. Posebnu grupu čine diskretni modeli razvoja biljke, kao što su DEM modeli, koji se primenjuju u analizi interakcija korena i zemljišta, uključujući fizičke kontakte između semena, korena i čestica zemljišta \cite{Tian2024}. Modeli optimalnosti zasnovani su na pretpostavci da biljke alociraju resurse na način koji maksimizuje određeni kriterijum, kao što su prinos, rast ili efikasnost resursa. U tom kontekstu, Dynamic Energy Budget teorija predstavlja jedan od okvira za opis raspodele resursa u promenljivim uslovima okruženja \cite{Russo2022}. Konačno, kontinuirani modeli opisuju dinamiku biljke sistemima običnih ili parcijalnih diferencijalnih jednačina. Ovakav pristup omogućava formalnu matematičku analizu sistema i koristi se u modelima u kojima se biomasa, voda ili vegetaciona dinamika predstavljaju kao glatke vremenski promenljive \cite{Meron2019}.
+
+
+```latex
+\subsection{Photosynthesis and stomatal conductance modelling}
+
+Fotosinteza je jedan od centralnih procesa u mehanističkim modelima rasta biljaka, jer određuje primarni ulaz ugljenika koji se kasnije raspodeljuje ka ugljenim hidratima, respiraciji, održavanju i rastu. Za C$_3$ biljke najčešće korišćen biohemijski opis predstavlja Farquhar--von Caemmerer--Berry model, koji povezuje neto asimilaciju sa intercelularnom koncentracijom CO$_2$, Rubisco-limitiranom karboksilacijom i regeneracijom RuBP \cite{Farquhar1980}. Ovaj model se široko koristi kao osnova za opis fotosintetičkog odgovora lista i često se parametrizuje kroz veličine kao što su $V_{cmax}$, $J$, $\Gamma^*$, $K_c$, $K_o$ i $R_d$ \cite{Sharkey2007,Dubois2007}.
+
+Međutim, fotosintetički odgovor ne zavisi samo od biohemijskog kapaciteta lista, već i od difuzione dostupnosti CO$_2$, koja je određena stomatalnom provodljivošću. Stomatalni modeli zato čine neophodnu vezu između mikroklimatskih uslova i asimilacije ugljenika. U literaturi su česti Jarvis-ov empirijski pristup, Ball--Berry model i Medlyn-ov optimalistički model stomatalne regulacije \cite{Jarvis1976,Ball1987,Medlyn2011}. Jarvis-ov pristup opisuje stomatalnu provodljivost kao proizvod funkcija odgovora na spoljašnje faktore, kao što su osvetljenje, deficit pritiska vodene pare, temperatura, koncentracija CO$_2$ i vodni status biljke \cite{Jarvis1976,YU2017,Yu2021}. Takva formulacija je pogodna za simulacione modele jer omogućava direktno uključivanje vremenski promenljivih ulaza iz scenarija ili merenja.
+
+Povezivanje fotosinteze i stomatalne provodljivosti uvodi povratnu spregu između biohemijske potrošnje CO$_2$ i difuzionog toka kroz stome. Intercelularna koncentracija CO$_2$ određuje brzinu asimilacije u Farquhar-ovom modelu, dok stomatalna provodljivost određuje koliko CO$_2$ može da difunduje iz okolnog vazduha u unutrašnjost lista. Zbog toga spoj Farquhar-ovog biohemijskog modela i Jarvis-ove stomatalne regulacije predstavlja prirodan osnov za simulaciju gasne razmene pod promenljivim mikroklimatskim i fotoperiodskim uslovima.
+
+U kontekstu ovog rada, Farquhar-ove i Jarvis-ove jednačine ne predstavljaju samostalan novi fiziološki doprinos, već nasledne modelne komponente koje se integrišu u širi dinamički simulacioni okvir. Doprinos rada nalazi se u njihovom povezivanju sa ugljenohidratnim, nutritivnim i biomasnim promenljivama, tako da se fotosintetski ulaz ne posmatra kao unapred zadat spoljašnji faktor, već kao rezultat simulirane gasne razmene i uslova okruženja.
+
+\subsection{Carbohydrate and photoperiod-dependent growth in \textit{Arabidopsis thaliana}}
+
+Dinamika ugljenih hidrata predstavlja ključnu vezu između fotosinteze i rasta biljke. Tokom svetle faze dana asimilovani ugljenik se raspodeljuje između mobilnih šećera, pre svega saharoze, i privremenih rezervi, pre svega skroba. Tokom tamne faze, kada fotosintetski ulaz prestaje, skrob se razgrađuje i obezbeđuje kontinuirano snabdevanje ugljenikom za respiraciju, održavanje i rast \cite{Stitt2012,Smith2007}. Zbog toga modeli koji opisuju samo trenutnu fotosintezu, bez eksplicitne dinamike skroba i saharoze, imaju ograničenu mogućnost da predstave dan--noć ravnotežu rasta.
+
+Kod \textit{Arabidopsis thaliana}, više radova pokazuje da je noćna degradacija skroba strogo regulisana i da se rezerve skroba često troše približno do trenutka svitanja, čime se smanjuje rizik od noćnog nedostatka ugljenika \cite{Scialdone2013,Stitt2012,Webb2015}. Matematički modeli ovog procesa povezuju cirkadijalnu regulaciju, dostupnost saharoze, aktivnost enzima i signale šećera sa dinamikom rasta i raspodele ugljenika \cite{Feugier2013,Seki2017}. Ova svojstva čine \textit{Arabidopsis thaliana} pogodnim sistemom za validaciju modela koji eksplicitno opisuju fotoperiodski zavisnu dinamiku ugljenih hidrata.
+
+Fotoperiod značajno utiče na odnos između dnevne akumulacije ugljenika i noćne potrošnje rezervi. Kraći dan ograničava vreme fotosintetske asimilacije i produžava period u kome rast zavisi od mobilizacije skroba, dok duži dan omogućava duži period direktnog ugljeničnog ulaza. Eksperimentalni podaci za \textit{Arabidopsis thaliana} pokazuju da biljka koordinira diurnalnu regulaciju alokacije ugljenika i rast kroz širok opseg fotoperioda \cite{Sulpice2014}. Zbog toga fotoperiodski scenariji predstavljaju pogodan validacioni okvir za proveru da li simulacioni model reprodukuje očekivane promene u relativnoj stopi rasta, biomasi i ugljenohidratnim promenljivama.
+
+Pored skroba i saharoze, rast zavisi i od nutritivnog statusa biljke. Azot i fosfor utiču na fotosintetički kapacitet, metabolizam i raspodelu biomase, pa se u mehanističkim modelima često uvode kao unutrašnja stanja ili ograničavajući faktori \cite{Gastal2002,Xu2012,Barber1995,Shen2011,Carstensen2018}. Raspodela ugljenika između lista i korena može se posmatrati kroz odnose izvor--ponor, pri čemu dostupnost asimilata, unutrašnje potrebe za nutrijentima i stanje korena utiču na alokaciju resursa \cite{Marcelis1996,Feller2015,Louarn2020}. U ovom radu se ovi procesi koriste kao deo spregnutog dinamičkog sistema koji povezuje gasnu razmenu, ugljenohidratne rezerve, nutritivne tokove i rast biomase.
+
+\subsection{Simulation validation, ablation, and sensitivity analysis}
+
+U dinamičkim modelima rasta biljaka validacija obično obuhvata poređenje simuliranih i referentnih vrednosti za biomasu, relativnu stopu rasta, tokove vode ili nutrijenata, kao i druge fiziološke promenljive kada su dostupne \cite{Wallach2018,Holzworth2014,Jones2003,deWit2019}. Za model koji se validira pod različitim fotoperiodima, posebno su značajni pokazatelji kao što su relativna stopa rasta, finalna biomasa i dinamika skroba i saharoze.
+
+Pored standardne validacije, analiza ponašanja modela treba da pokaže i doprinos pojedinačnih komponenti. Ablacioni eksperimenti omogućavaju da se uporede varijante modela u kojima se pojedini delovi uklanjaju, pojednostavljuju ili zamenjuju alternativnim formulacijama. U ovom kontekstu, relevantno je porediti osnovni model sa propisanim ili pojednostavljenim fotosintetskim ulazom, model sa Farquhar-ovom fotosintezom, model sa stomatalnom regulacijom i punu varijantu u kojoj su gasna razmena, ugljeni hidrati, nutrijenti i biomasa povezani u jedinstven dinamički sistem. Takvo poređenje pomaže da se pokaže da doprinos rada nije samo implementacija poznatih jednačina, već njihovo funkcionalno povezivanje u simulacionom toku.
+
+Analiza osetljivosti predstavlja dodatni korak u proceni robusnosti modela. Ona pokazuje koji parametri najviše utiču na izlaze modela, kao što su finalna biomasa, relativna stopa rasta, neto asimilacija, skrob i saharoza. U slučaju modela koji uključuje gasnu razmenu, posebno su važni parametri povezani sa svetlošću, temperaturom, ambijentalnom koncentracijom CO$_2$, relativnom vlažnošću ili deficitom pritiska vodene pare, kao i biohemijski parametri $V_{cmax}$ i $J$. Za nizvodne procese važni su parametri degradacije skroba, alokacije saharoze, nutritivnih ograničenja i početnih rezervi ugljenih hidrata.
+
+U ovom radu se validacija, ablation study i sensitivity analysis koriste kao komplementarni elementi evaluacije. Validacija proverava slaganje sa literaturnim ciljevima, ablation study procenjuje doprinos spajanja gasne razmene sa ostatkom modela, dok analiza osetljivosti ispituje stabilnost i dominantne izvore varijabilnosti u ponašanju simulacije.
+```
+
+
+% ============================================================
+\section{Model Scope and Contribution Boundary}
+\label{sec:scope}
+
+% CILJ:
+% Odmah zastititi rad od komentara:
+% "ovo je samo implementacija Tedone/Farquhar/Jarvis".
+% Ovde ide tabela sta je inherited, sta je adapted, sta je contribution.
+
+\begin{table}[ht]
+\centering
+\caption{Model components, sources, and contribution boundary.}
+\label{tab:component_boundary}
+\begin{tabular}{p{0.25\textwidth} p{0.23\textwidth} p{0.32\textwidth} p{0.12\textwidth}}
+\hline
+\textbf{Component} & \textbf{Source / basis} & \textbf{Role in this work} & \textbf{Status} \\
+\hline
+Growth and carbohydrate framework & Tedone-based literature &
+Baseline carbon storage, allocation, and growth structure & Adopted/adapted \\
+
+Farquhar C$_3$ photosynthesis & Literature &
+Assimilation response to $C_i$, light, and biochemical capacity & Integrated \\
+
+Jarvis stomatal conductance & Literature &
+Environmental modifiers of stomatal conductance & Integrated \\
+
+Gas-exchange coupling & This work &
+Links $g_s$, $C_i$, $A_n$, and downstream carbon input & Proposed coupling \\
+
+Photoperiod simulation workflow & This work &
+Controls light/dark forcing and scenario execution & Implemented \\
+
+Validation protocol & This work &
+Evaluates model against photoperiod-dependent targets & Designed \\
+
+Ablation and sensitivity analysis & This work &
+Tests contribution and robustness of model components & New analysis \\
+\hline
+\end{tabular}
+\end{table}
+
+% ============================================================
+\section{Mathematical Model Formulation}
+\label{sec:model}
+
+% Ovo je centralna sekcija rada.
+% Mora biti formalna, ne opisna kao master.
+
+\subsection{State vector, input vector, and dynamic system}
+
+% LOCKED FORM:
+\begin{equation}
+    \frac{dX(t)}{dt} = f\left(X(t), U(t), \boldsymbol{\theta}, t\right).
+\end{equation}
+
+% LOCKED/LIKELY STATE VECTOR:
+\begin{equation}
+X(t) =
+\left[
+k_s,
+a,
+s,
+\alpha_N,
+\alpha_P,
+N,
+P,
+\rho_r,
+B_l,
+B_r
+\right]^T .
+\end{equation}
+
+% Znacenje:
+% k_s      - starch partition coefficient
+% a        - starch pool
+% s        - sucrose pool
+% alpha_N  - nitrogen affinity / investment state
+% alpha_P  - phosphorus affinity / investment state
+% N        - internal nitrogen state
+% P        - internal phosphorus state
+% rho_r    - sucrose/root allocation state
+% B_l      - leaf biomass
+% B_r      - root biomass
+
+% LOCKED/LIKELY INPUT VECTOR:
+\begin{equation}
+U(t) =
+\left[
+PAR(t),
+T(t),
+C_a(t),
+RH(t),
+VPD(t),
+\psi_w(t),
+L(t)
+\right]^T .
+\end{equation}
+
+% Znacenje:
+% PAR     - photosynthetically active radiation
+% T       - temperature
+% C_a     - ambient CO2
+% RH/VPD  - humidity / vapour pressure deficit
+% psi_w   - water status / water potential
+% L(t)    - day/night photoperiod signal
+
+\subsection{Photoperiod forcing}
+
+% LOCKED:
+\begin{equation}
+L(t) =
+\begin{cases}
+1, & 0 \leq h(t) < f, \\
+0, & f \leq h(t) < 24,
+\end{cases}
+\end{equation}
+
+% LOCKED if we keep current sinusoidal PAR profile:
+\begin{equation}
+PAR(t) =
+PAR_{\max}
+\sin\left(
+\pi \frac{h(t)}{f}
+\right),
+\quad 0 \leq h(t) < f .
+\end{equation}
+
+\begin{equation}
+PAR(t) = 0, \quad f \leq h(t) < 24 .
+\end{equation}
+
+% Sta ovde objasniti:
+% - f je photoperiod in hours.
+% - h(t) je hour of day.
+% - PAR_max je scenario/parameter value.
+% - Sinusni profil je idealizovana dnevna kriva.
+
+\subsection{Jarvis stomatal conductance}
+
+% LOCKED GENERAL FORM:
+\begin{equation}
+g_s =
+g_{s,\max}
+f_{PAR}(PAR)
+f_{VPD}(VPD)
+f_T(T)
+f_{CO_2}(C_a)
+f_w(\psi_w).
+\end{equation}
+
+% LOCKED VPD FORM if kept:
+\begin{equation}
+e_s = 0.61078 \exp\left(\frac{17.27T}{T+237.3}\right),
+\end{equation}
+
+\begin{equation}
+e_a = e_s \frac{RH}{100},
+\end{equation}
+
+\begin{equation}
+VPD = e_s - e_a.
+\end{equation}
+
+% Sta ovde ide:
+% - Definisati sve Jarvis faktore.
+% - Ne preterivati sa biologijom.
+% - Objasniti da Jarvis daje environment-dependent stomatal conductance.
+
+\subsection{Farquhar C$_3$ photosynthesis}
+
+% LOCKED:
+\begin{equation}
+A_c =
+V_{cmax}
+\frac{C_i - \Gamma^*}
+{C_i + K_c \left(1 + O/K_o\right)} .
+\end{equation}
+
+% LOCKED:
+\begin{equation}
+A_j =
+J
+\frac{C_i - \Gamma^*}
+{4.5C_i + 10.5\Gamma^*} .
+\end{equation}
+
+% LOCKED:
+\begin{equation}
+A_n = \min(A_c, A_j) - R_d .
+\end{equation}
+
+% Sta ovde ide:
+% - Ac Rubisco-limited.
+% - Aj light-limited / RuBP regeneration-limited.
+% - An net assimilation.
+% - Svi parametri u posebnoj tabeli.
+
+\subsection{Gas-exchange closure}
+
+% LOCKED GENERAL DIFFUSION RELATION:
+\begin{equation}
+C_i = C_a - \frac{A_n}{g_c}.
+\end{equation}
+
+% LOCKED if gs is water-vapour conductance:
+\begin{equation}
+g_c \approx \frac{g_s}{1.6}.
+\end{equation}
+
+% CONDITIONAL:
+% Ako aktiviramo iterate_ci(), ubacujemo ovo kao glavni deo.
+
+\begin{equation}
+C_i^{(0)} = \eta C_a, \quad \eta \in [0.6,0.8].
+\end{equation}
+
+\begin{equation}
+\left| C_i^{(k+1)} - C_i^{(k)} \right| < \varepsilon .
+\end{equation}
+
+% Ako NE aktiviramo iterate_ci():
+% Ovaj subsection mora da se zove:
+% "Jarvis-regulated surrogate approximation of net assimilation"
+% i mora da objasni surrogate An = S(PAR, B_l, g_s).
+% Tada ne smemo tvrditi full iterative Farquhar--Jarvis runtime.
+
+\subsection{Conversion from assimilation to model carbon input}
+
+% LOCKED GENERAL FORM:
+\begin{equation}
+PH(t) = \mathcal{C}\left(A_n(t), SLA, B_l(t), \boldsymbol{\theta}\right).
+\end{equation}
+
+% Sta ovde mora:
+% - Definisati jedinice An.
+% - Definisati jedinice PH.
+% - Objasniti SLA.
+% - Objasniti da PH ulazi u starch/sucrose ODE.
+% - Ako ostane base_scale = 1.10, objasniti kao calibration/scaling coefficient.
+
+\subsection{Carbohydrate dynamics}
+
+% LOCKED GENERAL FORM:
+\begin{equation}
+\frac{da}{dt} =
+k_s PH - D_a .
+\end{equation}
+
+\begin{equation}
+\frac{ds}{dt} =
+(1-k_s)PH + D_a
+- C_{uptake}
+- C_{transport}
+- C_{resp}
+- C_{load}.
+\end{equation}
+
+% Sta ovde ide:
+% - a = starch.
+% - s = sucrose.
+% - D_a = starch degradation.
+% - day: PH > 0.
+% - night: PH = 0, starch degradation supplies sucrose.
+
+% LOCKED/LIKELY:
+\begin{equation}
+PH(t) = 0, \quad L(t)=0 .
+\end{equation}
+
+\subsection{Nutrient uptake and nutrient-related costs}
+
+% LOCKED/LIKELY:
+\begin{equation}
+U_N^{pot} =
+I_{N,\max}
+\frac{N_s}{N_s + K_N}
+\alpha_N
+\frac{B_r}{B_l+B_r}.
+\end{equation}
+
+\begin{equation}
+U_P^{pot} =
+I_{P,\max}
+\frac{P_s}{P_s + K_P}
+\alpha_P
+\frac{B_r}{B_l+B_r}.
+\end{equation}
+
+\begin{equation}
+U_N =
+U_N^{pot}
+\frac{s}
+{s + c_N U_N^{pot} + \epsilon}.
+\end{equation}
+
+\begin{equation}
+U_P =
+U_P^{pot}
+\frac{s}
+{s + c_P U_P^{pot} + \epsilon}.
+\end{equation}
+
+% Sta ovde ide:
+% - Potential uptake depends on soil availability, affinity, root biomass share.
+% - Actual uptake is sucrose-limited.
+% - N/P dynamics consume carbon and affect growth/photosynthetic capacity.
+
+\subsection{Biomass growth and allocation}
+
+% LOCKED GENERAL FORM:
+\begin{equation}
+\frac{dB_l}{dt} =
+G_l(s, \rho_r, \boldsymbol{\theta}) - M_l(B_l).
+\end{equation}
+
+\begin{equation}
+\frac{dB_r}{dt} =
+G_r(s, \rho_r, \boldsymbol{\theta}) - M_r(B_r).
+\end{equation}
+
+% Sta ovde ide:
+% - Leaf/root growth depends on sucrose availability.
+% - rho_r controls allocation to root.
+% - Mortality/competition terms included.
+% - Full exact implementation can be listed after final code check.
+
+% ============================================================
+\section{Algorithmic Description}
+\label{sec:algorithm}
+
+% Ovde ide Algorithm 1.
+% Ne kao software detail, nego kao modelling/simulation contribution.
+
+\begin{algorithm}
+\caption{One simulation step with Farquhar--Jarvis gas-exchange coupling}
+\label{alg:simulation_step}
+\begin{algorithmic}[1]
+\STATE Read $X(t)$, $U(t)$, $\boldsymbol{\theta}$, and $\Delta t$.
+\STATE Determine $L(t)$ from the photoperiod function.
+\STATE Compute or read $PAR(t)$, $T(t)$, $C_a(t)$, $RH(t)$ or $VPD(t)$, and water status.
+\STATE Compute Jarvis environmental modifiers.
+\STATE Compute stomatal conductance $g_s$.
+\STATE Compute or solve $C_i$.
+\STATE Compute $A_c$, $A_j$, and $A_n$.
+\STATE Convert $A_n$ into model carbon input $PH$.
+\STATE Update starch, sucrose, nutrient-related states, allocation state, and biomass states.
+\STATE Store outputs and diagnostics.
+\end{algorithmic}
+\end{algorithm}
+
+% CONDITIONAL:
+% If iterate_ci() is active, expand steps 6-7 into iterative loop.
+% If surrogate remains active, explicitly say "compute An using surrogate approximation".
+
+% ============================================================
+\section{Numerical Implementation}
+\label{sec:implementation}
+
+% Sta ovde ide:
+% - C numerical core.
+% - External solver framework.
+% - RHS function.
+% - Algebraic variables computed before derivatives.
+% - CSV input scenario.
+% - Output time series.
+% - Validation runner.
+% - Reproducibility: config, commit hash, solver version.
+
+\subsection{Implementation architecture}
+% Mention modules:
+% - photosynthesis
+% - carbohydrates
+% - nutrients
+% - growth
+% - algebraic outputs
+% - simulation dynamics
+% - validation runner
+
+\subsection{Numerical integration}
+% TODO:
+% - exact solver used
+% - dt_hours
+% - tolerances
+% - fixed/adaptive step
+% - time-step sensitivity check
+
+\subsection{Input and output workflow}
+% Sta ide:
+% - Input CSV scenario.
+% - Environmental time series.
+% - Initial conditions.
+% - Parameter files.
+% - Output CSV with states and diagnostics.
+
+\subsection{Reproducibility}
+% Sta ide:
+% - Build command.
+% - Commit hash.
+% - solver.lock / solver version.
+% - validation runner command.
+% - output CSV files.
+
+% ============================================================
+\section{Simulation Scenarios and Validation Protocol}
+\label{sec:validation}
+
+% Sta ovde ide:
+% - Validation is literature-based.
+% - Arabidopsis is validation domain.
+% - Photoperiods: 4h, 6h, 8h, 12h.
+% - Metrics: RGR error, MAE, RMSE, nRMSE, pass/fail.
+% - State validity checks.
+% - Day/night photosynthesis checks.
+% - Time-step sensitivity.
+
+\subsection{Photoperiod scenarios}
+
+\begin{table}[ht]
+\centering
+\caption{Photoperiod validation scenarios.}
+\label{tab:scenarios}
+\begin{tabular}{rrrr}
+\hline
+\textbf{Scenario} & \textbf{Photoperiod} & \textbf{Duration} & \textbf{Primary target} \\
+\hline
+S1 & 4 h  & TODO & RGR \\
+S2 & 6 h  & TODO & RGR, sugars/starch if available \\
+S3 & 8 h  & TODO & RGR \\
+S4 & 12 h & TODO & RGR \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{RGR validation}
+
+% LOCKED:
+\begin{equation}
+RGR =
+\frac{\ln B(t_2) - \ln B(t_1)}
+{t_2 - t_1}.
+\end{equation}
+
+% Or if implementation uses start/final ratio differently, align with code.
+
+\begin{table}[ht]
+\centering
+\caption{RGR validation under photoperiod treatments.}
+\label{tab:rgr_validation}
+\begin{tabular}{rrrrr p{0.22\textwidth}}
+\hline
+\textbf{Photoperiod} & \textbf{Literature RGR} & \textbf{Simulated RGR} &
+\textbf{Abs. error} & \textbf{Rel. error} & \textbf{Comment} \\
+\hline
+4 h  & 0.0680 & TODO & TODO & TODO & TODO \\
+6 h  & 0.1135 & TODO & TODO & TODO & TODO \\
+8 h  & 0.1708 & TODO & TODO & TODO & TODO \\
+12 h & 0.2600 & TODO & TODO & TODO & TODO \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Sugar and starch validation}
+In addition to RGR, the model output includes simulated sucrose and starch
+pools, which are used to evaluate whether the model reproduces physiologically
+plausible day–night carbohydrate dynamics. When a curated reference dataset is
+available, sucrose and starch are compared quantitatively against literature-derived
+ time points. The comparison is performed separately for each photoperiod
+scenario for which reference values are available.
+The following metrics are used:
+\begin{equation}
+MAE =
+\frac{1}{n}
+\sum_{i=1}^{n}
+\left|
+y_i - \hat{y}_i
+\right|,
+\end{equation}
+\begin{equation}
+RMSE =
+\sqrt{
+\frac{1}{n}
+\sum_{i=1}^{n}
+\left(
+y_i - \hat{y}_i
+\right)^2
+},
+\end{equation}
+\begin{equation}
+nRMSE =
+\frac{RMSE}
+{y_{\max} - y_{\min}}.
+\end{equation}
+Here, $y_i$ denotes the reference value, $\hat{y}
+_i$ denotes the simulated value at the corresponding time point, and $n$ is the
+number of available reference points. When reference values are available only
+in relative or normalized form, the comparison is performed using normalized
+time-series behaviour rather than absolute concentrations.
+
+\begin{table}[ht]
+\centering
+\caption{Sugar and starch validation summary.}
+
+\label{tab:sugar_starch_validation}
+\begin{tabular}{rrrrr p{0.22\textwidth}}
+\hline
+\textbf{Photoperiod} &
+\textbf{Ref. points} &
+\textbf{Sucrose nRMSE} &
+\textbf{Sucrose MAE} &
+\textbf{Starch nRMSE} &
+\textbf{Starch MAE} &
+\textbf{Comment} \\
+\hline
+4 h & TODO & TODO & TODO & TODO & TODO & TODO \\
+6 h & TODO & TODO & TODO & TODO & TODO & TODO \\
+8 h & TODO & TODO & TODO & TODO & TODO & TODO \\
+12 h & TODO & TODO & TODO & TODO & TODO & TODO \\
+\hline
+\end{tabular}
+\end{table}
+
+If a sufficient number of curated reference points is not available for a given
+photoperiod, sugar and starch are not treated as fully quantitative validation
+targets for that scenario. In such cases, the model is evaluated qualitatively
+with respect to expected carbohydrate behaviour: starch should accumulate during
+the light phase, decrease during the dark phase, and contribute to sucrose
+availability during the night. This distinction is reported explicitly to avoid
+interpreting trend-level agreement as full quantitative validation
+
+\subsection{Gas-exchange validation or plausibility check}
+% Sta ide:
+% - If direct An/gs/Ci data exist: quantitative validation.
+% - If not: range and trend plausibility.
+% - If surrogate remains: surrogate error must be validated.
+
+\subsection{Numerical checks}
+% Sta ide:
+% - finite states
+% - non-negative sucrose/starch/biomass
+% - positive final biomass
+% - night photosynthesis close to zero
+% - dt vs dt/2 sensitivity
+
+% ============================================================
+\section{Ablation Study}
+\label{sec:ablation}
+
+% Cilj:
+% Pokazati sta konkretno menja predlozeni coupling.
+
+\begin{table}[ht]
+\centering
+\caption{Ablation variants.}
+\label{tab:ablation_variants}
+\begin{tabular}{rrrrr p{0.22\textwidth}}
+\hline
+\textbf{Variant} & \textbf{Description} \\
+\hline
+M0 & Tedone-style baseline with simplified or prescribed carbon input. \\
+M1 & Tedone-based model with Farquhar photosynthesis only. \\
+M2 & Tedone-based model with Farquhar--Jarvis gas-exchange coupling. \\
+M3 & Full model with photoperiod forcing, gas exchange, carbohydrates, nutrients, and biomass dynamics. \\
+\hline
+\end{tabular}
+\end{table}
+
+% Metrics:
+% - RGR error
+% - final biomass error
+% - sucrose/starch dynamics
+% - day/night plausibility
+% - numerical stability
+
+% ============================================================
+\section{Sensitivity Analysis}
+\label{sec:sensitivity}
+
+% Minimum: one-at-a-time.
+% Better: Morris/Sobol if time allows.
+
+\subsection{Parameters}
+% Candidate parameters:
+% - PAR_max
+% - T
+% - C_a
+% - RH/VPD
+% - Vcmax
+% - J
+% - Jarvis VPD sensitivity
+% - starch degradation rate
+% - sucrose allocation coefficient
+% - nutrient limitation coefficient
+% - initial starch/sucrose
+
+\subsection{Outputs}
+% Candidate outputs:
+% - final biomass
+% - RGR
+% - An / PH
+% - sucrose
+% - starch
+% - N
+% - P
+
+\subsection{Sensitivity metric}
+% TODO:
+% Choose metric.
+% Simple option:
+% relative output change per relative parameter perturbation.
+
+\begin{equation}
+S_p =
+\frac{\Delta Y / Y_0}
+{\Delta p / p_0}.
+\end{equation}
+
+% ============================================================
+\section{Results}
+\label{sec:results}
+
+% Ne pisati jos dok nema finalnih runova.
+
+\subsection{Numerical behaviour of the gas-exchange coupling}
+% Sta ide:
+% - convergence if iterate_ci active
+% - or surrogate behaviour if surrogate path active
+% - diagnostics
+
+\subsection{Photoperiod-dependent assimilation response}
+% Sta ide:
+% - PAR/An/PH through day
+% - comparison across 4h, 6h, 8h, 12h
+
+\subsection{Carbohydrate dynamics}
+% Sta ide:
+% - starch accumulation in day
+% - starch degradation at night
+% - sucrose behaviour
+
+\subsection{Biomass and RGR validation}
+% Sta ide:
+% - RGR table
+% - final biomass
+% - errors
+
+\subsection{Ablation results}
+% Sta ide:
+% - M0-M3 comparison
+
+\subsection{Sensitivity results}
+% Sta ide:
+% - tornado plot / table
+% - dominant parameters
+% - unstable regions
+
+% ============================================================
+\section{Discussion}
+\label{sec:discussion}
+
+% Sta mora eksplicitno:
+% - This is not a completely new plant physiology model.
+% - Tedone/Farquhar/Jarvis are inherited and cited.
+% - Contribution is coupling, reformulation, implementation, validation.
+% - Arabidopsis is validation domain.
+% - This is not a full digital twin.
+% - No new wet-lab validation is claimed.
+% - Sensor integration, actuator feedback, online correction, surrogate acceleration are future work.
+
+% ============================================================
+\section{Limitations}
+\label{sec:limitations}
+
+% Moze skoro fiksno:
+% - literature-parameterized model
+% - limited published validation data
+% - simplified root architecture
+% - simplified hormonal/developmental regulation
+% - no full leaf energy balance
+% - parameter uncertainty
+% - no complete digital twin deployment
+% - surrogate not central unless validated
+% - transfer to other species requires recalibration
+
+% ============================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+% Sta mora:
+% - Presented extended Tedone-based mechanistic simulation model.
+% - Integrated Farquhar--Jarvis gas-exchange layer.
+% - Linked environmental drivers to carbon assimilation and downstream growth.
+% - Validated under Arabidopsis photoperiod treatments.
+% - Ablation and sensitivity analysis support relevance/robustness.
+% - Provides simulation core for future hybrid/digital-twin-enabled work.
+```
+
+
+
+% Numbered list
+% Use the style of numbering in square brackets.
+% If nothing is used, default style will be taken.
+%\begin{enumerate}[a)]
+%\item 
+%\item 
+%\item 
+%\end{enumerate}  
+
+% Unnumbered list
+%\begin{itemize}
+%\item 
+%\item 
+%\item 
+%\end{itemize}  
+
+% Description list
+%\begin{description}
+%\item[]
+%\item[] 
+%\item[] 
+%\end{description}  
+
+\clearpage %%Remove this from your manuscript
+
+% Figure
+\begin{figure}%[]
+  \centering
+%    \includegraphics{}
+    \caption{}\label{fig1}
+\end{figure}
+
+
+\begin{table}%[]
+\caption{}\label{tbl1}
+\begin{tabular*}{\tblwidth}{@{}LL@{}}
+\toprule
+  &  \\ % Table header row
+\midrule
+ & \\
+ & \\
+ & \\
+ & \\
+\bottomrule
+\end{tabular*}
+\end{table}
+
+% Uncomment and use as the case may be
+%\begin{theorem} 
+%\end{theorem}
+
+% Uncomment and use as the case may be
+%\begin{lemma} 
+%\end{lemma}
+
+%% The Appendices part is started with the command \appendix;
+%% appendix sections are then done as normal sections
+%% \appendix
+
+\section{}\label{}
+
+% To print the credit authorship contribution details
+\printcredits
+
+%% Loading bibliography style file
+%\bibliographystyle{model1-num-names}
+\bibliographystyle{cas-model2-names}
+
+% Loading bibliography database
+\bibliography{master_ref}
+
+% Biography
+%\bio{}
+% Here goes the biography details.
+%\endbio
+
+%\bio{pic1}
+% Here goes the biography details.
+%\endbio
+
+\end{document}
+

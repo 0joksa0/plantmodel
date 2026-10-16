@@ -41,8 +41,10 @@ typedef struct {
     int ref_points;
     real_t sucrose_scale;
     real_t sucrose_nrmse;
+    real_t sucrose_mae;
     real_t starch_scale;
     real_t starch_nrmse;
+    real_t starch_mae;
 } RunMetrics;
 
 typedef struct {
@@ -56,12 +58,34 @@ typedef struct {
     char fail_reason[256];
 } PassFlags;
 
-static const Scenario SCENARIOS[] = {
+/* Two parameterisations, selected at run time.
+ *
+ * SCENARIOS_PERPP is the published one: lambda_sb, lambda_sni and lambda_c all
+ * differ per photoperiod.  Four photoperiods times two fitted values is eight
+ * parameters against eight observations, so it has zero degrees of freedom and
+ * its agreement is a bisection residual, not a prediction.  It is kept so the
+ * published result stays reproducible.
+ *
+ * SCENARIOS_SHARED is the revised one: a single value of each parameter across
+ * all photoperiods.  lambda_c = 1 makes the starch feedback inert, so only
+ * lambda_sb is fitted here; lambda_sdr, lambda_sdi and the sink constant live in
+ * the config file.  Selected with --shared (the default), overridden by
+ * --per-photoperiod. */
+static const Scenario SCENARIOS_PERPP[] = {
     { 4, REAL(0.0680), REAL(0.16), REAL(0.003843), REAL(0.82) },
     { 6, REAL(0.1135), REAL(0.15), REAL(0.004433), REAL(0.79) },
     { 8, REAL(0.1708), REAL(0.13), REAL(0.005246), REAL(0.67) },
     { 12, REAL(0.2600), REAL(0.08), REAL(0.005850), REAL(0.62) },
 };
+
+static const Scenario SCENARIOS_SHARED[] = {
+    { 4, REAL(0.0680), REAL(0.12), REAL(0.00295), REAL(1.00) },
+    { 6, REAL(0.1135), REAL(0.12), REAL(0.00295), REAL(1.00) },
+    { 8, REAL(0.1708), REAL(0.12), REAL(0.00295), REAL(1.00) },
+    { 12, REAL(0.2600), REAL(0.12), REAL(0.00295), REAL(1.00) },
+};
+
+static const Scenario* SCENARIOS = SCENARIOS_SHARED;
 
 #define REF_POINTS_CAP 2048
 
@@ -189,11 +213,18 @@ static int load_reference_data(const char* path, ReferencePoint* out, int cap, i
     return 0;
 }
 
-static void fit_scaled_nrmse(const real_t* model, const real_t* ref, int n, real_t* out_scale, real_t* out_nrmse)
+/* Least-squares fits a single multiplicative scale to the model trace, then reports both the
+   normalised RMSE (RMSE divided by the mean reference level) and the mean absolute error of the
+   SAME scaled residual, so nRMSE and MAE describe one and the same fit. MAE keeps the units of
+   the reference data (µmol/gFW); out_mae may be NULL if the caller does not want it. */
+static void fit_scaled_nrmse(const real_t* model, const real_t* ref, int n, real_t* out_scale, real_t* out_nrmse,
+    real_t* out_mae)
 {
     if (n <= 0) {
         *out_scale = REAL(1.0);
         *out_nrmse = REAL(1e9);
+        if (out_mae)
+            *out_mae = REAL(1e9);
         return;
     }
 
@@ -211,9 +242,11 @@ static void fit_scaled_nrmse(const real_t* model, const real_t* ref, int n, real
     real_t scale = dot_mm > REAL(1e-12) ? dot_mr / dot_mm : REAL(1.0);
 
     real_t mse = REAL(0.0);
+    real_t sum_abs = REAL(0.0);
     for (int i = 0; i < n; ++i) {
         real_t e = scale * model[i] - ref[i];
         mse += e * e;
+        sum_abs += RABS(e);
     }
     mse /= (real_t)n;
 
@@ -222,6 +255,8 @@ static void fit_scaled_nrmse(const real_t* model, const real_t* ref, int n, real
 
     *out_scale = scale;
     *out_nrmse = rmse / denom;
+    if (out_mae)
+        *out_mae = sum_abs / (real_t)n;
 }
 
 static void compute_external_fit_metrics(const SimulationConfig* cfg, const SimulationResult* result,
@@ -230,8 +265,10 @@ static void compute_external_fit_metrics(const SimulationConfig* cfg, const Simu
     out->ref_points = 0;
     out->sucrose_scale = REAL(1.0);
     out->sucrose_nrmse = REAL(-1.0);
+    out->sucrose_mae = REAL(-1.0);
     out->starch_scale = REAL(1.0);
     out->starch_nrmse = REAL(-1.0);
+    out->starch_mae = REAL(-1.0);
 
     if (!ref_data || ref_count <= 0 || result->filled_steps <= 0)
         return;
@@ -273,8 +310,8 @@ static void compute_external_fit_metrics(const SimulationConfig* cfg, const Simu
     if (n < 3)
         return;
 
-    fit_scaled_nrmse(model_sucrose, ref_sucrose, n, &out->sucrose_scale, &out->sucrose_nrmse);
-    fit_scaled_nrmse(model_starch, ref_starch, n, &out->starch_scale, &out->starch_nrmse);
+    fit_scaled_nrmse(model_sucrose, ref_sucrose, n, &out->sucrose_scale, &out->sucrose_nrmse, &out->sucrose_mae);
+    fit_scaled_nrmse(model_starch, ref_starch, n, &out->starch_scale, &out->starch_nrmse, &out->starch_mae);
 }
 
 static void compute_run_metrics(const SimulationConfig* cfg, Input* run_input, real_t fw_start, real_t lit_rgr,
@@ -284,7 +321,14 @@ static void compute_run_metrics(const SimulationConfig* cfg, Input* run_input, r
     memset(&result, 0, sizeof(result));
     simulate_days(cfg, run_input, &result);
 
-    real_t rgr_days = (real_t)(cfg->days - 1);
+    /* RGR is averaged over the elapsed time, which is cfg->days days: the
+     * simulation starts at t = 0 with fw_start and ends at t = 24*days h. The
+     * earlier divisor days-1 measured the same growth over a shorter interval
+     * and so inflated every reported rate by days/(days-1) = 1.0345 at days=30,
+     * which is why this tool reported MAPE 8.880% and worst case 15.04% where
+     * model_report reported 8.584% and 11.75% from an identical trajectory.
+     * Both tools now divide by the same elapsed time. */
+    real_t rgr_days = (real_t)cfg->days;
     real_t model_rgr = compute_rgr(fw_start, run_input->growth.total_biomass, rgr_days);
 
     out->model_rgr = model_rgr;
@@ -305,14 +349,16 @@ static void compute_run_metrics(const SimulationConfig* cfg, Input* run_input, r
     out->ref_points = 0;
     out->sucrose_scale = REAL(1.0);
     out->sucrose_nrmse = REAL(-1.0);
+    out->sucrose_mae = REAL(-1.0);
     out->starch_scale = REAL(1.0);
     out->starch_nrmse = REAL(-1.0);
+    out->starch_mae = REAL(-1.0);
 
     if (result.filled_steps > 0) {
         out->max_ph = result.ph[0];
         out->min_sucrose = result.sucrose[0];
         out->min_starch = result.starch[0];
-        out->min_total_biomass = result.partition[0];
+        out->min_total_biomass = result.total_biomass[0];
     }
 
     real_t day_sum = REAL(0.0);
@@ -324,7 +370,7 @@ static void compute_run_metrics(const SimulationConfig* cfg, Input* run_input, r
         real_t ph = result.ph[k];
         real_t sucrose = result.sucrose[k];
         real_t starch = result.starch[k];
-        real_t biomass = result.partition[k];
+        real_t biomass = result.total_biomass[k];
 
         if (!isfinite(ph) || !isfinite(sucrose) || !isfinite(starch) || !isfinite(biomass)) {
             out->nonfinite_samples++;
@@ -351,7 +397,7 @@ static void compute_run_metrics(const SimulationConfig* cfg, Input* run_input, r
         }
 
         if (k > 0) {
-            real_t d_biomass = biomass - result.partition[k - 1];
+            real_t d_biomass = biomass - result.total_biomass[k - 1];
             if (d_biomass < -max_negative_step_abs) {
                 out->negative_biomass_steps++;
                 if (-d_biomass > out->max_biomass_drop)
@@ -439,6 +485,7 @@ int main(int argc, char** argv)
     real_t sucrose_nrmse_threshold = REAL(0.50);
     real_t starch_nrmse_threshold = REAL(0.25);
     int min_ref_points = 6;
+    int chamber = 0;   /* --chamber: reproduce the reference growth conditions */
 
     char overall_path[512];
 
@@ -521,6 +568,12 @@ int main(int argc, char** argv)
                 return 1;
             }
             min_ref_points = atoi(argv[++i]);
+        } else if (strcmp(argv[i], "--chamber") == 0) {
+            chamber = 1;
+        } else if (strcmp(argv[i], "--shared") == 0) {
+            SCENARIOS = SCENARIOS_SHARED;
+        } else if (strcmp(argv[i], "--per-photoperiod") == 0) {
+            SCENARIOS = SCENARIOS_PERPP;
         } else if (strcmp(argv[i], "--help") == 0 || strcmp(argv[i], "-h") == 0) {
             usage(argv[0]);
             return 0;
@@ -530,6 +583,11 @@ int main(int argc, char** argv)
             return 1;
         }
     }
+
+    printf("Parameterisation: %s\n",
+           SCENARIOS == SCENARIOS_SHARED
+               ? "shared across photoperiods (lambda_sb 0.00295, lambda_sni 0.12, lambda_c 1.00)"
+               : "per photoperiod (published; eight fitted values, zero degrees of freedom)");
 
     if (days < 2) {
         fprintf(stderr, "--days must be >= 2\n");
@@ -557,13 +615,31 @@ int main(int argc, char** argv)
     base_cfg.gui_enabled = 0;
     base_cfg.write_csv = 0;
 
+    if (chamber) {
+        /* The reference series was measured at 160 umol m-2 s-1 under a square
+         * wave at 21/19 C.  The shipped configuration runs a half-sine peaking at
+         * 1200 at a single 25 C, a daily light integral about 4.8x larger, so
+         * scoring the model against those data without this block compares the
+         * model under one light dose to plants grown under another.  Same block
+         * as model_report --chamber. */
+        base_input.photo.max_PAR                 = REAL(160.0);
+        base_input.gas_exchange.leaf_temperature = REAL(21.0);
+#ifdef PLANTMODEL_HAS_DAYNIGHT_TEMP
+        base_input.gas_exchange.leaf_temperature_day   = REAL(21.0);
+        base_input.gas_exchange.leaf_temperature_night = REAL(19.0);
+#endif
+#ifdef PLANTMODEL_HAS_LIGHT_PROFILE
+        base_input.photo.light_profile = REAL(1.0);
+#endif
+    }
+
     FILE* out = fopen(out_path, "w");
     if (!out) {
         fprintf(stderr, "Failed to open output CSV: %s\n", out_path);
         return 1;
     }
     fprintf(out,
-        "photoperiod_h,days,model_rgr,lit_rgr,abs_error,rel_error_pct,pass_rgr,pass_day_night,pass_state,pass_growth,pass_dt,pass_external,pass,max_ph,day_avg_ph,night_avg_ph,min_sucrose,min_starch,min_total_biomass,max_biomass_drop,negative_biomass_steps,nonfinite_samples,final_total_biomass,dt_half_rgr,rgr_dt_delta_pct,dt_half_final_total_biomass,final_biomass_dt_delta_pct,ref_points,sucrose_scale,sucrose_nrmse,starch_scale,starch_nrmse,fail_reason\n");
+        "photoperiod_h,days,model_rgr,lit_rgr,abs_error,rel_error_pct,pass_rgr,pass_day_night,pass_state,pass_growth,pass_dt,pass_external,pass,max_ph,day_avg_ph,night_avg_ph,min_sucrose,min_starch,min_total_biomass,max_biomass_drop,negative_biomass_steps,nonfinite_samples,final_total_biomass,dt_half_rgr,rgr_dt_delta_pct,dt_half_final_total_biomass,final_biomass_dt_delta_pct,ref_points,sucrose_scale,sucrose_nrmse,starch_scale,starch_nrmse,fail_reason,sucrose_mae,starch_mae\n");
 
     real_t sum_abs = REAL(0.0);
     real_t sum_sq = REAL(0.0);
@@ -578,7 +654,9 @@ int main(int argc, char** argv)
     int pass_dt_count = 0;
     int pass_external_count = 0;
 
-    int n = (int)(sizeof(SCENARIOS) / sizeof(SCENARIOS[0]));
+    /* SCENARIOS is a pointer to one of the two tables, so sizeof() cannot give
+     * the element count; both tables carry one row per photoperiod. */
+    int n = (int)(sizeof(SCENARIOS_SHARED) / sizeof(SCENARIOS_SHARED[0]));
 
     for (int i = 0; i < n; ++i) {
         Input in = base_input;
@@ -619,7 +697,7 @@ int main(int argc, char** argv)
             &dt_rgr_delta_pct, &dt_biomass_delta_pct);
 
         fprintf(out,
-            "%d,%d,%.6f,%.6f,%.6f,%.3f,%d,%d,%d,%d,%d,%d,%d,%.6f,%.6f,%.6f,%.6f,%.6f,%.6f,%.6e,%d,%d,%.6f,%.6f,%.3f,%.6f,%.3f,%d,%.6f,%.6f,%.6f,%.6f,%s\n",
+            "%d,%d,%.6f,%.6f,%.6f,%.3f,%d,%d,%d,%d,%d,%d,%d,%.6f,%.6f,%.6f,%.6f,%.6f,%.6f,%.6e,%d,%d,%.6f,%.6f,%.3f,%.6f,%.3f,%d,%.6f,%.6f,%.6f,%.6f,%s,%.6f,%.6f\n",
             SCENARIOS[i].photoperiod_h,
             base_cfg.days,
             (double)base_metrics.model_rgr,
@@ -652,7 +730,9 @@ int main(int argc, char** argv)
             (double)base_metrics.sucrose_nrmse,
             (double)base_metrics.starch_scale,
             (double)base_metrics.starch_nrmse,
-            flags.fail_reason);
+            flags.fail_reason,
+            (double)base_metrics.sucrose_mae,
+            (double)base_metrics.starch_mae);
 
         sum_abs += base_metrics.abs_err;
         sum_sq += base_metrics.abs_err * base_metrics.abs_err;
@@ -681,7 +761,7 @@ int main(int argc, char** argv)
     real_t mape_pct = (sum_rel / (real_t)n) * REAL(100.0);
     real_t pass_rate_pct = ((real_t)pass_count / (real_t)n) * REAL(100.0);
 
-    fprintf(out, "OVERALL,%d,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,\n", base_cfg.days);
+    fprintf(out, "OVERALL,%d,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,\n", base_cfg.days);
     fclose(out);
 
     snprintf(overall_path, sizeof(overall_path), "%s", out_path);

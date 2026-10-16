@@ -12,7 +12,8 @@ PlantState plant_state_from_input(const Input* input)
         .phosphorus             = input->nutrients.phosphorus,
         .sucrose_root_allocation = input->growth.sucrose_root_allocation,
         .leaf_biomass           = input->growth.leaf_biomass,
-        .root_biomass           = input->growth.root_biomass
+        .root_biomass           = input->growth.root_biomass,
+        .sucrose_vacuole        = input->carbohydrates.sucrose_vacuole
     };
     return state;
 }
@@ -30,20 +31,22 @@ void plant_state_apply_to_input(Input* input, const PlantState* state)
     input->growth.leaf_biomass                  = state->leaf_biomass;
     input->growth.root_biomass                  = state->root_biomass;
     input->growth.total_biomass                 = state->leaf_biomass + state->root_biomass;
+    input->carbohydrates.sucrose_vacuole        = state->sucrose_vacuole;
 }
 
 void plant_state_pack(real_t* dst, const PlantState* state)
 {
-    dst[X_STARCH_PART]       = state->starch_partition_coeff;
-    dst[X_STARCH]            = state->starch;
-    dst[X_SUCROSE]           = state->sucrose;
-    dst[X_N_AFF]             = state->nitrogen_affinity;
-    dst[X_P_AFF]             = state->phosphorus_affinity;
-    dst[X_N]                 = state->nitrogen;
-    dst[X_P]                 = state->phosphorus;
+    dst[X_STARCH_PART]        = state->starch_partition_coeff;
+    dst[X_STARCH]             = state->starch;
+    dst[X_SUCROSE]            = state->sucrose;
+    dst[X_N_AFF]              = state->nitrogen_affinity;
+    dst[X_P_AFF]              = state->phosphorus_affinity;
+    dst[X_N]                  = state->nitrogen;
+    dst[X_P]                  = state->phosphorus;
     dst[X_SUCROSE_ROOT_ALLOC] = state->sucrose_root_allocation;
-    dst[X_LEAF_BIOMASS]      = state->leaf_biomass;
-    dst[X_ROOT_BIOMASS]      = state->root_biomass;
+    dst[X_LEAF_BIOMASS]       = state->leaf_biomass;
+    dst[X_ROOT_BIOMASS]       = state->root_biomass;
+    dst[X_SUCROSE_VAC]        = state->sucrose_vacuole;
 }
 
 void plant_state_unpack(PlantState* dst, const real_t* src)
@@ -58,4 +61,5 @@ void plant_state_unpack(PlantState* dst, const real_t* src)
     dst->sucrose_root_allocation = src[X_SUCROSE_ROOT_ALLOC];
     dst->leaf_biomass           = src[X_LEAF_BIOMASS];
     dst->root_biomass           = src[X_ROOT_BIOMASS];
+    dst->sucrose_vacuole        = src[X_SUCROSE_VAC];
 }
